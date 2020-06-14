@@ -1,0 +1,48 @@
+
+# These are my own snippets
+snippet ankinote "Basic Anki note"
+\documentclass[12pt]{article}
+\special{papersize=3in,5in}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage[makeroom]{cancel}
+\usepackage{mathtools}
+\usepackage{relsize}
+\usepackage[shortlabels]{enumitem}
+\usepackage{lipsum}
+
+\pagestyle{empty}
+\setlength{\parindent}{0in}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\convergencearrow}{\longrightarrow}
+
+\newcommand*\mybracestrut[1]{\vrule width0pt height0pt depth#1\relax}
+
+
+\begin{document}
+
+\textbf{ ${1:title} }  \\\
+
+-----------------------------------------------------\\
+
+[latex]
+
+${0:body}
+
+[/latex]
+
+\end{document}
+endsnippet
+
+snippet verb "verbatim"
+\verb|${0:${VISUAL}}|
+endsnippet
+
+snippet t_ "text underscore"
+\textunderscore
+endsnippet

@@ -1,0 +1,154 @@
+snippet ankinote "Basic Anki note"
+\documentclass[12pt]{article}
+\special{papersize=3in,5in}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage[makeroom]{cancel}
+\usepackage{mathtools}
+\usepackage{relsize}
+\usepackage[shortlabels]{enumitem}
+\usepackage{lipsum}
+
+\pagestyle{empty}
+\setlength{\parindent}{0in}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\convergencearrow}{\longrightarrow}
+
+\newcommand*\mybracestrut[1]{\vrule width0pt height0pt depth#1\relax}
+
+
+\begin{document}
+
+\textbf{ ${1:title} }  \\\
+
+-----------------------------------------------------\\
+
+[latex]
+
+${0:body}
+
+[/latex]
+
+\end{document}
+endsnippet
+
+snippet verb "verbatim"
+\verb|${0:${VISUAL}}|
+endsnippet
+
+snippet 1= "Header 1"
+= ${0:title} =
+endsnippet
+
+snippet 2= "Header 2"
+== ${0:title} ==
+endsnippet
+
+snippet 3= "Header 3"
+=== ${0:title} ===
+endsnippet
+
+snippet 4= "Header 4"
+==== ${0:title} ====
+endsnippet
+
+snippet 5= "Header 5"
+===== ${0:title} =====
+endsnippet
+
+snippet 6= "Header 6"
+====== ${0:title} ======
+endsnippet
+
+snippet latex "Latex equation"
+{{$
+${0:equation}
+}}$
+endsnippet
+
+snippet codeblock "Fenced code block"
+{{{>
+${0:code}
+}}}
+endsnippet
+
+snippet $ "Inline Latex equation"
+$\; ${0:math} \;$
+endsnippet
+
+snippet diary "Vimwiki diary entry template"
+= `env LC_ALL=en_US.utf8 date --date="today" "+%Y.%m.%d %A"` =
+
+==== To do today ====
+
+
+
+
+==== Stack of things doing now ====
+
+
+
+
+==== Done ====
+
+===== Research and work =====
+
+
+===== Vim and config =====
+
+
+===== Personal =====
+
+
+
+
+==== Notes ====
+
+
+endsnippet
+
+snippet link "Vimwiki link"
+[[./${0:LINK_PATH}|${1:description}]]
+endsnippet
+
+snippet image "Vimwiki image"
+{{file:./images/processed_${0:IMAGE_PATH}|${1:description}|style="width:550px;height:220px;"}}
+endsnippet
+
+snippet paper "Vimwiki paper"
+{{file:./papers/${0:PAPER_PATH}|${1:description}}}
+endsnippet
+
+snippet b "HTML bold"
+<b>${0:bold}</b>
+endsnippet
+
+snippet u "HTML underline"
+<u>${0:underline}</u>
+endsnippet
+
+snippet i "HTML italic"
+<i>${0:italic}</i>
+endsnippet
+
+snippet ` "Inline ceode"
+\`${0:code}\`
+endsnippet
+
+snippet < "<> snippet"
+<${0:text}>
+endsnippet
+
+
+snippet ref "Vimwiki references"
+--------------------------------
+
+===== References =====
+
+*1* ${0}
+endsnippet

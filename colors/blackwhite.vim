@@ -1,0 +1,1 @@
+/home/mgarort/repos/wiki/setup/blackwhite.vim
