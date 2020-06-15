@@ -696,6 +696,11 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 tnoremap <C-k> <C-w>k
 tnoremap <C-j> <C-w>j
+inoremap <C-k> <C-o><C-w>k
+inoremap <C-j> <C-o><C-w>j
+inoremap <C-l> <C-o><C-w>l
+inoremap <C-h> <C-o><C-w>h
+
 " <C-h> and <C-l> are not mapped in the terminal because <C-l> is supposed to
 " clear the screen in the terminal
 " Freed <C-l> in Netrw
