@@ -51,7 +51,8 @@ Plugin 'qpkorr/vim-bufkill'
 Plugin 'tpope/vim-fugitive'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
+filetype plugin indent on    " required (note that this automatically guesses indents for 
+                             " Python, etc, when you're writing code, so it's very useful)
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "

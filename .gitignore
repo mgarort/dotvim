@@ -1,2 +1,4 @@
 .saved_session
 .netrwhist
+.backup/*
+!.backup/.gitkeep
