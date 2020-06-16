@@ -2,3 +2,4 @@
 .netrwhist
 .backup/*
 !.backup/.gitkeep
+bundle/*
