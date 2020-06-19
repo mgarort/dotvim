@@ -50,6 +50,7 @@ Plugin 'mechatroner/rainbow_csv'
 Plugin 'qpkorr/vim-bufkill'
 Plugin 'tpope/vim-fugitive'
 Plugin 'wellle/targets.vim'
+Plugin 'ap/vim-css-color'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required (note that this automatically guesses indents for 
@@ -315,15 +316,6 @@ vmap <C-c> d:let @+ = @"<CR>i
 " Copy the last Vim selection to clipboard
 nmap <leader>+ :let @+=@"<CR>
 
-
-" vim-cellmode mappings
-" start ipython shell with <C-s>. Note that for this to work, you need to add stty -ixon to .bashrc
-nmap <C-s> :call StartPyShell()<CR>
-" run current cell, and leave cursor in current cell
-imap <C-g> <Esc>:call RunTmuxPythonCell(1)<CR>
-" run current cell, and take cursor outside of current cell. Note that <C-b>
-" won't work in a default tmux installation, since <C-b> is the default prefix
-imap <C-b> <C-\><C-o>:call RunTmuxPythonCell(0)<CR>
 
 " avoid an annoying beeping sound. Instead, the ``beeping" will be a white
 " flash
