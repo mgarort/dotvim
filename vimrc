@@ -465,7 +465,7 @@ nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>s :source $MYVIMRC<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
 nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
-nnoremap <leader>b :e ~/repos/dotfiles/dot.bashrc<CR>
+nnoremap <leader>b :e ~/.bashrc<CR>
 
 "python with virtualenv support TODO Check if you see any difference
 py3 << EOF
