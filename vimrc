@@ -450,14 +450,24 @@ let g:netrw_liststyle = 3
 "augroup END
 "
 
-" Keybindings for buffers. The first one lists the buffers and waits for input
-" to choose one (l for ls). The second one goes to the next buffer (n for next). The third one goes to
-" the previous buffer (b for before). The fourth one goes to the opposite
-" buffer (h for hash)
+" Keybindings for buffers. Note that changing buffers is relevant for the
+" entire vim session, not just the current buffer, so according to my personal
+" convention I should be using <leader> instead of , . However, in this case
+" we're making an exception for ergonomics.
+" Display buffers and wait for input to choose one (l for ls).
 nnoremap ,l :ls<CR>:b
+" Same as before but display all buffers, including unlisted ones
+nnoremap ,<S-l> :ls!<CR>:b
+" Go to next buffer (n for next)
 nnoremap ,n :bn<CR>
+" Go to previous buffer (b for before)
 nnoremap ,b :bp<CR>
+" Go to opposite (alternate buffer)
 nnoremap ,m :b#<CR>
+
+" Similar keybinding for displaying registers
+nnoremap ,r :register<CR>
+
 
 " The following keybindings quickly open .vimrc (and load it), my wiki index
 " and i3 config file
