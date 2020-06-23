@@ -98,8 +98,15 @@ let g:vimwiki_list = [{'path': '~/repos/wiki',
 let g:vimwiki_list_ignore_newline = 0
 " The following prevents vimwiki to automatically write buffers upon exit
 let g:vimwiki_autowriteall = 0
-" Recompile HTML upon writing buffer to disk
-autocmd FileType vimwiki autocmd BufWritePost <buffer> silent Vimwiki2HTML
+" Recompile HTML upon writing buffer to disk. The augroup avoids creating a
+" duplicate autocommand every time we source the vimrc file (see explanation
+" here https://learnvimscriptthehardway.stevelosh.com/chapters/14.html).
+" Before defining the augroup and clearing autocommands with autocmd!, writing
+" to file took a long time after long Vim sessions
+augroup CompileVimwiki
+    autocmd!
+    autocmd FileType vimwiki autocmd BufWritePost <buffer> silent Vimwiki2HTML
+augroup END
 " Make blackwhite the default colorscheme for vimwiki
 " Removed from now because I'm testing the function AutomaticColorscheme
 " autocmd FileType vimwiki colorscheme blackwhite
