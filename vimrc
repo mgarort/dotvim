@@ -550,7 +550,10 @@ function! AutomaticColorscheme()
     hi Search cterm=NONE ctermfg=white ctermbg=DarkRed
     hi IncSearch cterm=NONE ctermfg=white ctermbg=DarkGreen
 endfunction
-autocmd BufEnter * :call AutomaticColorscheme()
+augroup ColorschemeForBuffers
+    autocmd!
+    autocmd BufEnter * :call AutomaticColorscheme()
+augroup END
 
 " Map Y to y$ so that C, D and Y behave in the same way
 nnoremap <S-y> y$
