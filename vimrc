@@ -779,3 +779,8 @@ nmap <localleader>lw :VimtexCountWords<CR>
 " Display line equivalent of o and O
 nnoremap go  i<CR>
 nnoremap gO  i<CR><Esc><Up>A
+
+" Make Vim remember last cursor position in a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
