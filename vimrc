@@ -434,10 +434,12 @@ if &term =~ "xterm\\|rxvt"
   let &t_EI = "\<Esc>]12;gray\x7"
   silent !echo -ne "\033]12;gray\007"
   " reset cursor when vim exits
-  autocmd VimLeave * silent !echo -ne "\033]112\007"
+  augroup ResetCursorWhenVimLeaves
+    autocmd!
+    autocmd VimLeave * silent !echo -ne "\033]112\007"
+  augroup END
   " use \003]12;gray\007 for gnome-terminal
 endif
-
 
 " Netrw keybindings similar to NERDTree
 " This hides the annoying netrw banner
@@ -782,5 +784,9 @@ nnoremap gO  i<CR><Esc><Up>A
 
 " Make Vim remember last cursor position in a file
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    augroup RememberCursorPosition
+        au!
+        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    augroup END
 endif
+
