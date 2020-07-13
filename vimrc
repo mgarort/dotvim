@@ -158,7 +158,22 @@ setlocal comments+=n:*,n:#
 " nnoremap because otherwise <CR> doesn't create a link
 " I tried to create a more sophisticated function but it took longer, so it's
 " gonna be a mapping
-nmap '<CR> :s/====== \(.*\) ======/====== \[\[\1\]\] ======/<CR>:let @/=""<CR>:w<CR>^t]yi]<CR>ggi=<space><Esc>pa<space>=<CR><CR>
+nmap '<CR> :s/======\s*\(.\{-}\)\s*======/====== \[\[\1\]\] ======/<CR>:let @/=""<CR>:w<CR>^t]yi]<CR>ggi=<space><Esc>pa<space>=<CR><CR>
+" Regex explanation:
+"  - \s* matches 0 or more whitespaces
+"  - \( ____ \) is a capturing group. It allows us to store a matching string
+"    in the variable \1
+"  - .\{-} is the same as .*, but it matches stuff lazily. This means that it
+"    takes less priority over other regex pattern. In this particular case, it
+"    has less priority than the two \s* left and right of the capturing group.
+"    So if there are surrounding whitespaces, those will be matched by \s* and
+"    not by \{-}
+
+" TODO If the regex above is too slow, change it back to the following
+" previous regex. The advantage of the regex above is that it corrects a
+" different number of whitespaces left and right, but if it's too slow we can
+" do without it.
+"nmap '<CR> :s/====== \(.*\) ======/====== \[\[\1\]\] ======/<CR>:let @/=""<CR>:w<CR>^t]yi]<CR>ggi=<space><Esc>pa<space>=<CR><CR>
 
 " Keybindings for going to previous and next day's diary entries. 
 " 1) First you have to freed <C-Left> and <C-Right> from Putty, which for some reason holds
@@ -331,11 +346,14 @@ set visualbell
 " with the command ColorScheme, so that Vim does it after loading the
 " colorscheme and doesn't overwrite it)
 set hlsearch
-au ColorScheme * hi Search cterm=NONE ctermfg=white ctermbg=DarkRed
-" IncSearch changes the color for the current match in search and replace with
-" confirmation. That way you can distinguish the one you're currently looking
-" at from all the others
-au ColorScheme * hi IncSearch cterm=NONE ctermfg=white ctermbg=DarkGreen
+augroup highlight_search
+    au!
+    au ColorScheme * hi Search cterm=NONE ctermfg=white ctermbg=DarkRed
+    " IncSearch changes the color for the current match in search and replace with
+    " confirmation. That way you can distinguish the one you're currently looking
+    " at from all the others
+    au ColorScheme * hi IncSearch cterm=NONE ctermfg=white ctermbg=DarkGreen
+augroup END
 " Noh to avoid highlighting upon sourcing .vimrc
 noh
 " remap :noh to <C-n> in normal model. :noh stops highlighting until next
@@ -344,9 +362,9 @@ nmap <C-n> :noh<CR>
 " This (supposedly) will make that highlight stays on after a search, but not after a
 " string substitution
 augroup search_be_gone
-  autocmd!
-  autocmd CmdlineEnter : let s:prev_hlsearch = v:hlsearch
-  autocmd CmdlineLeave : if v:hlsearch && !s:prev_hlsearch | call feedkeys(":nohlsearch\<cr>") | endif
+    autocmd!
+    autocmd CmdlineEnter : let s:prev_hlsearch = v:hlsearch
+    autocmd CmdlineLeave : if v:hlsearch && !s:prev_hlsearch | call feedkeys(":nohlsearch\<cr>") | endif
 augroup END
 
 " Make sure that tabs are expanded to spaces. If you do this all the time
@@ -378,9 +396,9 @@ syntax on                      " to make sure that syntax is highlighted in ever
 " Avoid mouse setting cursor
 " noremap <LeftMouse> ma<LeftMouse>`a   
 augroup NO_CURSOR_MOVE_ON_FOCUS
-  au!
-  au FocusLost * let g:oldmouse=&mouse | set mouse=
-  au FocusGained * if exists('g:oldmouse') | let &mouse=g:oldmouse | unlet g:oldmouse | endif
+    au!
+    au FocusLost * let g:oldmouse=&mouse | set mouse=
+    au FocusGained * if exists('g:oldmouse') | let &mouse=g:oldmouse | unlet g:oldmouse | endif
 augroup END
 
 " Look for tags file (from ctags) in upper directories recursively
@@ -428,17 +446,17 @@ imap <F12> <Esc>:call IterateColorscheme()<CR>li
 " Vim isn't able to change the cursor color by itself in a colorscheme: 
 " this is something that belongs to urxvt. So a little bit of wizardry is needed
 if &term =~ "xterm\\|rxvt"
-  " use an orange cursor in insert mode
-  let &t_SI = "\<Esc>]12;orange\x7"
-  " use a gray cursor otherwise
-  let &t_EI = "\<Esc>]12;gray\x7"
-  silent !echo -ne "\033]12;gray\007"
-  " reset cursor when vim exits
-  augroup ResetCursorWhenVimLeaves
-    autocmd!
-    autocmd VimLeave * silent !echo -ne "\033]112\007"
-  augroup END
-  " use \003]12;gray\007 for gnome-terminal
+    " use an orange cursor in insert mode
+    let &t_SI = "\<Esc>]12;orange\x7"
+    " use a gray cursor otherwise
+    let &t_EI = "\<Esc>]12;gray\x7"
+    silent !echo -ne "\033]12;gray\007"
+    " reset cursor when vim exits
+    augroup ResetCursorWhenVimLeaves
+        autocmd!
+        autocmd VimLeave * silent !echo -ne "\033]112\007"
+    augroup END
+    " use \003]12;gray\007 for gnome-terminal
 endif
 
 " Netrw keybindings similar to NERDTree
@@ -491,9 +509,9 @@ py3 << EOF
 import os
 import sys
 if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  exec(open(activate_this).read(), dict(__file__=activate_this))
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    exec(open(activate_this).read(), dict(__file__=activate_this))
 EOF
 
 " CtrlP configuration
@@ -509,32 +527,32 @@ set scrolloff=3
 " Or to redirect the out put of ls, do     :Redir !ls
 " Obtained from https://gist.github.com/romainl/eae0a260ab9c135390c30cd370c20cd7
 function! Redir(cmd, rng, start, end)
-	for win in range(1, winnr('$'))
-		if getwinvar(win, 'scratch')
-			execute win . 'windo close'
-		endif
-	endfor
-	if a:cmd =~ '^!'
-		let cmd = a:cmd =~' %'
-			\ ? matchstr(substitute(a:cmd, ' %', ' ' . expand('%:p'), ''), '^!\zs.*')
-			\ : matchstr(a:cmd, '^!\zs.*')
-		if a:rng == 0
-			let output = systemlist(cmd)
-		else
-			let joined_lines = join(getline(a:start, a:end), '\n')
-			let cleaned_lines = substitute(shellescape(joined_lines), "'\\\\''", "\\\\'", 'g')
-			let output = systemlist(cmd . " <<< $" . cleaned_lines)
-		endif
-	else
-		redir => output
-		execute a:cmd
-		redir END
-		let output = split(output, "\n")
-	endif
-	vnew
-	let w:scratch = 1
-	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
-	call setline(1, output)
+    for win in range(1, winnr('$'))
+            if getwinvar(win, 'scratch')
+                    execute win . 'windo close'
+            endif
+    endfor
+    if a:cmd =~ '^!'
+            let cmd = a:cmd =~' %'
+                    \ ? matchstr(substitute(a:cmd, ' %', ' ' . expand('%:p'), ''), '^!\zs.*')
+                    \ : matchstr(a:cmd, '^!\zs.*')
+            if a:rng == 0
+                    let output = systemlist(cmd)
+            else
+                    let joined_lines = join(getline(a:start, a:end), '\n')
+                    let cleaned_lines = substitute(shellescape(joined_lines), "'\\\\''", "\\\\'", 'g')
+                    let output = systemlist(cmd . " <<< $" . cleaned_lines)
+            endif
+    else
+            redir => output
+            execute a:cmd
+            redir END
+            let output = split(output, "\n")
+    endif
+    vnew
+    let w:scratch = 1
+    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+    call setline(1, output)
 endfunction
 command! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
 
@@ -645,8 +663,24 @@ nnoremap <silent><S-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " Add mappings to make (save) current session and load it. Three <leader> to avoid doing
 " it by mistake
-nnoremap <leader><leader><leader>m :mksession! ~/.vim/.saved_session<CR>
-nnoremap <leader><leader><leader>l :source ~/.vim/.saved_session<CR>
+nnoremap <leader><leader>m :mksession! ~/.vim/.saved_session<CR>
+nnoremap <leader><leader>l :source ~/.vim/.saved_session<CR>
+
+" Add mappings to delete first swap file (useful when laptop freezes and you
+" need to recover many files and also delete their many swap files)
+function! DeleteFirstSwapFile()
+    let dirname = expand('%:p:h')
+    let filename = expand('%:t')
+    " Only add the initial dot if the filename is not hidden already. If it is
+    " hidden (i.e. if it already has an initial dot) then there is no need to
+    " add it
+    if filename[0] != '.'
+        let filename = '.' . filename
+    endif
+    let swapfile = dirname . '/' . filename . '.swp'
+    call delete(swapfile)
+endfunction
+nnoremap <leader><leader>d :call DeleteFirstSwapFile()<CR>
 
 " Useful commands to view and navigate table (csv or tsv) files
 " - <C-h> and <C-l> scroll half a page laterally, similarly to <C-d> and <C-u>
