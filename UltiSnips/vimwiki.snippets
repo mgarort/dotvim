@@ -24,7 +24,7 @@ snippet 6= "Header 6"
 ====== ${0:title} ======
 endsnippet
 
-# Snippets for latex and code environments
+# Snippets for defining environments (latex equation, inline latex, code block, inline code...)
 
 snippet latex "Latex equation"
 {{$
@@ -46,7 +46,7 @@ snippet ` "Inline code"
 \`${0:code}\`
 endsnippet
 
-snippet < "<> snippet"
+snippet < "<>"
 <${0:text}>
 endsnippet
 
@@ -144,3 +144,28 @@ snippet ~~ "Strikethrough"
 ~~${0:strikethrough}~~
 endsnippet
 
+# Snippets for latex commands (copied from tex.snippets)
+
+snippet verb "verbatim"
+\verb|${0:${VISUAL}}|
+endsnippet
+
+snippet _ "text underscore"
+\textunderscore
+endsnippet
+
+snippet ~ "text tilde"
+\textasciitilde
+endsnippet
+
+snippet i "italic"
+\textit{${0}}
+endsnippet
+
+snippet b "bold"
+\textbf{${0}}
+endsnippet
+
+snippet mbf "mathbf"
+\mathbf{${0}}
+endsnippet
