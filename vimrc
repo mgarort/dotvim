@@ -824,3 +824,6 @@ if has("autocmd")
     augroup END
 endif
 
+" Make g[ select last pasted text, copying gv, which selects last seleted text
+nnoremap g[ `[v`]
+vnoremap g[ <Esc>`[v`]

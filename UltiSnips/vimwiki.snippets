@@ -32,6 +32,12 @@ ${0:equation}
 }}$
 endsnippet
 
+snippet align "Latex align"
+{{$%align%
+${0:equation}
+}}$
+endsnippet
+
 snippet codeblock "Fenced code block"
 {{{>
 ${0:code}
@@ -95,7 +101,7 @@ snippet image "Vimwiki image"
 endsnippet
 
 snippet paper "Vimwiki paper"
-{{file:./papers/${0:PAPER_PATH}|${1:description}}}
+[[file:./papers/${0:PAPER_PATH}|${1:description}]]
 endsnippet
 
 snippet ref "Vimwiki references"
@@ -158,11 +164,11 @@ snippet ~ "text tilde"
 \textasciitilde
 endsnippet
 
-snippet i "italic"
+snippet ti "text italic"
 \textit{${0:italic}}
 endsnippet
 
-snippet b "bold"
+snippet tb "text bold"
 \textbf{${0:bold}}
 endsnippet
 
@@ -170,15 +176,16 @@ snippet mbf "mathbf"
 \mathbf{${0:mathbold}}
 endsnippet
 
-snippet RR "real" 
+snippet RR "real"
 \R
 endsnippet
 
-snippet QQ "Q" 
+snippet QQ "Q"
 \Q
 endsnippet
 
-snippet ZZ "Z" 
+snippet ZZ "Z"
 \Z
 endsnippet
+
 
