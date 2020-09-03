@@ -152,16 +152,14 @@ endsnippet
 
 # Snippets for latex commands (copied from tex.snippets)
 
+### Text formatting
+
 snippet verb "verbatim"
 \verb|${0:verbatim}|
 endsnippet
 
 snippet t_ "text underscore"
 \textunderscore
-endsnippet
-
-snippet ~ "text tilde"
-\textasciitilde
 endsnippet
 
 snippet ti "text italic"
@@ -172,9 +170,37 @@ snippet tb "text bold"
 \textbf{${0:bold}}
 endsnippet
 
+### Symbols
+
+snippet ~ "text tilde"
+\textasciitilde
+endsnippet
+
+snippet hat "hat ^"
+\hat{${0}}
+endsnippet
+
+### Math formatting
+
 snippet mbf "mathbf"
 \mathbf{${0:mathbold}}
 endsnippet
+
+snippet mcal "mathcal"
+\mathcal{${0}}
+endsnippet
+
+### Probability
+
+snippet p "p( )"
+p(${0:X})
+endsnippet
+
+snippet pcon "p( | )"
+p(${1: X }\,|\,${0: Y })
+endsnippet
+
+### Set and special symbols
 
 snippet RR "R for reals"
 \R
@@ -192,6 +218,8 @@ snippet EE "E for expectation"
 \E
 endsnippet
 
+### Delimiters
+
 snippet big[ "big ["
 \big[\, ${0} \,\big]
 endsnippet
@@ -206,4 +234,24 @@ endsnippet
 
 snippet Bigg[ "Bigg ["
 \Bigg[\, ${0} \,\Bigg]
+endsnippet
+
+snippet { "{"
+\\{ ${0} \\}
+endsnippet
+
+snippet big{ "big {"
+\big\\{ ${0} \big\\}
+endsnippet
+
+snippet Big{ "Big {"
+\Big\\{ ${0} \Big\\}
+endsnippet
+
+snippet bigg{ "bigg {"
+\bigg\\{ ${0} \bigg\\}
+endsnippet
+
+snippet Bigg{ "Bigg {"
+\Bigg\\{ ${0} \Bigg\\}
 endsnippet
