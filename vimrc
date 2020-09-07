@@ -600,7 +600,7 @@ cnoremap <C-a> <C-b>
 
 " Make <C-a> and <C-e> in insert mode behave like in the command line, going
 " to the beginning and end of the line respectively
-inoremap <C-a> <Home>
+inoremap <C-a> <Esc>^i
 inoremap <C-e> <End>
 
 " Make mapping so that Shift-Arrow increase and reduce the window size in normal
