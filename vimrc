@@ -51,6 +51,7 @@ Plugin 'qpkorr/vim-bufkill'
 Plugin 'tpope/vim-fugitive'
 Plugin 'wellle/targets.vim'
 Plugin 'ap/vim-css-color'
+Plugin 'Konfekt/vim-CtrlXA'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required (note that this automatically guesses indents for 
