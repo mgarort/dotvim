@@ -828,3 +828,7 @@ endif
 " Make g[ select last pasted text, copying gv, which selects last seleted text
 nnoremap g[ `[v`]
 vnoremap g[ <Esc>`[v`]
+
+" Make '"%P' in normal mode paste the entire path to the file (similar to '"%p', 
+" which pastes just the filename)
+nnoremap "%<S-p> i<C-r>=expand("%:p")<CR><Esc>
