@@ -845,4 +845,14 @@ nnoremap "%<S-p> i<C-r>=expand("%:p")<CR><Esc>
 nnoremap "%p i<C-r>=expand("%:t")<CR><Esc>
 
 
-
+" Create function that updates the title of the current file, according to the
+" filename
+function! UpdateTitle()
+    " Get filename name
+    let filename = expand('%:t')
+    " Remove .wiki extension
+    let filename = split(filename, '\.wiki')[0]
+    " Replace '= OLD_TITLE =' by '= filename =' in line 1 only
+    execute '1s/= .* =/= ' . filename . ' =/'
+endfunction
+command! UpdateTitle call UpdateTitle()
