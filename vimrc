@@ -813,9 +813,14 @@ nmap <localleader>lw :VimtexCountWords<CR>
 " filter. It DOESN'T WORK TODO 
  let g:vimtex_log_ignore = ['^.*Warning.*$']
 
-" Display line equivalent of o and O
+" Display line equivalent of o and O. gO adds an additional line of space
+" below because we usually want the stuff below to go away and not bother us
 nnoremap go  i<CR>
-nnoremap gO  i<CR><Esc><Up>A
+nnoremap gO  i<CR><CR><Esc><Up><Up>A
+
+" Display line equivalent of I and A
+nnoremap gA g$a
+nnoremap gI g^i
 
 " Make Vim remember last cursor position in a file
 if has("autocmd")
