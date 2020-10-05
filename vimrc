@@ -834,6 +834,15 @@ endif
 nnoremap g[ `[v`]
 vnoremap g[ <Esc>`[v`]
 
+
 " Make '"%P' in normal mode paste the entire path to the file (similar to '"%p', 
 " which pastes just the filename)
 nnoremap "%<S-p> i<C-r>=expand("%:p")<CR><Esc>
+" Make an explicity keybinding '"%p' in normal mode that pastes just the
+" filename. This would usually be redundant, since "%p already pastes the
+" filename by default. But it is useful because Vimwiki sometimes pastes full
+" path instead of just the filename due to a design flaw:  https://github.com/vimwiki/vimwiki/issues/1015
+nnoremap "%p i<C-r>=expand("%:t")<CR><Esc>
+
+
+
