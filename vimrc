@@ -856,3 +856,12 @@ function! UpdateTitle()
     execute '1s/= .* =/= ' . filename . ' =/'
 endfunction
 command! UpdateTitle call UpdateTitle()
+
+" Make : be equivalent to , to be able to quickly go back in f, F, t, T and s,
+" S motions. This is a good strategy because:
+" - Currently, , is part of other keybindings, like ,l (to list buffers), and
+"   so if we use , to go back in the motions above, we have to wait a 1s
+"   timeout
+" - : is usually used to access command mode, but I have the whitespace for
+"   that
+nnoremap : ,
