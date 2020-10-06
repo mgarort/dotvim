@@ -138,7 +138,7 @@ endfunction
 "    "so Vim goes back to editing instead of hanging while Firefox is open
 "    execute "!firefox -new-window" full_path_to_html_file "&"  
 "endfunction
-nmap ,h :call OpenThisHTML()<CR><CR>
+noremap ,h :call OpenThisHTML()<CR><CR>
 " Process images so that they use less space, and map keybinding to <C-c> (c
 " for compress)
 function! ProcessImages()
@@ -149,7 +149,7 @@ endfunction
 " Apparently <C-i> is mapped by default to a function that goes to the next
 " Vimwiki link, which could be quite useful
 "nmap <Leader>wn <Plug>VimwikiNextLink
-nmap <C-c> :call ProcessImages()<CR>
+nnoremap <C-c> :call ProcessImages()<CR>
 " This allows bulletpoints to be continued even at deeper bulletpoint levels,
 " instead of only at the first level.
 setlocal formatoptions=ctnqro
@@ -159,7 +159,11 @@ setlocal comments+=n:*,n:#
 " nnoremap because otherwise <CR> doesn't create a link
 " I tried to create a more sophisticated function but it took longer, so it's
 " gonna be a mapping
-nmap '<CR> :s/======\s*\(.\{-}\)\s*======/====== \[\[\1\]\] ======/<CR>:let @/=""<CR>:w<CR>^t]yi]<CR>ggi=<space><Esc>pa<space>=<CR><CR>
+" Originally I used the following mapping:
+"nmap '<CR> :s/======\s*\(.\{-}\)\s*======/====== \[\[\1\]\] ======/<CR>:let @/=""<CR>:w<CR>^t]yi]<CR>ggi=<space><Esc>pa<space>=<CR><CR>
+" but then I mapped : to , so I had to modify it by changing : to <space>
+" where necessary  
+nmap '<CR> <space>s/======\s*\(.\{-}\)\s*======/====== \[\[\1\]\] ======/<CR><space>let @/=""<CR><space>w<CR>^t]yi]<CR>ggi=<space><Esc>pa<space>=<CR><CR>
 " Regex explanation:
 "  - \s* matches 0 or more whitespaces
 "  - \( ____ \) is a capturing group. It allows us to store a matching string
@@ -211,15 +215,15 @@ function! GoToNextDay()
     endif
 endfunction
 " 3) Map the previous functions
-nmap <C-Left> :call GoToPreviousDay()<CR>
-nmap <C-Right> :call GoToNextDay()<CR>
+nnoremap <C-Left> :call GoToPreviousDay()<CR>
+nnoremap <C-Right> :call GoToNextDay()<CR>
 
 " Also, create a mapping for creating tomorrow's note, in case you need to
 " create it in advance. Note that it makes sense to create it like this,
 " because the <leader> prefix is for opening files. First you need to remap
 " VimwikiTabMakeDiaryNote, which is hogging <leader>w<leader>t
-nmap <leader>w<leader>x <Plug>VimwikiTabMakeDiaryNote
-nmap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
+nnoremap <leader>w<leader>x <Plug>VimwikiTabMakeDiaryNote
+nnoremap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
 " Notice that <leader>w<leader>y creates yesterday's note if that wasn't
 " already created
 
@@ -263,8 +267,8 @@ function! CloseThisBuffer()
         BD
     endif
 endfunction
-nmap <Leader>wb <Plug>VimwikiGoBackLink
-nmap <BS> :call CloseThisBuffer()<CR>
+nnoremap <Leader>wb <Plug>VimwikiGoBackLink
+nnoremap <BS> :call CloseThisBuffer()<CR>
 " Keybindings for time tracking with ti. <leader>t stands for time commands
 " Turn on with o
 function! OnTi()
@@ -337,7 +341,7 @@ vmap <C-y> "+y
 map <C-p> "+p
 vmap <C-c> d:let @+ = @"<CR>i
 " Copy the last Vim selection to clipboard
-nmap <leader>+ :let @+=@"<CR>
+nnoremap <leader>+ :let @+=@"<CR>
 
 
 " avoid an annoying beeping sound. Instead, the ``beeping" will be a white
@@ -359,7 +363,7 @@ augroup END
 noh
 " remap :noh to <C-n> in normal model. :noh stops highlighting until next
 " search
-nmap <C-n> :noh<CR>
+nnoremap <C-n> :noh<CR>
 " This (supposedly) will make that highlight stays on after a search, but not after a
 " string substitution
 augroup search_be_gone
@@ -440,7 +444,7 @@ function! IterateColorscheme()
     execute "colorscheme" current_colorscheme
 endfunction
 
-nmap <F12> :call IterateColorscheme()<CR>
+nnoremap <F12> :call IterateColorscheme()<CR>
 imap <F12> <Esc>:call IterateColorscheme()<CR>li
 
 
@@ -754,7 +758,7 @@ inoremap <C-h> <C-o><C-w>h
 " <C-h> and <C-l> are not mapped in the terminal because <C-l> is supposed to
 " clear the screen in the terminal
 " Freed <C-l> in Netrw
-nmap <leader><leader><leader><leader><leader><leader>l <Plug>NetrwRefresh
+nnoremap <leader><leader><leader><leader><leader><leader>l <Plug>NetrwRefresh
 
 " Copying in terminal mode (same as copying to clipboard in normal mode)
 tnoremap <C-p> <C-w>"+p
@@ -808,7 +812,7 @@ hi! link Sneak Normal
 
 " Vimtex configuration
 let g:vimtex_view_method = 'zathura'
-nmap <localleader>lw :VimtexCountWords<CR>
+nnoremap <localleader>lw :VimtexCountWords<CR>
 " CHECK IF THE FOLLOWING WORKS. It is supposed to be a list of regex to
 " filter. It DOESN'T WORK TODO 
  let g:vimtex_log_ignore = ['^.*Warning.*$']
@@ -865,3 +869,7 @@ command! UpdateTitle call UpdateTitle()
 " - : is usually used to access command mode, but I have the whitespace for
 "   that
 nnoremap : ,
+" XXX The above is actually very dangerous, because if any mappings with nmap
+" use :, then we'll actually be pressing , instead of entering the command
+" line. As a result I had to change a bunch of commands above from nmap to
+" nnoremap. If problems arise, consider this a possible source
