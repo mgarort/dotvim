@@ -52,6 +52,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'wellle/targets.vim'
 Plugin 'ap/vim-css-color'
 Plugin 'Konfekt/vim-CtrlXA'
+Plugin 'romainl/vim-cool'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required (note that this automatically guesses indents for 
@@ -359,18 +360,12 @@ augroup highlight_search
     " at from all the others
     au ColorScheme * hi IncSearch cterm=NONE ctermfg=white ctermbg=DarkGreen
 augroup END
-" Noh to avoid highlighting upon sourcing .vimrc
+" noh to avoid highlighting upon sourcing .vimrc
 noh
-" remap :noh to <C-n> in normal model. :noh stops highlighting until next
+" remap :noh to <CR> in normal mode. :noh stops highlighting until next
 " search
-nnoremap <C-n> :noh<CR>
-" This (supposedly) will make that highlight stays on after a search, but not after a
-" string substitution
-augroup search_be_gone
-    autocmd!
-    autocmd CmdlineEnter : let s:prev_hlsearch = v:hlsearch
-    autocmd CmdlineLeave : if v:hlsearch && !s:prev_hlsearch | call feedkeys(":nohlsearch\<cr>") | endif
-augroup END
+" XXX This mapping may be redundant after installing romainl's vim-cool
+nnoremap <CR> :noh<CR>
 
 " Make sure that tabs are expanded to spaces. If you do this all the time
 " consistently, you'll avoid errors of mixing tabs and spaces in the same
