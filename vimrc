@@ -868,3 +868,10 @@ nnoremap : ,
 " use :, then we'll actually be pressing , instead of entering the command
 " line. As a result I had to change a bunch of commands above from nmap to
 " nnoremap. If problems arise, consider this a possible source
+
+" Trying out this simple fold configuration from https://stackoverflow.com/questions/357785/what-is-the-recommended-way-to-use-vim-folding-for-python-code
+" Try this other plugin too:   https://github.com/tmhedberg/SimpylFold
+set foldmethod=indent
+set foldnestmax=2
+nnoremap <CR> za
+vnoremap <CR> zf
