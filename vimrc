@@ -875,3 +875,6 @@ set foldmethod=indent
 set foldnestmax=2
 nnoremap <CR> za
 vnoremap <CR> zf
+
+" This will make Ctrl-XA move the cursor whenever a change happens
+let g:CtrlXA_move = 1
