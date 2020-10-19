@@ -257,6 +257,8 @@ function! Wikify()
     "   of $$, instead of the first $$ in the file and the last $$ in the file
     " - Right hand side, \1 pastes the capturing group from the left hand side
     %s/\$\$\(\_.\{-}\)\$\$/{{\$\1}}\$/g
+    " Same, but with align environments
+    %s/\\begin{align.*}\(\_.\{-}\)\\end{align.*/{{\$%align%\1}}\$/g
 endfunction
 command! Wikify call Wikify()
 " Make fuction to open Vimwiki index (in order to open the index with a simple
