@@ -878,3 +878,11 @@ vnoremap <CR> zf
 
 " This will make Ctrl-XA move the cursor whenever a change happens
 let g:CtrlXA_move = 1
+
+" Keybinding to surround in codeblock
+vnoremap <S-s>c dO{{{><CR><Esc>p`]a<CR>}}}<Esc>
+
+" Keybinding to visually select within line, without the newline at the end
+nnoremap vil ^v$<Left>
+
+
