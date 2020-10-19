@@ -247,6 +247,16 @@ function! Wikify()
     %s#\\underline{\(.*\)}#<u>\1</u>#ge
     %s#\\textbf{\(.*\)}#<b>\1</b>#ge
     %s#\\textit{\(.*\)}#<i>\1</i>#ge
+    " The following replaces the $$....$$ equations in latex 
+    " for {{$....}}$ in Vimwiki. Explanation:
+    " - Left hand side, \$\$  \$\$ are $$   $$ for Latex
+    " - Left hand side, \(\_.\{-}\) is a capturing group
+    " - Left hand side, \_ is saying to go over multiple lines
+    " - Left hand side, .\{-} is saying to match everything, but being
+    "   non-greedy. This is because we want $$....$$ to match the closest pair
+    "   of $$, instead of the first $$ in the file and the last $$ in the file
+    " - Right hand side, \1 pastes the capturing group from the left hand side
+    %s/\$\$\(\_.\{-}\)\$\$/{{\$\1}}\$/g
 endfunction
 command! Wikify call Wikify()
 " Make fuction to open Vimwiki index (in order to open the index with a simple
