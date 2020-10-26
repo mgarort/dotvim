@@ -223,8 +223,8 @@ nnoremap <C-Right> :call GoToNextDay()<CR>
 " create it in advance. Note that it makes sense to create it like this,
 " because the <leader> prefix is for opening files. First you need to remap
 " VimwikiTabMakeDiaryNote, which is hogging <leader>w<leader>t
-nnoremap <leader>w<leader>x <Plug>VimwikiTabMakeDiaryNote
-nnoremap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
+nmap <leader>w<leader>x <Plug>VimwikiTabMakeDiaryNote
+nmap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
 " Notice that <leader>w<leader>y creates yesterday's note if that wasn't
 " already created
 
