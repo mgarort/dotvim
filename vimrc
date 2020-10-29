@@ -53,6 +53,7 @@ Plugin 'wellle/targets.vim'
 Plugin 'ap/vim-css-color'
 Plugin 'Konfekt/vim-CtrlXA'
 Plugin 'romainl/vim-cool'
+Plugin 'vim-scripts/SearchComplete'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required (note that this automatically guesses indents for 
@@ -894,7 +895,12 @@ let g:CtrlXA_move = 1
 " Keybinding to surround in codeblock
 vnoremap <S-s>c dO{{{><CR><Esc>p`]a<CR>}}}<Esc>
 
+" Useful visual keybindings
 " Keybinding to visually select within line, without the newline at the end
 nnoremap vil ^v$<Left>
+" nnoremap <C-v>ip {<Down><C-v>}<Up> "I want this to be a way to block select
+" a paragraph, but it doesn't work if the paragraph is right at the end of the
+" file because it requires to first go to the line below hte paragraph and
+" then up
 
 
