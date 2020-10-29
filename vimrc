@@ -883,11 +883,13 @@ nnoremap : ,
 " nnoremap. If problems arise, consider this a possible source
 
 " Trying out this simple fold configuration from https://stackoverflow.com/questions/357785/what-is-the-recommended-way-to-use-vim-folding-for-python-code
-" Try this other plugin too:   https://github.com/tmhedberg/SimpylFold
+" Maybe try this other plugin too:   https://github.com/tmhedberg/SimpylFold
+" (yes, it's SimpylFold and not SimplyFold)
 set foldmethod=indent
 set foldnestmax=2
 nnoremap <CR> za
 vnoremap <CR> zf
+nnoremap z<CR> zO
 
 " This will make Ctrl-XA move the cursor whenever a change happens
 let g:CtrlXA_move = 1
