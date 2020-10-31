@@ -36,6 +36,8 @@ let s:palette.magenta = [125, '#af005f']
 let s:palette.darkred = [124, '#af0000']
 let s:palette.darkgreen = [22, '#005f00']
 
+let s:palette.yellow = [220, '	#ffd700']
+
 if has("nvim")
     let g:terminal_color_0 = s:palette.gray01[1]
     let g:terminal_color_1 = s:palette.gray06[1]
@@ -113,7 +115,7 @@ call s:hi('Special', s:palette.gray10, [], '')
 call s:hi('SpecialComment', s:palette.gray12, [], 'bold')
 
 call s:hi('Title', s:palette.gray10, [], 'bold')
-call s:hi('Todo', s:palette.red, s:palette.gray14, '')
+call s:hi('Todo', s:palette.red, s:palette.yellow, '')
 if has("nvim") || has("gui_running")
     call s:hi('Comment', s:palette.gray12, [], 'italic')
 else
@@ -177,6 +179,11 @@ call s:hi('VimwikiDelText', s:palette.gray10, [], 'underline')
 call s:hi('VimwikiCode', s:palette.gray10, [], 'italic')
 call s:hi('VimwikiUnderline', s:palette.gray10, [], 'underline')
 call s:hi('VimwikiPre', s:palette.gray10, [], 'italic')
+
+" My general highlights
+"hi hl-Question cterm=NONE ctermfg=red ctermbg=NONE
+
+"call s:hi('hl-Question', s:palette.red, [], '')
 
 
 highlight! link Character Constant
