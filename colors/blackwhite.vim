@@ -36,7 +36,8 @@ let s:palette.magenta = [125, '#af005f']
 let s:palette.darkred = [124, '#af0000']
 let s:palette.darkgreen = [22, '#005f00']
 
-let s:palette.yellow = [220, '	#ffd700']
+let s:palette.yellow = [220, '#ffd700']
+let s:palette.lightgreen = [187, '#d7d7af']
 
 if has("nvim")
     let g:terminal_color_0 = s:palette.gray01[1]
@@ -115,7 +116,7 @@ call s:hi('Special', s:palette.gray10, [], '')
 call s:hi('SpecialComment', s:palette.gray12, [], 'bold')
 
 call s:hi('Title', s:palette.gray10, [], 'bold')
-call s:hi('Todo', s:palette.red, s:palette.yellow, '')
+call s:hi('Todo', s:palette.red, s:palette.lightgreen, '')
 if has("nvim") || has("gui_running")
     call s:hi('Comment', s:palette.gray12, [], 'italic')
 else
