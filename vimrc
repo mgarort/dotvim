@@ -336,6 +336,12 @@ nnoremap <silent> <leader>t<leader>s :call StatusTi()<CR>
 
 
 
+" Set case options:
+" - ignorecase ignores the case when searching
+" - smartcase overrides ignorecase and pays attention to case, but only when
+"   capital letters are included in the search
+set ignorecase
+set smartcase
 
 " Make new windows open below and to the right
 set splitbelow
