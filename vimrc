@@ -245,9 +245,9 @@ function! Wikify()
     %s/\\item/- /ge
     %s/\\begin{verbatim}/{{{>/ge
     %s/\\end{verbatim}/}}}/ge
-    %s#\\underline{\(.*\)}#<u>\1</u>#ge
-    %s#\\textbf{\(.*\)}#<b>\1</b>#ge
-    %s#\\textit{\(.*\)}#<i>\1</i>#ge
+    %s#\\underline{\(.\{-}\)}#<u>\1</u>#ge
+    %s#\\textbf{\(.\{-}\)}#<b>\1</b>#ge
+    %s#\\textit{\(.\{-}\)}#<i>\1</i>#ge
     " The following replaces the $$....$$ equations in latex 
     " for {{$....}}$ in Vimwiki. Explanation:
     " - Left hand side, \$\$  \$\$ are $$   $$ for Latex
@@ -876,7 +876,8 @@ command! UpdateTitle call UpdateTitle()
 "   timeout
 " - : is usually used to access command mode, but I have the whitespace for
 "   that
-nnoremap : ,
+"nnoremap : ,
+map : <Plug>Sneak_,
 " XXX The above is actually very dangerous, because if any mappings with nmap
 " use :, then we'll actually be pressing , instead of entering the command
 " line. As a result I had to change a bunch of commands above from nmap to
