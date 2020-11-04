@@ -104,6 +104,14 @@ snippet paper "Vimwiki paper"
 [[file:./papers/${0:PAPER_PATH}|${1:description}]]
 endsnippet
 
+snippet doc "Vimwiki document"
+[[file:./docs/${0:DOC_PATH}|${1:description}]]
+endsnippet
+
+snippet book "Vimwiki link to book"
+[[file:./books/${0:BOOK_PATH}|${1:description}]]
+endsnippet
+
 snippet ref "Vimwiki references"
 --------------------------------
 
@@ -190,6 +198,10 @@ snippet mcal "mathcal"
 \mathcal{${0}}
 endsnippet
 
+snippet bs "boldsymbol"
+\boldsymbol{${0:mathbold}}
+endsnippet
+
 ### Probability
 
 snippet p "p( )"
@@ -254,4 +266,14 @@ endsnippet
 
 snippet Bigg{ "Bigg {"
 \Bigg\\{ ${0} \Bigg\\}
+endsnippet
+
+# Spacing
+
+snippet , "double \,"
+\, ${1} \,
+endsnippet
+
+snippet ; "double \;"
+\; ${1} \;
 endsnippet
