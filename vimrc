@@ -615,10 +615,12 @@ com! DiffSaved call s:DiffWithSaved()
 " Note that the usual <C-e> to go to the end already works by default
 cnoremap <C-a> <C-b>
 
-" Make <C-a> and <C-e> in insert mode behave like in the command line, going
+" Make <C-a> and <C-e> in insert and select modes behave like in the command line, going
 " to the beginning and end of the line respectively
 inoremap <C-a> <Esc>^i
 inoremap <C-e> <End>
+snoremap <C-a> <Esc>^i
+snoremap <C-e> <End><Esc>i
 
 " Make mapping so that Shift-Arrow increase and reduce the window size in normal
 " mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
@@ -910,4 +912,8 @@ nnoremap vil ^v$<Left>
 " file because it requires to first go to the line below hte paragraph and
 " then up
 
-
+" Insert digraphs with <C-i> (can think of it as "special insert")
+"inoremap <C-@> <C-k>
+"inoremap <C-2> <C-k>
+"TODO Currently this only works after manually sourcing, probably because of a
+"clash with <C-k> in UltiSnips. Fix
