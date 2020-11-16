@@ -904,6 +904,11 @@ let g:CtrlXA_move = 1
 " Keybinding to surround in codeblock
 vnoremap <S-s>c dO{{{><CR><Esc>p`]a<CR>}}}<Esc>
 
+" Keybinding to change indentation of single line with a single key press
+" (note that l after < or > is an arbitrary key, it could also be j, for example)
+nnoremap < <l
+nnoremap > >l
+
 " Useful visual keybindings
 " Keybinding to visually select within line, without the newline at the end
 nnoremap vil ^v$<Left>
