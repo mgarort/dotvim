@@ -382,7 +382,7 @@ noh
 " remap :noh to <CR> in normal mode. :noh stops highlighting until next
 " search
 " XXX This mapping may be redundant after installing romainl's vim-cool
-nnoremap <CR> :noh<CR>
+nnoremap <C-n> :noh<CR>
 
 " Make sure that tabs are expanded to spaces. If you do this all the time
 " consistently, you'll avoid errors of mixing tabs and spaces in the same
@@ -834,7 +834,7 @@ nnoremap <localleader>lw :VimtexCountWords<CR>
 " Display line equivalent of o and O. gO adds an additional line of space
 " below because we usually want the stuff below to go away and not bother us
 nnoremap go  i<CR>
-nnoremap gO  i<CR><CR><Esc><Up><Up>A
+nnoremap gO  i<CR><Esc><Up>A
 
 " Display line equivalent of I and A
 nnoremap gA g$a
@@ -918,7 +918,8 @@ nnoremap vil ^v$<Left>
 " then up
 
 " Insert digraphs with <C-i> (can think of it as "special insert")
-"inoremap <C-@> <C-k>
+inoremap <C-@> <C-k>
 "inoremap <C-2> <C-k>
 "TODO Currently this only works after manually sourcing, probably because of a
 "clash with <C-k> in UltiSnips. Fix
+
