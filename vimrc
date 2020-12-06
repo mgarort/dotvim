@@ -275,6 +275,10 @@ endfunction
 function! CloseThisBuffer()
     if bufname("%") == ""
         q
+    elseif IsFugitiveDiffScratchWindow() == 1
+        bd
+    elseif IsFugitiveStatusWindow() == 1
+        q
     else
         BD
     endif
@@ -923,3 +927,23 @@ inoremap <C-@> <C-k>
 "TODO Currently this only works after manually sourcing, probably because of a
 "clash with <C-k> in UltiSnips. Fix
 
+"Mappings for Vim fugitive
+nnoremap <leader>g :G<CR>
+function! IsFugitiveDiffScratchWindow()
+    let buffer_name = bufname("%")
+    let string_index = stridx(buffer_name,"fugitive")
+    if string_index == 0
+        return 1
+    else
+        return 0
+    endif
+endfunction
+function! IsFugitiveStatusWindow()
+    let buffer_name = bufname("%")
+    let string_index = stridx(buffer_name,"\.git/index")
+    if string_index == -1
+        return 0
+    else
+        return 1
+    endif
+endfunction
