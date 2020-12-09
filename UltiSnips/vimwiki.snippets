@@ -26,13 +26,13 @@ endsnippet
 
 # Snippets for defining environments (latex equation, inline latex, code block, inline code...)
 
-snippet latex "Latex equation"
+snippet $$ "Latex equation"
 {{$
 ${0:equation}
 }}$
 endsnippet
 
-snippet align "Latex align"
+snippet $$align "Latex align"
 {{$%align%
 ${0:equation}
 }}$
@@ -182,14 +182,20 @@ snippet tr "text roman"
 \textrm{${0:roman}}
 endsnippet
 
+snippet t "text"
+\text{${0:text}}
+endsnippet
+
+### Text decorators
+
+snippet hat "hat ^"
+\hat{${0}}
+endsnippet
+
 ### Symbols
 
 snippet ~ "text tilde"
 \textasciitilde
-endsnippet
-
-snippet hat "hat ^"
-\hat{${0}}
 endsnippet
 
 ### Math formatting
@@ -274,6 +280,10 @@ endsnippet
 
 snippet Bigg{ "Bigg {"
 \Bigg\\{ ${0} \Bigg\\}
+endsnippet
+
+snippet langle "< , >"
+\langle ${1:v1} , ${2:v2} \rangle
 endsnippet
 
 # Spacing
