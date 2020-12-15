@@ -229,6 +229,10 @@ nmap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
 " Notice that <leader>w<leader>y creates yesterday's note if that wasn't
 " already created
 
+" Keymaps for quick renaming of vimwiki files
+nnoremap <leader>r :VimwikiRenameFile<CR>y<CR>
+nnoremap <leader>u :UpdateTitle<CR>
+
 " Make function to change Anki (Latex) to Vimwiki. Note that the e flag mutes
 " error signs when the pattern is not found
 function! Wikify()
