@@ -902,7 +902,10 @@ map : <Plug>Sneak_,
 " (yes, it's SimpylFold and not SimplyFold)
 set foldmethod=indent
 set foldnestmax=2
-nnoremap <CR> za
+" If we are in the quickfix window, we don't want to change the behaviour of
+" <CR>, o else we won't be able to select from the quickfix list with <CR>
+" https://vi.stackexchange.com/questions/3127/how-to-map-enter-to-custom-command-except-in-quick-fix
+nnoremap <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : 'za'
 vnoremap <CR> zf
 nnoremap z<CR> zO
 
