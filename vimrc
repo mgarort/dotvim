@@ -951,3 +951,11 @@ function! IsFugitiveStatusWindow()
         return 1
     endif
 endfunction
+
+"Mappings for quickfix window (copied from tpope's unimpaired)
+nnoremap [q :cprev<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [Q :cfirst<CR>
+nnoremap ]Q :clast<CR>
+nnoremap [c :cclose<CR>
+nnoremap [o :copen<CR>
