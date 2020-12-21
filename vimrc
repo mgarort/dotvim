@@ -831,6 +831,25 @@ nnoremap <leader>f :find
 
 " Disable vim-sneak highlight so that it behaves more like the f and t motions
 hi! link Sneak Normal
+" Replace f, F, t, T for the vim-sneak versions, which can jump across lines
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
+" Make : be equivalent to , to be able to quickly go back in f, F, t, T and s,
+" S motions. This is a good strategy because:
+" - Currently, , is part of other keybindings, like ,l (to list buffers), and
+"   so if we use , to go back in the motions above, we have to wait a 1s
+"   timeout
+" - : is usually used to access command mode, but I have the whitespace for
+"   that
+"nnoremap : ,
+map : <Plug>Sneak_,
+" XXX The above is actually very dangerous, because if any mappings with nmap
+" use :, then we'll actually be pressing , instead of entering the command
+" line. As a result I had to change a bunch of commands above from nmap to
+" nnoremap. If problems arise, consider this a possible source
+
 
 " Vimtex configuration
 let g:vimtex_view_method = 'zathura'
@@ -883,19 +902,6 @@ function! UpdateTitle()
 endfunction
 command! UpdateTitle call UpdateTitle()
 
-" Make : be equivalent to , to be able to quickly go back in f, F, t, T and s,
-" S motions. This is a good strategy because:
-" - Currently, , is part of other keybindings, like ,l (to list buffers), and
-"   so if we use , to go back in the motions above, we have to wait a 1s
-"   timeout
-" - : is usually used to access command mode, but I have the whitespace for
-"   that
-"nnoremap : ,
-map : <Plug>Sneak_,
-" XXX The above is actually very dangerous, because if any mappings with nmap
-" use :, then we'll actually be pressing , instead of entering the command
-" line. As a result I had to change a bunch of commands above from nmap to
-" nnoremap. If problems arise, consider this a possible source
 
 " Trying out this simple fold configuration from https://stackoverflow.com/questions/357785/what-is-the-recommended-way-to-use-vim-folding-for-python-code
 " Maybe try this other plugin too:   https://github.com/tmhedberg/SimpylFold
