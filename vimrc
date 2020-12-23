@@ -39,6 +39,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-commentary'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 Plugin 'tomasiser/vim-code-dark'
@@ -928,7 +929,7 @@ nnoremap > >l
 
 " Useful visual keybindings
 " Keybinding to visually select within line, without the newline at the end
-nnoremap vil ^v$<Left>
+" nnoremap vil ^v$<Left>
 " nnoremap <C-v>ip {<Down><C-v>}<Up> "I want this to be a way to block select
 " a paragraph, but it doesn't work if the paragraph is right at the end of the
 " file because it requires to first go to the line below hte paragraph and
