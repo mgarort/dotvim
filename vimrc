@@ -640,10 +640,10 @@ nnoremap <leader>f :find
 " Disable vim-sneak highlight so that it behaves more like the f and t motions
 hi! link Sneak Normal
 " Replace f, F, t, T for the vim-sneak versions, which can jump across lines
-" map f <Plug>Sneak_f
-" map F <Plug>Sneak_F
-" map t <Plug>Sneak_t
-" map T <Plug>Sneak_T
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 " Make : be equivalent to , to be able to quickly go back in f, F, t, T and s,
 " S motions. This is a good strategy because:
 " - Currently, , is part of other keybindings, like ,l (to list buffers), and
