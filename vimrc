@@ -123,6 +123,9 @@ function! CloseThisBuffer()
         BD
     endif
 endfunction
+nnoremap <BS> :call CloseThisBuffer()<CR>
+" Needed to freed <BS> in Vimwiki
+nnoremap <Leader>wb <Plug>VimwikiGoBackLink
 
 " Set case options:
 " - ignorecase ignores the case when searching

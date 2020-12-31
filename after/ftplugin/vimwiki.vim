@@ -198,8 +198,6 @@ function! Wikify()
     %s/\\begin{align.*}\(\_.\{-}\)\\end{align.*/{{\$%align%\1}}\$/ge
 endfunction
 command! Wikify call Wikify()
-nnoremap <Leader>wb <Plug>VimwikiGoBackLink
-nnoremap <BS> :call CloseThisBuffer()<CR>
 " Keybindings for time tracking with ti. <leader>t stands for time commands
 " Turn on with o
 function! OnTi()
