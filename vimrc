@@ -55,6 +55,8 @@ Plugin 'ap/vim-css-color'
 Plugin 'Konfekt/vim-CtrlXA'
 Plugin 'romainl/vim-cool'
 Plugin 'vim-scripts/SearchComplete'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required (note that this automatically guesses indents for 
@@ -631,6 +633,25 @@ inoremap <C-e> <End>
 snoremap <C-a> <Esc>^i
 snoremap <C-e> <End><Esc>i
 
+" Make 0 a 'smart' go to start of line: if we press it once, we go to the
+" first non-blank character, and if we press it twice, we go to the actual
+" start of the line
+" From https://www.reddit.com/r/vim/comments/kn0cpp/key_mappings_everyone_uses/
+nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+
+
+" When using <CTRL-U>, <CTRL-W> or <Enter> in Insert-mode, do <CTRL-G>u
+" first to start a new change so that I can undo these operations with
+" u in Normal/Command mode, rather than undoing the entire Insert
+" operation at once.
+" From https://www.reddit.com/r/vim/comments/kn0cpp/key_mappings_everyone_uses/
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
+inoremap <C-J> <C-G>u<C-J>
+inoremap <NL> <C-G>u<NL>
+inoremap <C-M> <C-G>u<C-M>
+inoremap <CR> <C-G>u<CR>
+
 " Make mapping so that Shift-Arrow increase and reduce the window size in normal
 " mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
 " freed <S-Arrow> and then map them.
@@ -833,10 +854,10 @@ nnoremap <leader>f :find
 " Disable vim-sneak highlight so that it behaves more like the f and t motions
 hi! link Sneak Normal
 " Replace f, F, t, T for the vim-sneak versions, which can jump across lines
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
+" map f <Plug>Sneak_f
+" map F <Plug>Sneak_F
+" map t <Plug>Sneak_t
+" map T <Plug>Sneak_T
 " Make : be equivalent to , to be able to quickly go back in f, F, t, T and s,
 " S motions. This is a good strategy because:
 " - Currently, , is part of other keybindings, like ,l (to list buffers), and
