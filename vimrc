@@ -99,6 +99,11 @@ function! LaunchVimwiki()
     execute "cd ". index_path
     execute "e " . "index.wiki"
 endfunction
+" Map <Plug>VimwikiTextObjListSingle to something ridiculous to freed il, so
+" that we can select "in line" (il). For some reason this must be in vimrc to
+" work, rather than after/ftplugin/vimwiki.vim
+nnoremap <leader><leader><leader><leader><leader><leader>i <Plug>VimwikiTextObjListSingle
+nnoremap <leader><leader><leader><leader><leader><leader>iV <Plug>VimwikiTextObjListSingleV
 
 
 
