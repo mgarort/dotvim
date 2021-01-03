@@ -75,35 +75,13 @@ filetype plugin indent on    " required (note that this automatically guesses in
 
 
 
-" MY OWN STUFF 
 
 " This is the minimal Vimwiki stuff that needs to be defined in my vimrc
 " instead of in the vimwiki.vim specific file
 set nocompatible
 filetype plugin on
 syntax on
-" The following is so that vimwiki doesn't take over Tab in insert mode
-let g:vimwiki_table_mappings = 0
-" This is so that my vimwiki is hosted in the repos folder
-let g:vimwiki_list = [{'path': '~/repos/wiki', 
-            \ 'path_html':'~/wiki_html', 
-            \ 'syntax':'default', 
-            \ 'template_path':'~/repos/wiki/setup',
-            \ 'ext':'.wiki',
-            \ 'template_default': 'default',
-            \ 'template_ext': '.tpl'}]
-" Make fuction to open Vimwiki index (in order to open the index with a simple
-" i3 keybinding)
-function! LaunchVimwiki()
-    let index_path = g:vimwiki_list[0]['path']
-    execute "cd ". index_path
-    execute "e " . "index.wiki"
-endfunction
-" Map <Plug>VimwikiTextObjListSingle to something ridiculous to freed il, so
-" that we can select "in line" (il). For some reason this must be in vimrc to
-" work, rather than after/ftplugin/vimwiki.vim
-nnoremap <leader><leader><leader><leader><leader><leader>i <Plug>VimwikiTextObjListSingle
-nnoremap <leader><leader><leader><leader><leader><leader>iV <Plug>VimwikiTextObjListSingleV
+
 
 
 
@@ -329,8 +307,11 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 
 " CtrlP configuration
-let g:ctrlp_map = '<leader>p'
+let g:ctrlp_map = '<leader>,'
 let g:ctrlp_cmd = 'CtrlP'
+
+" fzf configuration
+nnoremap <leader>p :Files<CR>
 
 " Keep the window margin 3 lines away from the cursor
 set scrolloff=3
@@ -418,8 +399,9 @@ inoremap <C-a> <Esc>^i
 inoremap <C-e> <End>
 snoremap <C-a> <Esc>^i
 snoremap <C-e> <End><Esc>i
-" Make <C-b> and <C-f> in insert mode behave similarly to how <Alt-b> behaves in the
-" command line, i.e. going back and advancing one word at a time
+" Make <C-b> and <C-f> in insert mode behave similarly to how <Alt-b> and 
+" <Alt-f> behaves in the command line, i.e. going back and advancing one 
+" word at a time
 inoremap <C-b> <Esc><Right>bi
 inoremap <C-f> <Esc><Right>ei
 
@@ -780,3 +762,6 @@ nnoremap [Q :cfirst<CR>
 nnoremap ]Q :clast<CR>
 nnoremap [c :cclose<CR>
 nnoremap [o :copen<CR>
+
+
+
