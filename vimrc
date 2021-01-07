@@ -410,6 +410,7 @@ inoremap <C-f> <Esc><Right>ei
 " start of the line
 " From https://www.reddit.com/r/vim/comments/kn0cpp/key_mappings_everyone_uses/
 nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 
 
 " When using <CTRL-U>, <CTRL-W> or <Enter> in Insert-mode, do <CTRL-G>u
