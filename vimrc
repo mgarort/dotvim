@@ -765,3 +765,8 @@ nnoremap [o :copen<CR>
 
 
 
+" SECTION  Not sorted yet. Things to be sorted
+
+" Enable jumping to matching angle bracket with % 
+" source: https://www.reddit.com/r/vim/comments/kr9rnu/how_to_jump_to_matching_anglebracket_using/
+set matchpairs+=<:>
