@@ -282,14 +282,20 @@ nnoremap ,m :b#<CR>
 nnoremap ,r :register<CR>
 
 
-" The following keybindings quickly open .vimrc (and load it), my wiki index
-" and i3 config file
+" The following keybindings quickly open important files like:
+" - ~/.vim files
+" - my wiki index
+" - i3 config file
+" - bashrc
+" - etc...
 nnoremap <leader>vv :e $MYVIMRC<CR>
 nnoremap <leader>va :Explore $HOME/.vim/after<CR>
 nnoremap <leader>vp :Explore $HOME/.vim/plugin<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
 nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
 nnoremap <leader>b :e ~/.bashrc<CR>
+nnoremap <leader>d :e ~/repos/wiki/setup/default.tpl<CR>
+
 " The following keybinding reloads vimrc and also does :e to load filetype
 " specific configurations (such as those in after/ftplugin/vimwiki.vim). This
 " allows us to split the vimrc into general stuff and filetype specific stuff,
