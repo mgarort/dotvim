@@ -284,7 +284,9 @@ nnoremap ,r :register<CR>
 
 " The following keybindings quickly open .vimrc (and load it), my wiki index
 " and i3 config file
-nnoremap <leader>v :e $MYVIMRC<CR>
+nnoremap <leader>vv :e $MYVIMRC<CR>
+nnoremap <leader>va :Explore $HOME/.vim/after<CR>
+nnoremap <leader>vp :Explore $HOME/.vim/plugin<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
 nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
 nnoremap <leader>b :e ~/.bashrc<CR>
@@ -771,3 +773,11 @@ nnoremap [o :copen<CR>
 " Enable jumping to matching angle bracket with % 
 " source: https://www.reddit.com/r/vim/comments/kr9rnu/how_to_jump_to_matching_anglebracket_using/
 set matchpairs+=<:>
+
+
+" Delete text in select mode without affecting the registers TODO
+" function! DeleteSelectMode()
+" endfunction
+" snoremap <CR> <Esc>gv"_c
+" snoremap a <Esc>gv"_ca
+
