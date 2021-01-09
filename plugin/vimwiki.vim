@@ -84,6 +84,10 @@ nnoremap <C-c> :call ProcessImages()<CR>
 nnoremap <leader><leader><leader><leader><leader><leader>i <Plug>VimwikiTextObjListSingle
 nnoremap <leader><leader><leader><leader><leader><leader>iV <Plug>VimwikiTextObjListSingleV
 
+" Freed <C-o> by disabling the native 'next link' functionality, which is redundant 
+" after mapping <C-h> and <C-l>
+nnoremap <leader><leader><leader><leader><leader><leader><leader><leader>asdfasdferqer <Plug>VimwikiNextLink
+
 " Have multiline list/itemize items
 let g:vimwiki_list_ignore_newline = 0
 " Avoid automatically writing upon exit
