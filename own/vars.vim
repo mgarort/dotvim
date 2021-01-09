@@ -1,4 +1,4 @@
-" This is my own varsion of vars.vim, where I have only modified:
+" This is my own version of .vim/bundle/vimwiki/autoload/vimwiki/vars.vim where I have only modified:
 "
 " - The variable g:vimwiki_global_vars.rxTodo so that other words (such as NOTE, 
 "   COMMENT, ANSWER...) are highlighted in Vimwiki like TODO, XXX, etc
