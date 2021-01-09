@@ -1,9 +1,16 @@
-" This is my own varsion of vars.vim, where I have only modified the variable g:vimwiki_global_vars.rxTodo
-" so that other words (such as NOTE, COMMENT, ANSWER...) are highlighted in Vimwiki like TODO, XXX, etc
+" This is my own varsion of vars.vim, where I have only modified:
+"
+" - The variable g:vimwiki_global_vars.rxTodo so that other words (such as NOTE, 
+"   COMMENT, ANSWER...) are highlighted in Vimwiki like TODO, XXX, etc
 " To be symlinked in ~/repos/dotvim/bundle/vimwiki/autoload/vimwiki/vars.vim
 " NOTE If vars.vim changes in the official Vimwiki repository, then you should
 " update to the newest version and modify g:vimwiki_global_vars.rxTodo in that
 " version
+" - The variable g:vimwiki_global_vars.web_schemes1, so that ssh is not
+"   treated as a URL scheme and a link that starts with ssh: doesn't open the
+"   web browser
+
+
 
 
 " vim:tabstop=2:shiftwidth=2:expandtab:textwidth=99
@@ -48,7 +55,7 @@ function! s:populate_global_variables() abort
   let g:vimwiki_global_vars.schemes = join(['wiki\d\+', 'diary', 'local'], '\|')
   let g:vimwiki_global_vars.web_schemes1 = join(['http', 'https', 'file', 'ftp', 'gopher',
         \ 'telnet', 'nntp', 'ldap', 'rsync', 'imap', 'pop', 'irc', 'ircs', 'cvs', 'svn', 'svn+ssh',
-        \ 'git', 'ssh', 'fish', 'sftp'], '\|')
+        \ 'git', 'fish', 'sftp'], '\|')
   let web_schemes2 =
         \ join(['mailto', 'news', 'xmpp', 'sip', 'sips', 'doi', 'urn', 'tel', 'data'], '\|')
 
