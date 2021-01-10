@@ -663,6 +663,8 @@ omap s <Plug>Sneak_s
 omap S <Plug>Sneak_S
 xmap <S-s> <Plug>Sneak_S
 xmap z <Plug>VSurround
+nmap yzz <Plug>Yssurround
+nmap yz  <Plug>Ysurround
 
 
 " Vimtex configuration
