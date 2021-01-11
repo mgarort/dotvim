@@ -288,6 +288,7 @@ nnoremap ,r :register<CR>
 " - i3 config file
 " - bashrc
 " - etc...
+nnoremap <leader>v :Explore $HOME/.vim<CR>
 nnoremap <leader>vv :e $MYVIMRC<CR>
 nnoremap <leader>va :Explore $HOME/.vim/after<CR>
 nnoremap <leader>vp :Explore $HOME/.vim/plugin<CR>
@@ -396,10 +397,6 @@ function! s:DiffWithSaved()
   exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 com! DiffSaved call s:DiffWithSaved()
-
-" Make <C-a> go to the beginning of the Vim command line, like in the shell
-" Note that the usual <C-e> to go to the end already works by default
-cnoremap <C-a> <C-b>
 
 " Make <C-a> and <C-e> in insert and select modes behave like in the command line, going
 " to the beginning and end of the line respectively
@@ -602,29 +599,6 @@ function! EnterNormalMode()
     endif
 endfunction
 tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
-
-" Command to copy contents of cell
-function! CopyCell()
-    " Save content of clipboard in unused register
-    let @z = getreg('+')
-    " Copy cell (delimited by ##{ and ##}) to clipboard
-    let @+ = ''
-    exe '?##{?+1;/##}/-1y +'
-    " Paste clipboard to IPython command line, using IPython's %paste magic
-    wincmd j
-    call term_sendkeys(bufnr("%"), "%paste\<CR>")
-    wincmd k
-    " Move to the last character of the previously yanked text (copied from
-    " vim-cellmode)
-    execute "normal! ']"
-    " Move three line down
-    execute "normal! 3j"
-    " Recover the content of the clipboard (cannot do this because the
-    " terminal is executed after recovering the clipboard)
-    "echo getreg('+')
-    "let @+ = getreg('z')
-endfunction
-nnoremap <silent> <C-b> :call CopyCell()<CR>
  
 " Set path to search recursively for all the directories in the respos folder 
 " Using ** is not the best option because it may take a very long time, but
@@ -784,6 +758,18 @@ nnoremap [Q :cfirst<CR>
 nnoremap ]Q :clast<CR>
 nnoremap [c :cclose<CR>
 nnoremap [o :copen<CR>
+
+
+" SECTION Command line mode
+
+" Open history of previous commands with <C-r>, similar to the terminal
+" :History is part of fzf.vim
+cnoremap <C-r> History<CR>
+
+" Make <C-a> go to the beginning of the Vim command line, like in the shell
+" Note that the usual <C-e> to go to the end already works by default
+cnoremap <C-a> <C-b>
+
 
 
 
