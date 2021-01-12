@@ -193,11 +193,6 @@ set tags=./tags;/
 " Allow to open other buffers when current file is unsaved
 set hidden
 
-" Make file completion in command mode (e.g. when opening a file in a buffer
-" with :e) more similar to Bash completion
-set wildmenu
-set wildmode=longest,list
-
 " Set updatetime variable so that live views of tex pdfs get updated
 " automatically (used by xuhdev/vim-latex-live-preview)
 set updatetime=500
@@ -770,6 +765,12 @@ cnoremap <C-r> History<CR>
 " Note that the usual <C-e> to go to the end already works by default
 cnoremap <C-a> <C-b>
 
+" Make file completion in command mode (e.g. when opening a file in a buffer
+" with :e) more similar to Bash completion
+set wildmenu
+set wildmode=longest,list
+
+
 
 
 
@@ -786,3 +787,19 @@ set matchpairs+=<:>
 " snoremap <CR> <Esc>gv"_c
 " snoremap a <Esc>gv"_ca
 
+
+" Keep indentation level while wrapping lines
+set breakindent
+" Don't break lines in the middle of words
+set linebreak
+
+" Allow to select rectangular blocks even in regions with no text
+set virtualedit=block
+
+" Try setting g by default (since it's rare that you need a single
+" substitution). If you DO need a single substitution, you can add g t the
+" end, and it will toggle off gdefault
+set gdefault
+
+" Strip comment character when joining comment lines
+set fo+=j
