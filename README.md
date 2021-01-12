@@ -1,4 +1,4 @@
-This repository has all my Vim configuration (with the exception of some Vimwiki scripts that are in my wiki repository).
+This repository has all my Vim configuration.
 
 To fully configure Vim in a new computer, do:
 
