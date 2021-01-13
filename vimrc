@@ -287,10 +287,12 @@ nnoremap <leader>v :Explore $HOME/.vim<CR>
 nnoremap <leader>vv :e $MYVIMRC<CR>
 nnoremap <leader>va :Explore $HOME/.vim/after<CR>
 nnoremap <leader>vp :Explore $HOME/.vim/plugin<CR>
+" t for template (it is indeed the HTML template, and the extension is .tpl
+" for template)
+nnoremap <leader>t :e ~/repos/wiki/setup/default.tpl<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
 nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
 nnoremap <leader>b :e ~/.bashrc<CR>
-nnoremap <leader>d :e ~/repos/wiki/setup/default.tpl<CR>
 
 " The following keybinding reloads vimrc and also does :e to load filetype
 " specific configurations (such as those in after/ftplugin/vimwiki.vim). This
@@ -299,6 +301,9 @@ nnoremap <leader>d :e ~/repos/wiki/setup/default.tpl<CR>
 " Also, set noautowriteall so that :e does not automatically write unsaved changes
 nnoremap <leader>s :source $MYVIMRC<CR>:e<CR>
 set noautowriteall
+
+" Quickly check modifications wrt the saved version
+nnoremap <leader>d :DiffSaved<CR>
 
 "python with virtualenv support TODO Check if you see any difference
 py3 << EOF
