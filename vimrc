@@ -793,10 +793,6 @@ set matchpairs+=<:>
 " snoremap a <Esc>gv"_ca
 
 
-" Keep indentation level while wrapping lines
-set breakindent
-" Don't break lines in the middle of words
-set linebreak
 
 " Allow to select rectangular blocks even in regions with no text
 set virtualedit=block
