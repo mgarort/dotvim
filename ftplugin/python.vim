@@ -19,4 +19,4 @@ function! CopyCell()
     "echo getreg('+')
     "let @+ = getreg('z')
 endfunction
-nnoremap <silent> <C-b> :call CopyCell()<CR>
+nnoremap <silent> <C-b> <Down>:call CopyCell()<CR>
