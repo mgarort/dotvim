@@ -429,6 +429,8 @@ inoremap <C-J> <C-G>u<C-J>
 inoremap <NL> <C-G>u<NL>
 inoremap <C-M> <C-G>u<C-M>
 inoremap <CR> <C-G>u<CR>
+" TODO For some reason, moving the cursor with the arrow keys seems to break
+" the undo sequence too. Investigate if this is the reason
 
 " Make mapping so that Shift-Arrow increase and reduce the window size in normal
 " mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
@@ -627,18 +629,24 @@ map : <Plug>Sneak_,
 " line. As a result I had to change a bunch of commands above from nmap to
 " nnoremap. If problems arise, consider this a possible source
 
-" Make vim-sneak mappings more consistent by making s go to next match and S
-" go to previous match in all modes (including visual and operator-pending
-" modes), while keeping vim-surround functionality through z 
-" (mnemonics: vim-zurround). Explained in this GitHub issue:
+" Make vim-sneak mappings more consistent in visual mode by making s go to next match and S
+" go to previous match, while keeping vim-surround functionality through z 
+" (mnemonics: vim-zurround) Explained in this GitHub issue:
 " https://github.com/justinmk/vim-sneak/issues/268
+"
+" So now the behaviour is:
+" - Normal: s and S to move with sneak
+" - Visual: s and S to move with sneak, z to surround (zurround)
+" - cs and ds: change/delete matching characters (), [], {}... with
+"   vim-surround
 let g:surround_no_mappings= 1
-omap s <Plug>Sneak_s
-omap S <Plug>Sneak_S
 xmap <S-s> <Plug>Sneak_S
 xmap z <Plug>VSurround
 nmap yzz <Plug>Yssurround
 nmap yz  <Plug>Ysurround
+nmap ds  <Plug>Dsurround
+nmap cs  <Plug>Csurround
+
 
 
 " Vimtex configuration
