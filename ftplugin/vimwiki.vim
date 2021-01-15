@@ -32,3 +32,8 @@ let g:fzf_colors =
   \ 'gutter':  ['bg', 'Normal'],
   \ 'query':   ['fg', 'Normal'] }
 
+
+" Keep indentation level while wrapping lines
+set breakindent
+" Don't break lines in the middle of words
+set linebreak

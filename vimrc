@@ -418,7 +418,7 @@ nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 
 
-" When using <CTRL-U>, <CTRL-W> or <Enter> in Insert-mode, do <CTRL-G>u
+" When using <CTRL-U>, <CTRL-W>, <Enter> or <Tab> in Insert-mode, do <CTRL-G>u
 " first to start a new change so that I can undo these operations with
 " u in Normal/Command mode, rather than undoing the entire Insert
 " operation at once.
@@ -429,6 +429,7 @@ inoremap <C-J> <C-G>u<C-J>
 inoremap <NL> <C-G>u<NL>
 inoremap <C-M> <C-G>u<C-M>
 inoremap <CR> <C-G>u<CR>
+inoremap <Tab> <C-G>u<Tab>
 " TODO For some reason, moving the cursor with the arrow keys seems to break
 " the undo sequence too. Investigate if this is the reason
 
@@ -801,10 +802,6 @@ set matchpairs+=<:>
 " snoremap a <Esc>gv"_ca
 
 
-" Keep indentation level while wrapping lines
-set breakindent
-" Don't break lines in the middle of words
-set linebreak
 
 " Allow to select rectangular blocks even in regions with no text
 set virtualedit=block
