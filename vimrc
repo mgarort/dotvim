@@ -57,6 +57,7 @@ Plugin 'romainl/vim-cool'
 Plugin 'vim-scripts/SearchComplete'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'ojroques/vim-oscyank'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required (note that this automatically guesses indents for 
@@ -119,16 +120,25 @@ set splitright
 " so that vim-cellmode sends code from the cell to the right pane
 let g:cellmode_tmux_panenumber=1
 
-" map keys to copying in system clipboard, so that you can search stuff for
-" instance on Firefox. Note that in order for Vim to be able to copy to system
-" clipboard, it must be compiled with the +clipboard. I usually use the binary
-" vim-gtk, which can be installed with
-" sudo apt install vim-gtk
-vmap <C-y> "+y
+" map keys to copy to and paste from the system clipboard. This way you can
+" interact with other applications. For example, you can copy to clipboard to
+" search Vim text in Firefox, and you can paste from clipboard to use a
+" solution you have found online.
+" - Pasting from clipboard: use the usual register + (for example to search 
+"   stuff in Firefox). For Vim to be able to copy to system clipboard, it must 
+"   be compiled with the +clipboard. I usually use the binary vim-gtk, which 
+"   can be installed with      sudo apt install vim-gtk
+" - Copying from clipboard: rather than copying to the usual clipboard
+"   registers + and *, we use the terminal escape sequence OSC52. For this,
+"   you need to:
+"   - Enable OSC52 support by urxvt: OSC52 is not supported by default, but it
+"   can be added with the perl extension "52-osc" (in your dotfiles). 
+"   - Enable OSC52 functionality in Vim: through the plugin "ojroques/vim-oscyank"
+vnoremap <C-y> :OSCYank<CR>
 map <C-p> "+p
-vmap <C-c> d:let @+ = @"<CR>i
-" Copy the last Vim selection to clipboard
-nnoremap <leader>+ :let @+=@"<CR>
+" Copy the last Vim selection to clipboard TODO Need to do this through
+" vim-oscyank too, rather than using the system clipboard
+nnoremap <leader>+ :OSCYankReg "<CR>
 
 
 " avoid an annoying beeping sound. Instead, the ``beeping" will be a white
