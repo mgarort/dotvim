@@ -302,6 +302,7 @@ nnoremap <leader>vp :Explore $HOME/.vim/plugin<CR>
 nnoremap <leader>t :e ~/repos/wiki/setup/default.tpl<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
 nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
+nnoremap <leader>x :e ~/.Xdefaults<CR>
 nnoremap <leader>b :e ~/.bashrc<CR>
 
 " The following keybinding reloads vimrc and also does :e to load filetype
