@@ -36,7 +36,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " Comment out YouCompleteMe if in a cluster where you cannot compile it
-Plugin 'ycm-core/YouCompleteMe'
+" Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
@@ -440,9 +440,18 @@ inoremap <C-J> <C-G>u<C-J>
 inoremap <NL> <C-G>u<NL>
 inoremap <C-M> <C-G>u<C-M>
 inoremap <CR> <C-G>u<CR>
-inoremap <Tab> <C-G>u<Tab>
 " TODO For some reason, moving the cursor with the arrow keys seems to break
 " the undo sequence too. Investigate if this is the reason
+
+" Settings for completion and snippet expansion, with the following features:
+" - Easy UltiSnips expansion with F1, which is easy to reach
+" - <Tab> is undoable
+" - Open completion window with <S-Tab>, and then:
+"   - Go up with <S-Tab>
+"   - Go down with <Tab>
+let g:UltiSnipsExpandTrigger='<F1>'
+inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<C-G>u<Tab>'
+inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<C-x><C-n>'
 
 " Make mapping so that Shift-Arrow increase and reduce the window size in normal
 " mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
