@@ -553,22 +553,22 @@ nnoremap ,t :call ViewTable()<CR>
 
 " COMMANDS USEFUL FOR TERMINAL
 " Open terminal with <leader><CR>, similarly to how you open a terminal in i3 with $mod+<CR>
-nnoremap <leader><CR> :term ++close ++rows=12<CR>
-" Close terminal with <C-d> similar to how you close a terminal everywhere
-" else
-tnoremap <C-d> exit<CR>:q<CR>
-" Getting to terminal mode with just pressing <Esc>. Both mappings, <Esc> and
-" <Esc><Esc> are needed, since:
-" - If we map only <Esc>, using the arrow keys (to go to previous commands,
-"   for instance) won't work and will put the terminal in normal mode, since
-"   arrow keys are represented with a code starting with <Esc>
-" - If we map only <Esc><Esc>, pressing <Esc> and waiting for 1s doesnt' put
-"   the terminal in normal mode
-" - If we map both <Esc> and <Esc><Esc>, we can use the arrow keys and we can
-"   go into terminal mode either by pressing <Esc> and waiting for 1s, and by
-"   pressing <Esc> twice quickly
-tnoremap <Esc> <C-\><C-n>
-tnoremap <Esc><Esc> <C-\><C-n>
+ nnoremap <leader><CR> :term ++close ++rows=12<CR>
+ " Close terminal with <C-d> similar to how you close a terminal everywhere
+ " else
+ tnoremap <C-d> exit<CR>:q<CR>
+ " Getting to terminal mode with just pressing <Esc>. Both mappings, <Esc> and
+ " <Esc><Esc> are needed, since:
+ " - If we map only <Esc>, using the arrow keys (to go to previous commands,
+ "   for instance) won't work and will put the terminal in normal mode, since
+ "   arrow keys are represented with a code starting with <Esc>
+ " - If we map only <Esc><Esc>, pressing <Esc> and waiting for 1s doesnt' put
+ "   the terminal in normal mode
+ " - If we map both <Esc> and <Esc><Esc>, we can use the arrow keys and we can
+ "   go into terminal mode either by pressing <Esc> and waiting for 1s, and by
+ "   pressing <Esc> twice quickly
+ tnoremap <Esc> <C-\><C-n>
+ tnoremap <Esc><Esc> <C-\><C-n>
 
 " Maximize and minimize windows
 function! ZoomInCurrentWindow()
@@ -622,7 +622,7 @@ function! EnterNormalMode()
     endif
 endfunction
 tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
- 
+
 " Set path to search recursively for all the directories in the respos folder 
 " Using ** is not the best option because it may take a very long time, but
 " for my number of files it is ok
