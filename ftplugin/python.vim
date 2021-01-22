@@ -5,25 +5,23 @@ function! CopyCellToIPython()
     call feedkeys("\<C-w>j")
     " Paste register t to IPython command line and move back
     " to previous window
-    " Type register t to IPython command. For this:
-    " 1. Replace newlines by <CR> so that Vim types newlines
-    let regt = getreg('t')
-    let regt = substitute(regt,"\n","\<CR>",'g')
-    " let regt2 = "hello\<CR>"
-    " 2. Prepare iPython to receive several lines of code, rather than
+    " 1. Prepare iPython to receive several lines of code, rather than
     " executing after the first line
-    call feedkeys("\<C-o>")
-    " 3. Make Vim type the register t
-    call feedkeys(regt)
-    " 4. Indicate to iPython that this is the last line of code by adding an
-    " extra newline
-    call feedkeys("\<CR>")
-    " Return to the top window
+    call feedkeys("%cpaste\<CR>")
+    " For some reason, after %cpaste it is not possible to copy directly.
+    " So we first change windows and then copy
     call feedkeys("\<C-w>k")
-    " Move to the last character of the previously yanked text 
-    " (copied from vim-cellmode)
+    call feedkeys("\<C-w>j")
+    " 2. Paste register t
+    call feedkeys("\<C-w>\"t")
+    " 3. Indicate to iPython that this is the last line of code
+    call feedkeys("--\<CR>")
+    " Return to previous window and move to end of copied cell
+    " ( '] indicates the end of the yanked text)
+    call feedkeys("\<C-w>k")
     execute "normal! ']"
     " Move three line down
     execute "normal! 3j"
 endfunction
+
 nnoremap <C-b> :call CopyCellToIPython()<CR>
