@@ -45,7 +45,6 @@ Plugin 'SirVer/ultisnips'
 Plugin 'tomasiser/vim-code-dark'
 Plugin 'lervag/vimtex'
 Plugin 'vimwiki/vimwiki'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'mechatroner/rainbow_csv'
 Plugin 'qpkorr/vim-bufkill'
@@ -113,9 +112,6 @@ nnoremap <Leader>wb <Plug>VimwikiGoBackLink
 set ignorecase
 set smartcase
 
-" Make new windows open below and to the right
-set splitbelow
-set splitright
 
 " so that vim-cellmode sends code from the cell to the right pane
 let g:cellmode_tmux_panenumber=1
@@ -184,8 +180,6 @@ set completeopt-=preview  " avoid the annoying preview window, that shows the do
 " sccroll and select cursor position with mouse in normal mode
 set mouse=n
 
-set number                     " Show current line number
-set relativenumber             " Show relative line numbers
 set backspace=indent,eol,start " To make sure that backspace works in every system
 syntax on                      " to make sure that syntax is highlighted in every system
 
@@ -207,6 +201,14 @@ set hidden
 " automatically (used by xuhdev/vim-latex-live-preview)
 set updatetime=500
 
+" ------------
+" | SECTION | Vim appearance and windows
+" -------------
+
+" Set numbers
+set number                     " Show current line number
+set relativenumber             " Show relative line numbers
+
 " Status line
 set statusline=
 set statusline +=[%n]\ \ \%*  "buffer number
@@ -217,6 +219,13 @@ set statusline+=(%c)\ \       "column number
 set statusline+=%l/%L         "cursor line/total lines
 set statusline+=\ \ %P          "percent through file
 set laststatus=2              " Show statusline for all windows.
+
+" Keep the window margin 3 lines away from the curso
+set scrolloff=3
+
+" Make new windows open below and to the right
+set splitbelow
+set splitright
 
 " My very simple script and keybinding to iterate over colorschemes upon
 " pressing F12
@@ -266,26 +275,46 @@ let g:netrw_liststyle = 3
 "  autocmd!
 "  autocmd VimEnter * :Vexplore
 "augroup END
-"
 
-" Keybindings for buffers. Note that changing buffers is relevant for the
-" entire vim session, not just the current buffer, so according to my personal
-" convention I should be using <leader> instead of , . However, in this case
-" we're making an exception for ergonomics.
+
+" -----------------------------------------------
+" | SECTION | Keybindings starting with comma , |
+" -----------------------------------------------
+" Usually the comma , is used for the following kind of actions:
+" - Current buffer: show differences of the current buffer and the saved file,
+"                   show the current buffer in HTML...
+" - Buffer navigation: go to alternate buffer, show buffer list...
+" - Lists: show buffer list, show register list, show fuzzy finder list...
+
 " Display buffers and wait for input to choose one (l for ls).
 nnoremap ,l :ls<CR>:b
 " Same as before but display all buffers, including unlisted ones
 nnoremap ,<S-l> :ls!<CR>:b
+" Same as before but display previously opened files
+nnoremap ,<C-l> :History<CR>
 " Go to next buffer (n for next)
 nnoremap ,n :bn<CR>
 " Go to previous buffer (b for before)
 nnoremap ,b :bp<CR>
 " Go to opposite (alternate buffer)
 nnoremap ,m :b#<CR>
-
 " Similar keybinding for displaying registers
 nnoremap ,r :register<CR>
+" Quickly check modifications wrt the saved version
+nnoremap ,d :DiffSaved<CR>
 
+
+" -------------------------------------------------------------------------------
+" | SECTION | Important keybindings starting with <leader>. 
+" -------------------------------------------------------------------------------
+" <leader> is generally used for either:
+" - Actions affecting the entire state of the session: like sourcing vimrc
+" - Going to an important file or location: like vimrc, bashrc, i3 config...
+" - Dangerous actions that shouldn't be easily reachable so that they are not
+"   performed by mistake: delete swp file, save session, load session...
+
+"   TODO Maybe add another bulletpoint that simply says "actions that are
+"   ergonomic to <leader>? Like fuzzy search
 
 " The following keybindings quickly open important files like:
 " - ~/.vim files
@@ -293,17 +322,23 @@ nnoremap ,r :register<CR>
 " - i3 config file
 " - bashrc
 " - etc...
-nnoremap <leader>v :Explore $HOME/.vim<CR>
+" d for directory
+nnoremap <leader>vd :Explore $HOME/.vim<CR>
+" v for vimrc
 nnoremap <leader>vv :e $MYVIMRC<CR>
+" a for after
 nnoremap <leader>va :Explore $HOME/.vim/after<CR>
+" p for plugin
 nnoremap <leader>vp :Explore $HOME/.vim/plugin<CR>
-" t for template (it is indeed the HTML template, and the extension is .tpl
-" for template)
-nnoremap <leader>t :e ~/repos/wiki/setup/default.tpl<CR>
+" w for wiki
+nnoremap <leader>vw :e $HOME/.vim/plugin/vimwiki.vim
+" h for HTML (since this is the HTML template and it's written in html)
+nnoremap <leader>h :e ~/repos/wiki/setup/default.tpl<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
 nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
 nnoremap <leader>x :e ~/.Xdefaults<CR>
 nnoremap <leader>b :e ~/.bashrc<CR>
+nnoremap <leader>u :UltiSnipsEdit<CR>
 
 " The following keybinding reloads vimrc and also does :e to load filetype
 " specific configurations (such as those in after/ftplugin/vimwiki.vim). This
@@ -313,28 +348,20 @@ nnoremap <leader>b :e ~/.bashrc<CR>
 nnoremap <leader>s :source $MYVIMRC<CR>:e<CR>
 set noautowriteall
 
-" Quickly check modifications wrt the saved version
-nnoremap <leader>d :DiffSaved<CR>
-
-"python with virtualenv support TODO Check if you see any difference
-py3 << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    exec(open(activate_this).read(), dict(__file__=activate_this))
-EOF
-
-" CtrlP configuration
-let g:ctrlp_map = '<leader>,'
-let g:ctrlp_cmd = 'CtrlP'
-
 " fzf configuration
 nnoremap <leader>p :Files<CR>
 
-" Keep the window margin 3 lines away from the cursor
-set scrolloff=3
+
+""python with virtualenv support TODO Check if you see any difference
+"py3 << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+"    project_base_dir = os.environ['VIRTUAL_ENV']
+"    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"    exec(open(activate_this).read(), dict(__file__=activate_this))
+"EOF
+
 
 " The Redir command allows you to redirect the output of every command to a
 " scratch window. For instance, to redirect all the lines that contain
@@ -425,8 +452,17 @@ inoremap <C-f> <Esc><Right>ei
 " first non-blank character, and if we press it twice, we go to the actual
 " start of the line
 " From https://www.reddit.com/r/vim/comments/kn0cpp/key_mappings_everyone_uses/
+" TODO Make 0 mapping not depend on itself, i.e. make it go to the first
+" column by using cursor() https://stackoverflow.com/questions/9953082/how-to-jump-directly-to-a-column-number-in-vim
+" instead of 0. That way, we can make 0 an inclusive backward motion with omap
+" instead of onoremap
 nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+
+" Make backward motions such as b or 0 inclusive (for changing with c)
+onoremap b vb
+onoremap 0 v0
+" TODO Change 0's onoremap by omap when the recursion above has been fixed.
 
 
 " When using <CTRL-U>, <CTRL-W>, <Enter> or <Tab> in Insert-mode, do <CTRL-G>u
@@ -536,8 +572,8 @@ nnoremap <leader><leader>d :call DeleteFirstSwapFile()<CR>
 " - <C-h> and <C-l> scroll half a page laterally, similarly to <C-d> and <C-u>
 " - For consistency, set <C-j> and <C-k> to scroll up and down too. This is
 "   probably more ergonomic as well
-" - ,t activates view of the current buffer as  a table (remember that ,
-"   commands usually do something related to the current buffer)
+" - <leader>t activates table view (<leader> can be for fancy and dangerous
+"   operactions)
 " - sidescroll=1 allows to move the screen by 1 position at a time when moving
 "   the cursor with h and l
 set nostartofline
@@ -549,7 +585,7 @@ function! ViewTable()
     set nowrite
     RainbowAlign
 endfunction
-nnoremap ,t :call ViewTable()<CR>
+nnoremap <leader>t :call ViewTable()<CR>
 
 " COMMANDS USEFUL FOR TERMINAL
 " Open terminal with <leader><CR>, similarly to how you open a terminal in i3 with $mod+<CR>
@@ -709,19 +745,6 @@ nnoremap "%<S-p> i<C-r>=expand("%:p")<CR><Esc>
 nnoremap "%p i<C-r>=expand("%:t")<CR><Esc>
 
 
-" Create function that updates the title of the current file, according to the
-" filename
-function! UpdateTitle()
-    " Get filename name
-    let filename = expand('%:t')
-    " Remove .wiki extension
-    let filename = split(filename, '\.wiki')[0]
-    " Replace '= OLD_TITLE =' by '= filename =' in line 1 only
-    execute '1s/= .* =/= ' . filename . ' =/'
-endfunction
-command! UpdateTitle call UpdateTitle()
-
-
 " Trying out this simple fold configuration from https://stackoverflow.com/questions/357785/what-is-the-recommended-way-to-use-vim-folding-for-python-code
 " Maybe try this other plugin too:   https://github.com/tmhedberg/SimpylFold
 " (yes, it's SimpylFold and not SimplyFold)
@@ -792,8 +815,8 @@ nnoremap [o :copen<CR>
 " SECTION Command line mode
 
 " Open history of previous commands with <C-r>, similar to the terminal
-" :History is part of fzf.vim
-cnoremap <C-r> History<CR>
+" :History: is part of fzf.vim
+cnoremap <C-r> History:<CR>
 
 " Make <C-a> go to the beginning of the Vim command line, like in the shell
 " Note that the usual <C-e> to go to the end already works by default
@@ -833,3 +856,9 @@ set gdefault
 
 " Strip comment character when joining comment lines
 set fo+=j
+
+
+" Make <C-w> and <C-u> in insert mode undoable with <C-y>, same as in the command line
+inoremap <C-w> <C-g>u<C-w>
+inoremap <C-u> <C-g>u<C-u>
+inoremap <C-y> <Esc>ua
