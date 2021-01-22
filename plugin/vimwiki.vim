@@ -101,9 +101,18 @@ setlocal comments+=n:*,n:#
 
 """ SECTION: Create new notes and rename
 
-" Keymaps for quick renaming of vimwiki files
-nnoremap <leader>r :VimwikiRenameFile<CR>y<CR>
-nnoremap <leader>u :UpdateTitle<CR>
+" Keymaps for quick renaming of vimwiki files (t for title and u for update)
+nnoremap ,t :VimwikiRenameFile<CR>y<CR>
+function! UpdateTitle()
+    " Get filename name
+    let filename = expand('%:t')
+    " Remove .wiki extension
+    let filename = split(filename, '\.wiki')[0]
+    " Replace '= OLD_TITLE =' by '= filename =' in line 1 only
+    execute '1s/= .* =/= ' . filename . ' =/'
+endfunction
+command! UpdateTitle call UpdateTitle()
+nnoremap ,u :UpdateTitle<CR>
 
 " Make function to change Anki (Latex) to Vimwiki. Note that the e flag mutes
 " error signs when the pattern is not found
