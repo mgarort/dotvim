@@ -10,8 +10,9 @@ function! SearchPreviousLink()
     let [lnum, col] = searchpos('\[\[.*\]\]\|http', 'bn') 
     call setpos('.', [0, lnum, col, 0])
 endfunction
-nnoremap <silent> <C-h> :call SearchPreviousLink()<CR>
-nnoremap <silent> <C-l> :call SearchNextLink()<CR>
+" Jumping between links will create an entry in the jumplist with m'
+nnoremap <silent> <C-h> m':call SearchPreviousLink()<CR>
+nnoremap <silent> <C-l> m':call SearchNextLink()<CR>
 
 
 
