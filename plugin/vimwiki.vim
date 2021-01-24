@@ -29,7 +29,7 @@ endfunction
 " to file took a long time after long Vim sessions
 augroup CompileVimwiki
     autocmd!
-    autocmd FileType vimwiki autocmd BufWritePost <buffer> silent Vimwiki2HTML
+    autocmd BufWritePost *.wiki silent Vimwiki2HTML
 augroup END
 " Make blackwhite the default colorscheme for vimwiki
 " Removed from now because I'm testing the function AutomaticColorscheme
