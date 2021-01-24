@@ -331,7 +331,7 @@ nnoremap <leader>va :Explore $HOME/.vim/after<CR>
 " p for plugin
 nnoremap <leader>vp :Explore $HOME/.vim/plugin<CR>
 " w for wiki
-nnoremap <leader>vw :e $HOME/.vim/plugin/vimwiki.vim
+nnoremap <leader>vw :e $HOME/.vim/plugin/vimwiki.vim<CR>
 " h for HTML (since this is the HTML template and it's written in html)
 nnoremap <leader>h :e ~/repos/wiki/setup/default.tpl<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
