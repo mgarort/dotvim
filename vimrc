@@ -201,9 +201,11 @@ set hidden
 " automatically (used by xuhdev/vim-latex-live-preview)
 set updatetime=500
 
-" ------------
+
+
+" -----------
 " | SECTION | Vim appearance and windows
-" -------------
+" -----------
 
 " Set numbers
 set number                     " Show current line number
@@ -227,6 +229,28 @@ set scrolloff=3
 set splitbelow
 set splitright
 
+" Make mapping so that  <C-w>_ and <C-w>| create horizontal and vertical
+" splits respectively
+nnoremap <C-w>_ :Hex<CR><C-w>=
+" Vex! creates the split to the right
+nnoremap <C-w><Bar> :Vex!<CR><C-w>=
+
+" Make mapping so that Shift-Arrow increase and reduce the window size in normal
+" mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
+" freed <S-Arrow> and then map them.
+map [a <S-Up>
+map! [a <S-Up>
+map [b <S-Down>
+map! [b <S-Down>
+map [d <S-Left>
+map! [d <S-Left>
+map [c <S-Right>
+map! [c <S-Right>
+nnoremap <S-Up> <C-w>+
+nnoremap <S-Down> <C-w>-
+nnoremap <S-Left> <C-w><
+nnoremap <S-Right> <C-w>>
+
 " My very simple script and keybinding to iterate over colorschemes upon
 " pressing F12
 let g:iterable_colorschemes=['codedark', 'morning', 'blackwhite']
@@ -242,8 +266,7 @@ endfunction
 nnoremap <F12> :call IterateColorscheme()<CR>
 imap <F12> <Esc>:call IterateColorscheme()<CR>li
 
-
-" Vim isn't able to change the cursor color by itself in a colorscheme: 
+" Color cursor. Vim isn't able to change the cursor color by itself in a colorscheme: 
 " this is something that belongs to urxvt. So a little bit of wizardry is needed
 if &term =~ "xterm\\|rxvt"
     " use an orange cursor in insert mode
@@ -277,9 +300,11 @@ let g:netrw_liststyle = 3
 "augroup END
 
 
-" -----------------------------------------------
-" | SECTION | Keybindings starting with comma , |
-" -----------------------------------------------
+
+" -----------
+" | SECTION | Keybindings starting with comma
+" -----------
+"
 " Usually the comma , is used for the following kind of actions:
 " - Current buffer: show differences of the current buffer and the saved file,
 "                   show the current buffer in HTML...
@@ -304,9 +329,11 @@ nnoremap ,r :register<CR>
 nnoremap ,d :DiffSaved<CR>
 
 
-" -------------------------------------------------------------------------------
+
+" -----------
 " | SECTION | Important keybindings starting with <leader>. 
-" -------------------------------------------------------------------------------
+" -----------
+"
 " <leader> is generally used for either:
 " - Actions affecting the entire state of the session: like sourcing vimrc
 " - Going to an important file or location: like vimrc, bashrc, i3 config...
@@ -476,41 +503,71 @@ inoremap <C-J> <C-G>u<C-J>
 inoremap <NL> <C-G>u<NL>
 inoremap <C-M> <C-G>u<C-M>
 inoremap <CR> <C-G>u<CR>
+" NOTE <Tab> is also made undoable with <C-g>u<Tab>, but <Tab> is also used to
+" expand snippets and to jump forward in snippet expansions and in
+" autocomplete popups, the configuration is a bit more involved. See below.
 " TODO For some reason, moving the cursor with the arrow keys seems to break
 " the undo sequence too. Investigate if this is the reason
 
-" Settings for completion and snippet expansion, with the following features:
-" - Easy UltiSnips expansion with F1, which is easy to reach
-" - <Tab> is undoable
-" - Open completion window with <S-Tab>, and then:
-"   - Go up with <S-Tab>
-"   - Go down with <Tab>
+
+
+
+" -----------
+" | SECTION | UltiSnips and autocomplete popup window    (Tab configuration)
+" -----------
+"
+" This section contains the configuration for the following functionalities:
+
+" - Snippet expansion with <Tab>
+"       - Jumping forward and backward in snippets with <Tab> and <S-Tab>
+" - Autocomplete popup with <S-Tab>
+"       - Iterating forward and backward in the autocomplete popup with <Tab and <S-Tab>
+
+" Expansion trigger will be <Tab>, but it needs to be manually and very finely
+" configured. So we set it to <F1> here so that UltiSnips doesn't take over
 let g:UltiSnipsExpandTrigger='<F1>'
-inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<C-G>u<Tab>'
+let g:UltiSnipsJumpForwardTrigger='<Tab>'
+let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
+
+" If autocomplete popup window is visible, <S-Tab> returns <C-p>. If not
+" visible, it returns <C-x><C-n>
 inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<C-x><C-n>'
 
-" Make mapping so that Shift-Arrow increase and reduce the window size in normal
-" mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
-" freed <S-Arrow> and then map them.
-map [a <S-Up>
-map! [a <S-Up>
-map [b <S-Down>
-map! [b <S-Down>
-map [d <S-Left>
-map! [d <S-Left>
-map [c <S-Right>
-map! [c <S-Right>
 
-nnoremap <S-Up> <C-w>+
-nnoremap <S-Down> <C-w>-
-nnoremap <S-Left> <C-w><
-nnoremap <S-Right> <C-w>>
+" We will map <Tab> to our own function ExpandSnippetIfPossibleAndGetResult, 
+" so that we can create the following behaviour:
+"
+" - If upon pressing <Tab> we can expand a snippet, then we don't do anything
+"   else. We check that the snippet has been expanded because
+"   g:ulti_expand_res = 1.
+"
+" - If upon pressing <Tab> we cannot expand a snippet, then we can do one of
+"   two things. We check that the snippet has not been expanded because
+"   g:ulti_expand_res = 0.
+"
+"       - If autocomplete (pumvisible() returns 1), do <C-n> to iterate to the
+"       next element of the autocomplete list.
+"       - If not autocomplete (pumvisible() returns 0), do <C-g>u<Tab>
 
-" Make mapping so that  <C-w>_ and <C-w>| create horizontal and vertical
-" splits respectively
-nnoremap <C-w>_ :Hex<CR><C-w>=
-" Vex! creates the split to the right
-nnoremap <C-w><Bar> :Vex!<CR><C-w>=
+let g:ulti_expand_res = 0
+function! ExpandSnippetIfPossibleAndGetResult()
+    call UltiSnips#ExpandSnippet()
+    return g:ulti_expand_res
+endfunction
+
+function! TabOrIteratePopup()
+    let is_popup_visible = pumvisible()
+    if is_popup_visible
+        return "\<C-n>"
+    else
+        return "\<C-g>u\<Tab>"
+    endif
+endfunction
+" If return value of ExpandSnippetIfPossibleAndGetResult is 1, then nothing
+" ('') is inserted, but if result is 0, then <C-g>u<Tab> is done
+inoremap <silent> <Tab> <C-R>=(ExpandSnippetIfPossibleAndGetResult() > 0) ? '' : TabOrIteratePopup()<CR>
+
+
 
 " Useful text objects by romainl (there are more at https://gist.github.com/romainl/c0a8b57a36aec71a986f1120e1931f20)
 " 24 simple text objects
@@ -518,10 +575,10 @@ nnoremap <C-w><Bar> :Vex!<CR><C-w>=
 " i_ i. i: i, i; i| i/ i\ i* i+ i- i# i=
 " a_ a. a: a, a; a| a/ a\ a* a+ a- a# a=
 for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '-', '#' , '=']
-	execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
-	execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
-	execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
-	execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
+        execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
+        execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
+        execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
+        execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
 endfor
 " line text objects
 " -----------------
@@ -534,9 +591,9 @@ onoremap al :<C-u>normal val<CR>
 " --------------------------------------
 " in
 function! VisualNumber()
-	call search('\d\([^0-9\.]\|$\)', 'cW')
-	normal v
-	call search('\(^\|[^0-9\.]\d\)', 'becW')
+        call search('\d\([^0-9\.]\|$\)', 'cW')
+        normal v
+        call search('\(^\|[^0-9\.]\d\)', 'becW')
 endfunction
 xnoremap in :<C-u>call VisualNumber()<CR>
 onoremap in :<C-u>normal vin<CR>
@@ -812,8 +869,11 @@ nnoremap [c :cclose<CR>
 nnoremap [o :copen<CR>
 
 
-" SECTION Command line mode
 
+" -----------
+" | SECTION | Command line mode
+" -----------
+"
 " Open history of previous commands with <C-r>, similar to the terminal
 " :History: is part of fzf.vim
 cnoremap <C-r> History:<CR>
@@ -829,10 +889,10 @@ set wildmode=longest,list
 
 
 
-
-
-" SECTION  Not sorted yet. Things to be sorted
-
+" -----------
+" | SECTION | Not sorted yet. Things to be sorted
+" -----------
+"
 " Enable jumping to matching angle bracket with % 
 " source: https://www.reddit.com/r/vim/comments/kr9rnu/how_to_jump_to_matching_anglebracket_using/
 set matchpairs+=<:>
@@ -862,3 +922,14 @@ set fo+=j
 inoremap <C-w> <C-g>u<C-w>
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-y> <Esc>ua
+
+" Define motions g( and g) similar to motion ge
+nnoremap g) )geh
+nnoremap g( (geh
+
+
+" Map <C-b> to do nothing in insert mode, since I often press it by mistake
+" while trying to copy from clipboard and that scrolls the page and makes me
+" lose my focus. In the future I can map it to just vimwiki so that I am able
+" to execute the current cell in python with <C-b> from insert mode
+inoremap <C-b> <Nop>
