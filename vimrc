@@ -933,3 +933,12 @@ nnoremap g( (geh
 " lose my focus. In the future I can map it to just vimwiki so that I am able
 " to execute the current cell in python with <C-b> from insert mode
 inoremap <C-b> <Nop>
+
+" Make j and k move display lines instead of actual lines, unless you have a
+" count. This way:
+" - You can move through long lines wrapped into paragraphs more easily by
+"   typing j and k instead of gj and gk
+" - You can still use line numbers to move a few lines up or down
+" Stolen from https://www.hillelwayne.com/post/intermediate-vim/
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
