@@ -24,6 +24,12 @@ snippet 6= "Header 6"
 ====== ${0:title} ======
 endsnippet
 
+# Snippet for separating topic notes in the index
+
+snippet ---- "Separating line"
+------------------------------------------------------
+endsnippet
+
 # Snippets for defining environments (latex equation, inline latex, code block, inline code...)
 
 snippet $$ "Latex equation"
@@ -38,7 +44,7 @@ ${0:equation}
 }}$
 endsnippet
 
-snippet code "Fenced code block"
+snippet ``` "Fenced code block"
 {{{>
 ${0:code}
 }}}
@@ -93,23 +99,23 @@ endsnippet
 # Snippets for links and references
 
 snippet link "Vimwiki link"
-[[./${0:LINK_PATH}|${1:description}]]
+[[./${2:LINK_PATH}|${1:description}]]
 endsnippet
 
 snippet image "Vimwiki image"
-{{file:./images/processed_${0:IMAGE_PATH}|${1:description}|style="width:550px;height:220px;"}}
+{{file:./images/processed_${2:IMAGE_PATH}|${1:description}|style="width:550px;height:220px;"}}
 endsnippet
 
 snippet paper "Vimwiki paper"
-[[file:./papers/${0:PAPER_PATH}|${1:description}]]
+[[file:./papers/${2:PAPER_PATH}|${1:description}]]
 endsnippet
 
 snippet doc "Vimwiki document"
-[[file:./docs/${0:DOC_PATH}|${1:description}]]
+[[file:./docs/${2:DOC_PATH}|${1:description}]]
 endsnippet
 
 snippet book "Vimwiki link to book"
-[[file:./books/${0:BOOK_PATH}|${1:description}]]
+[[file:./books/${2:BOOK_PATH}|${1:description}]]
 endsnippet
 
 snippet ref "Vimwiki references"
