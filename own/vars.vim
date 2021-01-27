@@ -140,7 +140,7 @@ function! s:populate_global_variables() abort
   let g:vimwiki_global_vars.rxWikiInclSuffix1 = g:vimwiki_global_vars.rxWikiInclArgs.
         \ g:vimwiki_global_vars.rxWikiInclSuffix
 
-  let g:vimwiki_global_vars.rxTodo = '\C\<\%(IDEA\|ANSWER\|NOTE\|COMMENT\|QUESTION\|TODO\|DONE\|STARTED\|FIXME\|FIXED\|XXX\)\>'
+  let g:vimwiki_global_vars.rxTodo = '\C\<\%(IDEA\|ANSWER\|NOTE\|COMMENT\|QUESTION\|TODO\|DONE\|STARTED\|FIXME\|FIXED\|XXX\|POINT\)\>'
 
   " default colors when headers of different levels are highlighted differently
   " not making it yet another option; needed by ColorScheme autocommand
