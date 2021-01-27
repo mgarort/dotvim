@@ -488,6 +488,7 @@ vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 
 " Make backward motions such as b or 0 inclusive (for changing with c)
 onoremap b vb
+onoremap B vB
 onoremap 0 v0
 " TODO Change 0's onoremap by omap when the recursion above has been fixed.
 
