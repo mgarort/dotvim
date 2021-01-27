@@ -542,6 +542,17 @@ let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
 " visible, it tries to open either filepath completion (if current line
 " contains slashes '/' ) or word completion (if current line does not contain
 " slashes)
+" function! CheckWhetherSlashInQuotes()
+" endfunction
+" function! CheckWheterCursorInQuotes()
+" endfunction
+" function! CheckWhetherCursorInFilename()
+"     let is_cursor_in_quotes = CheckWhetherCursorInQuotes()
+"     let is_slash_in_quotes = CheckWhetherSlashInQuotes()
+"     " Check syntax of the next, not sure if correct
+"     let is_cursor_in_filename = is_cursor_in_quotes & is_slash_in_quotes
+"     return is_cursor_in_filename
+" endfunction
 function! ShiftTab()
     let is_popup_visible = pumvisible()
     if is_popup_visible
@@ -549,6 +560,8 @@ function! ShiftTab()
     else
         " We suppose to be completing filepaths if current line has slashes
         " TODO Use another method (see previous TODO)
+        " Maybe we could do:
+        " let is_cursor_in_filename = CheckWhetherCursorInFilename()
         let is_there_slash = match(getline('.'),'/')
         if is_there_slash == -1
             return "\<C-x>\<C-n>"
@@ -557,7 +570,6 @@ function! ShiftTab()
         endif
     endif
 endfunction
-nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 inoremap <expr> <S-Tab> ShiftTab()
 
 
@@ -787,8 +799,10 @@ xmap <S-s> <Plug>Sneak_S
 xmap z <Plug>VSurround
 nmap yzz <Plug>Yssurround
 nmap yz  <Plug>Ysurround
-nmap ds  <Plug>Dsurround
-nmap cs  <Plug>Csurround
+nmap dz  <Plug>Dsurround
+nmap cz  <Plug>Csurround
+omap s <Plug>Sneak_s
+omap S <Plug>Sneak_S
 
 
 
