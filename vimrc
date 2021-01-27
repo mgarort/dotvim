@@ -523,16 +523,44 @@ inoremap <CR> <C-G>u<CR>
 " - Autocomplete popup with <S-Tab>
 "       - Iterating forward and backward in the autocomplete popup with <Tab and <S-Tab>
 
+" Triggering autocompletion doesn't automatically select the first item in the
+" list. The user has to explicitly choose an item
+set completeopt=menu,preview,noselect,menuone
+
 " Expansion trigger will be <Tab>, but it needs to be manually and very finely
 " configured. So we set it to <F1> here so that UltiSnips doesn't take over
 let g:UltiSnipsExpandTrigger='<F1>'
 let g:UltiSnipsJumpForwardTrigger='<Tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
 
+" TODO Autocomplete more finely. Maybe autocomplete should first try file
+" completion, and if it doesn't work, word completion. Sometimes we'll want
+" word completion even if there is a slash in the current line
+" is_there_sk
 " If autocomplete popup window is visible, <S-Tab> returns <C-p>. If not
-" visible, it returns <C-x><C-n>
-inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<C-x><C-n>'
+" visible, it tries to open either filepath completion (if current line
+" contains slashes '/' ) or word completion (if current line does not contain
+" slashes)
+function! ShiftTab()
+    let is_popup_visible = pumvisible()
+    if is_popup_visible
+        return "\<C-p>"
+    else
+        " We suppose to be completing filepaths if current line has slashes
+        " TODO Use another method (see previous TODO)
+        let is_there_slash = match(getline('.'),'/')
+        if is_there_slash == -1
+            return "\<C-x>\<C-n>"
+        else
+            return "\<C-x>\<C-f>"
+        endif
+    endif
+endfunction
+nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+inoremap <expr> <S-Tab> ShiftTab()
 
+
+inoremap <expr> <CR> pumvisible() ? '<Esc>a' : '<CR>'
 
 " We will map <Tab> to our own function ExpandSnippetIfPossibleAndGetResult, 
 " so that we can create the following behaviour:
