@@ -231,9 +231,11 @@ set splitright
 
 " Make mapping so that  <C-w>_ and <C-w>| create horizontal and vertical
 " splits respectively
-nnoremap <C-w>_ :Hex<CR><C-w>=
+" nnoremap <C-w>_ :Hex<CR><C-w>=
+nnoremap <C-w>_ :sp<CR>
 " Vex! creates the split to the right
-nnoremap <C-w><Bar> :Vex!<CR><C-w>=
+" nnoremap <C-w><Bar> :Vex!<CR><C-w>=
+noremap <C-w><Bar> :vsp<CR>
 
 " Make mapping so that Shift-Arrow increase and reduce the window size in normal
 " mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
