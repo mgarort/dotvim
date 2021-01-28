@@ -489,9 +489,7 @@ vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 " Make backward motions such as b or 0 inclusive (for changing with c)
 onoremap b vb
 onoremap B vB
-onoremap 0 v0
-" TODO Change 0's onoremap by omap when the recursion above has been fixed.
-
+onoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'v0' : 'v^'
 
 " When using <CTRL-U>, <CTRL-W>, <Enter> or <Tab> in Insert-mode, do <CTRL-G>u
 " first to start a new change so that I can undo these operations with
