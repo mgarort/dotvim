@@ -380,17 +380,14 @@ set noautowriteall
 " fzf configuration
 nnoremap <leader>p :Files<CR>
 
-
-""python with virtualenv support TODO Check if you see any difference
-"py3 << EOF
-"import os
-"import sys
-"if 'VIRTUAL_ENV' in os.environ:
-"    project_base_dir = os.environ['VIRTUAL_ENV']
-"    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"    exec(open(activate_this).read(), dict(__file__=activate_this))
-"EOF
-
+" remove conflicting/annoying maps
+nmap <leader><leader><leader><leader><leader>psdfs  <Plug>BufKillAlt
+nmap <leader><leader><leader><leader><leader>asdjf  <Plug>BufKillUndo
+nmap <leader><leader><leader><leader><leader>khbff  <Plug>BufKillBw
+nmap <leader><leader><leader><leader><leader>rfkhk  <Plug>BufKillBd
+nmap <leader><leader><leader><leader><leader>slfkj  <Plug>BufKillBun
+nmap <leader><leader><leader><leader><leader>nbgfh  <Plug>BufKillForward
+nmap <leader><leader><leader><leader><leader>burib  <Plug>BufKillBack
 
 " The Redir command allows you to redirect the output of every command to a
 " scratch window. For instance, to redirect all the lines that contain

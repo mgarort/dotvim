@@ -102,7 +102,9 @@ setlocal comments+=n:*,n:#
 """ SECTION: Create new notes and rename
 
 " Keymaps for quick renaming of vimwiki files (t for title and u for update)
-nnoremap ,t :VimwikiRenameFile<CR>y<CR>
+" ,t not only prompts new filename, but inserts the old one as a starting
+" point for convenience
+nnoremap ,t :VimwikiRenameFile<CR>y<CR><C-r>=expand('%:t:r')<CR>
 function! UpdateTitle()
     " Get filename name
     let filename = expand('%:t')
