@@ -581,7 +581,7 @@ endfunction
 inoremap <expr> <S-Tab> ShiftTab()
 " If a desired word is not found, we can also include other loaded buffers and
 " open windows to complete from with <F1>
-set complete=.,b,w,
+set complete=.,b,w
 inoremap <expr> <F1> pumvisible() ? '<Esc>a<C-n>' : '<F1>'
 " If we want to return to the original completion list from only the current
 " buffer, we can do that with <F2>
@@ -1004,3 +1004,7 @@ inoremap <C-b> <Nop>
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
+" Before going to a mark with ' or `, insert an entry in the jumplist with the
+" hack m' . This way you can go back to where you were after mark navigation
+" nnoremap ' m''
+" nnoremap ` m'`
