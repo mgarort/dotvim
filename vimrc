@@ -531,10 +531,19 @@ let g:UltiSnipsExpandTrigger='<F1>'
 let g:UltiSnipsJumpForwardTrigger='<Tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
 
-" TODO Autocomplete more finely. Maybe autocomplete should first try file
+" TODO Autocomplete more finely for filename completion in Python filename
+" strings. Maybe autocomplete should first try file
 " completion, and if it doesn't work, word completion. Sometimes we'll want
-" word completion even if there is a slash in the current line
+" word completion even if there is a slash in the current line, because there
+" could be a slash somewhere else, but we could be outside of a filename
+" string
 " is_there_sk
+" TODO in addition to Python filename strings, activate filename completion
+" also when we are in a Vimwiki link, since you very often create links to
+" other notes (files), so it would be very useful.
+"
+"
+"
 " If autocomplete popup window is visible, <S-Tab> returns <C-p>. If not
 " visible, it tries to open either filepath completion (if current line
 " contains slashes '/' ) or word completion (if current line does not contain
@@ -618,7 +627,7 @@ inoremap <silent> <Tab> <C-R>=(ExpandSnippetIfPossibleAndGetResult() > 0) ? '' :
 " ----------------------
 " i_ i. i: i, i; i| i/ i\ i* i+ i- i# i=
 " a_ a. a: a, a; a| a/ a\ a* a+ a- a# a=
-for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '-', '#' , '=']
+for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '-', '#' , '=','$']
         execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
         execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
         execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
@@ -805,7 +814,9 @@ nmap yz  <Plug>Ysurround
 nmap dz  <Plug>Dsurround
 nmap cz  <Plug>Csurround
 omap s <Plug>Sneak_s
-omap S <Plug>Sneak_S
+" S mapped with v to make it inclusive, similarly to other backward motions in
+" my config (0 mapped to v0, ^ mapped to v^, etc)
+omap S v<Plug>Sneak_S
 
 
 
