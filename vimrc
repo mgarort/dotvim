@@ -550,6 +550,12 @@ let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
 "     let is_cursor_in_filename = is_cursor_in_quotes & is_slash_in_quotes
 "     return is_cursor_in_filename
 " endfunction
+
+" Complete from current buffer, other loaded buffers and open windows
+" TODO Check if this is very expensive with respect to completing with 
+" current buffer only. If so, delete either b or w
+set complete=.,b,w,
+
 function! ShiftTab()
     let is_popup_visible = pumvisible()
     if is_popup_visible
@@ -561,9 +567,9 @@ function! ShiftTab()
         " let is_cursor_in_filename = CheckWhetherCursorInFilename()
         let is_there_slash = match(getline('.'),'/')
         if is_there_slash == -1
-            return "\<C-x>\<C-n>"
+            return "\<C-n>"
         else
-            return "\<C-x>\<C-f>"
+            return "\<C-f>"
         endif
     endif
 endfunction
@@ -982,3 +988,4 @@ inoremap <C-b> <Nop>
 " Stolen from https://www.hillelwayne.com/post/intermediate-vim/
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+
