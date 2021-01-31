@@ -165,8 +165,11 @@ nnoremap <C-n> :noh<CR>
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 " Minimize the number of types that Vim goes to a weird buffer type (bt) that
 " doesn't allow you to write to files when editing over scp
-autocmd BufRead scp://* :set bt=
-autocmd BufWritePost scp://* :set bt=
+augroup CorrectBufferTypeDuringSCP
+    au!
+    autocmd BufRead scp://* :set bt=
+    autocmd BufWritePost scp://* :set bt=
+augroup END
 "autocmd BufNewFile,BufRead *.py set keywordprg=pydoc
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"
 
@@ -197,9 +200,6 @@ set tags=./tags;/
 " Allow to open other buffers when current file is unsaved
 set hidden
 
-" Set updatetime variable so that live views of tex pdfs get updated
-" automatically (used by xuhdev/vim-latex-live-preview)
-set updatetime=500
 
 
 
@@ -1004,3 +1004,10 @@ inoremap <C-b> <Nop>
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
+" If the cursor is quiet for 10s or more, add that position to the jumplist so
+" that we can easily return to it
+set updatetime=10000
+augroup CursorHoldToJumplist
+    autocmd!
+    autocmd CursorHold * normal! m'
+augroup END
