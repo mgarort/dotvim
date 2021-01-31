@@ -526,8 +526,8 @@ inoremap <CR> <C-G>u<CR>
 set completeopt=menu,preview,noselect,menuone
 
 " Expansion trigger will be <Tab>, but it needs to be manually and very finely
-" configured. So we set it to <F1> here so that UltiSnips doesn't take over
-let g:UltiSnipsExpandTrigger='<F1>'
+" configured. So we set it to <F11> here so that UltiSnips doesn't take over
+let g:UltiSnipsExpandTrigger='<F11>'
 let g:UltiSnipsJumpForwardTrigger='<Tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
 
@@ -560,11 +560,7 @@ let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
 "     return is_cursor_in_filename
 " endfunction
 
-" Complete from current buffer, other loaded buffers and open windows
-" TODO Check if this is very expensive with respect to completing with 
-" current buffer only. If so, delete either b or w
-set complete=.,b,w,
-
+" <S-Tab> triggers completion from current buffer
 function! ShiftTab()
     let is_popup_visible = pumvisible()
     if is_popup_visible
@@ -576,15 +572,23 @@ function! ShiftTab()
         " let is_cursor_in_filename = CheckWhetherCursorInFilename()
         let is_there_slash = match(getline('.'),'/')
         if is_there_slash == -1
-            return "\<C-n>"
+            return "\<C-x>\<C-n>"
         else
-            return "\<C-f>"
+            return "\<C-x>\<C-f>"
         endif
     endif
 endfunction
 inoremap <expr> <S-Tab> ShiftTab()
-
-
+" If a desired word is not found, we can also include other loaded buffers and
+" open windows to complete from with <F1>
+set complete=.,b,w,
+inoremap <expr> <F1> pumvisible() ? '<Esc>a<C-n>' : '<F1>'
+" If we want to return to the original completion list from only the current
+" buffer, we can do that with <F2>
+inoremap <expr> <F2> pumvisible() ? '<Esc>a<C-x><C-n>' : '<F2>'
+" To select one entry and go back to normal mode, press <Esc> (this is Vim
+" default). But to select one entry and stay in normal mode, press <CR> (this
+" is my own config)
 inoremap <expr> <CR> pumvisible() ? '<Esc>a' : '<CR>'
 
 " We will map <Tab> to our own function ExpandSnippetIfPossibleAndGetResult, 
