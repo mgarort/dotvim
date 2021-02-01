@@ -170,13 +170,9 @@ augroup CorrectBufferTypeDuringSCP
     autocmd BufRead scp://* :set bt=
     autocmd BufWritePost scp://* :set bt=
 augroup END
-"autocmd BufNewFile,BufRead *.py set keywordprg=pydoc
-let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"
 
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+" TODO Check if the following line was only applicable to YouCompleteMe, or it
+" is still relevant
 set completeopt-=preview  " avoid the annoying preview window, that shows the documentation of whatever function you are autocompleting, and then stays open
 
 " This mouse behaviour is the closest to what I wanted. It only allows to
