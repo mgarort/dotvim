@@ -38,3 +38,6 @@ let g:fzf_colors =
 set breakindent
 " Don't break lines in the middle of words
 set linebreak
+
+" Disable folding
+set nofoldenable
