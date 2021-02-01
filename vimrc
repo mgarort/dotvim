@@ -1011,3 +1011,8 @@ augroup CursorHoldToJumplist
     autocmd!
     autocmd CursorHold * normal! m'
 augroup END
+
+
+" Disable K to look up for documentation, because you never use it 
+" and it's a hindrance rather than any help
+vnoremap <S-k> <Nop>
