@@ -151,13 +151,6 @@ command! Wikify call Wikify()
 " Given a note title surrounded by 6 equal signs in the wiki index, this
 " creates a link, follows it and copies the title. Needs to use nmap and not
 " nnoremap because otherwise <CR> doesn't create a link
-" I tried to create a more sophisticated function but it took longer, so it's
-" gonna be a mapping
-" Originally I used the following mapping:
-"nmap '<CR> :s/======\s*\(.\{-}\)\s*======/====== \[\[\1\]\] ======/<CR>:let @/=""<CR>:w<CR>^t]yi]<CR>ggi=<space><Esc>pa<space>=<CR><CR>
-" but then I mapped : to , so I had to modify it by changing : to <space>
-" where necessary  
-nmap '<CR> <space>s/======\s*\(.\{-}\)\s*======/====== \[\[\1\]\] ======/<CR><space>let @/=""<CR><space>w<CR>^t]yi]<CR>ggi=<space><Esc>pa<space>=<CR><CR>
 " Regex explanation:
 "  - \s* matches 0 or more whitespaces
 "  - \( ____ \) is a capturing group. It allows us to store a matching string
@@ -167,12 +160,18 @@ nmap '<CR> <space>s/======\s*\(.\{-}\)\s*======/====== \[\[\1\]\] ======/<CR><sp
 "    has less priority than the two \s* left and right of the capturing group.
 "    So if there are surrounding whitespaces, those will be matched by \s* and
 "    not by \{-}
-
-" TODO If the regex above is too slow, change it back to the following
-" previous regex. The advantage of the regex above is that it corrects a
-" different number of whitespaces left and right, but if it's too slow we can
-" do without it.
-"nmap '<CR> :s/====== \(.*\) ======/====== \[\[\1\]\] ======/<CR>:let @/=""<CR>:w<CR>^t]yi]<CR>ggi=<space><Esc>pa<space>=<CR><CR>
+function! CreateNoteFromTitle()
+    " Make a link (and restore search register afterwards)
+    let old_search = getreg("/")
+    s/======\s*\(.\{-}\)\s*======/====== \[\[\1\]\] ======/
+    let @/ = old_search
+    " Save the modification without triggering autocommands (the autocommand
+    " for compiling to HTML is too slow)
+    noa write
+    " Copy title, follow link to note and paste title
+    execute "normal ^t]yi]\<CR>ggi= \<Esc>pa =\<CR>\<CR>\<CR>"
+endfunction
+nnoremap '<CR> :call CreateNoteFromTitle()<CR>i
 
 
 
