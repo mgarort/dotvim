@@ -373,8 +373,11 @@ nnoremap <leader>u :UltiSnipsEdit<CR>
 nnoremap <leader>s :source $MYVIMRC<CR>:e<CR>
 set noautowriteall
 
-" fzf configuration
+" Search with fzf
 nnoremap <leader>p :Files<CR>
+
+" Search with grep
+nnoremap <leader>o :grep! "" *<Left><Left><Left>
 
 " remove conflicting/annoying maps
 nmap <leader><leader><leader><leader><leader>psdfs  <Plug>BufKillAlt
@@ -945,45 +948,24 @@ set wildmenu
 set wildmode=longest,list
 
 
-
 " -----------
-" | SECTION | Not sorted yet. Things to be sorted
+" | SECTION | Motions and text editing
 " -----------
 "
 " Enable jumping to matching angle bracket with % 
 " source: https://www.reddit.com/r/vim/comments/kr9rnu/how_to_jump_to_matching_anglebracket_using/
 set matchpairs+=<:>
 
-
-" Delete text in select mode without affecting the registers TODO
-" function! DeleteSelectMode()
-" endfunction
-" snoremap <CR> <Esc>gv"_c
-" snoremap a <Esc>gv"_ca
-
-
-
 " Allow to select rectangular blocks even in regions with no text
 set virtualedit=block
 
-" Try setting g by default (since it's rare that you need a single
-" substitution). If you DO need a single substitution, you can add g t the
-" end, and it will toggle off gdefault
-set gdefault
-
 " Strip comment character when joining comment lines
 set fo+=j
-
 
 " Make <C-w> and <C-u> in insert mode undoable with <C-y>, same as in the command line
 inoremap <C-w> <C-g>u<C-w>
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-y> <Esc>ua
-
-" Define motions g( and g) similar to motion ge
-nnoremap g) )geh
-nnoremap g( (geh
-
 
 " Map <C-b> to do nothing in insert mode, since I often press it by mistake
 " while trying to copy from clipboard and that scrolls the page and makes me
@@ -999,6 +981,8 @@ inoremap <C-b> <Nop>
 " Stolen from https://www.hillelwayne.com/post/intermediate-vim/
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+vnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+vnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
 " If the cursor is quiet for 10s or more, add that position to the jumplist so
 " that we can easily return to it
@@ -1008,7 +992,46 @@ augroup CursorHoldToJumplist
     autocmd CursorHold * normal! m'
 augroup END
 
-
 " Disable K to look up for documentation, because you never use it 
 " and it's a hindrance rather than any help
 vnoremap <S-k> <Nop>
+
+
+
+" -----------
+" | SECTION | Things I'm yet deciding to keep or not
+" -----------
+"
+" Define motions g( and g) similar to motion ge
+nnoremap g) )geh
+nnoremap g( (geh
+
+" Try setting g by default (since it's rare that you need a single
+" substitution). If you DO need a single substitution, you can add g t the
+" end, and it will toggle off gdefault
+set gdefault
+
+
+
+" -----------
+" | SECTION | Not sorted yet. Things to be sorted
+" -----------
+"
+
+
+" Delete text in select mode without affecting the registers TODO
+" function! DeleteSelectMode()
+" endfunction
+" snoremap <CR> <Esc>gv"_c
+" snoremap a <Esc>gv"_ca
+
+
+
+
+
+
+
+
+
+
+
