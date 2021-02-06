@@ -273,3 +273,14 @@ nnoremap <silent> <leader>t<leader>s :call StatusTi()<CR>
 "nmap <Leader>w<Leader>w VimwikiMakeDiaryNote<CR>idiary<Tab>
 " Finally, note that <C-i> may be going from link to link
 " Here ends my vimwiki configuration
+
+
+" -----------
+" | SECTION | Appearance
+" -----------
+"
+" Wrap lines at 100 characters
+" let custom_width=100
+" let &l:columns=custom_width
+" autocmd VimResized *.wiki if (&columns > custom_width) | let &l:columns=custom_width | endif
+" set wrap
