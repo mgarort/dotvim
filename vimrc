@@ -377,7 +377,7 @@ set noautowriteall
 nnoremap <leader>p :Files<CR>
 
 " Search with grep
-nnoremap <leader>o :grep! "" *<Left><Left><Left>
+nnoremap <leader>o :grep! "" *.wiki<Left><Left><Left><Left><Left><Left><Left><Left>
 
 " remove conflicting/annoying maps
 nmap <leader><leader><leader><leader><leader>psdfs  <Plug>BufKillAlt
@@ -995,6 +995,9 @@ augroup END
 " Disable K to look up for documentation, because you never use it 
 " and it's a hindrance rather than any help
 vnoremap <S-k> <Nop>
+
+" Recognize `.tags` file as well as `tags` file
+set tags=./tags;,tags;./.tags;,.tags;
 
 
 
