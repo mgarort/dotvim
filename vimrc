@@ -200,7 +200,7 @@ set hidden
 
 
 " -----------
-" | SECTION | Vim appearance and windows
+" | SECTION | Appearance
 " -----------
 
 " Set numbers
@@ -225,29 +225,6 @@ set scrolloff=3
 set splitbelow
 set splitright
 
-" Make mapping so that  <C-w>_ and <C-w>| create horizontal and vertical
-" splits respectively
-" nnoremap <C-w>_ :Hex<CR><C-w>=
-nnoremap <C-w>_ :sp<CR>
-" Vex! creates the split to the right
-" nnoremap <C-w><Bar> :Vex!<CR><C-w>=
-noremap <C-w><Bar> :vsp<CR>
-
-" Make mapping so that Shift-Arrow increase and reduce the window size in normal
-" mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
-" freed <S-Arrow> and then map them.
-map [a <S-Up>
-map! [a <S-Up>
-map [b <S-Down>
-map! [b <S-Down>
-map [d <S-Left>
-map! [d <S-Left>
-map [c <S-Right>
-map! [c <S-Right>
-nnoremap <S-Up> <C-w>+
-nnoremap <S-Down> <C-w>-
-nnoremap <S-Left> <C-w><
-nnoremap <S-Right> <C-w>>
 
 " My very simple script and keybinding to iterate over colorschemes upon
 " pressing F12
@@ -361,7 +338,7 @@ nnoremap <leader>vw :e $HOME/.vim/plugin/vimwiki.vim<CR>
 nnoremap <leader>h :e ~/repos/wiki/setup/default.tpl<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
 nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
-nnoremap <leader>x :e ~/.Xdefaults<CR>
+nnoremap <leader>x :e ~/repos/dotfiles/dot.Xdefaults<CR>
 nnoremap <leader>b :e ~/.bashrc<CR>
 nnoremap <leader>u :UltiSnipsEdit<CR>
 
@@ -387,6 +364,11 @@ nmap <leader><leader><leader><leader><leader>rfkhk  <Plug>BufKillBd
 nmap <leader><leader><leader><leader><leader>slfkj  <Plug>BufKillBun
 nmap <leader><leader><leader><leader><leader>nbgfh  <Plug>BufKillForward
 nmap <leader><leader><leader><leader><leader>burib  <Plug>BufKillBack
+
+" HERE ENDS THE SECTION TODO Remove this indication once the sections are well
+" defined
+
+
 
 " The Redir command allows you to redirect the output of every command to a
 " scratch window. For instance, to redirect all the lines that contain
@@ -442,12 +424,6 @@ augroup ColorschemeForBuffers
     autocmd BufEnter * :call AutomaticColorscheme()
 augroup END
 
-" Map Y to y$ so that C, D and Y behave in the same way
-nnoremap <S-y> y$
-
-" Remap : to <space> for easier typing
-nnoremap <space> :
-vnoremap <space> :
 
 " Function to be able to see the changes between the current buffer and its
 " saved version in the filesystem. It can be launched with :DiffSaved
@@ -461,50 +437,6 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
-" Make <C-a> and <C-e> in insert and select modes behave like in the command line, going
-" to the beginning and end of the line respectively
-inoremap <C-a> <Esc>^i
-inoremap <C-e> <End>
-snoremap <C-a> <Esc>^i
-snoremap <C-e> <End><Esc>i
-" Make <C-b> and <C-f> in insert mode behave similarly to how <Alt-b> and 
-" <Alt-f> behaves in the command line, i.e. going back and advancing one 
-" word at a time
-inoremap <C-b> <Esc><Right>bi
-inoremap <C-f> <Esc><Right>ei
-
-" Make 0 a 'smart' go to start of line: if we press it once, we go to the
-" first non-blank character, and if we press it twice, we go to the actual
-" start of the line
-" From https://www.reddit.com/r/vim/comments/kn0cpp/key_mappings_everyone_uses/
-" TODO Make 0 mapping not depend on itself, i.e. make it go to the first
-" column by using cursor() https://stackoverflow.com/questions/9953082/how-to-jump-directly-to-a-column-number-in-vim
-" instead of 0. That way, we can make 0 an inclusive backward motion with omap
-" instead of onoremap
-nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
-vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
-
-" Make backward motions such as b or 0 inclusive (for changing with c)
-onoremap b vb
-onoremap B vB
-onoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'v0' : 'v^'
-
-" When using <CTRL-U>, <CTRL-W>, <Enter> or <Tab> in Insert-mode, do <CTRL-G>u
-" first to start a new change so that I can undo these operations with
-" u in Normal/Command mode, rather than undoing the entire Insert
-" operation at once.
-" From https://www.reddit.com/r/vim/comments/kn0cpp/key_mappings_everyone_uses/
-inoremap <C-U> <C-G>u<C-U>
-inoremap <C-W> <C-G>u<C-W>
-inoremap <C-J> <C-G>u<C-J>
-inoremap <NL> <C-G>u<NL>
-inoremap <C-M> <C-G>u<C-M>
-inoremap <CR> <C-G>u<CR>
-" NOTE <Tab> is also made undoable with <C-g>u<Tab>, but <Tab> is also used to
-" expand snippets and to jump forward in snippet expansions and in
-" autocomplete popups, the configuration is a bit more involved. See below.
-" TODO For some reason, moving the cursor with the arrow keys seems to break
-" the undo sequence too. Investigate if this is the reason
 
 
 
@@ -588,7 +520,7 @@ inoremap <expr> <F2> pumvisible() ? '<Esc>a<C-x><C-n>' : '<F2>'
 " To select one entry and go back to normal mode, press <Esc> (this is Vim
 " default). But to select one entry and stay in normal mode, press <CR> (this
 " is my own config)
-inoremap <expr> <CR> pumvisible() ? '<Esc>a' : '<CR>'
+inoremap <expr> <CR> pumvisible() ? '<Esc>a' : '<C-G>u<CR>'
 
 " We will map <Tab> to our own function ExpandSnippetIfPossibleAndGetResult, 
 " so that we can create the following behaviour:
@@ -700,24 +632,33 @@ function! ViewTable()
 endfunction
 nnoremap <leader>t :call ViewTable()<CR>
 
-" COMMANDS USEFUL FOR TERMINAL
-" Open terminal with <leader><CR>, similarly to how you open a terminal in i3 with $mod+<CR>
- nnoremap <leader><CR> :term ++close ++rows=12<CR>
- " Close terminal with <C-d> similar to how you close a terminal everywhere
- " else
- tnoremap <C-d> exit<CR>:q<CR>
- " Getting to terminal mode with just pressing <Esc>. Both mappings, <Esc> and
- " <Esc><Esc> are needed, since:
- " - If we map only <Esc>, using the arrow keys (to go to previous commands,
- "   for instance) won't work and will put the terminal in normal mode, since
- "   arrow keys are represented with a code starting with <Esc>
- " - If we map only <Esc><Esc>, pressing <Esc> and waiting for 1s doesnt' put
- "   the terminal in normal mode
- " - If we map both <Esc> and <Esc><Esc>, we can use the arrow keys and we can
- "   go into terminal mode either by pressing <Esc> and waiting for 1s, and by
- "   pressing <Esc> twice quickly
- tnoremap <Esc> <C-\><C-n>
- tnoremap <Esc><Esc> <C-\><C-n>
+" -----------
+" | SECTION | Windows
+" -----------
+
+" Make mapping so that  <C-w>_ and <C-w>| create horizontal and vertical
+" splits respectively
+" nnoremap <C-w>_ :Hex<CR><C-w>=
+nnoremap <C-w>_ :sp<CR>
+" Vex! creates the split to the right
+" nnoremap <C-w><Bar> :Vex!<CR><C-w>=
+noremap <C-w><Bar> :vsp<CR>
+
+" Make mapping so that Shift-Arrow increase and reduce the window size in normal
+" mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
+" freed <S-Arrow> and then map them.
+map [a <S-Up>
+map! [a <S-Up>
+map [b <S-Down>
+map! [b <S-Down>
+map [d <S-Left>
+map! [d <S-Left>
+map [c <S-Right>
+map! [c <S-Right>
+nnoremap <S-Up> <C-w>+
+nnoremap <S-Down> <C-w>-
+nnoremap <S-Left> <C-w><
+nnoremap <S-Right> <C-w>>
 
 " Maximize and minimize windows
 function! ZoomInCurrentWindow()
@@ -754,6 +695,30 @@ inoremap <C-h> <C-o><C-w>h
 " Freed <C-l> in Netrw
 nnoremap <leader><leader><leader><leader><leader><leader>l <Plug>NetrwRefresh
 
+
+" -----------
+" | SECTION | Terminal mode
+" -----------
+"
+" Open terminal with <leader><CR>, similarly to how you open a terminal in i3 with $mod+<CR>
+ nnoremap <leader><CR> :term ++close ++rows=12<CR>
+ " Close terminal with <C-d> similar to how you close a terminal everywhere
+ " else
+ tnoremap <C-d> exit<CR>:q<CR>
+ " Getting to terminal mode with just pressing <Esc>. Both mappings, <Esc> and
+ " <Esc><Esc> are needed, since:
+ " - If we map only <Esc>, using the arrow keys (to go to previous commands,
+ "   for instance) won't work and will put the terminal in normal mode, since
+ "   arrow keys are represented with a code starting with <Esc>
+ " - If we map only <Esc><Esc>, pressing <Esc> and waiting for 1s doesnt' put
+ "   the terminal in normal mode
+ " - If we map both <Esc> and <Esc><Esc>, we can use the arrow keys and we can
+ "   go into terminal mode either by pressing <Esc> and waiting for 1s, and by
+ "   pressing <Esc> twice quickly
+ tnoremap <Esc> <C-\><C-n>
+ tnoremap <Esc><Esc> <C-\><C-n>
+
+
 " Copying in terminal mode (same as copying to clipboard in normal mode)
 tnoremap <C-p> <C-w>"+p
 
@@ -772,54 +737,17 @@ function! EnterNormalMode()
 endfunction
 tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
 
+
+
+
+
+
 " Set path to search recursively for all the directories in the respos folder 
 " Using ** is not the best option because it may take a very long time, but
 " for my number of files it is ok
 set path=~/repos/**
 nnoremap <leader>f :find 
 
-" Disable vim-sneak highlight so that it behaves more like the f and t motions
-hi! link Sneak Normal
-" Replace f, F, t, T for the vim-sneak versions, which can jump across lines
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
-" Make : be equivalent to , to be able to quickly go back in f, F, t, T and s,
-" S motions. This is a good strategy because:
-" - Currently, , is part of other keybindings, like ,l (to list buffers), and
-"   so if we use , to go back in the motions above, we have to wait a 1s
-"   timeout
-" - : is usually used to access command mode, but I have the whitespace for
-"   that
-"nnoremap : ,
-map : <Plug>Sneak_,
-" XXX The above is actually very dangerous, because if any mappings with nmap
-" use :, then we'll actually be pressing , instead of entering the command
-" line. As a result I had to change a bunch of commands above from nmap to
-" nnoremap. If problems arise, consider this a possible source
-
-" Make vim-sneak mappings more consistent in visual mode by making s go to next match and S
-" go to previous match, while keeping vim-surround functionality through z 
-" (mnemonics: vim-zurround) Explained in this GitHub issue:
-" https://github.com/justinmk/vim-sneak/issues/268
-"
-" So now the behaviour is:
-" - Normal: s and S to move with sneak
-" - Visual: s and S to move with sneak, z to surround (zurround)
-" - cs and ds: change/delete matching characters (), [], {}... with
-"   vim-surround
-let g:surround_no_mappings= 1
-xmap <S-s> <Plug>Sneak_S
-xmap z <Plug>VSurround
-nmap yzz <Plug>Yssurround
-nmap yz  <Plug>Ysurround
-nmap dz  <Plug>Dsurround
-nmap cz  <Plug>Csurround
-omap s <Plug>Sneak_s
-" S mapped with v to make it inclusive, similarly to other backward motions in
-" my config (0 mapped to v0, ^ mapped to v^, etc)
-omap S v<Plug>Sneak_S
 
 
 
@@ -999,7 +927,100 @@ vnoremap <S-k> <Nop>
 " Recognize `.tags` file as well as `tags` file
 set tags=./tags;,tags;./.tags;,.tags;
 
+" Disable vim-sneak highlight so that it behaves more like the f and t motions
+hi! link Sneak Normal
+" Replace f, F, t, T for the vim-sneak versions, which can jump across lines
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
+" Make : be equivalent to , to be able to quickly go back in f, F, t, T and s,
+" S motions. This is a good strategy because:
+" - Currently, , is part of other keybindings, like ,l (to list buffers), and
+"   so if we use , to go back in the motions above, we have to wait a 1s
+"   timeout
+" - : is usually used to access command mode, but I have the whitespace for
+"   that
+"nnoremap : ,
+map : <Plug>Sneak_,
+" XXX The above is actually very dangerous, because if any mappings with nmap
+" use :, then we'll actually be pressing , instead of entering the command
+" line. As a result I had to change a bunch of commands above from nmap to
+" nnoremap. If problems arise, consider this a possible source
 
+" Make vim-sneak mappings more consistent in visual mode by making s go to next match and S
+" go to previous match, while keeping vim-surround functionality through z 
+" (mnemonics: vim-zurround) Explained in this GitHub issue:
+" https://github.com/justinmk/vim-sneak/issues/268
+"
+" So now the behaviour is:
+" - Normal: s and S to move with sneak
+" - Visual: s and S to move with sneak, z to surround (zurround)
+" - cs and ds: change/delete matching characters (), [], {}... with
+"   vim-surround
+let g:surround_no_mappings= 1
+xmap <S-s> <Plug>Sneak_S
+xmap z <Plug>VSurround
+nmap yzz <Plug>Yssurround
+nmap yz  <Plug>Ysurround
+nmap dz  <Plug>Dsurround
+nmap cz  <Plug>Csurround
+omap s <Plug>Sneak_s
+" S mapped with v to make it inclusive, similarly to other backward motions in
+" my config (0 mapped to v0, ^ mapped to v^, etc)
+omap S v<Plug>Sneak_S
+
+" Map Y to y$ so that C, D and Y behave in the same way
+nnoremap <S-y> y$
+
+" Remap : to <space> for easier typing
+nnoremap <space> :
+vnoremap <space> :
+
+" Make <C-a> and <C-e> in insert and select modes behave like in the command line, going
+" to the beginning and end of the line respectively
+inoremap <C-a> <Esc>^i
+inoremap <C-e> <End>
+snoremap <C-a> <Esc>^i
+snoremap <C-e> <End><Esc>i
+" Make <C-b> and <C-f> in insert mode behave similarly to how <Alt-b> and 
+" <Alt-f> behaves in the command line, i.e. going back and advancing one 
+" word at a time
+inoremap <C-b> <Esc><Right>bi
+inoremap <C-f> <Esc><Right>ei
+
+" Make 0 a 'smart' go to start of line: if we press it once, we go to the
+" first non-blank character, and if we press it twice, we go to the actual
+" start of the line
+" From https://www.reddit.com/r/vim/comments/kn0cpp/key_mappings_everyone_uses/
+" TODO Make 0 mapping not depend on itself, i.e. make it go to the first
+" column by using cursor() https://stackoverflow.com/questions/9953082/how-to-jump-directly-to-a-column-number-in-vim
+" instead of 0. That way, we can make 0 an inclusive backward motion with omap
+" instead of onoremap
+nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+
+" Make backward motions such as b or 0 inclusive (for changing with c)
+onoremap b vb
+onoremap B vB
+omap F vF
+omap T vT
+onoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'v0' : 'v^'
+
+" When using <CTRL-U>, <CTRL-W>, <Enter> or <Tab> in Insert-mode, do <CTRL-G>u
+" first to start a new change so that I can undo these operations with
+" u in Normal/Command mode, rather than undoing the entire Insert
+" operation at once.
+" From https://www.reddit.com/r/vim/comments/kn0cpp/key_mappings_everyone_uses/
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
+inoremap <C-J> <C-G>u<C-J>
+inoremap <NL> <C-G>u<NL>
+" NOTE <Tab> is also made undoable with <C-g>u<Tab>, but <Tab> is also used to
+" expand snippets and to jump forward in snippet expansions and in
+" autocomplete popups, the configuration is a bit more involved. See below.
+" TODO For some reason, moving the cursor with the arrow keys seems to break
+" the undo sequence too. Investigate if this is the reason
 
 " -----------
 " | SECTION | Things I'm yet deciding to keep or not
