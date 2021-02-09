@@ -19,92 +19,17 @@ function! LaunchVimwiki()
 endfunction
 
 
-
-""" SECTION: Prepare and view HTML
-
-" Recompile HTML upon writing buffer to disk. The augroup avoids creating a
-" duplicate autocommand every time we source the vimrc file (see explanation
-" here https://learnvimscriptthehardway.stevelosh.com/chapters/14.html).
-" Before defining the augroup and clearing autocommands with autocmd!, writing
-" to file took a long time after long Vim sessions
-augroup CompileVimwiki
-    autocmd!
-    autocmd BufWritePost *.wiki silent Vimwiki2HTML
-augroup END
-" Make blackwhite the default colorscheme for vimwiki
-" Removed from now because I'm testing the function AutomaticColorscheme
-" autocmd FileType vimwiki colorscheme blackwhite
-" Load the html of the current file in firefox (h for html)
-function! OpenThisHTML()
-    let path_to_html_folder = expand(g:vimwiki_list[0]['path_html']) . '/'
-    let full_path_to_wiki_file = expand('%:p')
-    let note_name_with_wiki_extension = split(full_path_to_wiki_file, '/wiki/')[-1]
-    let note_name = split(note_name_with_wiki_extension, '\.wiki')[0]
-    " The quotes around make sure that firefox receives the full path instead
-    " of just the path up to the first parenthesis
-    let full_path_to_html_file = "'" . path_to_html_folder . note_name . ".html'"
-    "The & at the end guarantees that firefox is executed in the background,
-    "so Vim goes back to editing instead of hanging while Firefox is open
-    execute "!firefox -new-window" full_path_to_html_file "&"  
-endfunction
-"function! OpenThisPDF()
-"    let path_to_html_folder = expand(g:vimwiki_list[0]['path_html']) . '/'
-"    let full_path_to_wiki_file = expand('%:p')
-"    let note_name_with_wiki_extension = split(full_path_to_wiki_file, '/wiki/')[-1]
-"    let note_name = split(note_name_with_wiki_extension, '\.wiki')[0]
-"    " The quotes around make sure that firefox receives the full path instead
-"    " of just the path up to the first parenthesis
-"    let full_path_to_html_file = "'" . path_to_html_folder . note_name . ".html'"
-"    let full_path_to_pdf_file  = "'./pdf" . path_to_html_folder . note_name . ".html'"
-"    execute  "wkhtmltopdf -L 25mm -R 25mm -T 25mm -B 25mm" . full_path_to_html_file 2020-05-22\ Andreas.pdf
-"    "The & at the end guarantees that firefox is executed in the background,
-"    "so Vim goes back to editing instead of hanging while Firefox is open
-"    execute "!firefox -new-window" full_path_to_html_file "&"  
-"endfunction
-noremap ,h :call OpenThisHTML()<CR><CR>
-" Process images so that they use less space, and map keybinding to <C-c> (c
-" for compress)
-function! ProcessImages()
-    let path_to_wiki = expand(g:vimwiki_list[0]['path'])
-    let path_to_setup_folder = path_to_wiki . '/setup/'
-    execute '!cd' path_to_setup_folder '; python3 process_images.py'
-endfunction     
-" Apparently <C-i> is mapped by default to a function that goes to the next
-" Vimwiki link, which could be quite useful
-"nmap <Leader>wn <Plug>VimwikiNextLink
-nnoremap <C-c> :call ProcessImages()<CR>
-
-
-
-""" SECTION: Edit text and navigate
-
-" Map <Plug>VimwikiTextObjListSingle to something ridiculous to freed il, so
-" that we can select "in line" (il). For some reason this must be in vimrc to
-" work, rather than after/ftplugin/vimwiki.vim
-nnoremap <leader><leader><leader><leader><leader><leader>i <Plug>VimwikiTextObjListSingle
-nnoremap <leader><leader><leader><leader><leader><leader>iV <Plug>VimwikiTextObjListSingleV
-
-" Freed <C-o> by disabling the native 'next link' functionality, which is redundant 
-" after mapping <C-h> and <C-l>
-nnoremap <leader><leader><leader><leader><leader><leader><leader><leader>asdfasdferqer <Plug>VimwikiNextLink
-
-" Have multiline list/itemize items
-let g:vimwiki_list_ignore_newline = 0
-" Avoid automatically writing upon exit
-let g:vimwiki_autowriteall = 0
-" This allows bulletpoints to be continued even at deeper bulletpoint levels,
-" instead of only at the first level.
-setlocal formatoptions=ctnqro
-setlocal comments+=n:*,n:#
-
-
-
 """ SECTION: Create new notes and rename
 
-" Keymaps for quick renaming of vimwiki files (t for title and u for update)
-" ,t not only prompts new filename, but inserts the old one as a starting
-" point for convenience
-nnoremap ,t :VimwikiRenameFile<CR>y<CR><C-r>=expand('%:t:r')<CR>
+" Here, I will define functions for creating and renaming notes, but I will
+" create the keybindings to use them in ftplugin/vimwiki.vim. This way:
+" - Functions work properly even when they involve changing buffers within the
+"   function (remember that ftplugin is only for simple local definitions; see
+"   note "ftplugin: Only for simple local definitions")
+" - Keybindings will only be active in vimwiki notes. This way I won't trigger
+"   them by accident in other files (for example, by pressing '<CR> in a
+"   python file by mistake and triggering CreateNoteFromTitle)
+
 function! UpdateTitle()
     " Get filename name
     let filename = expand('%:t')
@@ -113,8 +38,6 @@ function! UpdateTitle()
     " Replace '= OLD_TITLE =' by '= filename =' in line 1 only
     execute '1s/= .* =/= ' . filename . ' =/'
 endfunction
-command! UpdateTitle call UpdateTitle()
-nnoremap ,u :UpdateTitle<CR>
 
 " Make function to change Anki (Latex) to Vimwiki. Note that the e flag mutes
 " error signs when the pattern is not found
@@ -146,7 +69,7 @@ function! Wikify()
     " Same, but with align environments
     %s/\\begin{align.*}\(\_.\{-}\)\\end{align.*/{{\$%align%\1}}\$/ge
 endfunction
-command! Wikify call Wikify()
+
 
 " Given a note title surrounded by 6 equal signs in the wiki index, this
 " creates a link, follows it and copies the title. Needs to use nmap and not
@@ -173,13 +96,14 @@ function! CreateNoteFromTitle()
     execute "normal ^t]\"hyi]\<CR>ggi= \<Esc>\"hpa =\<CR>\<CR>\<CR>"
     let @" = getreg("0")
 endfunction
-nnoremap '<CR> :call CreateNoteFromTitle()<CR>i
-
 
 
 """ SECTION: Diary-related functionality
 
-" Keybindings for going to previous and next day's diary entries. 
+" Keybindings for going to previous and next day's diary entries. Similarly to
+" the section on creating and renaming notes, here I define functions, and
+" keybindings for those functions are created in ftplugin/vimwiki.vim
+
 " 1) First you have to freed <C-Left> and <C-Right> from Putty, which for some reason holds
 " them hostage. You can find which sequence corresponds to <C-Left> (for
 " instance), in this case by pressing the following combination in insert
@@ -211,17 +135,10 @@ function! GoToNextDay()
         bd#
     endif
 endfunction
-" 3) Map the previous functions
-nnoremap <C-Left> :call GoToPreviousDay()<CR>
-nnoremap <C-Right> :call GoToNextDay()<CR>
-" Also, create a mapping for creating tomorrow's note, in case you need to
-" create it in advance. Note that it makes sense to create it like this,
-" because the <leader> prefix is for opening files. First you need to remap
-" VimwikiTabMakeDiaryNote, which is hogging <leader>w<leader>t
-nmap <leader>w<leader>x <Plug>VimwikiTabMakeDiaryNote
-nmap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
-" Notice that <leader>w<leader>y creates yesterday's note if that wasn't
-" already created
+
+
+" TODO Decide if you want to keep the following functionality for time
+" tracking
 
 " Keybindings for time tracking with ti. <leader>t stands for time commands
 " Turn on with o
@@ -275,14 +192,3 @@ nnoremap <silent> <leader>t<leader>s :call StatusTi()<CR>
 "nmap <Leader>w<Leader>w VimwikiMakeDiaryNote<CR>idiary<Tab>
 " Finally, note that <C-i> may be going from link to link
 " Here ends my vimwiki configuration
-
-
-" -----------
-" | SECTION | Appearance
-" -----------
-"
-" Wrap lines at 100 characters
-" let custom_width=100
-" let &l:columns=custom_width
-" autocmd VimResized *.wiki if (&columns > custom_width) | let &l:columns=custom_width | endif
-" set wrap
