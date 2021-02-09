@@ -168,8 +168,10 @@ function! CreateNoteFromTitle()
     " Save the modification without triggering autocommands (the autocommand
     " for compiling to HTML is too slow)
     noa write
-    " Copy title, follow link to note and paste title
-    execute "normal ^t]yi]\<CR>ggi= \<Esc>pa =\<CR>\<CR>\<CR>"
+    " Copy title, follow link to note and paste title. Use h register to leave
+    " the 0th unchanged, and restore unnamed register
+    execute "normal ^t]\"hyi]\<CR>ggi= \<Esc>\"hpa =\<CR>\<CR>\<CR>"
+    let @" = getreg("0")
 endfunction
 nnoremap '<CR> :call CreateNoteFromTitle()<CR>i
 
