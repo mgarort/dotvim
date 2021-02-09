@@ -23,5 +23,6 @@ function! CopyCellToIPython()
     " Move three line down
     execute "normal! 3j"
 endfunction
-
 nnoremap <C-b> :call CopyCellToIPython()<CR>
+
+set nowrap
