@@ -1003,8 +1003,8 @@ vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 " Make backward motions such as b or 0 inclusive (for changing with c)
 onoremap b vb
 onoremap B vB
-omap F vF
-omap T vT
+omap F v<Plug>Sneak_F
+omap T v<Plug>Sneak_T
 onoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'v0' : 'v^'
 
 " When using <CTRL-U>, <CTRL-W>, <Enter> or <Tab> in Insert-mode, do <CTRL-G>u
