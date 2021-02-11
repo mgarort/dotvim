@@ -876,6 +876,7 @@ set wildmenu
 set wildmode=longest,list
 
 " Better UX for substitution in visual selections
+"  From https://www.reddit.com/r/vim/comments/ixs9mv/how_to_avoid_writing_v_in_visual_mode/
 function! Cs()
 	let cmdline = getcmdline()
         " If the text in the command line starts by "^'<,'>" and the cursor is
