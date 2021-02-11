@@ -986,8 +986,8 @@ snoremap <C-e> <End><Esc>i
 " Make <C-b> and <C-f> in insert mode behave similarly to how <Alt-b> and 
 " <Alt-f> behaves in the command line, i.e. going back and advancing one 
 " word at a time
-inoremap <C-b> <Esc><Right>bi
-inoremap <C-f> <Esc><Right>ei
+inoremap <C-b> <S-Left>
+inoremap <C-f> <Esc>ei<Right>
 
 " Make 0 a 'smart' go to start of line: if we press it once, we go to the
 " first non-blank character, and if we press it twice, we go to the actual
