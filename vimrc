@@ -875,6 +875,27 @@ cnoremap <C-a> <C-b>
 set wildmenu
 set wildmode=longest,list
 
+" Better UX for substitution in visual selections
+function! Cs()
+	let cmdline = getcmdline()
+        " If the text in the command line starts by "^'<,'>" and the cursor is
+        " at position 6, that's because we've just started a command line
+        " while a text selection was active. In that case:
+        " - If the first character you press is a `s`, then you are starting a
+        "   substitution
+        " - Since there is an active text selection, substitute in the
+        "   selection only by adding \%V
+	if cmdline =~ "^'<,'>" && getcmdpos() == 6
+		return "s/\\%V"
+        " If you are not in the situation above, then typing s doesn't mean
+        " that you are starting a substitution in a visual selection. So just
+        " type s
+	else
+		return "s"
+	endif
+endfunction
+cnoremap <expr> s Cs()
+
 
 " -----------
 " | SECTION | Motions and text editing
@@ -1048,7 +1069,6 @@ set gdefault
 " endfunction
 " snoremap <CR> <Esc>gv"_c
 " snoremap a <Esc>gv"_ca
-
 
 
 
