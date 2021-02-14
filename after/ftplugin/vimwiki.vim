@@ -2,4 +2,4 @@
 " keeping the native Vimwiki <CR> in insert, which is useful for writing lists
 " with several levels.
 " Autocommand from section "8. Lists" in the Vimwiki docs
-autocmd FileType vimwiki inoremap <expr><buffer> <CR> pumvisible() ? '<Esc>a' : '<C-]><Esc>:VimwikiReturn 3 5<CR>'
+inoremap <expr><buffer> <CR> pumvisible() ? '<Esc>a' : '<C-]><Esc>:VimwikiReturn 3 5<CR>'
