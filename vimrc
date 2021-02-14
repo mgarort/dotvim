@@ -298,8 +298,6 @@ nnoremap ,n :bn<CR>
 nnoremap ,b :bp<CR>
 " Go to opposite (alternate buffer)
 nnoremap ,m :b#<CR>
-" Similar keybinding for displaying registers
-nnoremap ,r :register<CR>
 " Quickly check modifications wrt the saved version
 nnoremap ,d :DiffSaved<CR>
 
@@ -355,6 +353,9 @@ nnoremap <leader>p :Files<CR>
 
 " Search with grep
 nnoremap <leader>o :grep! "" *.wiki<Left><Left><Left><Left><Left><Left><Left><Left>
+
+" Show all registers with r
+nnoremap <leader>r :register<CR>
 
 " remove conflicting/annoying maps
 nmap <leader><leader><leader><leader><leader>psdfs  <Plug>BufKillAlt
@@ -694,6 +695,14 @@ inoremap <C-h> <C-o><C-w>h
 " clear the screen in the terminal
 " Freed <C-l> in Netrw
 nnoremap <leader><leader><leader><leader><leader><leader>l <Plug>NetrwRefresh
+
+" Maximize help window by default
+" From https://stackoverflow.com/questions/24477083/in-vim-how-can-i-automatically-maximize-the-help-window
+augroup LargeHelpWindow
+    autocmd!
+    autocmd BufWinEnter * if &l:buftype ==# 'help' | wincmd _ | endif
+augroup END
+
 
 
 " -----------
@@ -1070,11 +1079,6 @@ set gdefault
 " endfunction
 " snoremap <CR> <Esc>gv"_c
 " snoremap a <Esc>gv"_ca
-
-
-
-
-
 
 
 
