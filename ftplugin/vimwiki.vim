@@ -164,8 +164,14 @@ nmap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
 " | SECTION | Appearance
 " -----------
 "
+
+
 " Wrap lines at 100 characters
 " let custom_width=100
 " let &l:columns=custom_width
 " autocmd VimResized *.wiki if (&columns > custom_width) | let &l:columns=custom_width | endif
 " set wrap
+
+
+let b:is_prose_mode_active = 0
+nnoremap ,r :call ActivateProseMode()<CR>
