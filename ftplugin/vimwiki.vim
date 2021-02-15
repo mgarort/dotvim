@@ -143,8 +143,10 @@ command! Wikify call Wikify()
 nnoremap '<CR> :call CreateNoteFromTitle()<CR>i
 
 
-""" SECTION: Diary-related functionality
-
+" -----------
+" | SECTION | Diary functionality
+" -----------
+"
 " Keybindings for going to previous and next day's diary entries. Similarly to
 " the section on creating and renaming notes, here I only create keybindings,
 " and functions are defined in plugin/vimwiki.vim
@@ -174,4 +176,4 @@ nmap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
 
 
 let b:is_prose_mode_active = 0
-nnoremap ,r :call ActivateProseMode()<CR>
+nnoremap <buffer> ,r :call ActivateProseMode()<CR>
