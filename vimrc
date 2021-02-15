@@ -328,6 +328,8 @@ nnoremap <leader>vd :Explore $HOME/.vim<CR>
 nnoremap <leader>vv :e $MYVIMRC<CR>
 " a for after
 nnoremap <leader>va :Explore $HOME/.vim/after<CR>
+" f for filetype
+nnoremap <leader>vf :Explore $HOME/.vim/ftplugin<CR>
 " p for plugin
 nnoremap <leader>vp :Explore $HOME/.vim/plugin<CR>
 " w for wiki
@@ -1099,6 +1101,12 @@ function! ActivateProseMode()
         echo "Prose mode inactive"
     endif
 endfunction
+
+" Append at end of paragraph
+" line("'}") - empty(getline(line("'}"))) is there to take care of the edge
+" case in which the last line of the current paragraph is the last line of the
+" file
+nnoremap gA :call cursor(line("'}") - empty(getline(line("'}"))),0)<CR>A
 
 
 
