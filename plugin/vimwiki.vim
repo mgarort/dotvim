@@ -192,3 +192,11 @@ nnoremap <silent> <leader>t<leader>s :call StatusTi()<CR>
 "nmap <Leader>w<Leader>w VimwikiMakeDiaryNote<CR>idiary<Tab>
 " Finally, note that <C-i> may be going from link to link
 " Here ends my vimwiki configuration
+
+
+" Make diary note for any date (or open if existing)
+function! EditArbitraryDate()
+    let date = input('Enter date in YYYY-MM-DD format:  ')
+    let path = g:vimwiki_list[0]['path'] . '/diary/' . date . '.wiki'
+    exe 'e ' . path
+endfunction

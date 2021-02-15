@@ -160,6 +160,8 @@ nmap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
 " TODO insert the diary template if the diary buffer is empty, and don't
 " insert it if it already has content
 
+" Create new diary note (or edit existing one)
+nnoremap <silent><buffer> <leader>d :call EditArbitraryDate()<CR>
 
 
 " -----------
