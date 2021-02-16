@@ -354,7 +354,12 @@ set noautowriteall
 nnoremap <leader>p :Files<CR>
 
 " Search with grep
-nnoremap <leader>o :grep! "" *.wiki<Left><Left><Left><Left><Left><Left><Left><Left>
+function! SearchWithGrep()
+    let search = input('Search for:  ')
+    silent exe 'grep! "' . search . '" *.wiki'
+    copen
+endfunction
+nnoremap <leader>o :call SearchWithGrep()<CR>
 
 " Show all registers with r
 nnoremap <leader>r :register<CR>
