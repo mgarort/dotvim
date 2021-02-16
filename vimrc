@@ -432,11 +432,31 @@ augroup END
 " saved version in the filesystem. It can be launched with :DiffSaved
 " Copied from https://stackoverflow.com/questions/749297/can-i-see-changes-before-i-save-my-file-in-vim
 function! s:DiffWithSaved()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+    " Disable diff in all buffers. This is because if there are any lingering
+    " diff from previous diff comparisons, the current comparison will be
+    " mangled. From https://vi.stackexchange.com/questions/701/diffoff-on-all-buffers
+    bufdo diffoff
+    " Save filetype for later
+    let filetype=&ft
+    " Enable diff in the original file
+    diffthis
+    " Copy the original file to a new vertical split, and remove the spurious
+    " empty first line that results from copying
+    vnew | r # | normal! 1Gdd
+    " Diff the copy
+    diffthis
+    " In the copy's buffer, indicate:
+    " - buftype nofile: buffer not related to any file and which won't be 
+    "   written
+    " - bufhidden wipe: when the buffer stops being displayed, wipe it out
+    "   from the buffer list
+    " - nobuflisted: don't show buffer in the buffer list
+    " - readonly: do not write
+    " - filetype: set to whatever it was saved at the beginning
+    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+    " Fold everything possible. Needed because sometimes the new split is not
+    " folded automatically after vimdiff
+    normal! zM
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
