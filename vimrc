@@ -356,7 +356,10 @@ nnoremap <leader>p :Files<CR>
 " Search with grep
 function! SearchWithGrep()
     let search = input('Search for:  ')
-    silent exe 'grep! "' . search . '" *.wiki'
+    " The redirection at the end is so that no output is printed to the
+    " terminal. Otherwise grep clutters the screen for the output of later
+    " commands
+    silent exe 'grep! "' . search . '" *.wiki > /dev/null 2>&1'
     copen
 endfunction
 nnoremap <leader>o :call SearchWithGrep()<CR>
