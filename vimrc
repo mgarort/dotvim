@@ -356,10 +356,18 @@ nnoremap <leader>p :Files<CR>
 " Search with grep
 function! SearchWithGrep()
     let search = input('Search for:  ')
+    " Check if there are uppercase characters. If there are, we will grep
+    " case-sensitively. If there aren't, we will grep case-insensitively. This
+    " is similar to the behaviour of "set ignorecase, set smartcase"
+    let is_upper = match('sdfs',"\u")
     " The redirection at the end is so that no output is printed to the
     " terminal. Otherwise grep clutters the screen for the output of later
     " commands
-    silent exe 'grep! "' . search . '" *.wiki > /dev/null 2>&1'
+    if is_upper == -1
+        silent exe 'grep! -i "' . search . '" *.wiki'
+    else
+        silent exe 'grep! "' . search . '" *.wiki'
+    endif
     copen
 endfunction
 nnoremap <leader>o :call SearchWithGrep()<CR>
