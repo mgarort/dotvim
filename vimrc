@@ -462,8 +462,8 @@ set completeopt=menu,preview,noselect,menuone
 " Expansion trigger will be <Tab>, but it needs to be manually and very finely
 " configured. So we set it to <F11> here so that UltiSnips doesn't take over
 let g:UltiSnipsExpandTrigger='<F11>'
-let g:UltiSnipsJumpForwardTrigger='<Tab>'
-let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
+let g:UltiSnipsJumpForwardTrigger='<C-j>'
+let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 
 " TODO Autocomplete more finely for filename completion in Python filename
 " strings. Maybe autocomplete should first try file
