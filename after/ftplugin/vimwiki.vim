@@ -3,3 +3,15 @@
 " with several levels.
 " Autocommand from section "8. Lists" in the Vimwiki docs
 inoremap <expr><buffer> <CR> pumvisible() ? '<Esc>a' : '<C-]><Esc>:VimwikiReturn 3 5<CR>'
+
+" Map the <Plug> commands that interfere with <C-l>. Needs to be done here
+" because in ftplugin/vimwiki.vim there is an error when unmapping that there is no such
+" mappings. This is presumably because at the time ftplugin is sourced those
+" mappings haven't been created by Vimwiki, but at the time after is sourced
+" they have
+iunmap <buffer> <C-l><CR>
+iunmap <buffer> <C-l><C-k>
+iunmap <buffer> <C-l><NL>
+imap <C-g><C-g> <Plug>VimwikiListToggle
+imap <C-g><C-k> <Plug>VimwikiListPrevSymbol
+imap <C-g><C-j> <Plug>VimwikiListNextSymbol
