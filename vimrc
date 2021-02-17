@@ -942,6 +942,13 @@ function! Cs()
 endfunction
 cnoremap <expr> s Cs()
 
+" Motions up, down, left and right similar in command line mode as in normal mode.
+" These motions will also be mirrored in insert mode
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
+cnoremap <C-l> <Right>
+cnoremap <C-h> <Left>
+
 
 " -----------
 " | SECTION | Motions and text editing
@@ -1089,6 +1096,16 @@ inoremap <NL> <C-G>u<NL>
 " TODO For some reason, moving the cursor with the arrow keys seems to break
 " the undo sequence too. Investigate if this is the reason
 
+" Motions up, down, left and right similar in insert mode as in normal mode.
+" These motions will also be mirrored in command line mode
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
+
+
+
+
 " -----------
 " | SECTION | Things I'm yet deciding to keep or not
 " -----------
@@ -1144,8 +1161,3 @@ nnoremap gA :call cursor(line("'}") - empty(getline(line("'}"))),0)<CR>A
 
 
 
-" Try mapping the following to <Up>,<Down>, etc 
-inoremap <C-k> <Up>
-inoremap <C-j> <Down>
-inoremap <C-l> <Right>
-inoremap <C-h> <Left>
