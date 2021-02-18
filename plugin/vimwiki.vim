@@ -1,3 +1,20 @@
+" plugin/vimwiki.vim contains config that is vimwiki-specific but should not
+" be loaded everytime with every new vimwiki buffer (as opposed to config in
+" ftplugin/vimwiki.vim). For example, functions are defined in
+" plugin/vimwiki.vim, and associated keybindings are defined in
+" ftplugin/vimwiki.vim. This way:
+" - Functions work properly even when they involve changing buffers within the
+"   function (remember that ftplugin is only for simple local definitions; see
+"   note "ftplugin: Only for simple local definitions")
+" - Keybindings will only be active in vimwiki notes. This way I won't trigger
+"   them by accident in other files (for example, by pressing '<CR> in a
+"   python file by mistake and triggering CreateNoteFromTitle)
+
+
+" -------------------------
+" SECTION:  Vimwiki variables
+" ------------------------
+"
 " The following is so that vimwiki doesn't take over Tab in insert mode
 let g:vimwiki_table_mappings = 0
 " Have multiline list/itemize items
@@ -13,7 +30,9 @@ let g:vimwiki_list = [{'path': '~/repos/wiki',
             \ 'ext':'.wiki',
             \ 'template_default': 'default',
             \ 'template_ext': '.tpl'}]
-" Make fuction to open Vimwiki index (in order to open the index with a simple
+
+
+
 
 " ---------------------------------
 "  SECTION:  Edit text and navigate
@@ -28,6 +47,16 @@ function! SearchPrevLink()
     call search('\[\[.\{-}\]\]\|http', 'bW')
 endfunction
 
+
+
+" --------------------------------------------------------
+" SECTION:  Commands and functions for fast note-writing
+" --------------------------------------------------------
+"
+"  Here, I define commands and functions for quickly putting your ideas into
+"  notes.
+
+" Function to open Vimwiki index (in order to open the index with a simple
 " i3 keybinding)
 function! LaunchVimwiki()
     let index_path = g:vimwiki_list[0]['path']
@@ -35,17 +64,32 @@ function! LaunchVimwiki()
     execute "e " . "index.wiki"
 endfunction
 
-
-""" SECTION: Create new notes and rename
-
-" Here, I will define functions for creating and renaming notes, but I will
-" create the keybindings to use them in ftplugin/vimwiki.vim. This way:
-" - Functions work properly even when they involve changing buffers within the
-"   function (remember that ftplugin is only for simple local definitions; see
-"   note "ftplugin: Only for simple local definitions")
-" - Keybindings will only be active in vimwiki notes. This way I won't trigger
-"   them by accident in other files (for example, by pressing '<CR> in a
-"   python file by mistake and triggering CreateNoteFromTitle)
+" Function to create new notes from a 6-level header.
+" Given a note title surrounded by 6 equal signs in the wiki index, this
+" creates a link, follows it and copies the title. Needs to use nmap and not
+" nnoremap because otherwise <CR> doesn't create a link
+" Regex explanation:
+"  - \s* matches 0 or more whitespaces
+"  - \( ____ \) is a capturing group. It allows us to store a matching string
+"    in the variable \1
+"  - .\{-} is the same as .*, but it matches stuff lazily. This means that it
+"    takes less priority over other regex pattern. In this particular case, it
+"    has less priority than the two \s* left and right of the capturing group.
+"    So if there are surrounding whitespaces, those will be matched by \s* and
+"    not by \{-}
+function! CreateNoteFromTitle()
+    " Make a link (and restore search register afterwards)
+    let old_search = getreg("/")
+    s/======\s*\(.\{-}\)\s*======/====== \[\[\1\]\] ======/
+    let @/ = old_search
+    " Save the modification without triggering autocommands (the autocommand
+    " for compiling to HTML is too slow)
+    noa write
+    " Copy title, follow link to note and paste title. Use h register to leave
+    " the 0th unchanged, and restore unnamed register
+    execute "normal ^t]\"hyi]\<CR>ggi= \<Esc>\"hpa =\<CR>\<CR>\<CR>"
+    let @" = getreg("0")
+endfunction
 
 function! UpdateTitle()
     " Get filename name
@@ -56,7 +100,7 @@ function! UpdateTitle()
     execute '1s/= .* =/= ' . filename . ' =/'
 endfunction
 
-" Make function to change Anki (Latex) to Vimwiki. Note that the e flag mutes
+" Function to change Anki (Latex) to Vimwiki. Note that the e flag mutes
 " error signs when the pattern is not found
 function! Wikify()
     %s/\[latex\]//ge
@@ -88,35 +132,12 @@ function! Wikify()
 endfunction
 
 
-" Given a note title surrounded by 6 equal signs in the wiki index, this
-" creates a link, follows it and copies the title. Needs to use nmap and not
-" nnoremap because otherwise <CR> doesn't create a link
-" Regex explanation:
-"  - \s* matches 0 or more whitespaces
-"  - \( ____ \) is a capturing group. It allows us to store a matching string
-"    in the variable \1
-"  - .\{-} is the same as .*, but it matches stuff lazily. This means that it
-"    takes less priority over other regex pattern. In this particular case, it
-"    has less priority than the two \s* left and right of the capturing group.
-"    So if there are surrounding whitespaces, those will be matched by \s* and
-"    not by \{-}
-function! CreateNoteFromTitle()
-    " Make a link (and restore search register afterwards)
-    let old_search = getreg("/")
-    s/======\s*\(.\{-}\)\s*======/====== \[\[\1\]\] ======/
-    let @/ = old_search
-    " Save the modification without triggering autocommands (the autocommand
-    " for compiling to HTML is too slow)
-    noa write
-    " Copy title, follow link to note and paste title. Use h register to leave
-    " the 0th unchanged, and restore unnamed register
-    execute "normal ^t]\"hyi]\<CR>ggi= \<Esc>\"hpa =\<CR>\<CR>\<CR>"
-    let @" = getreg("0")
-endfunction
 
 
-""" SECTION: Diary-related functionality
-
+" -------------------------------
+" SECTION:  Diary functionality
+" ------------------------------
+"
 " Keybindings for going to previous and next day's diary entries. Similarly to
 " the section on creating and renaming notes, here I define functions, and
 " keybindings for those functions are created in ftplugin/vimwiki.vim
@@ -153,64 +174,6 @@ function! GoToNextDay()
     endif
 endfunction
 
-
-" TODO Decide if you want to keep the following functionality for time
-" tracking
-
-" Keybindings for time tracking with ti. <leader>t stands for time commands
-" Turn on with o
-function! OnTi()
-    let on_message = system('ti on $( date \+\%F ) --no-color')
-    echo on_message
-endfunction
-nnoremap <silent> <leader>t<leader>o :call OnTi()<CR>
-" Finish with f
-function! FinishTi()
-    let finish_message = system('ti fin --no-color')
-    echo finish_message
-endfunction
-nnoremap <silent> <leader>t<leader>f :call FinishTi()<CR>
-" Write log to current diary entry with w
-function! GetDiaryTime()
-    let title = getline('1')
-    let diary_date = split(title, ' ')[1]
-    let diary_date = substitute(diary_date, '\.', '-', 'g')
-    let diary_date_log = system('ti log | grep ' . diary_date)
-    if diary_date_log == ''
-        let diary_date_log = '0 seconds'
-    else
-        let diary_date_log = split(diary_date_log, ' ')[4:]
-        let diary_date_log = join(diary_date_log, ' ')
-    endif
-    return diary_date_log
-endfunction
-function! WriteTi()
-    let diary_date_log = GetDiaryTime()
-    execute "normal! ggo\<cr>\<cr>Time working:  " . diary_date_log . "\<cr>\<esc>"
-endfunction
-nnoremap <silent> <leader>t<leader>w :call WriteTi()<CR>
-" Display the log of the time spent on the current diary entry's date, rather than writing it
-function! LogTi()
-    let diary_date_log = GetDiaryTime()
-    echo diary_date_log
-endfunction
-nnoremap <silent> <leader>t<leader>l :call LogTi()<CR>
-" Display ti status
-function! StatusTi()
-    let status_message = system('ti status --no-color')
-    echo status_message
-endfunction
-nnoremap <silent> <leader>t<leader>s :call StatusTi()<CR>
-" Make diary note with template, instead of empty diary note. Note that it is
-" not so easy because if the note is already created then you don't want to
-" insert the template. You only want to insert the template the first time you
-" open the diary entry. Another option would be to do it manually when you
-" first open the diary entry
-"nmap <Leader>w<Leader>w VimwikiMakeDiaryNote<CR>idiary<Tab>
-" Finally, note that <C-i> may be going from link to link
-" Here ends my vimwiki configuration
-
-
 " Make diary note for any date (or open if existing)
 function! EditArbitraryDate()
     let date = input('Enter date in YYYY-MM-DD format:  ')
@@ -244,3 +207,41 @@ function! ActivateProseMode()
         echo "Prose mode INACTIVE"
     endif
 endfunction
+
+
+
+" --------------------------------
+" SECTION:  Prepare and view HTML
+" --------------------------------
+"
+" Recompile HTML upon writing buffer to disk. The augroup avoids creating a
+" duplicate autocommand every time we source the vimrc file (see explanation
+" here https://learnvimscriptthehardway.stevelosh.com/chapters/14.html).
+" Before defining the augroup and clearing autocommands with autocmd!, writing
+" to file took a long time after long Vim sessions
+augroup CompileVimwiki
+    autocmd!
+    autocmd BufWritePost *.wiki silent Vimwiki2HTML
+augroup END
+" Load the html of the current file in firefox (h for html)
+function! OpenThisHTML()
+    let path_to_html_folder = expand(g:vimwiki_list[0]['path_html']) . '/'
+    let full_path_to_wiki_file = expand('%:p')
+    let note_name_with_wiki_extension = split(full_path_to_wiki_file, '/wiki/')[-1]
+    let note_name = split(note_name_with_wiki_extension, '\.wiki')[0]
+    " The quotes around make sure that firefox receives the full path instead
+    " of just the path up to the first parenthesis
+    let full_path_to_html_file = "'" . path_to_html_folder . note_name . ".html'"
+    "The & at the end guarantees that firefox is executed in the background,
+    "so Vim goes back to editing instead of hanging while Firefox is open
+    execute "!firefox -new-window" full_path_to_html_file "&"  
+endfunction
+noremap ,h :call OpenThisHTML()<CR><CR>
+" Process images so that they use less space, and map keybinding to <C-c> (c
+" for compress)
+function! ProcessImages()
+    let path_to_wiki = expand(g:vimwiki_list[0]['path'])
+    let path_to_setup_folder = path_to_wiki . '/setup/'
+    execute '!cd' path_to_setup_folder '; python3 process_images.py'
+endfunction     
+nnoremap <C-c> :call ProcessImages()<CR>
