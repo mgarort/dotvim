@@ -9,6 +9,8 @@ inoremap <expr><buffer> <CR> pumvisible() ? '<Esc>a' : '<C-]><Esc>:VimwikiReturn
 " mappings. This is presumably because at the time ftplugin is sourced those
 " mappings haven't been created by Vimwiki, but at the time after is sourced
 " they have
+" Declared silent to avoid errors, as explained here 
+" https://stackoverflow.com/questions/16218151/how-do-i-unmap-only-when-a-mapping-exists-in-vim
 iunmap <buffer> <C-l><CR>
 iunmap <buffer> <C-l><C-k>
 iunmap <buffer> <C-l><NL>
