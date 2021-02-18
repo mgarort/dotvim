@@ -111,10 +111,6 @@ nnoremap <leader><leader><leader><leader><leader><leader>iV <Plug>VimwikiTextObj
 " after mapping <C-h> and <C-l>
 nnoremap <leader><leader><leader><leader><leader><leader><leader><leader>asdfasdferqer <Plug>VimwikiNextLink
 
-" Have multiline list/itemize items
-let g:vimwiki_list_ignore_newline = 0
-" Avoid automatically writing upon exit
-let g:vimwiki_autowriteall = 0
 " This allows bulletpoints to be continued even at deeper bulletpoint levels,
 " instead of only at the first level.
 setlocal formatoptions=ctnqro

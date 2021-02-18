@@ -1,7 +1,10 @@
-"""
-
 " The following is so that vimwiki doesn't take over Tab in insert mode
 let g:vimwiki_table_mappings = 0
+" Have multiline list/itemize items
+let g:vimwiki_list_ignore_newline = 0
+" Avoid automatically writing upon exit
+" (if g:vimwiki_autowriteall is set in ftplugin, it doesn't work)
+let g:vimwiki_autowriteall = 0
 " This is so that my vimwiki is hosted in the repos folder
 let g:vimwiki_list = [{'path': '~/repos/wiki', 
             \ 'path_html':'~/wiki_html', 
