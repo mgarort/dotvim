@@ -1134,24 +1134,6 @@ set gdefault
 " snoremap a <Esc>gv"_ca
 
 
-function! ActivateProseMode()
-    if b:is_prose_mode_active == 0
-        nmap <buffer> <leader><leader><leader><leader><leader><leader><leader>o <Plug>VimwikiListo
-        nnoremap <buffer> o o
-        inoremap <expr><buffer> <CR> pumvisible() ? '<Esc>a' : '<C-G>u<CR>'
-        setlocal textwidth=110
-        setlocal formatoptions=wat
-        let b:is_prose_mode_active = 1
-        echo 'Prose mode ACTIVE'
-    elseif b:is_prose_mode_active == 1
-        nmap <buffer> o <Plug>VimwikiListo
-        inoremap <expr><buffer> <CR> pumvisible() ? '<Esc>a' : '<C-]><Esc>:VimwikiReturn 3 5<CR>'
-        setlocal textwidth=0
-        setlocal formatoptions=tqn
-        let b:is_prose_mode_active = 0
-        echo "Prose mode INACTIVE"
-    endif
-endfunction
 
 " Append at end of paragraph
 " line("'}") - empty(getline(line("'}"))) is there to take care of the edge

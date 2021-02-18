@@ -1,88 +1,13 @@
-" Customize fzf colors to ensure that they match the Vimwiki colorscheme
-" For more info check https://github.com/junegunn/fzf/blob/master/README-VIM.md#explanation-of-gfzf_colors
-" Do it in ftplugin because this makes it prettier for Vimwiki but makes it
-" uglier in the general case
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['bg', 'Exception'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['bg', 'Exception'],
-  \ 'gutter':  ['bg', 'Normal'],
-  \ 'query':   ['fg', 'Normal'] }
-
-
-" Keep indentation level while wrapping lines
-set breakindent
-" Don't break lines in the middle of words
-set linebreak
-
-" Disable folding
-set nofoldenable
-
-
-""" SECTION: Prepare and view HTML
-
-" Recompile HTML upon writing buffer to disk. The augroup avoids creating a
-" duplicate autocommand every time we source the vimrc file (see explanation
-" here https://learnvimscriptthehardway.stevelosh.com/chapters/14.html).
-" Before defining the augroup and clearing autocommands with autocmd!, writing
-" to file took a long time after long Vim sessions
-augroup CompileVimwiki
-    autocmd!
-    autocmd BufWritePost *.wiki silent Vimwiki2HTML
-augroup END
-" Make blackwhite the default colorscheme for vimwiki
-" Removed from now because I'm testing the function AutomaticColorscheme
-" autocmd FileType vimwiki colorscheme blackwhite
-" Load the html of the current file in firefox (h for html)
-function! OpenThisHTML()
-    let path_to_html_folder = expand(g:vimwiki_list[0]['path_html']) . '/'
-    let full_path_to_wiki_file = expand('%:p')
-    let note_name_with_wiki_extension = split(full_path_to_wiki_file, '/wiki/')[-1]
-    let note_name = split(note_name_with_wiki_extension, '\.wiki')[0]
-    " The quotes around make sure that firefox receives the full path instead
-    " of just the path up to the first parenthesis
-    let full_path_to_html_file = "'" . path_to_html_folder . note_name . ".html'"
-    "The & at the end guarantees that firefox is executed in the background,
-    "so Vim goes back to editing instead of hanging while Firefox is open
-    execute "!firefox -new-window" full_path_to_html_file "&"  
-endfunction
-"function! OpenThisPDF()
-"    let path_to_html_folder = expand(g:vimwiki_list[0]['path_html']) . '/'
-"    let full_path_to_wiki_file = expand('%:p')
-"    let note_name_with_wiki_extension = split(full_path_to_wiki_file, '/wiki/')[-1]
-"    let note_name = split(note_name_with_wiki_extension, '\.wiki')[0]
-"    " The quotes around make sure that firefox receives the full path instead
-"    " of just the path up to the first parenthesis
-"    let full_path_to_html_file = "'" . path_to_html_folder . note_name . ".html'"
-"    let full_path_to_pdf_file  = "'./pdf" . path_to_html_folder . note_name . ".html'"
-"    execute  "wkhtmltopdf -L 25mm -R 25mm -T 25mm -B 25mm" . full_path_to_html_file 2020-05-22\ Andreas.pdf
-"    "The & at the end guarantees that firefox is executed in the background,
-"    "so Vim goes back to editing instead of hanging while Firefox is open
-"    execute "!firefox -new-window" full_path_to_html_file "&"  
-"endfunction
-noremap ,h :call OpenThisHTML()<CR><CR>
-" Process images so that they use less space, and map keybinding to <C-c> (c
-" for compress)
-function! ProcessImages()
-    let path_to_wiki = expand(g:vimwiki_list[0]['path'])
-    let path_to_setup_folder = path_to_wiki . '/setup/'
-    execute '!cd' path_to_setup_folder '; python3 process_images.py'
-endfunction     
-" Apparently <C-i> is mapped by default to a function that goes to the next
-" Vimwiki link, which could be quite useful
-"nmap <Leader>wn <Plug>VimwikiNextLink
-nnoremap <C-c> :call ProcessImages()<CR>
+" ftplugin/vimwiki.vim contains config that is loaded for every Vimwiki buffer
+" every time a Vimwiki buffer is loaded. Associated functions are defined in
+" plugin/vimwiki.vim
 
 
 
-""" SECTION: Edit text and navigate
-
+" ---------------------------------
+"  SECTION:  Edit text and navigate
+" ---------------------------------
+"
 " Map <Plug>VimwikiTextObjListSingle to something ridiculous to freed il, so
 " that we can select "in line" (il). For some reason this must be in vimrc to
 " work, rather than after/ftplugin/vimwiki.vim
@@ -105,8 +30,10 @@ nnoremap <silent> <C-l> m':call SearchNextLink()<CR>
 
 
 
-""" SECTION: Create new notes and rename
-
+" --------------------------------------------------------
+" SECTION:  Commands and functions for fast note-writing
+" --------------------------------------------------------
+"
 " Here, I create keybindings for functions and commands defined in
 " plugin/vimwiki. This way:
 " - Functions work properly even when they involve changing buffers within the
@@ -126,9 +53,9 @@ command! Wikify call Wikify()
 nnoremap '<CR> :call CreateNoteFromTitle()<CR>i
 
 
-" -----------
-" | SECTION | Diary functionality
-" -----------
+" -------------------------------
+" SECTION:  Diary functionality
+" ------------------------------
 "
 " Keybindings for going to previous and next day's diary entries. Similarly to
 " the section on creating and renaming notes, here I only create keybindings,
@@ -175,11 +102,18 @@ set linebreak
 " Disable folding
 set nofoldenable
 
-
-
 " Prose mode for hard wrapping and smooth scrolling
 let b:is_prose_mode_active = 0
 nnoremap <buffer> ,r :call ActivateProseMode()<CR>
+
+
+" --------------------------------
+" SECTION:  Prepare and view HTML
+" --------------------------------
+"
+noremap ,h :call OpenThisHTML()<CR><CR>
+nnoremap <C-c> :call ProcessImages()<CR>
+
 
 
 
