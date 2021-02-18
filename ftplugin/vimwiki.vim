@@ -160,18 +160,41 @@ nmap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
 nnoremap <silent><buffer> <leader>d :call EditArbitraryDate()<CR>
 
 
-" -----------
-" | SECTION | Appearance
-" -----------
+" ----------------------
+" SECTION:  Appearance
+" ----------------------
 "
+" Customize fzf colors to ensure that they match the Vimwiki colorscheme
+" For more info check https://github.com/junegunn/fzf/blob/master/README-VIM.md#explanation-of-gfzf_colors
+" Do it in ftplugin because this makes it prettier for Vimwiki but makes it
+" uglier in the general case
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['bg', 'Exception'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['bg', 'Exception'],
+  \ 'gutter':  ['bg', 'Normal'],
+  \ 'query':   ['fg', 'Normal'] }
+
+" Keep indentation level while wrapping lines
+set breakindent
+" Don't break lines in the middle of words
+set linebreak
+" Disable folding
+set nofoldenable
 
 
-" Wrap lines at 100 characters
-" let custom_width=100
-" let &l:columns=custom_width
-" autocmd VimResized *.wiki if (&columns > custom_width) | let &l:columns=custom_width | endif
-" set wrap
 
-
+" Prose mode for hard wrapping and smooth scrolling
 let b:is_prose_mode_active = 0
 nnoremap <buffer> ,r :call ActivateProseMode()<CR>
+
+
+
+
+

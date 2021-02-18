@@ -203,3 +203,30 @@ function! EditArbitraryDate()
     let path = g:vimwiki_list[0]['path'] . '/diary/' . date . '.wiki'
     exe 'e ' . path
 endfunction
+
+
+
+" -------------------------
+" SECTION:  Appearance
+" ------------------------
+"
+" Prose mode for hard wrapping and smooth scrolling. 
+" Based on https://stackoverflow.com/questions/9922607/vim-long-lines-and-scrolling
+function! ActivateProseMode()
+    if b:is_prose_mode_active == 0
+        nmap <buffer> <leader><leader><leader><leader><leader><leader><leader>o <Plug>VimwikiListo
+        nnoremap <buffer> o o
+        inoremap <expr><buffer> <CR> pumvisible() ? '<Esc>a' : '<C-G>u<CR>'
+        setlocal textwidth=110
+        setlocal formatoptions=wat
+        let b:is_prose_mode_active = 1
+        echo 'Prose mode ACTIVE'
+    elseif b:is_prose_mode_active == 1
+        nmap <buffer> o <Plug>VimwikiListo
+        inoremap <expr><buffer> <CR> pumvisible() ? '<Esc>a' : '<C-]><Esc>:VimwikiReturn 3 5<CR>'
+        setlocal textwidth=0
+        setlocal formatoptions=tqn
+        let b:is_prose_mode_active = 0
+        echo "Prose mode INACTIVE"
+    endif
+endfunction
