@@ -1,21 +1,3 @@
-" Functions and keybindings to navigate to next link, 
-" either Vimwiki link or URL
-function! SearchNextLink()
-    " Get line number and column
-    let [lnum, col] = searchpos('\[\[.*\]\]\|http', 'n') 
-    call setpos('.', [0, lnum, col, 0])
-endfunction
-function! SearchPreviousLink()
-    " Get line number and column
-    let [lnum, col] = searchpos('\[\[.*\]\]\|http', 'bn') 
-    call setpos('.', [0, lnum, col, 0])
-endfunction
-" Jumping between links will create an entry in the jumplist with m'
-nnoremap <silent> <C-h> m':call SearchPreviousLink()<CR>
-nnoremap <silent> <C-l> m':call SearchNextLink()<CR>
-
-
-
 " Customize fzf colors to ensure that they match the Vimwiki colorscheme
 " For more info check https://github.com/junegunn/fzf/blob/master/README-VIM.md#explanation-of-gfzf_colors
 " Do it in ftplugin because this makes it prettier for Vimwiki but makes it
@@ -115,6 +97,11 @@ nnoremap <leader><leader><leader><leader><leader><leader><leader><leader>asdfasd
 " instead of only at the first level.
 setlocal formatoptions=ctnqro
 setlocal comments+=n:*,n:#
+
+" Jumping between links will create an entry in the jumplist with m'
+nnoremap <silent> <C-h> m':call SearchPrevLink()<CR>
+nnoremap <silent> <C-l> m':call SearchNextLink()<CR>
+
 
 
 

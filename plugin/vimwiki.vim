@@ -14,6 +14,20 @@ let g:vimwiki_list = [{'path': '~/repos/wiki',
             \ 'template_default': 'default',
             \ 'template_ext': '.tpl'}]
 " Make fuction to open Vimwiki index (in order to open the index with a simple
+
+" ---------------------------------
+"  SECTION:  Edit text and navigate
+" ---------------------------------
+"
+" Functions to navigate to next link, 
+" either Vimwiki link or URL
+function! SearchNextLink()
+    call search('\[\[.\{-}\]\]\|http', 'W')
+endfunction
+function! SearchPrevLink()
+    call search('\[\[.\{-}\]\]\|http', 'bW')
+endfunction
+
 " i3 keybinding)
 function! LaunchVimwiki()
     let index_path = g:vimwiki_list[0]['path']
