@@ -11,9 +11,9 @@ inoremap <expr><buffer> <CR> pumvisible() ? '<Esc>a' : '<C-]><Esc>:VimwikiReturn
 " they have
 " Declared silent to avoid errors, as explained here 
 " https://stackoverflow.com/questions/16218151/how-do-i-unmap-only-when-a-mapping-exists-in-vim
-iunmap <buffer> <C-l><CR>
-iunmap <buffer> <C-l><C-k>
-iunmap <buffer> <C-l><NL>
+silent! iunmap <buffer> <C-l><CR>
+silent! iunmap <buffer> <C-l><C-k>
+silent! iunmap <buffer> <C-l><NL>
 imap <C-g><C-g> <Plug>VimwikiListToggle
 imap <C-g><C-k> <Plug>VimwikiListPrevSymbol
 imap <C-g><C-j> <Plug>VimwikiListNextSymbol
