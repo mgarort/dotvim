@@ -1067,6 +1067,9 @@ inoremap <C-f> <Esc>ei<Right>
 " Backspace and delete
 inoremap <C-h> <BS>
 inoremap <C-d> <Del>
+" Up and down
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
 
 " Make 0 a 'smart' go to start of line: if we press it once, we go to the
 " first non-blank character, and if we press it twice, we go to the actual
@@ -1100,13 +1103,6 @@ inoremap <NL> <C-G>u<NL>
 " autocomplete popups, the configuration is a bit more involved. See below.
 " TODO For some reason, moving the cursor with the arrow keys seems to break
 " the undo sequence too. Investigate if this is the reason
-
-" Motions up, down, left and right similar in insert mode as in normal mode.
-" These motions will also be mirrored in command line mode
-inoremap <C-k> <Up>
-inoremap <C-j> <Down>
-inoremap <C-l> <Right>
-inoremap <C-h> <Left>
 
 
 
