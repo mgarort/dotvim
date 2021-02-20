@@ -24,8 +24,8 @@ setlocal formatoptions=ctnqro
 setlocal comments+=n:*,n:#
 
 " Jumping between links will create an entry in the jumplist with m'
-nnoremap <silent> <C-h> m':call SearchPrevLink()<CR>
-nnoremap <silent> <C-l> m':call SearchNextLink()<CR>
+nnoremap <silent> <C-p> m':call SearchPrevLink()<CR>
+nnoremap <silent> <C-n> m':call SearchNextLink()<CR>
 
 
 
