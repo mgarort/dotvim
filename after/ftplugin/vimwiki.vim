@@ -17,3 +17,6 @@ silent! iunmap <buffer> <C-l><NL>
 imap <C-g><C-g> <Plug>VimwikiListToggle
 imap <C-g><C-k> <Plug>VimwikiListPrevSymbol
 imap <C-g><C-j> <Plug>VimwikiListNextSymbol
+
+" Same as above, but with <C-d> so that we can use it for deleting, just as in the shell
+silent! iunmap <buffer> <C-d>
