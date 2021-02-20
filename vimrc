@@ -907,13 +907,22 @@ nnoremap [o :copen<CR>
 " | SECTION | Command line mode
 " -----------
 "
-" Open history of previous commands with <C-r>, similar to the terminal
-" :History: is part of fzf.vim
+" Make the command line similar to the shell (emacs keybindings)
+"
+" Open history of previous commands. :History: is part of fzf.vim
 cnoremap <C-r> History:<CR>
-
-" Make <C-a> go to the beginning of the Vim command line, like in the shell
-" Note that the usual <C-e> to go to the end already works by default
+" Go back and forward one word (usually, in the shell it's with <Alt-b> and
+" <Alt-f>, but in my shell it's with Ctrl)
+cnoremap <C-b> <S-Left>
+cnoremap <C-f> <S-Right>
+" Backspace and delete
+cnoremap <C-h> <BS>
+cnoremap <C-d> <Del>
+" Go to beginning and end of the line
 cnoremap <C-a> <C-b>
+" Up and down
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 " Make file completion in command mode (e.g. when opening a file in a buffer
 " with :e) more similar to Bash completion
@@ -941,13 +950,6 @@ function! Cs()
 	endif
 endfunction
 cnoremap <expr> s Cs()
-
-" Motions up, down, left and right similar in command line mode as in normal mode.
-" These motions will also be mirrored in insert mode
-cnoremap <C-k> <Up>
-cnoremap <C-j> <Down>
-cnoremap <C-l> <Right>
-cnoremap <C-h> <Left>
 
 
 " -----------
@@ -1051,17 +1053,20 @@ nnoremap <S-y> y$
 nnoremap <space> :
 vnoremap <space> :
 
-" Make <C-a> and <C-e> in insert and select modes behave like in the command line, going
-" to the beginning and end of the line respectively
+" Keybindings similar to shell (emacs keybindings) in insert mode
+"
+" Go to beginning and end of file
 inoremap <C-a> <Esc>^i
 inoremap <C-e> <End>
 snoremap <C-a> <Esc>^i
 snoremap <C-e> <End><Esc>i
-" Make <C-b> and <C-f> in insert mode behave similarly to how <Alt-b> and 
-" <Alt-f> behaves in the command line, i.e. going back and advancing one 
-" word at a time
+" Move backward and forward by one word (usually, in the shell it's <Alt-b>
+" and <Alt-f>, but in my shell it is with Ctrl)
 inoremap <C-b> <S-Left>
 inoremap <C-f> <Esc>ei<Right>
+" Backspace and delete
+inoremap <C-h> <BS>
+inoremap <C-d> <Del>
 
 " Make 0 a 'smart' go to start of line: if we press it once, we go to the
 " first non-blank character, and if we press it twice, we go to the actual
