@@ -915,14 +915,20 @@ cnoremap <C-r> History:<CR>
 " <Alt-f>, but in my shell it's with Ctrl)
 cnoremap <C-b> <S-Left>
 cnoremap <C-f> <S-Right>
-" Backspace and delete
-cnoremap <C-h> <BS>
-cnoremap <C-d> <Del>
+" Left, right, up and down
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
 " Go to beginning and end of the line
 cnoremap <C-a> <C-b>
 " Up and down
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+" <M-Left> and <M-Right> are <M-h> and <M-l> respectively, as determined in
+" ~/.Xdefaults
+cnoremap <M-Left> <Backspace>
+cnoremap <M-Right> <Delete>
 
 " Make file completion in command mode (e.g. when opening a file in a buffer
 " with :e) more similar to Bash completion
@@ -1064,12 +1070,15 @@ snoremap <C-e> <End><Esc>i
 " and <Alt-f>, but in my shell it is with Ctrl)
 inoremap <C-b> <S-Left>
 inoremap <C-f> <Esc>ei<Right>
-" Backspace and delete
-inoremap <C-h> <BS>
-inoremap <C-d> <Del>
-" Up and down
-inoremap <C-p> <Up>
-inoremap <C-n> <Down>
+" Backspace and delete (<M-Left> and <M-Right> are mapped to <M-h> and <M-j>
+" in .Xdefaults)
+inoremap <M-Left> <BS>
+inoremap <M-Right> <Del>
+" Left, right, up and down
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-k> <Up>
+" <C-j> must be mapped in after to disable default mapping to <NL>
 
 " Make 0 a 'smart' go to start of line: if we press it once, we go to the
 " first non-blank character, and if we press it twice, we go to the actual
