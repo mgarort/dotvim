@@ -340,7 +340,14 @@ nnoremap <leader>i :call LaunchVimwiki()<CR>
 nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
 nnoremap <leader>x :e ~/repos/dotfiles/dot.Xdefaults<CR>
 nnoremap <leader>b :e ~/.bashrc<CR>
-nnoremap <leader>u :UltiSnipsEdit<CR>
+nnoremap <leader>uu :UltiSnipsEdit<CR>
+function! OpenVimSnippets()
+    let ft = &l:filetype
+    let snippets = '$HOME/.vim/bundle/vim-snippets/snippets/' . ft . '.snippets'
+    echo snippets
+    exe 'e' . snippets
+endfunction
+nnoremap <silent> <leader>us :call OpenVimSnippets()<CR>
 
 " The following keybinding reloads vimrc and also does :e to load filetype
 " specific configurations (such as those in after/ftplugin/vimwiki.vim). This
