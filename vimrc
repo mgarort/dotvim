@@ -1104,6 +1104,7 @@ onoremap B vB
 omap F v<Plug>Sneak_F
 omap T v<Plug>Sneak_T
 onoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'v0' : 'v^'
+onoremap g0 vg0
 
 " When using <CTRL-U>, <CTRL-W>, <Enter> or <Tab> in Insert-mode, do <CTRL-G>u
 " first to start a new change so that I can undo these operations with
