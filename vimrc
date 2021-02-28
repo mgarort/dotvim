@@ -743,12 +743,34 @@ tnoremap <C-j> <C-w>j
 " Freed <C-l> in Netrw
 nnoremap <leader><leader><leader><leader><leader><leader>l <Plug>NetrwRefresh
 
-" Maximize help window by default
+
+" -------------------------
+" SECTION:  Help navigation
+" ------------------------
+"
+
+" Maximize help and man windows by default
 " From https://stackoverflow.com/questions/24477083/in-vim-how-can-i-automatically-maximize-the-help-window
 augroup LargeHelpWindow
     autocmd!
     autocmd BufWinEnter * if &l:buftype ==# 'help' | wincmd _ | endif
+    autocmd FileType man wincmd _
 augroup END
+
+
+" Use Vim as a man pager
+runtime ftplugin/man.vim
+function! ViewManFromCommandLine(command)
+    " View doc
+    exe "silent! Man " . a:command
+    " If man documentation for that command exists, close all other windows.
+    if &l:filetype == 'man'
+        only
+    " Else quit Vim
+    elseif &l:filetype == ''
+        quit
+    endif
+endfunction
 
 
 
