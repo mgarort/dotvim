@@ -221,6 +221,10 @@ set laststatus=2              " Show statusline for all windows.
 " Keep the window margin 3 lines away from the curso
 set scrolloff=3
 
+" Display as much of wrapped lines as possible, rather than hiding partial
+" lines
+set display=lastline
+
 " Make new windows open below and to the right
 set splitbelow
 set splitright
