@@ -838,8 +838,8 @@ nnoremap <localleader>lw :VimtexCountWords<CR>
 
 " Display line equivalent of o and O. gO adds an additional line of space
 " below because we usually want the stuff below to go away and not bother us
-nnoremap go  i<CR>
-nnoremap gO  i<CR><Esc><Up>A
+nmap go  i<CR>
+nmap gO  i<CR><Esc><Up>A
 
 " Display line equivalent of I and A
 nnoremap gA g$a
