@@ -23,10 +23,16 @@ nnoremap <leader><leader><leader><leader><leader><leader><leader><leader>asdfasd
 setlocal formatoptions=ctnqro
 setlocal comments+=n:*,n:#
 
+" Hard wrapping of characters at 110 characters (for manual wrapping with gq)
+setlocal textwidth=110
+
 " Jumping between links will create an entry in the jumplist with m'
 nnoremap <silent> <C-p> m':call SearchPrevLink()<CR>
 nnoremap <silent> <C-n> m':call SearchNextLink()<CR>
 
+" Prose mode for hard wrapping and smooth scrolling
+let b:is_prose_mode_active = 0
+nnoremap <buffer> ,r :call ActivateProseMode()<CR>
 
 
 
@@ -102,9 +108,7 @@ set linebreak
 " Disable folding
 set nofoldenable
 
-" Prose mode for hard wrapping and smooth scrolling
-let b:is_prose_mode_active = 0
-nnoremap <buffer> ,r :call ActivateProseMode()<CR>
+
 
 
 " --------------------------------
