@@ -899,11 +899,8 @@ nnoremap > >l
 " file because it requires to first go to the line below hte paragraph and
 " then up
 
-" Insert digraphs with <C-i> (can think of it as "special insert")
-inoremap <C-@> <C-k>
-"inoremap <C-2> <C-k>
-"TODO Currently this only works after manually sourcing, probably because of a
-"clash with <C-k> in UltiSnips. Fix
+" Insert digraphs with <C-q>
+inoremap <C-q> <C-k>
 
 "Mappings for Vim fugitive
 nnoremap <leader>g :G<CR>
