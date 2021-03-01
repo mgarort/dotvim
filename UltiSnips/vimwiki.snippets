@@ -26,7 +26,7 @@ endsnippet
 
 # Snippet for separating topic notes in the index
 
-snippet ---- "Separating line"
+snippet -- "Separating line"
 ------------------------------------------------------
 endsnippet
 
@@ -339,6 +339,81 @@ snippet x "times"
 \times 
 endsnippet
 
+# Greek letters (snippets consistent with digraph codes)
+# Some of the cap versions don't exist in Latex because the English letter is 
+# exactly the same (for example, \Alpha is not needed because capital alpha 
+# is A). However, they are added for consistency and to encourage learning the
+# Greek letters by seeing the errors caused by using \Alpha and similar ones.
+
+# Α α
+snippet A* "\Alpha"
+\Alpha
+endsnippet
+snippet a* "\alpha"
+\alpha
+endsnippet
+# Β β
+snippet B* "\Beta"
+\Beta
+endsnippet
+snippet b* "\beta"
+\beta
+endsnippet
+# Γ γ
+snippet G* "\Gamma"
+\Gamma
+endsnippet
+snippet g* "\gamma"
+\gamma
+endsnippet
+# Δ δ
+snippet D* "\Delta"
+\Delta
+endsnippet
+snippet d* "\delta"
+\delta
+endsnippet
+# Ε ε ϵ
+snippet E* "\Epsilon"
+\Epsilon
+endsnippet
+snippet e* "\varepsilon"
+\varepsilon
+endsnippet
+snippet j3 "\epsilon"
+\epsilon
+endsnippet
+# Ζ ζ
+snippet Z* "\Zeta"
+\Zeta
+endsnippet
+# Η η
+snippet Y* "\Eta"
+\Eta
+endsnippet
+snippet y* "\eta"
+\eta
+endsnippet
+# Θ θ
+snippet H* "\Theta"
+\Theta
+endsnippet
+snippet h* "\theta"
+\theta
+endsnippet
+# Φ φ
+snippet F* "\Phi"
+\Phi
+endsnippet
+snippet f* "\phi"
+\phi
+endsnippet
+
+# TODO Keep adding the Greek letter snippets.
+# - To see the Vim digraph codes check  http://vimdoc.sourceforge.net/htmldoc/digraph.html  and http://www.alecjacobson.com/weblog/?p=443
+# - To see the order of Greek letters check https://omniglot.com/writing/greek.htm
+
+
 
 # Snippets for highlighted words
 snippet I "IDEA"
@@ -374,4 +449,9 @@ endsnippet
 
 snippet P "POINT"
 POINT 
+endsnippet
+
+# Ad-hoc snippets for specific projects
+snippet xr "XXX Add ref"
+XXX Add ref
 endsnippet
