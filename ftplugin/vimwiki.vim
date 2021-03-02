@@ -32,7 +32,7 @@ nnoremap <silent> <C-n> m':call SearchNextLink()<CR>
 
 " Prose mode for hard wrapping and smooth scrolling
 let b:is_prose_mode_active = 0
-nnoremap <buffer> ,r :call ActivateProseMode()<CR>
+nnoremap <buffer> ,p :call ActivateProseMode()<CR>
 
 
 
