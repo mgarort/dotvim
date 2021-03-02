@@ -987,6 +987,11 @@ function! Cs()
 endfunction
 cnoremap <expr> s Cs()
 
+" Disable <Esc> in the command line so that you do not
+" lose half-typed commands by mistake
+cnoremap <Esc> <Nop>
+
+
 
 " -----------
 " | SECTION | Motions and text editing
