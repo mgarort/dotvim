@@ -50,28 +50,16 @@ ${0:code}
 }}}
 endsnippet
 
-snippet $ "Inline Latex"
+snippet $ "Inline Latex" i
 $\; ${0:math} \;$
 endsnippet
 
-snippet ($ "Inline Latex with parentheses"
-($\; ${0:math} \;$
-endsnippet
-
-snippet ` "Inline code"
+snippet ` "Inline code" i
 \`${0:code}\`
 endsnippet
 
-snippet (` "Inline code with parentheses"
-(\`${0:code}\`
-endsnippet
-
-snippet < "<>"
+snippet < "<>" i
 <${0:text}>
-endsnippet
-
-snippet `< "`<>"
-\`<${0:text}>
 endsnippet
 
 # Snippets for diary
@@ -162,15 +150,17 @@ endsnippet
 
 # Snippets for formatting text in Vimwiki style
 
-snippet _ "Italic"
+snippet _ "Italic" i
 _${0:italic}_
 endsnippet
 
+# Note that this snippet is an exception which cannot be greedy, since Greek letters 
+# use the same triggers as digraphs and all end with *
 snippet * "Bold"
 *${0:bold}*
 endsnippet
 
-snippet ^ "Superscript"
+snippet ^ "Superscript" i
 ^${0:superscript}^
 endsnippet
 
@@ -354,66 +344,66 @@ endsnippet
 # Greek letters by seeing the errors caused by using \Alpha and similar ones.
 
 # Α α
-snippet A* "\Alpha"
+snippet A* "\Alpha" i
 \Alpha
 endsnippet
-snippet a* "\alpha"
+snippet a* "\alpha" i
 \alpha
 endsnippet
 # Β β
-snippet B* "\Beta"
+snippet B* "\Beta" i
 \Beta
 endsnippet
-snippet b* "\beta"
+snippet b* "\beta" i
 \beta
 endsnippet
 # Γ γ
-snippet G* "\Gamma"
+snippet G* "\Gamma" i
 \Gamma
 endsnippet
-snippet g* "\gamma"
+snippet g* "\gamma" i
 \gamma
 endsnippet
 # Δ δ
-snippet D* "\Delta"
+snippet D* "\Delta" i
 \Delta
 endsnippet
-snippet d* "\delta"
+snippet d* "\delta" i
 \delta
 endsnippet
 # Ε ε ϵ
-snippet E* "\Epsilon"
+snippet E* "\Epsilon" i
 \Epsilon
 endsnippet
-snippet e* "\varepsilon"
+snippet e* "\varepsilon" i
 \varepsilon
 endsnippet
-snippet j3 "\epsilon"
+snippet j3 "\epsilon" i
 \epsilon
 endsnippet
 # Ζ ζ
-snippet Z* "\Zeta"
+snippet Z* "\Zeta" i
 \Zeta
 endsnippet
 # Η η
-snippet Y* "\Eta"
+snippet Y* "\Eta" i
 \Eta
 endsnippet
-snippet y* "\eta"
+snippet y* "\eta" i
 \eta
 endsnippet
 # Θ θ
-snippet H* "\Theta"
+snippet H* "\Theta" i
 \Theta
 endsnippet
-snippet h* "\theta"
+snippet h* "\theta" i
 \theta
 endsnippet
 # Φ φ
-snippet F* "\Phi"
+snippet F* "\Phi" i
 \Phi
 endsnippet
-snippet f* "\phi"
+snippet f* "\phi" i
 \phi
 endsnippet
 
