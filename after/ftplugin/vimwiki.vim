@@ -20,3 +20,8 @@ imap <C-g><C-j> <Plug>VimwikiListNextSymbol
 
 " Same as above, but with <C-d> so that we can use it for deleting, just as in the shell
 silent! iunmap <buffer> <C-d>
+
+" Unmap this weird expression, which is mapped to <Plug>VimwikiTabnewLink and
+" clashes with < action for removing indentation
+silent! unmap <buffer> <D-CR>
+
