@@ -189,7 +189,7 @@ endfunction
 "
 " Prose mode for hard wrapping and smooth scrolling. 
 " Based on https://stackoverflow.com/questions/9922607/vim-long-lines-and-scrolling
-function! ActivateProseMode()
+function! ToggleProseMode()
     if b:is_prose_mode_active == 0
         nmap <buffer> <leader><leader><leader><leader><leader><leader><leader>o <Plug>VimwikiListo
         nnoremap <buffer> o o
