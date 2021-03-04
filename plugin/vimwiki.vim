@@ -214,16 +214,38 @@ endfunction
 " SECTION:  Prepare and view HTML
 " --------------------------------
 "
+" Toggle HTML compiling. Useful when working with long wiki files, since
+" compiling every time we write to disk can take a long time. By toggling off
+" the compilation we can save time.
+function! ToggleCompileHTMLMode()
+    if b:is_compile_html_mode_active == 0
+        let b:is_compile_html_mode_active = 1
+        echo 'Compile HTML mode ACTIVE'
+    elseif b:is_compile_html_mode_active == 1
+        let b:is_compile_html_mode_active = 0
+        echo 'Compile HTML mode INACTIVE'
+    endif
+endfunction
+
 " Recompile HTML upon writing buffer to disk. The augroup avoids creating a
 " duplicate autocommand every time we source the vimrc file (see explanation
 " here https://learnvimscriptthehardway.stevelosh.com/chapters/14.html).
 " Before defining the augroup and clearing autocommands with autocmd!, writing
 " to file took a long time after long Vim sessions
+function! Compile()
+    silent Vimwiki2HTML
+endfunction
 augroup CompileVimwiki
     autocmd!
-    autocmd BufWritePost *.wiki silent Vimwiki2HTML
+    autocmd BufWritePost *.wiki if b:is_compile_html_mode_active ==# 1 | call Compile() | endif 
 augroup END
-" Load the html of the current file in firefox (h for html)
+" TODO  Ask either in Reddit why wrapping the command in a function (like
+" above) works, whereas using `silent Vimwiki2HTML` directly (like below)
+" doesn't
+" augroup CompileVimwiki
+"     autocmd!
+"     autocmd BufWritePost *.wiki if b:is_compile_html_mode_active ==# 1 | silent Vimwiki2HTML | endif 
+" augroup END
 function! OpenThisHTML()
     let path_to_html_folder = expand(g:vimwiki_list[0]['path_html']) . '/'
     let full_path_to_wiki_file = expand('%:p')

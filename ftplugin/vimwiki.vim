@@ -115,6 +115,13 @@ set nofoldenable
 " SECTION:  Prepare and view HTML
 " --------------------------------
 "
+" Compile mode that can be turned on or off depending on whether we want to
+" compile on every write (allows viewing changes in HTML, but is slow) or we
+" want to not compile (not viewing changes in HTML, but don't have to wait a
+" couple of seconds after each write)
+let b:is_compile_html_mode_active = 1
+nnoremap <buffer> ,c :call ToggleCompileHTMLMode()<CR>
+
 noremap ,h :call OpenThisHTML()<CR><CR>
 nnoremap <C-c> :call ProcessImages()<CR>
 
