@@ -176,7 +176,9 @@ endfunction
 
 " Make diary note for any date (or open if existing)
 function! EditArbitraryDate()
-    let date = input('Enter date in YYYY-MM-DD format:  ')
+    let current_date = strftime("%Y-%m-%d")
+    let message = 'Enter date in YYYY-MM-DD format:  ' . current_date
+    let date = input(message)
     let path = g:vimwiki_list[0]['path'] . '/diary/' . date . '.wiki'
     exe 'e ' . path
 endfunction
