@@ -395,6 +395,14 @@ nmap <leader><leader><leader><leader><leader>slfkj  <Plug>BufKillBun
 nmap <leader><leader><leader><leader><leader>nbgfh  <Plug>BufKillForward
 nmap <leader><leader><leader><leader><leader>burib  <Plug>BufKillBack
 
+" t for regenerating ctags
+" Function to regenerate ctags (with inspiration from 
+" https://stackoverflow.com/questions/27978307/how-to-run-vim-commands-scripts-from-project-root )
+function! GenerateCtags()
+    let root_dir = fnamemodify(finddir('.git', '.;'), ':h')   
+    exe '!ctags -R --python-kinds=-i ' . root_dir
+endfunction
+nnoremap <leader>t :call GenerateCtags()<CR>
 " HERE ENDS THE SECTION TODO Remove this indication once the sections are well
 " defined
 
