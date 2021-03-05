@@ -403,6 +403,42 @@ function! GenerateCtags()
     exe '!ctags -R --python-kinds=-i ' . root_dir
 endfunction
 nnoremap <leader>t :call GenerateCtags()<CR>
+
+" y for viewing in table format (just bc "y" is next to "t")
+function! ViewTable()
+    set nowrap
+    set nowrite
+    RainbowAlign
+endfunction
+nnoremap <leader>y :call ViewTable()<CR>
+
+" Add mappings to make (save) current session and load it. Three <leader> to avoid doing
+" it by mistake
+nnoremap <leader><leader>m :mksession! ~/.vim/.saved_session<CR>
+nnoremap <leader><leader>l :source ~/.vim/.saved_session<CR>
+
+" Add mappings to delete first swap file (useful when laptop freezes and you
+" need to recover many files and also delete their many swap files)
+function! DeleteFirstSwapFile()
+    let dirname = expand('%:p:h')
+    let filename = expand('%:t')
+    " Only add the initial dot if the filename is not hidden already. If it is
+    " hidden (i.e. if it already has an initial dot) then there is no need to
+    " add it
+    if filename[0] != '.'
+        let filename = '.' . filename
+    endif
+    let swapfile = dirname . '/' . filename . '.swp'
+    call delete(swapfile)
+endfunction
+nnoremap <leader><leader>d :call DeleteFirstSwapFile()<CR>
+
+
+
+
+
+
+
 " HERE ENDS THE SECTION TODO Remove this indication once the sections are well
 " defined
 
@@ -649,46 +685,6 @@ onoremap in :<C-u>normal vin<CR>
 " within the window
 nnoremap <silent><S-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><S-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
-
-" Add mappings to make (save) current session and load it. Three <leader> to avoid doing
-" it by mistake
-nnoremap <leader><leader>m :mksession! ~/.vim/.saved_session<CR>
-nnoremap <leader><leader>l :source ~/.vim/.saved_session<CR>
-
-" Add mappings to delete first swap file (useful when laptop freezes and you
-" need to recover many files and also delete their many swap files)
-function! DeleteFirstSwapFile()
-    let dirname = expand('%:p:h')
-    let filename = expand('%:t')
-    " Only add the initial dot if the filename is not hidden already. If it is
-    " hidden (i.e. if it already has an initial dot) then there is no need to
-    " add it
-    if filename[0] != '.'
-        let filename = '.' . filename
-    endif
-    let swapfile = dirname . '/' . filename . '.swp'
-    call delete(swapfile)
-endfunction
-nnoremap <leader><leader>d :call DeleteFirstSwapFile()<CR>
-
-" Useful commands to view and navigate table (csv or tsv) files
-" - <C-h> and <C-l> scroll half a page laterally, similarly to <C-d> and <C-u>
-" - For consistency, set <C-j> and <C-k> to scroll up and down too. This is
-"   probably more ergonomic as well
-" - <leader>t activates table view (<leader> can be for fancy and dangerous
-"   operactions)
-" - sidescroll=1 allows to move the screen by 1 position at a time when moving
-"   the cursor with h and l
-set nostartofline
-set sidescroll=1
-nnoremap <C-q> zH
-nnoremap <C-s> zL
-function! ViewTable()
-    set nowrap
-    set nowrite
-    RainbowAlign
-endfunction
-nnoremap <leader>t :call ViewTable()<CR>
 
 " -----------
 " | SECTION | Windows
@@ -1020,6 +1016,14 @@ inoremap <C-w> <C-g>u<C-w>
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-y> <Esc>ua
 
+" Stay in same character column when moving with vertical motions like 
+" <C-d> and <C-u>
+set nostartofline
+" Move screen by 1 position at a time when moving the cursor with h and l
+set sidescroll=1
+nnoremap <C-q> zH
+nnoremap <C-s> zL
+
 " Map <C-b> to do nothing in insert mode, since I often press it by mistake
 " while trying to copy from clipboard and that scrolls the page and makes me
 " lose my focus. In the future I can map it to just vimwiki so that I am able
@@ -1198,6 +1202,5 @@ set gdefault
 " case in which the last line of the current paragraph is the last line of the
 " file
 nnoremap gA :call cursor(line("'}") - empty(getline(line("'}"))),0)<CR>A
-
 
 
