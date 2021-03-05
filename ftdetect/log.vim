@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.log setf log
+autocmd BufNewFile,BufRead *.log,*.out setf log
