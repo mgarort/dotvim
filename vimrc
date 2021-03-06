@@ -944,24 +944,21 @@ nnoremap [o :copen<CR>
 "
 " Open history of previous commands. :History: is part of fzf.vim
 cnoremap <C-r> History:<CR>
-" Go back and forward one word (usually, in the shell it's with <Alt-b> and
-" <Alt-f>, but in my shell it's with Ctrl)
-cnoremap <C-b> <S-Left>
-cnoremap <C-f> <S-Right>
 " Left, right, up and down
-cnoremap <C-h> <Left>
-cnoremap <C-l> <Right>
-cnoremap <C-k> <Up>
-cnoremap <C-j> <Down>
+cnoremap <M-Left> <Left>
+cnoremap <M-Right> <Right>
+cnoremap <M-Up> <Up>
+cnoremap <M-Down> <Down>
 " Go to beginning and end of the line
 cnoremap <C-a> <C-b>
 " Up and down
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-" <M-Left> and <M-Right> are <M-h> and <M-l> respectively, as determined in
-" ~/.Xdefaults
-cnoremap <M-Left> <Backspace>
-cnoremap <M-Right> <Delete>
+" Move backward and forward by one word with <M-b> and <M-f> 
+" <M-b> and <M-f> are mapped to <F9> and <F10> by urxvt through escape
+" sequences
+cnoremap <F9> <S-Left>
+cnoremap <F10> <S-Right>
 
 " Make file completion in command mode (e.g. when opening a file in a buffer
 " with :e) more similar to Bash completion
