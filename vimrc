@@ -1233,22 +1233,3 @@ vnoremap gq gqgv:s/  / /<CR>
 "   autocmd BufEnter * match OverLength /\%72v/
 " augroup END
 
-<<<<<<< HEAD
-
-
-inoremap <C-q> <C-k>
-
-" nnoremap <leader><leader><leader><leader><leader>ksjdfsnk  <Plug>VimwikiTabnewLink
-
-" Simple function to view index of current wiki note
-function! ViewIndex()
-    Redir %g/^=.\+=$/
-    silent %s/^\(\s*[0-9]\+ = .\+ =\)$/\r\1/
-    exe 'normal! ggdd'
-    setlocal readonly
-    setlocal nomodifiable
-endfunction
-nnoremap <silent> ,i :call ViewIndex()<CR>
-
-=======
->>>>>>> 58dad9bf91212d0530635a8e263f4926c97a64f0
