@@ -53,10 +53,11 @@ Plugin 'wellle/targets.vim'
 Plugin 'ap/vim-css-color'
 Plugin 'Konfekt/vim-CtrlXA'
 Plugin 'romainl/vim-cool'
-Plugin 'vim-scripts/SearchComplete'
+" Plugin 'vim-scripts/SearchComplete'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'ojroques/vim-oscyank'
+" Plugin 'airblade/vim-matchquote'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required (note that this automatically guesses indents for 
