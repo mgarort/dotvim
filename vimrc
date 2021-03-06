@@ -748,7 +748,10 @@ nnoremap <leader><leader><leader><leader><leader><leader>l <Plug>NetrwRefresh
 " SECTION:  Help navigation
 " ------------------------
 "
-
+" Disable <F1> to open the help, which frequently and annoyingly opens help by
+" mistake
+nnoremap <F1> <Nop>
+inoremap <F1> <Nop>
 " Maximize help and man windows by default
 " From https://stackoverflow.com/questions/24477083/in-vim-how-can-i-automatically-maximize-the-help-window
 augroup LargeHelpWindow
