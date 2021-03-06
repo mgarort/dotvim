@@ -1006,7 +1006,7 @@ set matchpairs+=<:>
 set virtualedit=block
 
 " Strip comment character when joining comment lines
-set fo+=j
+set formatoptions+=j
 
 " Make <C-w> and <C-u> in insert mode undoable with <C-y>, same as in the command line
 inoremap <C-w> <C-g>u<C-w>
