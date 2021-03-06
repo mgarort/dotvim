@@ -1009,8 +1009,10 @@ set matchpairs+=<:>
 " Allow to select rectangular blocks even in regions with no text
 set virtualedit=block
 
-" Strip comment character when joining comment lines
-set formatoptions+=j
+" With these format options:
+" - new comment characters will be added to extend current comments
+" - comment characters will be stripped when joining lines with J
+set formatoptions=tcroqj
 
 " Make <C-w> and <C-u> in insert mode undoable with <C-y>, same as in the command line
 inoremap <C-w> <C-g>u<C-w>
