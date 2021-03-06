@@ -1183,11 +1183,57 @@ set gdefault
 
 
 
+" Define A, gA, I, gI, 0, g0 and $, g$ depending on whether wrap mode is
+" activated or not, and also on whether the current line fits in a screen line
+" or not. Actually, this is the key! Whether the current line fits in the
+" screen line or not. Or maybe not? Mmm...
+" - When we have a very long line that wraps around several screen line, then
+"   g$ should go to the last character of the current screen line.
+" - When we have a paragraph of many short lines, none of which exceeds the screen, then g$
+"   should go to the end of the paragraph. This is because going to the last
+"   character of the current line can be done with $ always, so g$ should go
+"   to the end of the paragraph
+
+" function! MoveToEndOfParagrah()
+" " The next line take care of the edge case in which the current paragraph is
+" " the end of the file, so { doesn't take us to the line after the paragraph,
+" " but rather to the last line of the paragraph
+"     call cursor(line("'}") - empty(getline(line("'}"))),0)
+"     normal $
+" endfunction
 " Append at end of paragraph
-" line("'}") - empty(getline(line("'}"))) is there to take care of the edge
-" case in which the last line of the current paragraph is the last line of the
-" file
-nnoremap gA :call cursor(line("'}") - empty(getline(line("'}"))),0)<CR>A
+" nnoremap gA :call MoveToEndOfParagrah()<CR>a
+" Go to end of paragraph
+" nnoremap g$ :call MoveToEndOfParagrah()<CR>
+" onoremap g$ :call MoveToEndOfParagrah()<CR>
 
 
+
+vnoremap gq gqgv:s/  / /<CR>
+
+
+" From http://blog.ezyang.com/2010/03/vim-textwidth/   
+" Got the color #00005f  from
+" https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim  Write note
+" on colors for Vim
+" augroup vimrc_autocmds
+"   autocmd BufEnter * highlight OverLength ctermbg=17 guibg=#00005f
+"   autocmd BufEnter * match OverLength /\%72v/
+" augroup END
+
+
+
+inoremap <C-q> <C-k>
+
+" nnoremap <leader><leader><leader><leader><leader>ksjdfsnk  <Plug>VimwikiTabnewLink
+
+" Simple function to view index of current wiki note
+function! ViewIndex()
+    Redir %g/^=.\+=$/
+    silent %s/^\(\s*[0-9]\+ = .\+ =\)$/\r\1/
+    exe 'normal! ggdd'
+    setlocal readonly
+    setlocal nomodifiable
+endfunction
+nnoremap <silent> ,i :call ViewIndex()<CR>
 
