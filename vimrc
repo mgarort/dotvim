@@ -823,6 +823,12 @@ function! EnterNormalMode()
 endfunction
 tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
 
+" Left, right, up and down
+tnoremap <M-Left> <Left>
+tnoremap <M-Right> <Right>
+tnoremap <M-Up> <Up>
+tnoremap <M-Down> <Down>
+
 
 
 
