@@ -1235,3 +1235,9 @@ vnoremap gq gqgv:s/  / /<CR>
 "   autocmd BufEnter * match OverLength /\%72v/
 " augroup END
 
+" From https://stackoverflow.com/questions/26829086/key-specific-timeoutlen-in-vim
+augroup InsertTimeoutlen
+    autocmd!
+    autocmd InsertEnter * set timeoutlen=10
+    autocmd InsertLeave * set timeoutlen=1000
+augroup END
