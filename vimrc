@@ -1106,19 +1106,16 @@ inoremap <C-a> <Esc>^i
 inoremap <C-e> <End>
 snoremap <C-a> <Esc>^i
 snoremap <C-e> <End><Esc>i
-" Move backward and forward by one word (usually, in the shell it's <Alt-b>
-" and <Alt-f>, but in my shell it is with Ctrl)
-inoremap <C-b> <S-Left>
-inoremap <C-f> <Esc>ei<Right>
-" Backspace and delete (<M-Left> and <M-Right> are mapped to <M-h> and <M-j>
-" in .Xdefaults)
-inoremap <M-Left> <BS>
-inoremap <M-Right> <Del>
+" Move backward and forward by one word with <M-b> and <M-f> 
+" <M-b> and <M-f> are mapped to <F9> and <F10> by urxvt through escape
+" sequences
+inoremap <F9> <S-Left>
+inoremap <F10> <Esc>ei<Right>
 " Left, right, up and down
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
-inoremap <C-k> <Up>
-" <C-j> must be mapped in after to disable default mapping to <NL>
+inoremap <M-Left> <Left>
+inoremap <M-Right> <Right>
+inoremap <M-Up> <Up>
+inoremap <M-Down> <Down>
 
 " Make 0 a 'smart' go to start of line: if we press it once, we go to the
 " first non-blank character, and if we press it twice, we go to the actual
