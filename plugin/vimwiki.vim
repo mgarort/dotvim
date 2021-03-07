@@ -209,16 +209,28 @@ function! ToggleProseMode()
     endif
 endfunction
 
-" Simple function to view index of current wiki note
+" Simple function to view summary of current wiki note
 " (i.e. summary of all headers)
-function! ViewIndex()
+function! ViewSummary()
+    " Save original position in mark to return later
+    exe 'norm ms'
+    " Create new window with the summary
     Redir %g/^=.\+=$/
     silent %s/^\(\s*[0-9]\+ = .\+ =\)$/\r\1/
     exe 'normal! ggdd'
+    " Make readonly
     setlocal readonly
     setlocal nomodifiable
+    " Set appropriate filetype and colorscheme
+    set filetype=vimwiki
+    exe 'colorscheme blackwhite'
+    " Return to original position
+    " 1. Go back to previous window
+    wincmd p
+    " 2. Go to mark
+    exe 'norm `s'
 endfunction
-nnoremap <silent> ,i :call ViewIndex()<CR>
+nnoremap <silent> ,s :call ViewSummary()<CR>
 
 
 
