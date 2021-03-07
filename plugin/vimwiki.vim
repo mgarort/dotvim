@@ -185,7 +185,7 @@ endfunction
 
 
 " -------------------------
-" SECTION:  Appearance
+" SECTION:  Functionality for writing in Vim
 " ------------------------
 "
 " Prose mode for hard wrapping and smooth scrolling. 
@@ -208,6 +208,17 @@ function! ToggleProseMode()
         echo "Prose mode INACTIVE"
     endif
 endfunction
+
+" Simple function to view index of current wiki note
+" (i.e. summary of all headers)
+function! ViewIndex()
+    Redir %g/^=.\+=$/
+    silent %s/^\(\s*[0-9]\+ = .\+ =\)$/\r\1/
+    exe 'normal! ggdd'
+    setlocal readonly
+    setlocal nomodifiable
+endfunction
+nnoremap <silent> ,i :call ViewIndex()<CR>
 
 
 
