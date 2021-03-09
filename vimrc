@@ -1118,6 +1118,8 @@ vnoremap <space> :
 " Change character under the cursor (s action) with <M-s>
 " <M-s> is mapped to <F8> by urxvt through a escape sequence
 nnoremap <F8> s
+inoremap <F8> s
+vnoremap <F8> s
 
 " Keybindings similar to shell (emacs keybindings) in insert mode
 "
