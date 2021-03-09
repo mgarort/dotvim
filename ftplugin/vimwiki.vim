@@ -30,9 +30,14 @@ setlocal textwidth=110
 nnoremap <silent> <C-p> m':call SearchPrevLink()<CR>
 nnoremap <silent> <C-n> m':call SearchNextLink()<CR>
 
+" -------------------------------------------
+" SECTION:  Functionality for writing in Vim
+" -------------------------------------------
+"
 " Prose mode for hard wrapping and smooth scrolling
 let b:is_prose_mode_active = 0
 nnoremap <buffer> ,p :call ToggleProseMode()<CR>
+nnoremap <silent> ,s :call ViewSummary()<CR>
 
 
 

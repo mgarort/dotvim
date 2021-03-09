@@ -230,7 +230,6 @@ function! ViewSummary()
     " 2. Go to mark
     exe 'norm `s'
 endfunction
-nnoremap <silent> ,s :call ViewSummary()<CR>
 
 
 
