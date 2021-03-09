@@ -127,7 +127,11 @@ set nofoldenable
 let b:is_compile_html_mode_active = 1
 nnoremap <buffer> ,c :call ToggleCompileHTMLMode()<CR>
 
-noremap ,h :call OpenThisHTML()<CR><CR>
+" To open the HTML of the current note
+nnoremap ,h :call OpenThisHTML()<CR><CR>
+" To manually compile the HTML of the current note
+" when in 'Compile HTML mode INACTIVE'
+nnoremap ,j :call Compile()<CR>
 nnoremap <C-c> :call ProcessImages()<CR>
 
 
