@@ -486,8 +486,8 @@ command! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>
 " the dictionaries to set the colorscheme, one extension at a time
 function! AutomaticColorscheme()
     colorscheme codedark
-    let extension = expand('%:e')
-    if extension == 'wiki'
+    let this_filetype = &l:filetype
+    if this_filetype == 'vimwiki'
         colorscheme blackwhite
     endif 
     set hlsearch
