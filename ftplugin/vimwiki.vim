@@ -124,7 +124,7 @@ set nofoldenable
 " compile on every write (allows viewing changes in HTML, but is slow) or we
 " want to not compile (not viewing changes in HTML, but don't have to wait a
 " couple of seconds after each write)
-let b:is_compile_html_mode_active = 1
+let b:is_compile_html_mode_active = 0
 nnoremap <buffer> ,c :call ToggleCompileHTMLMode()<CR>
 
 " To open the HTML of the current note
