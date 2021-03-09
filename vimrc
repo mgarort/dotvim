@@ -1171,6 +1171,13 @@ inoremap <NL> <C-G>u<NL>
 " TODO For some reason, moving the cursor with the arrow keys seems to break
 " the undo sequence too. Investigate if this is the reason
 
+" From https://stackoverflow.com/questions/26829086/key-specific-timeoutlen-in-vim
+augroup InsertTimeoutlen
+    autocmd!
+    autocmd InsertEnter * set timeoutlen=10
+    autocmd InsertLeave * set timeoutlen=1000
+augroup END
+
 
 
 
@@ -1241,9 +1248,5 @@ vnoremap gq gqgv:s/  / /<CR>
 "   autocmd BufEnter * match OverLength /\%72v/
 " augroup END
 
-" From https://stackoverflow.com/questions/26829086/key-specific-timeoutlen-in-vim
-augroup InsertTimeoutlen
-    autocmd!
-    autocmd InsertEnter * set timeoutlen=10
-    autocmd InsertLeave * set timeoutlen=1000
-augroup END
+
+
