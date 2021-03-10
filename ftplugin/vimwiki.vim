@@ -129,9 +129,11 @@ nnoremap <buffer> ,c :call ToggleCompileHTMLMode()<CR>
 
 " To open the HTML of the current note
 nnoremap ,h :call OpenThisHTML()<CR><CR>
-" To manually compile the HTML of the current note
-" when in 'Compile HTML mode INACTIVE'
+" To manually compile the HTML of the current note when 'Compile HTML mode' is
+" inactive. ,j is chosen as a mnemonic because 'j' is next to 'h' in the
+" keyboard
 nnoremap ,j :call Compile()<CR>
+
 nnoremap <C-c> :call ProcessImages()<CR>
 
 
