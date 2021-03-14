@@ -20,7 +20,7 @@ nnoremap <leader><leader><leader><leader><leader><leader><leader><leader>asdfasd
 
 " This allows bulletpoints to be continued even at deeper bulletpoint levels,
 " instead of only at the first level.
-setlocal formatoptions=ctnqro
+setlocal formatoptions=cnqro
 setlocal comments+=n:*,n:#
 
 " Hard wrapping of characters at 110 characters (for manual wrapping with gq)
