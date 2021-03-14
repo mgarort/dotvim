@@ -623,18 +623,18 @@ inoremap <expr> <CR> pumvisible() ? '<Esc>a' : '<C-G>u<CR>'
 
 " We will map <Tab> to our own function ExpandSnippetIfPossibleAndGetResult, 
 " so that we can create the following behaviour:
-"
+
 " - If upon pressing <Tab> we can expand a snippet, then we don't do anything
 "   else. We check that the snippet has been expanded because
 "   g:ulti_expand_res = 1.
-"
+
 " - If upon pressing <Tab> we cannot expand a snippet, then we can do one of
 "   two things. We check that the snippet has not been expanded because
 "   g:ulti_expand_res = 0.
-"
-"       - If autocomplete (pumvisible() returns 1), do <C-n> to iterate to the
-"       next element of the autocomplete list.
-"       - If not autocomplete (pumvisible() returns 0), do <C-g>u<Tab>
+
+"        - If autocomplete (pumvisible() returns 1), do <C-n> to iterate to the
+"        next element of the autocomplete list.
+"        - If not autocomplete (pumvisible() returns 0), do <C-g>u<Tab>
 
 let g:ulti_expand_res = 0
 function! ExpandSnippetIfPossibleAndGetResult()
@@ -706,18 +706,14 @@ noremap <C-w><Bar> :vsp<CR>
 " Make mapping so that Shift-Arrow increase and reduce the window size in normal
 " mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
 " freed <S-Arrow> and then map them.
-map [a <S-Up>
-map! [a <S-Up>
-map [b <S-Down>
-map! [b <S-Down>
-map [d <S-Left>
-map! [d <S-Left>
-map [c <S-Right>
-map! [c <S-Right>
-nnoremap <S-Up> <C-w>+
-nnoremap <S-Down> <C-w>-
-nnoremap <S-Left> <C-w><
-nnoremap <S-Right> <C-w>>
+set <S-Up>=[a 
+set <S-Down>=[b 
+set <S-Left>=[d 
+set <S-Right>=[c 
+nmap <S-Up>    <C-w>+
+nmap <S-Down>  <C-w>-
+nmap <S-Left>  <C-w><
+nmap <S-Right> <C-w>>
 
 " Maximize and minimize windows
 function! ZoomInCurrentWindow()
