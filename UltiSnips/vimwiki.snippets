@@ -1,3 +1,10 @@
+# This file contains my Vimwiki snippets. It is divided in two parts: 
+# 1. snippets for pure Vimwiki, 
+# 2. and snippets for Latex that will be used in Vimwiki. 
+
+
+# PART 1: Snippets for pure Vimwiki
+
 # -------------------------------------
 # SECTION:  Headers and separating line
 # -------------------------------------
@@ -207,7 +214,7 @@ snippet ~~ "Strikethrough"
 ~~${0:strikethrough}~~
 endsnippet
 
-# Snippets for latex commands (copied from tex.snippets)
+# PART 2: Snippets for Latex (some of them copied from tex.snippets)
 
 ### Text formatting
 
@@ -235,6 +242,10 @@ snippet t "text"
 \text{${0:text}}
 endsnippet
 
+snippet text "text" i
+\text{${0:text}}
+endsnippet
+
 snippet col "color"
 {\color{${1:color}} ${2:text}}
 endsnippet
@@ -249,7 +260,7 @@ snippet \~ "tilde"
 \tilde{${0}}
 endsnippet
 
-### Symbols
+### Text symbols
 
 snippet ~ "text tilde"
 \textasciitilde
@@ -302,6 +313,10 @@ snippet EE "E for expectation"
 \E
 endsnippet
 
+snippet ell "\ell"
+\ell 
+endsnippet
+
 ### Delimiters
 
 snippet " "Double quotes"
@@ -312,23 +327,47 @@ snippet ( "(" i
 (${0})
 endsnippet
 
+snippet (* "\left(" i
+\left( 
+endsnippet
+
+snippet )* "\right)" i
+\right) 
+endsnippet
+
+snippet big) "big (" i
+\big(\, ${0} \,\big)
+endsnippet
+
+snippet Big) "Big (" i
+\Big(\, ${0} \,\Big)
+endsnippet
+
+snippet bigg) "bigg (" i
+\bigg(\, ${0} \,\bigg)
+endsnippet
+
+snippet Bigg) "Bigg (" i
+\Bigg(\, ${0} \,\Bigg)
+endsnippet
+
 snippet [ "[" i
 [${0}]
 endsnippet
 
-snippet big[ "big ["
+snippet big] "big [" i
 \big[\, ${0} \,\big]
 endsnippet
 
-snippet Big[ "Big ["
+snippet Big] "Big [" i
 \Big[\, ${0} \,\Big]
 endsnippet
 
-snippet bigg[ "bigg ["
+snippet bigg] "bigg [" i
 \bigg[\, ${0} \,\bigg]
 endsnippet
 
-snippet Bigg[ "Bigg ["
+snippet Bigg] "Bigg [" i
 \Bigg[\, ${0} \,\Bigg]
 endsnippet
 
@@ -358,12 +397,16 @@ endsnippet
 
 # Spacing
 
-snippet , "double \,"
-\, ${1} \,
+snippet , "\," i
+\, 
 endsnippet
 
-snippet ; "double \;"
-\; ${1} \;
+snippet ; "\;" i
+\; 
+endsnippet
+
+snippet quad "\quad" i
+\quad 
 endsnippet
 
 # Math symbols
@@ -381,15 +424,15 @@ snippet to "\to"
 endsnippet
 
 snippet ... "\ldots"
-\ldots
+\ldots 
 endsnippet
 
 snippet c... "\cdots"
-\cdots
+\cdots 
 endsnippet
 
 snippet c. "\cdot"
-\cdot
+\cdot 
 endsnippet
 
 snippet __ "_{}" i
@@ -400,10 +443,39 @@ snippet ^^ "^{}" i
 ^{${0}}
 endsnippet
 
+snippet log "\log"
+\log
+endsnippet
+
+snippet mid "\mid" i
+\mid
+endsnippet
+
+snippet sim "\sim"
+\sim 
+endsnippet
+
+snippet approx "\approx"
+\approx 
+endsnippet
+
 # Operators
 
+
+snippet sum "\sum" i
+\sum_{${1:i=1}}^{${2:n}}  
+endsnippet
+
 snippet prod "\prod" i
-\prod_{${1}}^{${2}}
+\prod_{${1}}^{${2}} 
+endsnippet
+
+snippet nab "\nabla"
+\nabla
+endsnippet
+
+snippet +- "\pm (Latex for ±)"
+\pm 
 endsnippet
 
 # Operations
@@ -580,3 +652,4 @@ endsnippet
 snippet xr "XXX Add ref"
 XXX Add ref
 endsnippet
+
