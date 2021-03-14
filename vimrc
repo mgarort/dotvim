@@ -306,7 +306,10 @@ nnoremap ,m :b#<CR>
 " Quickly check modifications wrt the saved version
 nnoremap ,d :DiffSaved<CR>
 
-
+" Display registers (not related to the current buffer only, but it has a
+" display similar to showing the buffer list, so it makes sense to use , as a
+" mnemonic)
+nnoremap ,r :register<CR>
 
 " -----------
 " | SECTION | Important keybindings starting with <leader>. 
@@ -339,6 +342,8 @@ nnoremap <leader>vf :Explore $HOME/.vim/ftplugin<CR>
 nnoremap <leader>vp :Explore $HOME/.vim/plugin<CR>
 " w for wiki
 nnoremap <leader>vw :e $HOME/.vim/plugin/vimwiki.vim<CR>
+" r for repositories
+nnoremap <leader>r :Explore $HOME/repos<CR>
 " h for HTML (since this is the HTML template and it's written in html)
 nnoremap <leader>h :e ~/repos/wiki/setup/default.tpl<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
@@ -384,8 +389,7 @@ function! SearchWithGrep()
 endfunction
 nnoremap <leader>o :call SearchWithGrep()<CR>
 
-" Show all registers with r
-nnoremap <leader>r :register<CR>
+
 
 " remove conflicting/annoying maps
 nmap <leader><leader><leader><leader><leader>psdfs  <Plug>BufKillAlt
