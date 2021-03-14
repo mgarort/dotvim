@@ -142,18 +142,8 @@ endfunction
 " the section on creating and renaming notes, here I define functions, and
 " keybindings for those functions are created in ftplugin/vimwiki.vim
 
-" 1) First you have to freed <C-Left> and <C-Right> from Putty, which for some reason holds
-" them hostage. You can find which sequence corresponds to <C-Left> (for
-" instance), in this case by pressing the following combination in insert
-" mode: <C-v><C-Left>. Note that <Esc> is represented by ^[ when you do this.
-map  <Esc>Od <C-Left>
-map! <Esc>Od <C-Left>
-map  <Esc>Oc <C-Right>
-map! <Esc>Oc <C-Right>
-map  <Esc>Oa <C-Up> 
-map! <Esc>Oa <C-Up> 
-map  <Esc>Ob <C-Down> 
-map! <Esc>Ob <C-Down> 
+" 1) First, you need to create mappable symbols for <C-Left,Right,Up,Down>.
+" Done in vimrc.
 " 2) Second, you don't use VimwikiDiaryPrevDay and VimwikiDiaryNextDay
 " directly, because they leave saved buffers opened lingering around.
 " Therefore, write a function that, if unsaved changes, uses these functions
