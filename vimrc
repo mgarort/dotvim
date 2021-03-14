@@ -1198,6 +1198,34 @@ set gdefault
 
 
 
+
+
+
+
+" -------------------------
+" SECTION:  Keybindings that depend on urxvt and escape sequences
+" ------------------------
+"
+
+" So that 'set' keybindings time out in 10ms, while the usual keybindings
+" still time out at the default 1s
+set ttimeout
+set ttimeoutlen=10
+
+" <C-Arrows> 
+" <C-Up> and <C-Down> don't have associated symbol, so we cannot use 'set'
+" directly on them, but rather on function keys, and then we map to them
+set <C-Left>=Od
+set <C-Right>=Oc
+set <F32>=Oa
+set <F33>=Ob
+map <C-Up> <F32>
+map <C-Down> <F33>
+
+
+
+
+
 " -----------
 " | SECTION | Not sorted yet. Things to be sorted
 " -----------
@@ -1251,4 +1279,9 @@ vnoremap gq gqgv:s/  / /<CR>
 " augroup END
 
 
+" Ensure vim-fugitive does vertical splits always
+set diffopt+=vertical
 
+
+" Test persistent undo
+" set undofile
