@@ -306,7 +306,10 @@ nnoremap ,m :b#<CR>
 " Quickly check modifications wrt the saved version
 nnoremap ,d :DiffSaved<CR>
 
-
+" Display registers (not related to the current buffer only, but it has a
+" display similar to showing the buffer list, so it makes sense to use , as a
+" mnemonic)
+nnoremap ,r :register<CR>
 
 " -----------
 " | SECTION | Important keybindings starting with <leader>. 
@@ -339,6 +342,8 @@ nnoremap <leader>vf :Explore $HOME/.vim/ftplugin<CR>
 nnoremap <leader>vp :Explore $HOME/.vim/plugin<CR>
 " w for wiki
 nnoremap <leader>vw :e $HOME/.vim/plugin/vimwiki.vim<CR>
+" r for repositories
+nnoremap <leader>r :Explore $HOME/repos<CR>
 " h for HTML (since this is the HTML template and it's written in html)
 nnoremap <leader>h :e ~/repos/wiki/setup/default.tpl<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
@@ -384,8 +389,7 @@ function! SearchWithGrep()
 endfunction
 nnoremap <leader>o :call SearchWithGrep()<CR>
 
-" Show all registers with r
-nnoremap <leader>r :register<CR>
+
 
 " remove conflicting/annoying maps
 nmap <leader><leader><leader><leader><leader>psdfs  <Plug>BufKillAlt
@@ -486,8 +490,8 @@ command! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>
 " the dictionaries to set the colorscheme, one extension at a time
 function! AutomaticColorscheme()
     colorscheme codedark
-    let extension = expand('%:e')
-    if extension == 'wiki'
+    let this_filetype = &l:filetype
+    if this_filetype == 'vimwiki'
         colorscheme blackwhite
     endif 
     set hlsearch
@@ -619,18 +623,18 @@ inoremap <expr> <CR> pumvisible() ? '<Esc>a' : '<C-G>u<CR>'
 
 " We will map <Tab> to our own function ExpandSnippetIfPossibleAndGetResult, 
 " so that we can create the following behaviour:
-"
+
 " - If upon pressing <Tab> we can expand a snippet, then we don't do anything
 "   else. We check that the snippet has been expanded because
 "   g:ulti_expand_res = 1.
-"
+
 " - If upon pressing <Tab> we cannot expand a snippet, then we can do one of
 "   two things. We check that the snippet has not been expanded because
 "   g:ulti_expand_res = 0.
-"
-"       - If autocomplete (pumvisible() returns 1), do <C-n> to iterate to the
-"       next element of the autocomplete list.
-"       - If not autocomplete (pumvisible() returns 0), do <C-g>u<Tab>
+
+"        - If autocomplete (pumvisible() returns 1), do <C-n> to iterate to the
+"        next element of the autocomplete list.
+"        - If not autocomplete (pumvisible() returns 0), do <C-g>u<Tab>
 
 let g:ulti_expand_res = 0
 function! ExpandSnippetIfPossibleAndGetResult()
@@ -702,18 +706,14 @@ noremap <C-w><Bar> :vsp<CR>
 " Make mapping so that Shift-Arrow increase and reduce the window size in normal
 " mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
 " freed <S-Arrow> and then map them.
-map [a <S-Up>
-map! [a <S-Up>
-map [b <S-Down>
-map! [b <S-Down>
-map [d <S-Left>
-map! [d <S-Left>
-map [c <S-Right>
-map! [c <S-Right>
-nnoremap <S-Up> <C-w>+
-nnoremap <S-Down> <C-w>-
-nnoremap <S-Left> <C-w><
-nnoremap <S-Right> <C-w>>
+set <S-Up>=[a 
+set <S-Down>=[b 
+set <S-Left>=[d 
+set <S-Right>=[c 
+nmap <S-Up>    <C-w>+
+nmap <S-Down>  <C-w>-
+nmap <S-Left>  <C-w><
+nmap <S-Right> <C-w>>
 
 " Maximize and minimize windows
 function! ZoomInCurrentWindow()
@@ -1118,6 +1118,8 @@ vnoremap <space> :
 " Change character under the cursor (s action) with <M-s>
 " <M-s> is mapped to <F8> by urxvt through a escape sequence
 nnoremap <F8> s
+inoremap <F8> s
+vnoremap <F8> s
 
 " Keybindings similar to shell (emacs keybindings) in insert mode
 "
@@ -1171,6 +1173,13 @@ inoremap <NL> <C-G>u<NL>
 " TODO For some reason, moving the cursor with the arrow keys seems to break
 " the undo sequence too. Investigate if this is the reason
 
+" From https://stackoverflow.com/questions/26829086/key-specific-timeoutlen-in-vim
+augroup InsertTimeoutlen
+    autocmd!
+    autocmd InsertEnter * set timeoutlen=10
+    autocmd InsertLeave * set timeoutlen=1000
+augroup END
+
 
 
 
@@ -1186,6 +1195,34 @@ nnoremap g( (geh
 " substitution). If you DO need a single substitution, you can add g t the
 " end, and it will toggle off gdefault
 set gdefault
+
+
+
+
+
+
+
+" -------------------------
+" SECTION:  Keybindings that depend on urxvt and escape sequences
+" ------------------------
+"
+
+" So that 'set' keybindings time out in 10ms, while the usual keybindings
+" still time out at the default 1s
+set ttimeout
+set ttimeoutlen=10
+
+" <C-Arrows> 
+" <C-Up> and <C-Down> don't have associated symbol, so we cannot use 'set'
+" directly on them, but rather on function keys, and then we map to them
+set <C-Left>=Od
+set <C-Right>=Oc
+set <F32>=Oa
+set <F33>=Ob
+map <C-Up> <F32>
+map <C-Down> <F33>
+
+
 
 
 
@@ -1241,9 +1278,10 @@ vnoremap gq gqgv:s/  / /<CR>
 "   autocmd BufEnter * match OverLength /\%72v/
 " augroup END
 
-" From https://stackoverflow.com/questions/26829086/key-specific-timeoutlen-in-vim
-augroup InsertTimeoutlen
-    autocmd!
-    autocmd InsertEnter * set timeoutlen=10
-    autocmd InsertLeave * set timeoutlen=1000
-augroup END
+
+" Ensure vim-fugitive does vertical splits always
+set diffopt+=vertical
+
+
+" Test persistent undo
+" set undofile

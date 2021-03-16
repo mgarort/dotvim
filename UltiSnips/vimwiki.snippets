@@ -1,5 +1,14 @@
-# Snippets for Vimwiki headers
+# This file contains my Vimwiki snippets. It is divided in two parts: 
+# 1. snippets for pure Vimwiki, 
+# 2. and snippets for Latex that will be used in Vimwiki. 
 
+
+# PART 1: Snippets for pure Vimwiki
+
+# -------------------------------------
+# SECTION:  Headers and separating line
+# -------------------------------------
+#
 snippet 1= "Header 1"
 = ${0:title} =
 endsnippet
@@ -24,13 +33,16 @@ snippet 6= "Header 6"
 ====== ${0:title} ======
 endsnippet
 
-# Snippet for separating topic notes in the index
-
-snippet -- "Separating line"
+snippet -- "Separating line" i
 ------------------------------------------------------
 endsnippet
 
-# Snippets for defining environments (latex equation, inline latex, code block, inline code...)
+
+# -------------------------
+# SECTION:  Environments
+# ------------------------
+#
+# Environments are latex equation, inline latex, code block, inline code...
 
 snippet $$ "Latex equation"
 {{$
@@ -38,7 +50,7 @@ ${0:equation}
 }}$
 endsnippet
 
-snippet $$align "Latex align"
+snippet $A "Latex align"
 {{$%align%
 ${0:equation}
 }}$
@@ -50,11 +62,19 @@ ${0:code}
 }}}
 endsnippet
 
-snippet $ "Inline Latex" i
+# $ and ` not made greedy (option i) because they clash with snippets 
+# $$ and ``` respectively
+snippet $ "Inline Latex"
 $\; ${0:math} \;$
 endsnippet
+snippet ($ "Inline Latex"
+($\; ${0:math} \;$
+endsnippet
 
-snippet ` "Inline code" i
+snippet ` "Inline code"
+\`${0:code}\`
+endsnippet
+snippet (` "Inline code"
 \`${0:code}\`
 endsnippet
 
@@ -62,8 +82,11 @@ snippet < "<>" i
 <${0:text}>
 endsnippet
 
-# Snippets for diary
 
+# -------------------------
+# SECTION:  Diary
+# ------------------------
+#
 snippet diary "Vimwiki diary entry template"
 = `!p 
 import datetime
@@ -85,31 +108,44 @@ snip.rv = f'{year}.{month}.{day} {weekday}'` =
 
 ==== Done ====
 
-===== Research and work =====
+====== Research and work ======
 
 
-===== Vim and config =====
+====== Admin ======
 
 
-===== Personal =====
+====== Vim and config ======
+
+
+====== Writing notes ======
+
+
+====== Personal ======
 
 
 
 
-==== Notes ====
+==== Scratch ====
 
 
 endsnippet
 
 
-# Snippets for links and references
-
+# -------------------------
+# SECTION:  Vimwiki links and references
+# ------------------------
+#
 snippet link "Vimwiki link"
 [[./${2:LINK_PATH}|${1:description}]]
 endsnippet
 
 snippet image "Vimwiki image"
 {{file:./images/processed_${2:IMAGE_PATH}|${1:description}|style="width:550px;height:220px;"}}
+endsnippet
+
+# figures for reports, rather than images for notes
+snippet fig "Vimwiki figure"
+{{file:./figures/${2:FIGURE_PATH}|${1:description}|style="width:550px;height:220px;"}}
 endsnippet
 
 snippet paper "Vimwiki paper"
@@ -133,8 +169,10 @@ snippet ref "Vimwiki references"
 endsnippet
 
 
-# Snippets for formatting in HTML style
-
+# -------------------------
+# SECTION:  HTML formatting
+# ------------------------
+#
 snippet b "HTML bold"
 <b>${0:bold}</b>
 endsnippet
@@ -150,7 +188,9 @@ endsnippet
 
 # Snippets for formatting text in Vimwiki style
 
-snippet _ "Italic" i
+# _ for italic is not greedy, since greedy _ is reserved for subscripts _{subscript}
+# in Latex
+snippet _ "Italic"
 _${0:italic}_
 endsnippet
 
@@ -160,7 +200,9 @@ snippet * "Bold"
 *${0:bold}*
 endsnippet
 
-snippet ^ "Superscript" i
+# ^ for text superscript is not greedy, since greedy ^ is reserved for superscripts
+# ^{superscript} in Latex
+snippet ^ "Superscript"
 ^${0:superscript}^
 endsnippet
 
@@ -172,7 +214,7 @@ snippet ~~ "Strikethrough"
 ~~${0:strikethrough}~~
 endsnippet
 
-# Snippets for latex commands (copied from tex.snippets)
+# PART 2: Snippets for Latex (some of them copied from tex.snippets)
 
 ### Text formatting
 
@@ -200,6 +242,10 @@ snippet t "text"
 \text{${0:text}}
 endsnippet
 
+snippet text "text" i
+\text{${0:text}}
+endsnippet
+
 snippet col "color"
 {\color{${1:color}} ${2:text}}
 endsnippet
@@ -214,7 +260,7 @@ snippet \~ "tilde"
 \tilde{${0}}
 endsnippet
 
-### Symbols
+### Text symbols
 
 snippet ~ "text tilde"
 \textasciitilde
@@ -226,7 +272,7 @@ snippet bf "mathbf"
 \mathbf{${0:mathbold}}
 endsnippet
 
-snippet cal "mathcal"
+snippet cal "mathcal" i
 \mathcal{${0}}
 endsnippet
 
@@ -267,29 +313,65 @@ snippet EE "E for expectation"
 \E
 endsnippet
 
+snippet ell "\ell"
+\ell 
+endsnippet
+
 ### Delimiters
 
-snippet [ "["
+snippet " "Double quotes"
+"${0}"
+endsnippet
+
+snippet ( "(" i
+(${0})
+endsnippet
+
+snippet (* "\left(" i
+\left( 
+endsnippet
+
+snippet )* "\right)" i
+\right) 
+endsnippet
+
+snippet big) "big (" i
+\big(\, ${0} \,\big)
+endsnippet
+
+snippet Big) "Big (" i
+\Big(\, ${0} \,\Big)
+endsnippet
+
+snippet bigg) "bigg (" i
+\bigg(\, ${0} \,\bigg)
+endsnippet
+
+snippet Bigg) "Bigg (" i
+\Bigg(\, ${0} \,\Bigg)
+endsnippet
+
+snippet [ "[" i
 [${0}]
 endsnippet
 
-snippet big[ "big ["
+snippet big] "big [" i
 \big[\, ${0} \,\big]
 endsnippet
 
-snippet Big[ "Big ["
+snippet Big] "Big [" i
 \Big[\, ${0} \,\Big]
 endsnippet
 
-snippet bigg[ "bigg ["
+snippet bigg] "bigg [" i
 \bigg[\, ${0} \,\bigg]
 endsnippet
 
-snippet Bigg[ "Bigg ["
+snippet Bigg] "Bigg [" i
 \Bigg[\, ${0} \,\Bigg]
 endsnippet
 
-snippet { "{"
+snippet { "{" i
 \\{ ${0} \\}
 endsnippet
 
@@ -315,12 +397,16 @@ endsnippet
 
 # Spacing
 
-snippet , "double \,"
-\, ${1} \,
+snippet , "\," i
+\, 
 endsnippet
 
-snippet ; "double \;"
-\; ${1} \;
+snippet ; "\;" i
+\; 
+endsnippet
+
+snippet quad "\quad" i
+\quad 
 endsnippet
 
 # Math symbols
@@ -338,17 +424,72 @@ snippet to "\to"
 endsnippet
 
 snippet ... "\ldots"
-\ldots
+\ldots 
 endsnippet
 
 snippet c... "\cdots"
-\cdots
+\cdots 
 endsnippet
 
 snippet c. "\cdot"
-\cdot
+\cdot 
 endsnippet
-# Greek letters (snippets consistent with digraph codes)
+
+snippet __ "_{}" i
+_{${0}}
+endsnippet
+
+snippet ^^ "^{}" i
+^{${0}}
+endsnippet
+
+snippet log "\log"
+\log
+endsnippet
+
+snippet mid "\mid" i
+\mid
+endsnippet
+
+snippet sim "\sim"
+\sim 
+endsnippet
+
+snippet approx "\approx"
+\approx 
+endsnippet
+
+# Operators
+
+
+snippet sum "\sum" i
+\sum_{${1:i=1}}^{${2:n}}  
+endsnippet
+
+snippet prod "\prod" i
+\prod_{${1}}^{${2}} 
+endsnippet
+
+snippet nab "\nabla"
+\nabla
+endsnippet
+
+snippet +- "\pm (Latex for ±)"
+\pm 
+endsnippet
+
+# Operations
+
+snippet -1 "^{-1}" i
+^{-1}
+endsnippet
+
+
+# -------------------------
+# SECTION:  Greek letters
+# ------------------------
+#
+# These snippets try to be consistent with Vim digraphs
 # Some of the cap versions don't exist in Latex because the English letter is 
 # exactly the same (for example, \Alpha is not needed because capital alpha 
 # is A). However, they are added for consistency and to encourage learning the
@@ -414,32 +555,49 @@ snippet h* "\theta" i
 \theta
 endsnippet
 # Ι ι (Iota)
-snippet I* "\Iota"
+snippet I* "\Iota" i
 \Iota
 endsnippet
-snippet i* "\iota"
+snippet i* "\iota" i
 \iota
 endsnippet
 # Κ κ (Kappa)
-snippet K* "\Kappa"
+snippet K* "\Kappa" i
 \Kappa
 endsnippet
-snippet k* "\kappa"
+snippet k* "\kappa" i
 \kappa
 endsnippet
 # Λ λ (Lambda)
-snippet L* "\Lambda"
+snippet L* "\Lambda" i
 \Lambda
 endsnippet
-snippet l* "\lambda"
+snippet l* "\lambda" i
 \lambda
 endsnippet
 # Μ μ (Mu)
-snippet M* "\Mu"
+snippet M* "\Mu" i
 \Mu
 endsnippet
-snippet m* "\mu"
+snippet m* "\mu" i
 \mu
+endsnippet
+# Ν ν (Nu)
+snippet N* "\Nu" i
+\Nu
+endsnippet
+snippet n* "\nu" i
+\nu
+endsnippet
+# Σ σ ς (Sigma)
+snippet S* "\Sigma" i
+\Sigma
+endsnippet
+snippet s* "\sigma" i
+\sigma
+endsnippet
+snippet *s "\varsigma" i
+\varsigma
 endsnippet
 # Φ φ (Phi)
 snippet F* "\Phi" i
@@ -454,16 +612,15 @@ endsnippet
 # - To see the order of Greek letters check https://omniglot.com/writing/greek.htm
 
 
-
 # Snippets for highlighted words
-snippet I "IDEA"
+snippet I "IDEA" i
 IDEA 
 endsnippet
-snippet A "ANSWER"
+snippet A "ANSWER" i
 ANSWER 
 endsnippet
 
-snippet N "NOTE"
+snippet N "NOTE" i
 NOTE 
 endsnippet
 
@@ -471,11 +628,11 @@ snippet C "COMMENT"
 COMMENT 
 endsnippet
 
-snippet Q "QUESTION"
+snippet Q "QUESTION" i
 QUESTION 
 endsnippet
 
-snippet T "TODO"
+snippet T "TODO" i
 TODO 
 endsnippet
 
@@ -487,7 +644,7 @@ snippet X "XXX"
 XXX 
 endsnippet
 
-snippet P "POINT"
+snippet P "POINT" i
 POINT 
 endsnippet
 
@@ -495,3 +652,4 @@ endsnippet
 snippet xr "XXX Add ref"
 XXX Add ref
 endsnippet
+

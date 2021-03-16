@@ -142,18 +142,8 @@ endfunction
 " the section on creating and renaming notes, here I define functions, and
 " keybindings for those functions are created in ftplugin/vimwiki.vim
 
-" 1) First you have to freed <C-Left> and <C-Right> from Putty, which for some reason holds
-" them hostage. You can find which sequence corresponds to <C-Left> (for
-" instance), in this case by pressing the following combination in insert
-" mode: <C-v><C-Left>. Note that <Esc> is represented by ^[ when you do this.
-map  <Esc>Od <C-Left>
-map! <Esc>Od <C-Left>
-map  <Esc>Oc <C-Right>
-map! <Esc>Oc <C-Right>
-map  <Esc>Oa <C-Up> 
-map! <Esc>Oa <C-Up> 
-map  <Esc>Ob <C-Down> 
-map! <Esc>Ob <C-Down> 
+" 1) First, you need to create mappable symbols for <C-Left,Right,Up,Down>.
+" Done in vimrc.
 " 2) Second, you don't use VimwikiDiaryPrevDay and VimwikiDiaryNextDay
 " directly, because they leave saved buffers opened lingering around.
 " Therefore, write a function that, if unsaved changes, uses these functions
@@ -185,7 +175,7 @@ endfunction
 
 
 " -------------------------
-" SECTION:  Appearance
+" SECTION:  Functionality for writing in Vim
 " ------------------------
 "
 " Prose mode for hard wrapping and smooth scrolling. 
@@ -207,6 +197,28 @@ function! ToggleProseMode()
         let b:is_prose_mode_active = 0
         echo "Prose mode INACTIVE"
     endif
+endfunction
+
+" Simple function to view summary of current wiki note
+" (i.e. summary of all headers)
+function! ViewSummary()
+    " Save original position in mark to return later
+    exe 'norm ms'
+    " Create new window with the summary
+    Redir %g/^=.\+=$/
+    silent %s/^\(\s*[0-9]\+ = .\+ =\)$/\r\1/
+    exe 'normal! ggdd'
+    " Make readonly
+    setlocal readonly
+    setlocal nomodifiable
+    " Set appropriate filetype and colorscheme
+    set filetype=vimwiki
+    exe 'colorscheme blackwhite'
+    " Return to original position
+    " 1. Go back to previous window
+    wincmd p
+    " 2. Go to mark
+    exe 'norm `s'
 endfunction
 
 
