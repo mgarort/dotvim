@@ -959,22 +959,11 @@ nnoremap [o :copen<CR>
 "
 " Open history of previous commands. :History: is part of fzf.vim
 cnoremap <C-r> History:<CR>
-" Left, right, up and down
-cnoremap <M-Left> <Left>
-cnoremap <M-Right> <Right>
-cnoremap <M-Up> <Up>
-cnoremap <M-Down> <Down>
 " Go to beginning and end of the line
 cnoremap <C-a> <C-b>
 " Up and down
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-" Move backward and forward by one word with <M-b> and <M-f> 
-" <M-b> and <M-f> are mapped to <F9> and <F10> by urxvt through escape
-" sequences
-cnoremap <F9> <S-Left>
-cnoremap <F10> <S-Right>
-
 " Make file completion in command mode (e.g. when opening a file in a buffer
 " with :e) more similar to Bash completion
 set wildmenu
@@ -1002,9 +991,6 @@ function! Cs()
 endfunction
 cnoremap <expr> s Cs()
 
-" Disable <Esc> in the command line so that you do not
-" lose half-typed commands by mistake
-cnoremap <Esc> <Nop>
 
 
 
@@ -1119,11 +1105,6 @@ nnoremap <S-y> y$
 nnoremap <space> :
 vnoremap <space> :
 
-" Change character under the cursor (s action) with <M-s>
-" <M-s> is mapped to <F8> by urxvt through a escape sequence
-nnoremap <F8> s
-inoremap <F8> s
-vnoremap <F8> s
 
 " Keybindings similar to shell (emacs keybindings) in insert mode
 "
@@ -1132,16 +1113,6 @@ inoremap <C-a> <Esc>^i
 inoremap <C-e> <End>
 snoremap <C-a> <Esc>^i
 snoremap <C-e> <End><Esc>i
-" Move backward and forward by one word with <M-b> and <M-f> 
-" <M-b> and <M-f> are mapped to <F9> and <F10> by urxvt through escape
-" sequences
-inoremap <F9> <S-Left>
-inoremap <F10> <Esc>ei<Right>
-" Left, right, up and down
-inoremap <M-Left> <Left>
-inoremap <M-Right> <Right>
-inoremap <M-Up> <Up>
-inoremap <M-Down> <Down>
 
 " Make 0 a 'smart' go to start of line: if we press it once, we go to the
 " first non-blank character, and if we press it twice, we go to the actual
@@ -1210,7 +1181,6 @@ set gdefault
 " SECTION:  Keybindings that depend on urxvt and escape sequences
 " ------------------------
 "
-
 " So that 'set' keybindings time out in 10ms, while the usual keybindings
 " still time out at the default 1s
 set ttimeout
@@ -1225,10 +1195,38 @@ set <F32>=Oa
 set <F33>=Ob
 map <C-Up> <F32>
 map <C-Down> <F33>
+" Left, right, up and down
+cnoremap <M-Left> <Left>
+cnoremap <M-Right> <Right>
+cnoremap <M-Up> <Up>
+cnoremap <M-Down> <Down>
 
+" Move backward and forward by one word with <M-b> and <M-f> 
+" <M-b> and <M-f> are mapped to <F9> and <F10> by urxvt through escape
+" sequences
+cnoremap <F9> <S-Left>
+cnoremap <F10> <S-Right>
 
+" Move backward and forward by one word with <M-b> and <M-f> 
+" <M-b> and <M-f> are mapped to <F9> and <F10> by urxvt through escape
+" sequences
+inoremap <F9> <S-Left>
+inoremap <F10> <Esc>ei<Right>
+" Left, right, up and down
+inoremap <M-Left> <Left>
+inoremap <M-Right> <Right>
+inoremap <M-Up> <Up>
+inoremap <M-Down> <Down>
 
+" Change character under the cursor (s action) with <M-s>
+" <M-s> is mapped to <F8> by urxvt through a escape sequence
+nnoremap <F8> s
+inoremap <F8> s
+vnoremap <F8> s
 
+" Disable <Esc> in the command line so that you do not
+" lose half-typed commands by mistake
+" cnoremap <Esc> <Nop>
 
 " -----------
 " | SECTION | Not sorted yet. Things to be sorted
