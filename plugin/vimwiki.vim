@@ -41,10 +41,10 @@ let g:vimwiki_list = [{'path': '~/repos/wiki',
 " Functions to navigate to next link, 
 " either Vimwiki link or URL
 function! SearchNextLink()
-    call search('\[\[.\{-}\]\]\|http', 'W')
+    call search('\[\[.\{-}\]\]\|http\|{{.\{-}}}', 'W')
 endfunction
 function! SearchPrevLink()
-    call search('\[\[.\{-}\]\]\|http', 'bW')
+    call search('\[\[.\{-}\]\]\|http\|{{.\{-}}}', 'bW')
 endfunction
 
 
