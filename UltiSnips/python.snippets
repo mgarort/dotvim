@@ -54,3 +54,31 @@ endsnippet
 snippet N "NOTE"
 NOTE 
 endsnippet
+
+snippet expand "expand_chem_df"
+expand_chem_df(${1:df},input_column='${2:col}',input_format='${3:format}',output_column='${4:col}',output_format='${5:format}')
+endsnippet
+
+snippet pd "pandas"
+import pandas as pd
+endsnippet
+
+snippet np "numpy"
+import numpy as np
+endsnippet
+
+snippet plt "pyplot"
+import matplotlib.pyplot as plt
+endsnippet
+
+snippet read_csv "pd.read_csv" i
+read_csv(${1:path},sep='${2:sep}', header=${3:header})
+endsnippet
+
+snippet drop "DataFrame.drop_duplicates" i
+drop_duplicates(subset=['${1:subset}'],keep='${2:first, last or False}')
+endsnippet
+
+snippet to_csv "DataFrame.to_csv" i
+to_csv('${1:path}',sep='${2:sep}',header=${3:bool},index=${4:bool})
+endsnippet
