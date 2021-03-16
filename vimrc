@@ -57,14 +57,14 @@ Plugin 'romainl/vim-cool'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'ojroques/vim-oscyank'
-" Plugin 'airblade/vim-matchquote'
+" " Plugin 'airblade/vim-matchquote'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required (note that this automatically guesses indents for 
                              " Python, etc, when you're writing code, so it's very useful)
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
+filetype plugin on
+
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
@@ -349,7 +349,11 @@ nnoremap <leader>h :e ~/repos/wiki/setup/default.tpl<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
 nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
 nnoremap <leader>x :e ~/repos/dotfiles/dot.Xdefaults<CR>
-nnoremap <leader>b :e ~/.bashrc<CR>
+" <leader>bb for the main .bashrc, similar to how <leader>vv takes us to the main vimrc
+nnoremap <leader>bb :e ~/repos/dotfiles/dot.bashrc_common<CR>
+" Distinguish specific bashrc for the second letter: o or l
+nnoremap <leader>bo :e ~/repos/dotfiles/dot.bashrc_corona<CR>
+nnoremap <leader>bl :e ~/repos/dotfiles/dot.bashrc_cluster<CR>
 nnoremap <leader>uu :UltiSnipsEdit<CR>
 function! OpenVimSnippets()
     let ft = &l:filetype
