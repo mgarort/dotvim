@@ -26,3 +26,10 @@ endfunction
 nnoremap <C-b> :call CopyCellToIPython()<CR>
 
 set nowrap
+
+
+" Define keybindings for tab functionality
+nnoremap <C-Up> :tabnew %<CR>
+nnoremap <C-Down> :tabc<CR>
+nnoremap <C-Left> :tabp<CR>
+nnoremap <C-Right> :tabn<CR>
