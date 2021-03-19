@@ -1186,8 +1186,8 @@ set <C-Left>=Od
 set <C-Right>=Oc
 set <F32>=Oa
 set <F33>=Ob
-map <C-Up> <F32>
-map <C-Down> <F33>
+map <F32> <C-Up>
+map <F33> <C-Down>
 " Left, right, up and down
 cnoremap <M-Left> <Left>
 cnoremap <M-Right> <Right>
