@@ -292,9 +292,11 @@ let g:netrw_liststyle = 3
 " - Lists: show buffer list, show register list, show fuzzy finder list...
 
 " Display buffers and wait for input to choose one (l for ls).
-nnoremap ,l :ls<CR>:b
+" nnoremap ,l :ls<CR>:b
+nnoremap ,l :Buffers<CR>
 " Same as before but display all buffers, including unlisted ones
-nnoremap ,<S-l> :ls!<CR>:b
+" nnoremap ,<S-l> :ls!<CR>:
+nnoremap ,<S-l> :BuffersAll<CR>
 " Same as before but display previously opened files
 nnoremap ,<C-l> :History<CR>
 " Go to next buffer (n for next)
