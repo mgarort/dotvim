@@ -31,13 +31,26 @@ print('bye')
 endsnippet
 
 
-snippet script "header for script"
+# -------------------------
+# SECTION:  Headers
+# ------------------------
+#
+
+snippet script "script header"
 # ----------
 # | SCRIPT | ${0:description}
 # ----------
 #
 #
 endsnippet
+
+snippet section "python section"
+# -------------------------
+# SECTION:  ${0:description}
+# ------------------------
+#
+endsnippet
+
 
 # -------------------------
 # SECTION:  Highlight words
@@ -55,10 +68,10 @@ snippet N "NOTE"
 NOTE 
 endsnippet
 
-snippet expand "expand_chem_df"
-expand_chem_df(${1:df},input_column='${2:col}',input_format='${3:format}',output_column='${4:col}',output_format='${5:format}')
-endsnippet
-
+# -------------------------
+# SECTION:  Imports
+# ------------------------
+#
 snippet pd "pandas"
 import pandas as pd
 endsnippet
@@ -70,6 +83,16 @@ endsnippet
 snippet plt "pyplot"
 import matplotlib.pyplot as plt
 endsnippet
+
+# -------------------------
+# SECTION:  Popular functions and classes
+# ------------------------
+#
+
+snippet expand "expand_chem_df"
+expand_chem_df(${1:df},input_column='${2:col}',input_format='${3:format}',output_column='${4:col}',output_format='${5:format}')
+endsnippet
+
 
 snippet read_csv "pd.read_csv" i
 read_csv(${1:path},sep='${2:sep}', header=${3:header})
