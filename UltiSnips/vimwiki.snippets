@@ -3,7 +3,9 @@
 # 2. and snippets for Latex that will be used in Vimwiki. 
 
 
+################################################################################
 # PART 1: Snippets for pure Vimwiki
+################################################################################
 
 # -------------------------------------
 # SECTION:  Headers and separating line
@@ -227,10 +229,58 @@ snippet ~~ "Strikethrough"
 ~~${0:strikethrough}~~
 endsnippet
 
+# Snippets for highlighted words
+snippet I "IDEA" i
+IDEA 
+endsnippet
+snippet A "ANSWER" i
+ANSWER 
+endsnippet
+
+snippet N "NOTE" i
+NOTE 
+endsnippet
+
+snippet C "COMMENT"
+COMMENT 
+endsnippet
+
+snippet Q "QUESTION" i
+QUESTION 
+endsnippet
+
+snippet T "TODO" i
+TODO 
+endsnippet
+
+snippet D "DONE"
+DONE 
+endsnippet
+
+snippet X "XXX"
+XXX 
+endsnippet
+
+snippet P "POINT" i
+POINT 
+endsnippet
+
+# Ad-hoc snippets for specific projects
+snippet xr "XXX Add ref"
+XXX Add ref
+endsnippet
+
+
+
+################################################################################
 # PART 2: Snippets for Latex (some of them copied from tex.snippets)
+################################################################################
 
-### Text formatting
-
+# -------------------------
+# SECTION:  Formatting text and math
+# ------------------------
+#
+# Text formatting
 snippet verb "verbatim"
 \verb|${0:verbatim}|
 endsnippet
@@ -259,7 +309,7 @@ snippet text "text" i
 \text{${0:text}}
 endsnippet
 
-snippet col "color"
+snippet color "color"
 {\color{${1:color}} ${2:text}}
 endsnippet
 
@@ -269,7 +319,7 @@ snippet hat "hat ^"
 \hat{${0}}
 endsnippet
 
-snippet \~ "tilde"
+snippet tilde "tilde"
 \tilde{${0}}
 endsnippet
 
@@ -279,8 +329,8 @@ snippet ~ "text tilde"
 \textasciitilde
 endsnippet
 
-### Math formatting
 
+# Math text formatting
 snippet bf "mathbf"
 \mathbf{${0:mathbold}}
 endsnippet
@@ -298,18 +348,10 @@ snippet bs "boldsymbol"
 endsnippet
 
 
-### Probability
-
-snippet p "p( )"
-p(${0:X})
-endsnippet
-
-snippet pcon "p( | )"
-p(${1: X }\,|\,${0: Y })
-endsnippet
-
-### Set and special symbols
-
+# -------------------------
+# SECTION:  Set symbols and number types
+# ------------------------
+#
 snippet RR "R for reals"
 \R
 endsnippet
@@ -326,12 +368,14 @@ snippet EE "E for expectation"
 \E
 endsnippet
 
-snippet ell "\ell"
-\ell 
+snippet in "\in"
+\in 
 endsnippet
 
-### Delimiters
-
+# -------------------------
+# SECTION:  Delimiters
+# ------------------------
+#
 snippet " "Double quotes"
 "${0}"
 endsnippet
@@ -408,38 +452,54 @@ snippet langle "< , >"
 \langle ${1:v1} , ${2:v2} \rangle
 endsnippet
 
+# The following should be used instead of || . || in norms
 snippet norm "\norm"
 \norm{${0}} 
 endsnippet
 
-# Spacing
+# The following should be written instead of | in 
+# conditional probabilities p(a | b)
+snippet mid "\mid" i
+\mid 
+endsnippet
 
+# The following should be written instead of || in
+# the KL divergence KL(p || q)
+snippet | "\|"
+\| 
+endsnippet
+
+
+# -------------------------
+# SECTION:  Spacing
+# ------------------------
+#
 snippet , "\," i
-\, 
+\,
 endsnippet
 
 snippet ; "\;" i
-\; 
+\;
 endsnippet
 
 snippet quad "\quad" i
-\quad 
+\quad
 endsnippet
 
 # Math symbols
 
-snippet x "\times"
-\times 
-endsnippet
-
-snippet in "\in"
-\in 
-endsnippet
-
+# -------------------------
+# SECTION:  Arrows
+# ------------------------
+#
 snippet to "\to"
 \to 
 endsnippet
 
+# -------------------------
+# SECTION:  Dots
+# ------------------------
+#
 snippet ... "\ldots"
 \ldots 
 endsnippet
@@ -452,20 +512,26 @@ snippet c. "\cdot"
 \cdot 
 endsnippet
 
-snippet __ "_{}" i
-_{${0}}
-endsnippet
-
-snippet ^^ "^{}" i
-^{${0}}
-endsnippet
 
 snippet log "\log"
 \log
 endsnippet
 
-snippet mid "\mid" i
-\mid
+
+# -------------------------
+# SECTION:  Relation operators
+# ------------------------
+#
+snippet >= "\geq"
+\geq 
+endsnippet
+
+snippet <= "\leq"
+\leq 
+endsnippet
+
+snippet +- "\pm (Latex for ±)"
+\pm 
 endsnippet
 
 snippet sim "\sim"
@@ -476,30 +542,62 @@ snippet approx "\approx"
 \approx 
 endsnippet
 
-# Operators
 
-
+# -------------------------
+# SECTION:  Operators for terms
+# ------------------------
+#
 snippet sum "\sum" i
 \sum_{${1:i=1}}^{${2:n}}  
 endsnippet
 
 snippet prod "\prod" i
-\prod_{${1}}^{${2}} 
+\prod_{${1:i=1}}^{${2:n}} 
 endsnippet
 
-snippet nab "\nabla"
+snippet x "\times"
+\times 
+endsnippet
+
+
+# -------------------------
+# SECTION:  Operators for differentiation and integration
+# ------------------------
+#
+snippet nabla "\nabla"
 \nabla
 endsnippet
 
+snippet grad "\grad"
+\grad
+endsnippet
+
+
+# -------------------------
+# SECTION:  Operators for optimization
+# ------------------------
+#
 snippet min "\min"
 \min
 endsnippet
 
-snippet +- "\pm (Latex for ±)"
-\pm 
+snippet max "\max"
+\max
 endsnippet
 
-# Operations
+
+
+# -------------------------
+# SECTION:  Subscripts and superscripts
+# ------------------------
+#
+snippet __ "_{}" i
+_{${0}}
+endsnippet
+
+snippet ^^ "^{}" i
+^{${0}}
+endsnippet
 
 snippet -1 "^{-1}" i
 ^{-1}
@@ -647,44 +745,12 @@ endsnippet
 # - To see the order of Greek letters check https://omniglot.com/writing/greek.htm
 
 
-# Snippets for highlighted words
-snippet I "IDEA" i
-IDEA 
-endsnippet
-snippet A "ANSWER" i
-ANSWER 
-endsnippet
 
-snippet N "NOTE" i
-NOTE 
-endsnippet
-
-snippet C "COMMENT"
-COMMENT 
-endsnippet
-
-snippet Q "QUESTION" i
-QUESTION 
-endsnippet
-
-snippet T "TODO" i
-TODO 
-endsnippet
-
-snippet D "DONE"
-DONE 
-endsnippet
-
-snippet X "XXX"
-XXX 
-endsnippet
-
-snippet P "POINT" i
-POINT 
-endsnippet
-
-# Ad-hoc snippets for specific projects
-snippet xr "XXX Add ref"
-XXX Add ref
+# -------------------------
+# SECTION:  Still not sorted
+# ------------------------
+#
+snippet ell "\ell"
+\ell 
 endsnippet
 

@@ -292,11 +292,11 @@ let g:netrw_liststyle = 3
 " - Lists: show buffer list, show register list, show fuzzy finder list...
 
 " Display buffers and wait for input to choose one (l for ls).
-" nnoremap ,l :ls<CR>:b
-nnoremap ,l :Buffers<CR>
+nnoremap ,l :ls<CR>:b
+" nnoremap ,l :Buffers<CR>
 " Same as before but display all buffers, including unlisted ones
-" nnoremap ,<S-l> :ls!<CR>:
-nnoremap ,<S-l> :BuffersAll<CR>
+nnoremap ,<S-l> :ls!<CR>:
+" nnoremap ,<S-l> :BuffersAll<CR>
 " Same as before but display previously opened files
 nnoremap ,<C-l> :History<CR>
 " Go to next buffer (n for next)
@@ -497,11 +497,25 @@ command! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>
 " you associate each extension to their desired colorscheme, and loop over
 " the dictionaries to set the colorscheme, one extension at a time
 function! AutomaticColorscheme()
-    colorscheme codedark
+    " Colorscheme and highlighting trailing spaces
+    " - Highlighting trailing spaces is only in non-vimwiki files
+    " - Highlighting trailing spaces is not done in insert mode. This is
+    "   achieved through the augroup and autocommands
     let this_filetype = &l:filetype
     if this_filetype == 'vimwiki'
         colorscheme blackwhite
-    endif 
+    else
+        colorscheme codedark
+        augroup ExtraWhitespaceAugroup
+            autocmd!
+            highlight ExtraWhitespace ctermbg=red guibg=red
+            autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+            autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+            autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+            autocmd BufWinLeave * call clearmatches()
+        augroup END
+    endif
+    " Search coloring
     set hlsearch
     hi Search cterm=NONE ctermfg=white ctermbg=DarkRed
     hi IncSearch cterm=NONE ctermfg=white ctermbg=DarkGreen
