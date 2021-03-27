@@ -1,11 +1,11 @@
 " My vimrc file. To locate in ~/.vim/vimrc and to be used with the HUGE version
 " of Vim (all details about the Vim version used in corona are in
-" dotvim/.vim_version_on_corona.txt). Remember that you need to install Vundle, before installing the plugins, which you do with:    
+" dotvim/.vim_version_on_corona.txt). Remember that you need to install Vundle, before installing the plugins, which you do with:
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 " VUNDLE CONFIGURATION
 
-set nocompatible              " be iMproved, required 
+set nocompatible              " be iMproved, required
 filetype off                  " required
 
 
@@ -60,7 +60,7 @@ Plugin 'ojroques/vim-oscyank'
 " " Plugin 'airblade/vim-matchquote'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required (note that this automatically guesses indents for 
+filetype plugin indent on    " required (note that this automatically guesses indents for
                              " Python, etc, when you're writing code, so it's very useful)
 " To ignore plugin indent changes, instead use:
 filetype plugin on
@@ -121,15 +121,15 @@ let g:cellmode_tmux_panenumber=1
 " interact with other applications. For example, you can copy to clipboard to
 " search Vim text in Firefox, and you can paste from clipboard to use a
 " solution you have found online.
-" - Pasting from clipboard: use the usual register + (for example to search 
-"   stuff in Firefox). For Vim to be able to copy to system clipboard, it must 
-"   be compiled with the +clipboard. I usually use the binary vim-gtk, which 
+" - Pasting from clipboard: use the usual register + (for example to search
+"   stuff in Firefox). For Vim to be able to copy to system clipboard, it must
+"   be compiled with the +clipboard. I usually use the binary vim-gtk, which
 "   can be installed with      sudo apt install vim-gtk
 " - Copying from clipboard: rather than copying to the usual clipboard
 "   registers + and *, we use the terminal escape sequence OSC52. For this,
 "   you need to:
 "   - Enable OSC52 support by urxvt: OSC52 is not supported by default, but it
-"   can be added with the perl extension "52-osc" (in your dotfiles). 
+"   can be added with the perl extension "52-osc" (in your dotfiles).
 "   - Enable OSC52 functionality in Vim: through the plugin "ojroques/vim-oscyank"
 vnoremap <C-y> :OSCYank<CR>
 map <C-p> "+p
@@ -184,7 +184,7 @@ set backspace=indent,eol,start " To make sure that backspace works in every syst
 syntax on                      " to make sure that syntax is highlighted in every system
 
 " Avoid mouse setting cursor
-" noremap <LeftMouse> ma<LeftMouse>`a   
+" noremap <LeftMouse> ma<LeftMouse>`a
 augroup NO_CURSOR_MOVE_ON_FOCUS
     au!
     au FocusLost * let g:oldmouse=&mouse | set mouse=
@@ -246,7 +246,7 @@ endfunction
 nnoremap <F12> :call IterateColorscheme()<CR>
 imap <F12> <Esc>:call IterateColorscheme()<CR>li
 
-" Color cursor. Vim isn't able to change the cursor color by itself in a colorscheme: 
+" Color cursor. Vim isn't able to change the cursor color by itself in a colorscheme:
 " this is something that belongs to urxvt. So a little bit of wizardry is needed
 if &term =~ "xterm\\|rxvt"
     " use an orange cursor in insert mode
@@ -314,7 +314,7 @@ nnoremap ,d :DiffSaved<CR>
 nnoremap ,r :register<CR>
 
 " -----------
-" | SECTION | Important keybindings starting with <leader>. 
+" | SECTION | Important keybindings starting with <leader>.
 " -----------
 "
 " <leader> is generally used for either:
@@ -407,7 +407,7 @@ nmap <leader><leader><leader><leader><leader>nbgfh  <Plug>BufKillForward
 nmap <leader><leader><leader><leader><leader>burib  <Plug>BufKillBack
 
 " t for regenerating ctags
-" Function to regenerate ctags (with inspiration from 
+" Function to regenerate ctags (with inspiration from
 " https://stackoverflow.com/questions/27978307/how-to-run-vim-commands-scripts-from-project-root )
 " The 'exclude' argument is used in case we are in a repository with guatask
 " tasks and the OUTPUT directories have many files
@@ -506,6 +506,7 @@ function! AutomaticColorscheme()
         colorscheme blackwhite
     else
         colorscheme codedark
+        " Autocommands from https://stackoverflow.com/a/4617156/7998725
         augroup ExtraWhitespaceAugroup
             autocmd!
             highlight ExtraWhitespace ctermbg=red guibg=red
@@ -643,7 +644,7 @@ inoremap <expr> <F2> pumvisible() ? '<Esc>a<C-x><C-n>' : '<F2>'
 " is my own config)
 inoremap <expr> <CR> pumvisible() ? '<Esc>a' : '<C-G>u<CR>'
 
-" We will map <Tab> to our own function ExpandSnippetIfPossibleAndGetResult, 
+" We will map <Tab> to our own function ExpandSnippetIfPossibleAndGetResult,
 " so that we can create the following behaviour:
 
 " - If upon pressing <Tab> we can expand a snippet, then we don't do anything
@@ -728,10 +729,10 @@ noremap <C-w><Bar> :vsp<CR>
 " Make mapping so that Shift-Arrow increase and reduce the window size in normal
 " mode. As with the Vimwiki diary mappings for <C-Arrow>, first you need to
 " freed <S-Arrow> and then map them.
-set <S-Up>=[a 
-set <S-Down>=[b 
-set <S-Left>=[d 
-set <S-Right>=[c 
+set <S-Up>=[a
+set <S-Down>=[b
+set <S-Left>=[d
+set <S-Right>=[c
 nmap <S-Up>    <C-w>+
 nmap <S-Down>  <C-w>-
 nmap <S-Left>  <C-w><
@@ -755,7 +756,7 @@ endfunction
 nnoremap <C-w>z  :call ZoomInCurrentWindow()<CR>
 tnoremap <C-w>z  <C-\><C-N>:call ZoomInCurrentWindow()<CR>i
 
-" Change windows 
+" Change windows
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
 nnoremap <C-l> <C-w>l
@@ -856,11 +857,11 @@ tnoremap <M-Down> <Down>
 
 
 
-" Set path to search recursively for all the directories in the respos folder 
+" Set path to search recursively for all the directories in the respos folder
 " Using ** is not the best option because it may take a very long time, but
 " for my number of files it is ok
 set path=~/repos/**
-nnoremap <leader>f :find 
+nnoremap <leader>f :find
 
 
 
@@ -869,7 +870,7 @@ nnoremap <leader>f :find
 let g:vimtex_view_method = 'zathura'
 nnoremap <localleader>lw :VimtexCountWords<CR>
 " CHECK IF THE FOLLOWING WORKS. It is supposed to be a list of regex to
-" filter. It DOESN'T WORK TODO 
+" filter. It DOESN'T WORK TODO
  let g:vimtex_log_ignore = ['^.*Warning.*$']
 
 " Display line equivalent of o and O. gO adds an additional line of space
@@ -894,7 +895,7 @@ nnoremap g[ `[v`]
 vnoremap g[ <Esc>`[v`]
 
 
-" Make '"%P' in normal mode paste the entire path to the file (similar to '"%p', 
+" Make '"%P' in normal mode paste the entire path to the file (similar to '"%p',
 " which pastes just the filename)
 nnoremap "%<S-p> i<C-r>=expand("%:p")<CR><Esc>
 " Make an explicity keybinding '"%p' in normal mode that pastes just the
@@ -1016,7 +1017,7 @@ cnoremap <expr> s Cs()
 " | SECTION | Motions and text editing
 " -----------
 "
-" Enable jumping to matching angle bracket with % 
+" Enable jumping to matching angle bracket with %
 " source: https://www.reddit.com/r/vim/comments/kr9rnu/how_to_jump_to_matching_anglebracket_using/
 set matchpairs+=<:>
 
@@ -1033,7 +1034,7 @@ inoremap <C-w> <C-g>u<C-w>
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-y> <Esc>ua
 
-" Stay in same character column when moving with vertical motions like 
+" Stay in same character column when moving with vertical motions like
 " <C-d> and <C-u>
 set nostartofline
 " Move screen by 1 position at a time when moving the cursor with h and l
@@ -1066,7 +1067,7 @@ augroup CursorHoldToJumplist
     autocmd CursorHold * normal! m'
 augroup END
 
-" Disable K to look up for documentation, because you never use it 
+" Disable K to look up for documentation, because you never use it
 " and it's a hindrance rather than any help
 vnoremap <S-k> <Nop>
 
@@ -1095,7 +1096,7 @@ map : <Plug>Sneak_,
 " nnoremap. If problems arise, consider this a possible source
 
 " Make vim-sneak mappings more consistent in visual mode by making s go to next match and S
-" go to previous match, while keeping vim-surround functionality through z 
+" go to previous match, while keeping vim-surround functionality through z
 " (mnemonics: vim-zurround) Explained in this GitHub issue:
 " https://github.com/justinmk/vim-sneak/issues/268
 "
@@ -1197,7 +1198,7 @@ set gdefault
 set ttimeout
 set ttimeoutlen=10
 
-" <C-Arrows> 
+" <C-Arrows>
 " <C-Up> and <C-Down> don't have associated symbol, so we cannot use 'set'
 " directly on them, but rather on function keys, and then we map to them
 set <C-Left>=Od
@@ -1212,13 +1213,13 @@ cnoremap <M-Right> <Right>
 cnoremap <M-Up> <Up>
 cnoremap <M-Down> <Down>
 
-" Move backward and forward by one word with <M-b> and <M-f> 
+" Move backward and forward by one word with <M-b> and <M-f>
 " <M-b> and <M-f> are mapped to <F9> and <F10> by urxvt through escape
 " sequences
 cnoremap <F9> <S-Left>
 cnoremap <F10> <S-Right>
 
-" Move backward and forward by one word with <M-b> and <M-f> 
+" Move backward and forward by one word with <M-b> and <M-f>
 " <M-b> and <M-f> are mapped to <F9> and <F10> by urxvt through escape
 " sequences
 inoremap <F9> <S-Left>
@@ -1282,7 +1283,7 @@ vnoremap <F8> s
 vnoremap gq gqgv:s/  / /<CR>
 
 
-" From http://blog.ezyang.com/2010/03/vim-textwidth/   
+" From http://blog.ezyang.com/2010/03/vim-textwidth/
 " Got the color #00005f  from
 " https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim  Write note
 " on colors for Vim
