@@ -1167,6 +1167,9 @@ inoremap <NL> <C-G>u<NL>
 " TODO For some reason, moving the cursor with the arrow keys seems to break
 " the undo sequence too. Investigate if this is the reason
 
+" Delete trailing whitespaces
+nnoremap gt :s/\s\+$//<CR>
+
 
 
 
