@@ -412,8 +412,8 @@ nmap <leader><leader><leader><leader><leader>burib  <Plug>BufKillBack
 " The 'exclude' argument is used in case we are in a repository with guatask
 " tasks and the OUTPUT directories have many files
 function! GenerateCtags()
-    let root_dir = fnamemodify(finddir('.git', '.;'), ':h')   
-    exe '!ctags -R --python-kinds=-i exclude=tasks/*/OUTPUT' . root_dir
+    let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
+    exe '!ctags -R --python-kinds=-i --exclude=' . root_dir . '/tasks/*/OUTPUT ' . root_dir
 endfunction
 nnoremap <leader>t :call GenerateCtags()<CR>
 
