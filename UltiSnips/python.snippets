@@ -7,19 +7,31 @@ endsnippet
 
 snippet task "guatask task"
 class ${1:TaskName}(${2:TaskParent}):
-
     debug = True
     requires = [${3:required tasks}]
     params = {${4:parameters}}
     directory = '${5:directory name}'
     subdirectory = '${6:subdirectory name}'
-    output_filename = '${7: output filename}'
+    output_filename = '${7:output filename}'
 
     def run(self):
 	${8:Write here what the task is supposed to do.}
 
     def load_output(self):
 	${9:Write here how the output of the task should be loaded (once completed).}
+endsnippet
+
+snippet requires "class attributes needed for guatask task"
+requires = [${3:required tasks}]
+params = {${4:parameters}}
+directory = '${5:directory name}'
+subdirectory = '${6:subdirectory name}'
+output_filename = '${7:output filename}'
+debug = True
+def run(self):
+    ${8:Write here what the task is supposed to do.}
+def load_output(self):
+    ${9:Write here how the output of the task should be loaded (once completed).}
 endsnippet
 
 snippet hi "hi comment"
