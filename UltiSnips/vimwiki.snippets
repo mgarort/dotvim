@@ -1,6 +1,6 @@
-# This file contains my Vimwiki snippets. It is divided in two parts: 
-# 1. snippets for pure Vimwiki, 
-# 2. and snippets for Latex that will be used in Vimwiki. 
+# This file contains my Vimwiki snippets. It is divided in two parts:
+# 1. snippets for pure Vimwiki,
+# 2. and snippets for Latex that will be used in Vimwiki.
 
 
 ################################################################################
@@ -64,7 +64,7 @@ ${0:code}
 }}}
 endsnippet
 
-# $ and ` not made greedy (option i) because they clash with snippets 
+# $ and ` not made greedy (option i) because they clash with snippets
 # $$ and ``` respectively
 snippet $ "Inline Latex"
 $\; ${0:math} \;$
@@ -90,7 +90,7 @@ endsnippet
 # ------------------------
 #
 snippet diary "Vimwiki diary entry template"
-= `!p 
+= `!p
 import datetime
 
 year, month, day = snip.basename.split('-')
@@ -209,7 +209,7 @@ snippet _ "Italic"
 _${0:italic}_
 endsnippet
 
-# Note that this snippet is an exception which cannot be greedy, since Greek letters 
+# Note that this snippet is an exception which cannot be greedy, since Greek letters
 # use the same triggers as digraphs and all end with *
 snippet * "Bold"
 *${0:bold}*
@@ -457,7 +457,7 @@ snippet norm "\norm"
 \norm{${0}} 
 endsnippet
 
-# The following should be written instead of | in 
+# The following should be written instead of | in
 # conditional probabilities p(a | b)
 snippet mid "\mid" i
 \mid 
@@ -493,7 +493,7 @@ endsnippet
 # ------------------------
 #
 snippet to "\to"
-\to 
+\to
 endsnippet
 
 # -------------------------
@@ -548,7 +548,7 @@ endsnippet
 # ------------------------
 #
 snippet sum "\sum" i
-\sum_{${1:i=1}}^{${2:n}}  
+\sum_{${1:i=1}}^{${2:n}} 
 endsnippet
 
 snippet prod "\prod" i
@@ -609,8 +609,8 @@ endsnippet
 # ------------------------
 #
 # These snippets try to be consistent with Vim digraphs
-# Some of the cap versions don't exist in Latex because the English letter is 
-# exactly the same (for example, \Alpha is not needed because capital alpha 
+# Some of the cap versions don't exist in Latex because the English letter is
+# exactly the same (for example, \Alpha is not needed because capital alpha
 # is A). However, they are added for consistency and to encourage learning the
 # Greek letters by seeing the errors caused by using \Alpha and similar ones.
 
