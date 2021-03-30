@@ -872,7 +872,7 @@ nnoremap <localleader>lw :VimtexCountWords<CR>
 
 " Display line equivalent of o and O. gO adds an additional line of space
 " below because we usually want the stuff below to go away and not bother us
-nmap go  i<CR>
+nmap go  i<Backspace><CR>
 nmap gO  i<CR><Esc><Up>A
 
 " Display line equivalent of I and A
