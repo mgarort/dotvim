@@ -191,9 +191,6 @@ augroup NO_CURSOR_MOVE_ON_FOCUS
     au FocusGained * if exists('g:oldmouse') | let &mouse=g:oldmouse | unlet g:oldmouse | endif
 augroup END
 
-" Look for tags file (from ctags) in upper directories recursively
-set tags=./tags;/
-
 " Allow to open other buffers when current file is unsaved
 set hidden
 
@@ -413,7 +410,7 @@ nmap <leader><leader><leader><leader><leader>burib  <Plug>BufKillBack
 " tasks and the OUTPUT directories have many files
 function! GenerateCtags()
     let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
-    exe '!ctags -R --python-kinds=-i --exclude=' . root_dir . '/tasks/*/OUTPUT ' . root_dir
+    exe '!ctags -Rf ' . root_dir . '/.tags --python-kinds=-i --exclude=' . root_dir . '/tasks/*/OUTPUT ' . root_dir
 endfunction
 nnoremap <leader>t :call GenerateCtags()<CR>
 
@@ -1071,7 +1068,8 @@ augroup END
 " and it's a hindrance rather than any help
 vnoremap <S-k> <Nop>
 
-" Recognize `.tags` file as well as `tags` file
+" Recognize `.tags` file as well as `tags` file (for ctags), and look for tags in
+" upper directories recursively
 set tags=./tags;,tags;./.tags;,.tags;
 
 " Disable vim-sneak highlight so that it behaves more like the f and t motions
