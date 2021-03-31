@@ -1174,7 +1174,8 @@ nmap gt <Plug>DeleteTrailingWhitespaces
 " Note that we are using whitespace <space> instead of colon : because <Plug>
 " commands force us to use nmap instead of nnoremap
 
-
+" The same for every line selected in visual mode. We define noremapgt in
+vnoremap gt :s/\s\+$//<CR>
 
 
 " -----------
