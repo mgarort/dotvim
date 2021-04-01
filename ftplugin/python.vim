@@ -29,7 +29,7 @@ set nowrap
 
 
 " Define keybindings for tab functionality
-nnoremap <C-Up> :tabnew %<CR>
-nnoremap <C-Down> :tabc<CR>
-nnoremap <C-Left> :tabp<CR>
-nnoremap <C-Right> :tabn<CR>
+nnoremap <C-Up>    mt:tabnew %<CR>`t
+nnoremap <C-Down>  mt:tabc<CR>`t
+nnoremap <C-Left>  mt:tabp<CR>`t
+nnoremap <C-Right> mt:tabn<CR>`t
