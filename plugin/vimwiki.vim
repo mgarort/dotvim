@@ -94,6 +94,9 @@ function! CreateNoteFromTitle()
     " the 0th unchanged, and restore unnamed register
     execute "normal ^t]\"hyi]\<CR>ggi= \<Esc>\"hpa =\<CR>\<CR>\<CR>"
     let @" = getreg("0")
+    " Start insert mode
+    " (norm i doesn't work https://www.reddit.com/r/vim/comments/583uaf/how_to_enter_insert_mode_from_function/)
+    startinsert
 endfunction
 
 function! UpdateTitle()

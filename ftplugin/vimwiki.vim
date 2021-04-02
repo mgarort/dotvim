@@ -14,7 +14,7 @@
 nnoremap <leader><leader><leader><leader><leader><leader>i <Plug>VimwikiTextObjListSingle
 nnoremap <leader><leader><leader><leader><leader><leader>iV <Plug>VimwikiTextObjListSingleV
 
-" Freed <C-o> by disabling the native 'next link' functionality, which is redundant 
+" Freed <C-o> by disabling the native 'next link' functionality, which is redundant
 " after mapping <C-h> and <C-l>
 nnoremap <leader><leader><leader><leader><leader><leader><leader><leader>asdfasdferqer <Plug>VimwikiNextLink
 
@@ -61,7 +61,7 @@ nnoremap ,u :UpdateTitle<CR>
 " Create wiki notes from Anki notes
 command! Wikify call Wikify()
 " Create notes from 6= headers
-nnoremap '<CR> :call CreateNoteFromTitle()<CR>i
+nnoremap <silent> '<CR> :call CreateNoteFromTitle()<CR>
 
 
 " -------------------------------
