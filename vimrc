@@ -57,6 +57,7 @@ Plugin 'romainl/vim-cool'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'ojroques/vim-oscyank'
+Plugin 'godlygeek/tabular'
 " " Plugin 'airblade/vim-matchquote'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -1006,6 +1007,19 @@ function! Cs()
 	endif
 endfunction
 cnoremap <expr> s Cs()
+
+" Better UX for tabularizing
+" Pressing T in sixth posiiton in visual selection will type 'Tabularize /'
+" directly
+function! CT()
+	let cmdline = getcmdline()
+	if cmdline =~ "^'<,'>" && getcmdpos() == 6
+		return 'Tabularize /'
+	else
+		return 'T'
+	endif
+endfunction
+cnoremap <expr> T CT()
 
 
 
