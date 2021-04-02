@@ -23,9 +23,9 @@ let g:vimwiki_list_ignore_newline = 0
 " (if g:vimwiki_autowriteall is set in ftplugin, it doesn't work)
 let g:vimwiki_autowriteall = 0
 " This is so that my vimwiki is hosted in the repos folder
-let g:vimwiki_list = [{'path': '~/repos/wiki', 
-            \ 'path_html':'~/wiki_html', 
-            \ 'syntax':'default', 
+let g:vimwiki_list = [{'path': '~/repos/wiki',
+            \ 'path_html':'~/wiki_html',
+            \ 'syntax':'default',
             \ 'template_path':'~/repos/wiki/setup',
             \ 'ext':'.wiki',
             \ 'template_default': 'default',
@@ -38,7 +38,7 @@ let g:vimwiki_list = [{'path': '~/repos/wiki',
 "  SECTION:  Edit text and navigate
 " ---------------------------------
 "
-" Functions to navigate to next link, 
+" Functions to navigate to next link,
 " either Vimwiki link or URL
 function! SearchNextLink()
     call search('\[\[.\{-}\]\]\|http\|{{.\{-}}}', 'W')
@@ -78,6 +78,11 @@ endfunction
 "    So if there are surrounding whitespaces, those will be matched by \s* and
 "    not by \{-}
 function! CreateNoteFromTitle()
+    " Check that current line contains title. If not, return from function
+    let is_title_in_current_line = match(getline('.'), '====== .\+ ======')
+    if is_title_in_current_line == -1
+        return
+    endif
     " Make a link (and restore search register afterwards)
     let old_search = getreg("/")
     s/======\s*\(.\{-}\)\s*======/====== \[\[\1\]\] ======/
@@ -117,7 +122,7 @@ function! Wikify()
     %s#\\textit{\(.\{-}\)}#<i>\1</i>#ge
     %s#\\item{\(.*\)}#\1#ge
     %s#\\verb|\(.\{-}\)|#`\1`#ge
-    " The following replaces the $$....$$ equations in latex 
+    " The following replaces the $$....$$ equations in latex
     " for {{$....}}$ in Vimwiki. Explanation:
     " - Left hand side, \$\$  \$\$ are $$   $$ for Latex
     " - Left hand side, \(\_.\{-}\) is a capturing group
@@ -178,7 +183,7 @@ endfunction
 " SECTION:  Functionality for writing in Vim
 " ------------------------
 "
-" Prose mode for hard wrapping and smooth scrolling. 
+" Prose mode for hard wrapping and smooth scrolling.
 " Based on https://stackoverflow.com/questions/9922607/vim-long-lines-and-scrolling
 function! ToggleProseMode()
     if b:is_prose_mode_active == 0
@@ -257,7 +262,7 @@ augroup END
 " doesn't
 " augroup CompileVimwiki
 "     autocmd!
-"     autocmd BufWritePost *.wiki if b:is_compile_html_mode_active ==# 1 | silent Vimwiki2HTML | endif 
+"     autocmd BufWritePost *.wiki if b:is_compile_html_mode_active ==# 1 | silent Vimwiki2HTML | endif
 " augroup END
 function! OpenThisHTML()
     let path_to_html_folder = expand(g:vimwiki_list[0]['path_html']) . '/'
@@ -269,7 +274,7 @@ function! OpenThisHTML()
     let full_path_to_html_file = "'" . path_to_html_folder . note_name . ".html'"
     "The & at the end guarantees that firefox is executed in the background,
     "so Vim goes back to editing instead of hanging while Firefox is open
-    execute "!firefox -new-window" full_path_to_html_file "&"  
+    execute "!firefox -new-window" full_path_to_html_file "&"
 endfunction
 " Process images so that they use less space, and map keybinding to <C-c> (c
 " for compress)
@@ -277,4 +282,4 @@ function! ProcessImages()
     let path_to_wiki = expand(g:vimwiki_list[0]['path'])
     let path_to_setup_folder = path_to_wiki . '/setup/'
     execute '!cd' path_to_setup_folder '; python3 process_images.py'
-endfunction     
+endfunction
