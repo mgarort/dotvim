@@ -543,7 +543,7 @@ function! s:DiffWithSaved()
     " Diff the copy
     diffthis
     " In the copy's buffer, indicate:
-    " - buftype nofile: buffer not related to any file and which won't be 
+    " - buftype nofile: buffer not related to any file and which won't be
     "   written
     " - bufhidden wipe: when the buffer stops being displayed, wipe it out
     "   from the buffer list
