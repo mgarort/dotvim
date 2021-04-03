@@ -33,3 +33,16 @@ nnoremap <C-Up>    mt:tabnew %<CR>`t
 nnoremap <C-Down>  mt:tabc<CR>`t
 nnoremap <C-Left>  mt:tabp<CR>`t
 nnoremap <C-Right> mt:tabn<CR>`t
+
+
+" t for regenerating ctags
+" Function to regenerate ctags (with inspiration from
+" https://stackoverflow.com/questions/27978307/how-to-run-vim-commands-scripts-from-project-root )
+" The 'exclude' argument is used in case we are in a repository with guatask
+" tasks and the OUTPUT directories have many files
+function! GenerateCtags()
+    let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
+    exe '!ctags -Rf ' . root_dir . '/.tags --python-kinds=-i --exclude=' . root_dir . '/tasks/*/OUTPUT ' . root_dir
+endfunction
+nnoremap <leader>t :call GenerateCtags()<CR>
+

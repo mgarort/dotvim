@@ -404,16 +404,6 @@ nmap <leader><leader><leader><leader><leader>slfkj  <Plug>BufKillBun
 nmap <leader><leader><leader><leader><leader>nbgfh  <Plug>BufKillForward
 nmap <leader><leader><leader><leader><leader>burib  <Plug>BufKillBack
 
-" t for regenerating ctags
-" Function to regenerate ctags (with inspiration from
-" https://stackoverflow.com/questions/27978307/how-to-run-vim-commands-scripts-from-project-root )
-" The 'exclude' argument is used in case we are in a repository with guatask
-" tasks and the OUTPUT directories have many files
-function! GenerateCtags()
-    let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
-    exe '!ctags -Rf ' . root_dir . '/.tags --python-kinds=-i --exclude=' . root_dir . '/tasks/*/OUTPUT ' . root_dir
-endfunction
-nnoremap <leader>t :call GenerateCtags()<CR>
 
 " y for viewing in table format (just bc "y" is next to "t")
 function! ViewTable()
