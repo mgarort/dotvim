@@ -36,10 +36,17 @@ function! SbatchGuataskTask(partition,hours)
     let sed_hours_command = 'sed -i "s/HOURS/' . a:hours . '/" ' . target
     let sed_hours_output = system(sed_hours_command)
     echo sed_hours_output
-    " Batch submission file
+    " Batch submission file.
+    " (Change directory to ensure that the slurm-XXXXX.out file and the
+    "  machine.file.XXXXX files are saved in the submissions directory
+    "  rather than in the tasks directory, creating clutter)
+    let cd_command = 'cd ' . root_dir . '/submissions/'
+    exe cd_command
     let batch_command = 'sbatch ' . target
     let batch_output =  system(batch_command)
     echo batch_output
+    let cd_command = 'cd -'
+    exe cd_command
 endfunction
 com -nargs=* Guabatch call SbatchGuataskTask(<f-args>)
 " Keybindings for guatask tasks:
