@@ -58,6 +58,7 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'ojroques/vim-oscyank'
 Plugin 'godlygeek/tabular'
+Plugin 'jeetsukumaran/vim-pythonsense'
 " " Plugin 'airblade/vim-matchquote'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
