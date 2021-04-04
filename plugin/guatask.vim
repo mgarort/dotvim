@@ -12,8 +12,6 @@ function! SbatchGuataskTask(partition,hours)
     let task_name = task_name[0]
     let task_name = split(task_name, '(')
     let task_name = task_name[0]
-    echo task_name
-    echo "\n"
     " Create submission file
     if a:partition == 'pascal'
         let template_file_extension = '.wilkes2'
@@ -44,7 +42,7 @@ function! SbatchGuataskTask(partition,hours)
     exe cd_command
     let batch_command = 'sbatch ' . target
     let batch_output =  system(batch_command)
-    echo batch_output
+    echom task_name . ': ' . batch_output
     let cd_command = 'cd -'
     exe cd_command
 endfunction
