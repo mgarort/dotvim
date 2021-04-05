@@ -1,10 +1,9 @@
 " Function for submitting Guatask tasks to the cluster slurm queue, creating a
 " submission file with the name slurm_TASKNAME.{wilkes2,peta-skylake4}
 " a:0 is for the partition, and a:1 is for the time (integer, in hours)
-" TODO Make it operate on visual selections too:
-" - If currently a visual selection, iterate over the lines to submit all
-"   tasks on those lines  https://vi.stackexchange.com/questions/16610/operate-on-a-visual-selection-by-looping-through-the-lines
-" - If not currently a visual selection, operate on current line only
+" TODO Make SbatchGuataskTask and OpenGuataskLogFile work in the current
+" class, even if the cursor is anywhere in the class and not necessarily on
+" the class declaration. Copy how OpenGuataskLogFile gets the directory name
 function! SbatchGuataskTask(partition,hours)
     " Get name of Guatask task under the cursor
     let task_name = getline('.')
@@ -47,6 +46,29 @@ function! SbatchGuataskTask(partition,hours)
     exe cd_command
 endfunction
 com -nargs=* Guabatch call SbatchGuataskTask(<f-args>)
+
+function! OpenGuataskLogFile() abort
+    " Get directory name (cursor anywhere in the class, thanks to u/monkoose and u/abraxasnister)
+    let dir_line_regex = '^\s*directory\s*='
+    let class_regex = '^\s*class\s\+\S\+('
+    let dir_name_regex = "['\"]\\zs.*\\ze['\"]"
+    let first_line = search(class_regex, 'Wncb')
+    let indent_level = match(getline(first_line), 'class') + 1
+    let last_line = search('\%' .. indent_level .. 'c\S\|\%$', 'Wn') - 1
+    let dir_name = matchstr(matchstr(getline(first_line, last_line), dir_line_regex), dir_name_regex)
+    " Get task name (cursor in the class declaration)
+    let task_name = getline('.')
+    let task_name = split(task_name, 'class ')
+    let task_name = task_name[0]
+    let task_name = split(task_name, '(')
+    let task_name = task_name[0]
+    " Get full path to LOG file
+    let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
+    let log_path = root_dir . '/tasks/' . dir_name . '/LOG/' . task_name . '.log'
+    exe 'e ' . log_path
+endfunction
+com Gualog call OpenGuataskLogFile()
+
 " Keybindings for guatask tasks:
 " - g for guatask
 " - starting with , because they affect the current buffer only (as opposed to
@@ -56,3 +78,4 @@ com -nargs=* Guabatch call SbatchGuataskTask(<f-args>)
 "   - b for Guabatch
 "   - l for Gualog (to open the log file)
 nnoremap ,gb :Guabatch<space>
+nnoremap ,gl :Gualog<CR>
