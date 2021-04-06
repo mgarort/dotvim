@@ -71,6 +71,17 @@ function! OpenGuataskLogFile() abort
 endfunction
 com Gualog call OpenGuataskLogFile()
 
+function! OpenGuataskOutputFile()
+    " Get task name
+    let task_name = GetTaskName()
+    " Get full path to output file
+    let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
+    let out_path = root_dir . '/submissions/' . task_name . '.out'
+    " Open output file
+    exe 'e ' . out_path
+endfunction
+com Guaout call OpenGuataskOutputFile()
+
 " Keybindings for guatask tasks:
 " - g for guatask
 " - starting with , because they affect the current buffer only (as opposed to
@@ -79,5 +90,7 @@ com Gualog call OpenGuataskLogFile()
 " - ending with a different letter based on the action:
 "   - b for Guabatch
 "   - l for Gualog (to open the log file)
+"   - o for Guaout (to open the outpue file in the submissions directory)
 nnoremap ,gb :Guabatch<space>
 nnoremap ,gl :Gualog<CR>
+nnoremap ,go :Guaout<CR>
