@@ -294,7 +294,7 @@ let g:netrw_liststyle = 3
 nnoremap ,l :ls<CR>:b
 " nnoremap ,l :Buffers<CR>
 " Same as before but display all buffers, including unlisted ones
-nnoremap ,<S-l> :ls!<CR>:
+nnoremap ,<S-l> :ls!<CR>:b
 " nnoremap ,<S-l> :BuffersAll<CR>
 " Same as before but display previously opened files
 nnoremap ,<C-l> :History<CR>
