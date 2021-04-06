@@ -1,3 +1,13 @@
+" Function for getting task name if the cursor is on the first line of the
+" class
+function! GetTaskName()
+    let task_name = getline('.')
+    let task_name = split(task_name, 'class ')
+    let task_name = task_name[0]
+    let task_name = split(task_name, '(')
+    let task_name = task_name[0]
+    return task_name
+endfunction
 " Function for submitting Guatask tasks to the cluster slurm queue, creating a
 " submission file with the name slurm_TASKNAME.{wilkes2,peta-skylake4}
 " a:0 is for the partition, and a:1 is for the time (integer, in hours)
@@ -6,11 +16,7 @@
 " the class declaration. Copy how OpenGuataskLogFile gets the directory name
 function! SbatchGuataskTask(partition,hours)
     " Get name of Guatask task under the cursor
-    let task_name = getline('.')
-    let task_name = split(task_name, 'class ')
-    let task_name = task_name[0]
-    let task_name = split(task_name, '(')
-    let task_name = task_name[0]
+    let task_name = GetTaskName()
     " Create submission file
     if a:partition == 'pascal'
         let template_file_extension = '.wilkes2'
@@ -57,11 +63,7 @@ function! OpenGuataskLogFile() abort
     let last_line = search('\%' .. indent_level .. 'c\S\|\%$', 'Wn') - 1
     let dir_name = matchstr(matchstr(getline(first_line, last_line), dir_line_regex), dir_name_regex)
     " Get task name (cursor in the class declaration)
-    let task_name = getline('.')
-    let task_name = split(task_name, 'class ')
-    let task_name = task_name[0]
-    let task_name = split(task_name, '(')
-    let task_name = task_name[0]
+    let task_name = GetTaskName()
     " Get full path to LOG file
     let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
     let log_path = root_dir . '/tasks/' . dir_name . '/LOG/' . task_name . '.log'
