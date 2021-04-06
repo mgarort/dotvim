@@ -94,3 +94,24 @@ com Guaout call OpenGuataskOutputFile()
 nnoremap ,gb :Guabatch<space>
 nnoremap ,gl :Gualog<CR>
 nnoremap ,go :Guaout<CR>
+
+" Command line abbreviations for the partitions 'pascal' and 'skylake'
+function! GuataskCp()
+	let cmdline = getcmdline()
+	if cmdline =~ "Guabatch " && getcmdpos() == 10
+		return "pascal "
+	else
+		return "p"
+	endif
+endfunction
+cnoremap <expr> p GuataskCp()
+
+function! GuataskCs()
+	let cmdline = getcmdline()
+	if cmdline =~ "Guabatch " && getcmdpos() == 10
+		return "skylake "
+	else
+		return "s"
+	endif
+endfunction
+cnoremap <expr> s GuataskCs()
