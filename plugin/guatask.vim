@@ -67,7 +67,12 @@ function! OpenGuataskLogFile() abort
     " Get full path to LOG file
     let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
     let log_path = root_dir . '/tasks/' . dir_name . '/LOG/' . task_name . '.log'
-    exe 'e ' . log_path
+    " Open only if file exists
+    if filereadable(log_path)
+        exe 'e ' . log_path
+    else
+        echo 'Log file doesn' . "'t exist."
+    endif
 endfunction
 com Gualog call OpenGuataskLogFile()
 
@@ -77,8 +82,12 @@ function! OpenGuataskOutputFile()
     " Get full path to output file
     let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
     let out_path = root_dir . '/submissions/' . task_name . '.out'
-    " Open output file
-    exe 'e ' . out_path
+    " Open only if file exists
+    if filereadable(out_path)
+        exe 'e ' . out_path
+    else
+        echo 'Output file doesn' . "'t exist."
+    endif
 endfunction
 com Guaout call OpenGuataskOutputFile()
 
