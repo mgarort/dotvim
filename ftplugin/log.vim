@@ -3,3 +3,5 @@ set readonly
 setlocal nomodifiable
 " Do not fold
 setlocal nofoldenable
+
+set wrap
