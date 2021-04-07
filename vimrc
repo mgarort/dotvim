@@ -498,7 +498,7 @@ function! AutomaticColorscheme()
         " Autocommands from https://stackoverflow.com/a/4617156/7998725
         augroup ExtraWhitespaceAugroup
             autocmd!
-            highlight ExtraWhitespace ctermbg=red guibg=red
+            highlight ExtraWhitespace ctermbg=green guibg=green
             autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
             autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
             autocmd InsertLeave * match ExtraWhitespace /\s\+$/
