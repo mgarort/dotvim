@@ -117,10 +117,21 @@ cnoremap <expr> p GuataskCp()
 
 function! GuataskCs()
 	let cmdline = getcmdline()
+        " If using guatask functionality
 	if cmdline =~ "Guabatch " && getcmdpos() == 10
 		return "skylake "
+        " If using visual selection functionality (copy from function Cs() )
+        elseif cmdline =~ "^'<,'>" && getcmdpos() == 6
+		return "s/\\%V"
+        " If you are not in the situation above, then typing s doesn't mean
+        " that you are starting a substitution in a visual selection. So just
+        " type s
 	else
 		return "s"
+	endif
+	else
+		" return "s"
+                call Cs()
 	endif
 endfunction
 cnoremap <expr> s GuataskCs()
