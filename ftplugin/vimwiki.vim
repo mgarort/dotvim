@@ -62,6 +62,10 @@ nnoremap ,u :UpdateTitle<CR>
 command! Wikify call Wikify()
 " Create notes from 6= headers
 nnoremap <silent> '<CR> :call CreateNoteFromTitle()<CR>
+" Keybinding gl for linking to note
+" Note that we had to disable a lot of keybindings in after/ftplugin/vimwiki
+" to freed gl
+xmap gl z]gvz]<Right><Right>i\|<Esc>i
 
 
 " -------------------------------
