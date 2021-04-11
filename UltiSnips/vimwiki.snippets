@@ -35,6 +35,10 @@ snippet 6= "Header 6"
 ====== ${0:title} ======
 endsnippet
 
+snippet 6=] "Header 6 with link"
+====== [[${0:title}]] ======
+endsnippet
+
 snippet -- "Separating line" i
 ------------------------------------------------------
 endsnippet
@@ -132,7 +136,7 @@ snip.rv = f'{year}.{month}.{day} {weekday}'` =
 
 endsnippet
 
-snippet goals "Goals for this week"
+snippet goal "Goals for this week"
 
 ------------------------------------------------------
 
@@ -173,6 +177,14 @@ endsnippet
 
 snippet book "Vimwiki link to book"
 [[file:./books/${2:BOOK_PATH}|${1:description}]]
+endsnippet
+
+snippet file "Vimwiki link to file"
+[[file:./${2:file_path}|${1:description}]]
+endsnippet
+
+snippet textfile "Vimwiki link to textfile"
+[[./textfiles/${1:TEXTFILE_PATH}]]
 endsnippet
 
 snippet ref "Vimwiki references"
@@ -500,20 +512,20 @@ endsnippet
 # SECTION:  Dots
 # ------------------------
 #
-snippet ... "\ldots"
+snippet ... "\ldots" i
 \ldots 
 endsnippet
 
-snippet c... "\cdots"
+snippet c... "\cdots" i
 \cdots 
 endsnippet
 
-snippet c. "\cdot"
+snippet c. "\cdot" i
 \cdot 
 endsnippet
 
 
-snippet log "\log"
+snippet log "\log" i
 \log
 endsnippet
 
@@ -758,7 +770,10 @@ endsnippet
 # SECTION:  Still not sorted
 # ------------------------
 #
-snippet ell "\ell"
-\ell 
+snippet ell "\ell" i
+\ell
 endsnippet
 
+snippet infty "\infty" i
+\infty
+endsnippet
