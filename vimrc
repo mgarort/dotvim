@@ -1312,3 +1312,15 @@ set diffopt+=vertical
 
 " Test persistent undo
 " set undofile
+
+function CleanCompareOutput()
+    norm G
+    ?STARTING TASK
+    Redir .,$g/LINEAR REGRESSION\\|Fingerprints\\|R2 score (test)\\|AP (test)\\|Working with\\|STARTING TASK\\|FINISHED TASK\\|^$/p
+endfunction
+
+" Function to Search Excape for a gene
+function! SE(gene)
+    let search_command = '/\t\<' . a:gene . '\>\t'
+    norm search_command
+endfunction
