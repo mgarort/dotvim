@@ -1,5 +1,5 @@
 " Do not accidentally write or modify log files
-set readonly
+setlocal readonly
 setlocal nomodifiable
 " Do not fold
 setlocal nofoldenable

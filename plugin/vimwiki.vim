@@ -258,7 +258,7 @@ function! Compile()
 endfunction
 augroup CompileVimwiki
     autocmd!
-    autocmd BufWritePost *.wiki if b:is_compile_html_mode_active ==# 1 | call Compile() | endif 
+    autocmd BufWritePost *.wiki if b:is_compile_html_mode_active ==# 1 | call Compile() | endif
 augroup END
 " TODO  Ask either in Reddit why wrapping the command in a function (like
 " above) works, whereas using `silent Vimwiki2HTML` directly (like below)
@@ -274,10 +274,11 @@ function! OpenThisHTML()
     let note_name = split(note_name_with_wiki_extension, '\.wiki')[0]
     " The quotes around make sure that firefox receives the full path instead
     " of just the path up to the first parenthesis
-    let full_path_to_html_file = "'" . path_to_html_folder . note_name . ".html'"
+    let full_path_to_html_file = path_to_html_folder . note_name . ".html"
     "The & at the end guarantees that firefox is executed in the background,
     "so Vim goes back to editing instead of hanging while Firefox is open
-    execute "!firefox -new-window" full_path_to_html_file "&"
+    let full_path_to_html_file = substitute(full_path_to_html_file, "'", "\\\\'", "g")
+    execute "!firefox -new-window $'" . full_path_to_html_file . "' &"
 endfunction
 " Process images so that they use less space, and map keybinding to <C-c> (c
 " for compress)
@@ -286,3 +287,12 @@ function! ProcessImages()
     let path_to_setup_folder = path_to_wiki . '/setup/'
     execute '!cd' path_to_setup_folder '; python3 process_images.py'
 endfunction
+
+
+" -------------------------
+" SECTION:  Yet to be sorted
+" ------------------------
+"
+
+" Maybe create one section on unmapping Vimwiki mappings
+
