@@ -700,8 +700,8 @@ onoremap in :<C-u>normal vin<CR>
 " <S-j> and <S-k> add blank lines below and above respectively
 " Note that this stills leaves H, M and L for moving the cursor
 " within the window
-nnoremap <silent><S-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-nnoremap <silent><S-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+nnoremap <silent><S-j> m`o<Esc>``
+nnoremap <silent><S-k> m`O<Esc>``
 
 " -----------
 " | SECTION | Windows
@@ -1312,3 +1312,9 @@ set diffopt+=vertical
 
 " Test persistent undo
 " set undofile
+
+function CleanCompareOutput()
+    norm G
+    ?STARTING TASK
+    Redir .,$g/LINEAR REGRESSION\\|Fingerprints\\|R2 score (test)\\|AP (test)\\|Working with\\|STARTING TASK\\|FINISHED TASK\\|^$/p
+endfunction

@@ -27,15 +27,20 @@ function! SbatchGuataskTask(partition,hours)
         return
     endif
     let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
-    let origin = root_dir . '/submissions/' . 'slurm_TEMPLATE'     . template_file_extension
-    let target = root_dir . '/submissions/' . 'slurm_' . task_name . template_file_extension
+    let origin = '~/repos/slurm-templates/slurm_TEMPLATE'     . template_file_extension
+    let target =       root_dir    .    '/submissions/slurm_' . task_name . template_file_extension
     let copy_command = 'cp ' . origin . ' ' . target
     let copy_output = system(copy_command)
     echo copy_output
-    " Put the task name and the hours information into the submission file
+    " Put the task name, hours and repository information into the submission file
     let sed_taskname_command = 'sed -i "s/TASK_NAME/' . task_name . '/" ' . target
     let sed_taskname_output = system(sed_taskname_command)
     echo sed_taskname_output
+    let repository = split(root_dir, '/')
+    let repository = repository[-1]
+    let sed_repo_command = 'sed -i "s/REPOSITORY/' . repository . '/" ' . target
+    let sed_repo_output = system(sed_repo_command)
+    echo sed_repo_output
     let sed_hours_command = 'sed -i "s/HOURS/' . a:hours . '/" ' . target
     let sed_hours_output = system(sed_hours_command)
     echo sed_hours_output
@@ -71,7 +76,7 @@ function! OpenGuataskLogFile() abort
     if filereadable(log_path)
         exe 'e ' . log_path
     else
-        echo 'Log file doesn' . "'t exist."
+        echo 'Could not find log file at ' . log_path
     endif
 endfunction
 com Gualog call OpenGuataskLogFile()
