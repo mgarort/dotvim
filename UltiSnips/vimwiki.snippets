@@ -269,7 +269,7 @@ snippet D "DONE"
 DONE 
 endsnippet
 
-snippet X "XXX"
+snippet X "XXX" i
 XXX 
 endsnippet
 
@@ -321,10 +321,6 @@ snippet text "text" i
 \text{${0:text}}
 endsnippet
 
-snippet color "color"
-{\color{${1:color}} ${2:text}}
-endsnippet
-
 ### Text decorators
 
 snippet hat "hat ^"
@@ -359,6 +355,9 @@ snippet bs "boldsymbol"
 \boldsymbol{${0:mathbold}}
 endsnippet
 
+snippet color "\color{}" i
+{\color{${1:color}} ${2:stuff}}
+endsnippet
 
 # -------------------------
 # SECTION:  Set symbols and number types
