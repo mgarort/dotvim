@@ -1325,7 +1325,7 @@ set diffopt+=vertical
 " Test persistent undo
 " set undofile
 
-function CleanCompareOutput()
+function! CleanCompareOutput()
     norm G
     ?STARTING TASK
     Redir .,$g/LINEAR REGRESSION\\|Fingerprints\\|R2 score (test)\\|AP (test)\\|Working with\\|STARTING TASK\\|FINISHED TASK\\|^$/p
