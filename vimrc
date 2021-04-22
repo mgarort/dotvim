@@ -700,6 +700,8 @@ onoremap in :<C-u>normal vin<CR>
 " <S-j> and <S-k> add blank lines below and above respectively
 " Note that this stills leaves H, M and L for moving the cursor
 " within the window
+" The combo exe "norm keys" allows to use especial characters
+" See :h :normal and https://stackoverflow.com/questions/4010890/vim-exit-insert-mode-with-normal-command
 function! AddBlackLineAbove()
     setlocal formatoptions-=cro
     exe "normal m`o\<Esc>``"
