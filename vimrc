@@ -702,8 +702,20 @@ onoremap in :<C-u>normal vin<CR>
 " <S-j> and <S-k> add blank lines below and above respectively
 " Note that this stills leaves H, M and L for moving the cursor
 " within the window
-nnoremap <silent><S-j> m`o<Esc>``
-nnoremap <silent><S-k> m`O<Esc>``
+" The combo exe "norm keys" allows to use especial characters
+" See :h :normal and https://stackoverflow.com/questions/4010890/vim-exit-insert-mode-with-normal-command
+function! AddBlackLineAbove()
+    setlocal formatoptions-=cro
+    exe "normal m`o\<Esc>0D``"
+    setlocal formatoptions+=cro
+endfunction
+function! AddBlackLineBelow()
+    setlocal formatoptions-=cro
+    exe "normal m`O\<Esc>0D``"
+    setlocal formatoptions+=cro
+endfunction
+nnoremap <silent><S-j> :call AddBlackLineAbove()<CR>
+nnoremap <silent><S-k> :call AddBlackLineBelow()<CR>
 
 " -----------
 " | SECTION | Windows
@@ -967,13 +979,6 @@ nnoremap [o :copen<CR>
 "
 " Make the command line similar to the shell (emacs keybindings)
 "
-" Open history of previous commands. :History: is part of fzf.vim
-cnoremap <C-r> History:<CR>
-" Go to beginning and end of the line
-cnoremap <C-a> <C-b>
-" Up and down
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
 " Make file completion in command mode (e.g. when opening a file in a buffer
 " with :e) more similar to Bash completion
 set wildmenu
@@ -1037,11 +1042,6 @@ set virtualedit=block
 " - new comment characters will be added to extend current comments
 " - comment characters will be stripped when joining lines with J
 set formatoptions=tcroqj
-
-" Make <C-w> and <C-u> in insert mode undoable with <C-y>, same as in the command line
-inoremap <C-w> <C-g>u<C-w>
-inoremap <C-u> <C-g>u<C-u>
-inoremap <C-y> <Esc>ua
 
 " Stay in same character column when moving with vertical motions like
 " <C-d> and <C-u>
@@ -1134,15 +1134,6 @@ nnoremap <S-y> y$
 nnoremap <space> :
 vnoremap <space> :
 
-
-" Keybindings similar to shell (emacs keybindings) in insert mode
-"
-" Go to beginning and end of file
-inoremap <C-a> <Esc>^i
-inoremap <C-e> <End>
-snoremap <C-a> <Esc>^i
-snoremap <C-e> <End><Esc>i
-
 " Make 0 a 'smart' go to start of line: if we press it once, we go to the
 " first non-blank character, and if we press it twice, we go to the actual
 " start of the line
@@ -1162,13 +1153,11 @@ omap T v<Plug>Sneak_T
 onoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'v0' : 'v^'
 onoremap g0 vg0
 
-" When using <CTRL-U>, <CTRL-W>, <Enter> or <Tab> in Insert-mode, do <CTRL-G>u
+" When using <Enter> or <Tab> in Insert-mode, do <CTRL-G>u
 " first to start a new change so that I can undo these operations with
 " u in Normal/Command mode, rather than undoing the entire Insert
 " operation at once.
 " From https://www.reddit.com/r/vim/comments/kn0cpp/key_mappings_everyone_uses/
-inoremap <C-U> <C-G>u<C-U>
-inoremap <C-W> <C-G>u<C-W>
 inoremap <C-J> <C-G>u<C-J>
 inoremap <NL> <C-G>u<NL>
 " NOTE <Tab> is also made undoable with <C-g>u<Tab>, but <Tab> is also used to
@@ -1181,13 +1170,17 @@ inoremap <NL> <C-G>u<NL>
 " Make it repeatable with repeat.vim:
 " - Wrap it in a <Plug> command
 " - Prepare next dot . command with repeat#set after
-nmap <silent> <Plug>DeleteTrailingWhitespaces <space>s/\s\+$//<CR><space>call repeat#set("\<Plug>DeleteTrailingWhitespaces")<CR>
+nnoremap <silent> <Plug>DeleteTrailingWhitespaces :s/\s\+$//<CR>:call repeat#set("\<Plug>DeleteTrailingWhitespaces")<CR>
 nmap gt <Plug>DeleteTrailingWhitespaces
 " Note that we are using whitespace <space> instead of colon : because <Plug>
 " commands force us to use nmap instead of nnoremap
 
 " The same for every line selected in visual mode. We define noremapgt in
 vnoremap gt :s/\s\+$//<CR>
+
+" Vim-like undo and redo
+nnoremap <S-u> <C-r>
+nnoremap <C-r> <Nop>
 
 
 " -----------
@@ -1320,7 +1313,7 @@ set diffopt+=vertical
 " Test persistent undo
 " set undofile
 
-function CleanCompareOutput()
+function! CleanCompareOutput()
     norm G
     ?STARTING TASK
     Redir .,$g/LINEAR REGRESSION\\|Fingerprints\\|R2 score (test)\\|AP (test)\\|Working with\\|STARTING TASK\\|FINISHED TASK\\|^$/p

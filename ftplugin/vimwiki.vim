@@ -74,6 +74,8 @@ xmap gLl z]gvz]<Right><Right>i\|<Esc>i
 xmap gLp z]gvz]<Right><Right>ifile:./papers/\|<Esc>i
 xmap gLd z]gvz]<Right><Right>ifile:./docs/\|<Esc>i
 xmap gLb z]gvz]<Right><Right>ifile:./books/\|<Esc>i
+" Keybinding for creating link to title
+nnoremap gLt i[[]]<Esc><Left>i
 
 
 " -------------------------------
