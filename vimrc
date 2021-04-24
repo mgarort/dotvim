@@ -1173,6 +1173,10 @@ nmap gt <Plug>DeleteTrailingWhitespaces
 " The same for every line selected in visual mode. We define noremapgt in
 vnoremap gt :s/\s\+$//<CR>
 
+" Vim-like undo and redo
+nnoremap <S-u> <C-r>
+nnoremap <C-r> <Nop>
+
 
 " -----------
 " | SECTION | Things I'm yet deciding to keep or not
