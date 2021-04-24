@@ -1188,7 +1188,7 @@ inoremap <NL> <C-G>u<NL>
 " Make it repeatable with repeat.vim:
 " - Wrap it in a <Plug> command
 " - Prepare next dot . command with repeat#set after
-nmap <silent> <Plug>DeleteTrailingWhitespaces <space>s/\s\+$//<CR><space>call repeat#set("\<Plug>DeleteTrailingWhitespaces")<CR>
+nnoremap <silent> <Plug>DeleteTrailingWhitespaces :s/\s\+$//<CR>:call repeat#set("\<Plug>DeleteTrailingWhitespaces")<CR>
 nmap gt <Plug>DeleteTrailingWhitespaces
 " Note that we are using whitespace <space> instead of colon : because <Plug>
 " commands force us to use nmap instead of nnoremap
