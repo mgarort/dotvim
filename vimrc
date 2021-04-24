@@ -1021,9 +1021,9 @@ cnoremap <expr> T CT()
 
 " Abbreviate GPull to Gpull and GPush to Gpull since you often type it wrong
 cabbrev GPull Gpull
-cabbrev GPush GPush
+cabbrev GPush Gpush
 cabbrev gpull Gpull
-cabbrev gpush GPush
+cabbrev gpush Gpush
 
 
 
