@@ -5,6 +5,11 @@ ${0:code}
 endsnippet
 
 
+# -------------------------
+# SECTION:  Guatask
+# ------------------------
+#
+
 snippet task "guatask task"
 class ${1:TaskName}(${2:TaskParent}):
     debug = True
@@ -32,6 +37,11 @@ def run(self):
     ${8:Write here what the task is supposed to do.}
 def load_output(self):
     ${9:Write here how the output of the task should be loaded (once completed).}
+endsnippet
+
+snippet load_output "Task.load_output"
+def load_output(self):
+    ${0:raise NotImplementedError('Task.load_output not implemented')}
 endsnippet
 
 snippet hi "hi comment"
@@ -120,4 +130,16 @@ endsnippet
 
 snippet to_csv "DataFrame.to_csv" i
 to_csv('${1:path}',sep='${2:sep}',header=${3:bool},index=${4:bool})
+endsnippet
+
+# -------------------------
+# SECTION:  Errors and exceptions
+# ------------------------
+#
+snippet raise "NotImplementedError"
+raise NotImplementedError('${0:message}')
+endsnippet
+
+snippet raise "ValueError"
+raise ValueError('${0:message}')
 endsnippet
