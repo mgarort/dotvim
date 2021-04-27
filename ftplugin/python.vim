@@ -47,10 +47,16 @@ endfunction
 nnoremap <leader>t :call GenerateCtags()<CR>
 
 
-" gp for pdb
+" gp and gP for pdb
 function! AddPdbAbove()
     setlocal formatoptions-=cro
     exe "normal m`O__import__('pdb').set_trace()\<Esc>``"
     setlocal formatoptions+=cro
 endfunction
-nnoremap gp :call AddPdbAbove()<CR>
+nnoremap gP :call AddPdbAbove()<CR>
+function! AddPdbBelow()
+    setlocal formatoptions-=cro
+    exe "normal m`o__import__('pdb').set_trace()\<Esc>``"
+    setlocal formatoptions+=cro
+endfunction
+nnoremap gp :call AddPdbBelow()<CR>
