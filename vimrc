@@ -1180,7 +1180,7 @@ vnoremap gt :s/\s\+$//<CR>
 
 " Vim-like undo and redo
 nnoremap <S-u> <C-r>
-nnoremap <C-r> <Nop>
+" nnoremap <C-r> <Nop>
 
 
 " -----------
