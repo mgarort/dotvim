@@ -65,8 +65,8 @@ nnoremap <silent> '<CR> :call CreateNoteFromTitle()<CR>
 " Keybinding gl for linking to note
 " Note that we had to disable a lot of keybindings in after/ftplugin/vimwiki
 " to freed gl
-xmap <silent> gl  <space>set lazyredraw<CR>z]gvz]<Right><Right>i\|<Esc><space>set nolazyredraw<CR>i
-nmap <silent> gl  <space>set lazyredraw<CR>viwz]gvz]<Right><Right>i\|<Esc><space>set nolazyredraw<CR>i
+xmap <silent> gl  <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>i\|<Esc><space><C-u>set nolazyredraw<CR>i
+nmap <silent> gl  <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>i\|<Esc><space><C-u>set nolazyredraw<CR>i
 " Keybindings starting with gL for linking to:
 " - gLl for link (of which gl is just a shorthand because it's the most common)
 " - gLp paper
