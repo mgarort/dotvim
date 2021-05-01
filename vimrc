@@ -1211,6 +1211,17 @@ endfunction
 nnoremap <silent> gj :<c-u>call RepeatCmd('call NextClosedFold("j")')<cr>
 nnoremap <silent> gk :<c-u>call RepeatCmd('call NextClosedFold("k")')<cr>
 
+" Add last-modified info to the message by g<C-g>
+function! Improved_g_CTRL_g()
+    redir => message
+        silent exe "norm! g\<C-g>"
+    redir END
+    let modified_time = strftime("%c", getftime(bufname("%")))
+    let message = message . "\n\n" . modified_time . " (last modified)\n"
+    echo message
+endfunction
+nnoremap g<C-g>  :call Improved_g_CTRL_g()<CR>
+
 
 " -----------
 " | SECTION | Things I'm yet deciding to keep or not
