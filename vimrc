@@ -337,6 +337,8 @@ nnoremap <leader>vd :Explore $HOME/.vim<CR>
 nnoremap <leader>vv :e $MYVIMRC<CR>
 " a for after
 nnoremap <leader>va :Explore $HOME/.vim/after<CR>
+" a for bundle
+nnoremap <leader>vb :Explore $HOME/.vim/bundle<CR>
 " f for filetype
 nnoremap <leader>vf :Explore $HOME/.vim/ftplugin<CR>
 " p for plugin
