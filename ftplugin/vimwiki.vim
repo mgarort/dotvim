@@ -80,7 +80,9 @@ nmap <silent> gLp <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./p
 nmap <silent> gLd <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./docs/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLb <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./books/\|<Esc><space><C-u>set nolazyredraw<CR>i
 " Keybinding for creating link to title
-nnoremap gLt i[[]]<Esc><Left>i
+nnoremap gLt a[[]]<Esc><Left>i
+" Keybinding for removing link
+nmap gLr <space><C-u>set lazyredraw<CR>dz[<Right>dz[<space><C-u>set nolazyredraw<CR>
 
 
 " -------------------------------
