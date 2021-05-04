@@ -1029,6 +1029,9 @@ cabbrev GPush Gpush
 cabbrev gpull Gpull
 cabbrev gpush Gpush
 
+" Abbreviate :bq to :q so that we can close the buffer list by just pressing q
+abbrev bq b
+
 
 
 " -----------
