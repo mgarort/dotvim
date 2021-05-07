@@ -710,16 +710,20 @@ onoremap in :<C-u>normal vin<CR>
 " See :h :normal and https://stackoverflow.com/questions/4010890/vim-exit-insert-mode-with-normal-command
 function! AddBlackLineAbove()
     setlocal formatoptions-=cro
-    exe "keepjumps normal m`o\<Esc>0D``"
+    let l:cursor_pos = getpos('.')
+    exe "normal O\<Esc>0D"
+    call setpos('.', [l:cursor_pos[0], l:cursor_pos[1]+1, l:cursor_pos[2], l:cursor_pos[3]])
     setlocal formatoptions+=cro
 endfunction
 function! AddBlackLineBelow()
     setlocal formatoptions-=cro
-    exe "keepjumps normal m`O\<Esc>0D``"
+    let l:cursor_pos = getpos('.')
+    exe "normal m`o\<Esc>0D"
+    call setpos('.', l:cursor_pos)
     setlocal formatoptions+=cro
 endfunction
-nnoremap <silent><S-j> :call AddBlackLineAbove()<CR>
-nnoremap <silent><S-k> :call AddBlackLineBelow()<CR>
+nnoremap <silent><S-k> :call AddBlackLineAbove()<CR>
+nnoremap <silent><S-j> :call AddBlackLineBelow()<CR>
 
 " -----------
 " | SECTION | Windows
