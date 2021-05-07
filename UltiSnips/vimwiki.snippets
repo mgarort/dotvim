@@ -176,6 +176,10 @@ snippet doc "Vimwiki document"
 [[file:./docs/${2:DOC_PATH}|${1:description}]]
 endsnippet
 
+snippet writing "One of my writings"
+[[file:./writings/${2:WRITING_PATH}|${1:description}]]
+endsnippet
+
 snippet book "Vimwiki link to book"
 [[file:./books/${2:BOOK_PATH}|${1:description}]]
 endsnippet
@@ -781,4 +785,16 @@ endsnippet
 
 snippet h "Human"
 Human
+endsnippet
+
+snippet ch "I manually added a partial charge of ..."
+I manually added a partial charge of ${0:charge}.
+endsnippet
+
+snippet ze "These atoms have zero charge: ..."
+\`These atoms have zero charge: ${0:elem}\`
+endsnippet
+
+snippet no "Non-integral charge"
+Non-integral charge
 endsnippet

@@ -710,16 +710,20 @@ onoremap in :<C-u>normal vin<CR>
 " See :h :normal and https://stackoverflow.com/questions/4010890/vim-exit-insert-mode-with-normal-command
 function! AddBlackLineAbove()
     setlocal formatoptions-=cro
-    exe "keepjumps normal m`o\<Esc>0D``"
+    let l:cursor_pos = getpos('.')
+    exe "normal O\<Esc>0D"
+    call setpos('.', [l:cursor_pos[0], l:cursor_pos[1]+1, l:cursor_pos[2], l:cursor_pos[3]])
     setlocal formatoptions+=cro
 endfunction
 function! AddBlackLineBelow()
     setlocal formatoptions-=cro
-    exe "keepjumps normal m`O\<Esc>0D``"
+    let l:cursor_pos = getpos('.')
+    exe "normal m`o\<Esc>0D"
+    call setpos('.', l:cursor_pos)
     setlocal formatoptions+=cro
 endfunction
-nnoremap <silent><S-j> :call AddBlackLineAbove()<CR>
-nnoremap <silent><S-k> :call AddBlackLineBelow()<CR>
+nnoremap <silent><S-k> :call AddBlackLineAbove()<CR>
+nnoremap <silent><S-j> :call AddBlackLineBelow()<CR>
 
 " -----------
 " | SECTION | Windows
@@ -1225,6 +1229,11 @@ function! Improved_g_CTRL_g()
 endfunction
 nnoremap g<C-g>  :call Improved_g_CTRL_g()<CR>
 
+" Do not keep { } motions in jumplist
+" By romainl on https://superuser.com/questions/836784/in-vim-dont-store-motions-in-jumplist
+nnoremap } :<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>
+nnoremap { :<C-u>execute "keepjumps norm! " . v:count1 . "{"<CR>
+
 
 " -----------
 " | SECTION | Things I'm yet deciding to keep or not
@@ -1361,3 +1370,7 @@ function! CleanCompareOutput()
     ?STARTING TASK
     Redir .,$g/LINEAR REGRESSION\\|Fingerprints\\|R2 score (test)\\|AP (test)\\|Working with\\|STARTING TASK\\|FINISHED TASK\\|^$/p
 endfunction
+
+set iskeyword-=_
+let g:CtrlXA_iskeyword = &iskeyword
+set iskeyword+=_
