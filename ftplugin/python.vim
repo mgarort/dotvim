@@ -60,3 +60,7 @@ function! AddPdbBelow()
     setlocal formatoptions+=cro
 endfunction
 nnoremap gp :call AddPdbBelow()<CR>
+
+set iskeyword-=_
+let b:CtrlXA_iskeyword = &iskeyword
+set iskeyword+=_

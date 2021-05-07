@@ -1370,3 +1370,7 @@ function! CleanCompareOutput()
     ?STARTING TASK
     Redir .,$g/LINEAR REGRESSION\\|Fingerprints\\|R2 score (test)\\|AP (test)\\|Working with\\|STARTING TASK\\|FINISHED TASK\\|^$/p
 endfunction
+
+set iskeyword-=_
+let g:CtrlXA_iskeyword = &iskeyword
+set iskeyword+=_
