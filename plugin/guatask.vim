@@ -155,7 +155,10 @@ cnoremap <expr> s GuataskCs()
 function! GuataskCminus()
     let cmdline = getcmdline()
     " If using guatask functionality
-    if cmdline[0:8] =~ "Guabatch " && getcmdpos() == 10
-        return "--cpus 1 --partition "
+    if cmdline[0:8] =~ 'Guabatch ' && getcmdpos() == 10
+        return '--cpus 1 --partition '
+    else
+        return '-'
+    endif
 endfunction
 cnoremap <expr> - GuataskCminus()
