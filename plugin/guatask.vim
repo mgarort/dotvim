@@ -14,13 +14,16 @@ endfunction
 " TODO Make SbatchGuataskTask and OpenGuataskLogFile work in the current
 " class, even if the cursor is anywhere in the class and not necessarily on
 " the class declaration. Copy how OpenGuataskLogFile gets the directory name
-function! SbatchGuataskTask(partition,hours)
+function! SbatchGuataskTask(...)
+    let l:cpus = a:2
+    let l:partition = a:4
+    let l:hours = a:6
     " Get name of Guatask task under the cursor
     let task_name = GetTaskName()
     " Create submission file
-    if a:partition == 'pascal'
+    if l:partition == 'pascal'
         let template_file_extension = '.wilkes2'
-    elseif a:partition == 'skylake'
+    elseif l:partition == 'skylake'
         let template_file_extension = '.peta4-skylake'
     else
         echo 'The first argument should indicate the partition. Valid partition names are "pascal" or "skylake".'
@@ -41,9 +44,12 @@ function! SbatchGuataskTask(partition,hours)
     let sed_repo_command = 'sed -i "s/REPOSITORY/' . repository . '/" ' . target
     let sed_repo_output = system(sed_repo_command)
     echo sed_repo_output
-    let sed_hours_command = 'sed -i "s/HOURS/' . a:hours . '/" ' . target
+    let sed_hours_command = 'sed -i "s/NUM_HOURS/' . l:hours . '/" ' . target
     let sed_hours_output = system(sed_hours_command)
     echo sed_hours_output
+    let sed_cpus_command = 'sed -i "s/NUM_CPUS/' . l:cpus . '/" ' . target
+    let sed_cpus_output = system(sed_cpus_command)
+    echo sed_cpus_output
     " Batch submission file.
     " (Change directory to ensure that the slurm-XXXXX.out file and the
     "  machine.file.XXXXX files are saved in the submissions directory
@@ -105,15 +111,15 @@ com Guaout call OpenGuataskOutputFile()
 "   - b for Guabatch
 "   - l for Gualog (to open the log file)
 "   - o for Guaout (to open the outpue file in the submissions directory)
-nnoremap ,gb :Guabatch<space>
+nnoremap ,gb :Guabatch<space>--cpus<space>1<space>--partition<space>
 nnoremap ,gl :Gualog<CR>
 nnoremap ,go :Guaout<CR>
 
 " Command line abbreviations for the partitions 'pascal' and 'skylake'
 function! GuataskCp()
 	let cmdline = getcmdline()
-	if cmdline =~ "Guabatch " && getcmdpos() == 10
-		return "pascal "
+	if cmdline[0:8] =~ "Guabatch " && getcmdpos() == 31
+		return "pascal --hours "
 	else
 		return "p"
 	endif
@@ -123,8 +129,8 @@ cnoremap <expr> p GuataskCp()
 function! GuataskCs()
 	let cmdline = getcmdline()
         " If using guatask functionality
-	if cmdline =~ "Guabatch " && getcmdpos() == 10
-		return "skylake "
+	if cmdline[0:8] =~ "Guabatch " && getcmdpos() == 31
+		return "skylake --hours "
         " If using visual selection functionality (copy from function Cs() )
         elseif cmdline =~ "^'<,'>" && getcmdpos() == 6
 		return "s/\\%V"
@@ -140,3 +146,11 @@ function! GuataskCs()
 	endif
 endfunction
 cnoremap <expr> s GuataskCs()
+
+function! GuataskCminus()
+    let cmdline = getcmdline()
+    " If using guatask functionality
+    if cmdline[0:8] =~ "Guabatch " && getcmdpos() == 10
+        return "--cpus 1 --partition "
+endfunction
+cnoremap <expr> - GuataskCminus()
