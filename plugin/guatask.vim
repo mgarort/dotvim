@@ -30,8 +30,13 @@ function! SbatchGuataskTask(...)
         return
     endif
     let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
-    let origin = '~/repos/slurm-templates/slurm_TEMPLATE'     . template_file_extension
-    let target =       root_dir    .    '/submissions/slurm_' . task_name . template_file_extension
+    " The template is copied from the repository's submissions directory
+    " because that way the template can be customized:
+    " 1. Manually copy the template submission file from the slurm-templates
+    " repo to the submissions directory
+    " 2. Manually customize it: e.g. conda environment to use
+    let origin = root_dir . '/submissions/slurm_TEMPLATE'     . template_file_extension
+    let target = root_dir . '/submissions/slurm_' . task_name . template_file_extension
     let copy_command = 'cp ' . origin . ' ' . target
     let copy_output = system(copy_command)
     echo copy_output
