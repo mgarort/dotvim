@@ -21,7 +21,9 @@ imap <C-g><C-j> <Plug>VimwikiListNextSymbol
 " Unmap Vimwiki mappings starting with gl so that I can use gl for creating
 " link to note
 map <leader><leader><leader><leader><leader>bLbab <Plug>VimwikiRemoveSingleCB
+map <leader><leader><leader><leader><leader>a8oie <Plug>VimwikiRemoveCBInList
 map <leader><leader><leader><leader><leader>cKcbc <Plug>VimwikiRenumberList
+map <leader><leader><leader><leader><leader>oqh44 <Plug>VimwikiRenumberAllLists
 map <leader><leader><leader><leader><leader>dJdcd <Plug>VimwikiIncreaseLvlSingleItem
 map <leader><leader><leader><leader><leader>eHede <Plug>VimwikiDecreaseLvlSingleItem
 map <leader><leader><leader><leader><leader>fGfef <Plug>VimwikiDecrementListItem

@@ -710,12 +710,12 @@ onoremap in :<C-u>normal vin<CR>
 " See :h :normal and https://stackoverflow.com/questions/4010890/vim-exit-insert-mode-with-normal-command
 function! AddBlackLineAbove()
     setlocal formatoptions-=cro
-    exe "normal m`o\<Esc>0D``"
+    exe "keepjumps normal m`o\<Esc>0D``"
     setlocal formatoptions+=cro
 endfunction
 function! AddBlackLineBelow()
     setlocal formatoptions-=cro
-    exe "normal m`O\<Esc>0D``"
+    exe "keepjumps normal m`O\<Esc>0D``"
     setlocal formatoptions+=cro
 endfunction
 nnoremap <silent><S-j> :call AddBlackLineAbove()<CR>
@@ -1028,6 +1028,9 @@ cabbrev GPull Gpull
 cabbrev GPush Gpush
 cabbrev gpull Gpull
 cabbrev gpush Gpush
+
+" Abbreviate :bq to :q so that we can close the buffer list by just pressing q
+abbrev bq b
 
 
 
