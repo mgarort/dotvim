@@ -1229,6 +1229,11 @@ function! Improved_g_CTRL_g()
 endfunction
 nnoremap g<C-g>  :call Improved_g_CTRL_g()<CR>
 
+" Do not keep { } motions in jumplist
+" By romainl on https://superuser.com/questions/836784/in-vim-dont-store-motions-in-jumplist
+nnoremap } :<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>
+nnoremap { :<C-u>execute "keepjumps norm! " . v:count1 . "{"<CR>
+
 
 " -----------
 " | SECTION | Things I'm yet deciding to keep or not
