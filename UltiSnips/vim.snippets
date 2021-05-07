@@ -1,3 +1,7 @@
+# -------------------------
+# SECTION:  Formatting
+# ------------------------
+#
 snippet section "vimrc section"
 " -------------------------
 " SECTION:  ${0:description}
@@ -5,6 +9,10 @@ snippet section "vimrc section"
 "
 endsnippet
 
+# -------------------------
+# SECTION:  Highlight words
+# ------------------------
+#
 snippet T "TODO" i
 TODO 
 endsnippet
@@ -15,6 +23,16 @@ endsnippet
 
 snippet N "NOTE" i
 NOTE 
+endsnippet
+
+# -------------------------
+# SECTION:  Code
+# ------------------------
+#
+snippet function "function"
+function! ${1:Foo}()
+	${2:body}
+endfunction
 endsnippet
 
 snippet < "< >" i
