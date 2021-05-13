@@ -692,6 +692,62 @@ xnoremap il g_o^
 onoremap il :<C-u>normal vil<CR>
 xnoremap al $o0
 onoremap al :<C-u>normal val<CR>
+" link text objects
+" -----------------
+function! VisualLink(mode)
+    " Modes for text object could be 'in' or 'around'
+    if a:mode == 'in'
+        let shrink_selection = 1
+    elseif a:mode == 'around'
+        let shrink_selection = 0
+    endif
+    " Save cursor position
+    let l:cursor_pos = getpos('.')
+    " Use search() to search in current line only.
+    " Check if there is a link is in the forward direction
+    let link_found_forward = search(']]','ceW',line('.'))
+    if link_found_forward != 0
+        normal v
+        " Try to match closing brackets. If not found, turn off visual
+        " mode and restore cursor position
+        let found_closing_brackets = search('[[','bcW',line('.'))
+        if found_closing_brackets == 0
+            normal v
+            call setpos('.', l:cursor_pos)
+            return
+        else
+            if shrink_selection
+                call feedkeys('llohh')
+            endif
+        endif
+    " If there is no link in the forward direction, check in the backward
+    " direction
+    else
+        let link_found_backward = search('[[','bcW',line('.'))
+        if link_found_backward != 0
+            normal v
+            " Try to match closing brackets. If not found, turn off visual
+            " mode and restore cursor position
+            let found_closing_brackets = search(']]','ceW',line('.'))
+            if found_closing_brackets == 0
+                normal v
+                call setpos('.', l:cursor_pos)
+                return
+            else
+                if shrink_selection
+                    call feedkeys('hholl')
+                endif
+            endif
+        else
+            return
+        endif
+    endif
+endfunction
+xnoremap agl :<C-u>call VisualLink('around')<CR>
+onoremap agl :<C-u>normal vagl<CR>
+xnoremap igl :<C-u>call VisualLink('in')<CR>
+onoremap igl :<C-u>normal vigl<CR>
+" TODO Create text object igl
 " number text object (integer and float)
 " --------------------------------------
 " in
