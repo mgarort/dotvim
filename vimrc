@@ -60,6 +60,7 @@ Plugin 'ojroques/vim-oscyank'
 Plugin 'godlygeek/tabular'
 Plugin 'jeetsukumaran/vim-pythonsense'
 Plugin 'airblade/vim-matchquote'
+Plugin 'nvie/vim-flake8'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required (note that this automatically guesses indents for
@@ -1374,3 +1375,13 @@ endfunction
 set iskeyword-=_
 let g:CtrlXA_iskeyword = &iskeyword
 set iskeyword+=_
+
+
+
+" flake8 configuration
+let g:flake8_cmd="flake8 --config ~/repos/dockgym/.flake8"
+" autocmd FileType python map <buffer> <F3> :call flake8#Flake8()<CR>
+
+" YAPF (Yet Another Python Formatter) configuration
+" (requires `pip install yapf`)
+let &formatprg='yapf --style ~/repos/dockgym/.style.yapf'
