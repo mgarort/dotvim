@@ -107,7 +107,7 @@ function! CloseThisBuffer()
 endfunction
 nnoremap <BS> :call CloseThisBuffer()<CR>
 " Needed to freed <BS> in Vimwiki
-nnoremap <Leader>wb <Plug>VimwikiGoBackLink
+nnoremap <leader>wb <Plug>VimwikiGoBackLink
 
 " Set case options:
 " - ignorecase ignores the case when searching
@@ -1432,12 +1432,53 @@ set iskeyword-=_
 let g:CtrlXA_iskeyword = &iskeyword
 set iskeyword+=_
 
+" -------------------------
+" SECTION:  Linting Python
+" ------------------------
+"
+" This function will be executed for every buffer. If a single buffer is
+" modified, a global flag variable will be set to 1
+function! IsThisBufferModified()
+    if &l:modified
+        let g:some_buffer_modified = 1
+    endif
+endfunction
+function! FormatAndLintPython()
+    " Check if any buffer is modified
+    let g:some_buffer_modified = 0
+    bufdo :call IsThisBufferModified()
+    if g:some_buffer_modified
+        echom 'Unsaved work. Cannot format and lint.'
+        sleep 1
+        return
+    else
+        " Format and lint recursively from the repo's root directory
+        let old_dir = getcwd()
+        let root_dir = fnamemodify(finddir('.git', '.;'), ':h')
+        exe 'cd ' . root_dir
+        echo 'Formatting with yapf'
+        let yapf_return = system('yapf --style=.style.yapf --in-place --recursive .')
+        echo yapf_return
+        sleep 2
+        echo 'Linting with flake8'
+        let flake8_return = system('flake8 --config=.flake8 .')
+        echo flake8_return
+        sleep 2
+        exe 'cd ' . old_dir
+        " Refresh current file after formatting and linting (only if there is
+        " a file loaded)
+        if bufname("%") != ''
+            e
+        endif
+    endif
+endfunction
+nnoremap <leader><F7> :call FormatAndLintPython()<CR>
 
 
 " flake8 configuration
-let g:flake8_cmd="flake8 --config ~/repos/dockgym/.flake8"
+" let g:flake8_cmd="flake8 --config ~/repos/dockgym/.flake8"
 " autocmd FileType python map <buffer> <F3> :call flake8#Flake8()<CR>
 
 " YAPF (Yet Another Python Formatter) configuration
 " (requires `pip install yapf`)
-let &formatprg='yapf --style ~/repos/dockgym/.style.yapf'
+" let &formatprg='yapf --style ~/repos/dockgym/.style.yapf'
