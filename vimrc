@@ -371,6 +371,8 @@ function! OpenVimSnippets()
 endfunction
 nnoremap <silent> <leader>us :call OpenVimSnippets()<CR>
 
+nnoremap <leader>f :find
+
 " The following keybinding reloads vimrc and also does :e to load filetype
 " specific configurations (such as those in after/ftplugin/vimwiki.vim). This
 " allows us to split the vimrc into general stuff and filetype specific stuff,
@@ -841,7 +843,7 @@ nnoremap <leader><leader><leader><leader><leader><leader>l <Plug>NetrwRefresh
 
 
 " -------------------------
-" SECTION:  Help navigation
+" SECTION:  Help and info
 " ------------------------
 "
 " Disable <F1> to open the help, which frequently and annoyingly opens help by
@@ -856,7 +858,6 @@ augroup LargeHelpWindow
     autocmd FileType man wincmd _
 augroup END
 
-
 " Use Vim as a man pager
 runtime ftplugin/man.vim
 function! ViewManFromCommandLine(command)
@@ -870,6 +871,18 @@ function! ViewManFromCommandLine(command)
         quit
     endif
 endfunction
+
+" Add last-modified info to the message by g<C-g>
+function! Improved_g_CTRL_g()
+    redir => message
+        silent exe "norm! g\<C-g>"
+    redir END
+    let modified_time = strftime("%c", getftime(bufname("%")))
+    let message = message . "\n\n" . modified_time . " (last modified)\n"
+    echo message
+endfunction
+nnoremap g<C-g>  :call Improved_g_CTRL_g()<CR>
+
 
 
 
@@ -920,16 +933,10 @@ tnoremap <M-Right> <Right>
 tnoremap <M-Up> <Up>
 tnoremap <M-Down> <Down>
 
-
-
-
-
-
 " Set path to search recursively for all the directories in the respos folder
 " Using ** is not the best option because it may take a very long time, but
 " for my number of files it is ok
 set path=~/repos/**
-nnoremap <leader>f :find
 
 
 
@@ -941,26 +948,6 @@ nnoremap <localleader>lw :VimtexCountWords<CR>
 " filter. It DOESN'T WORK TODO
  let g:vimtex_log_ignore = ['^.*Warning.*$']
 
-" Display line equivalent of o and O. gO adds an additional line of space
-" below because we usually want the stuff below to go away and not bother us
-nnoremap go  i<CR><Esc><Up>:s/\s\+$//e<CR><Down>^i
-nnoremap gO  i<CR><Esc><Up>A
-
-" Display line equivalent of I and A
-nnoremap gA g$a
-nnoremap gI g^i
-
-" Make Vim remember last cursor position in a file
-if has("autocmd")
-    augroup RememberCursorPosition
-        au!
-        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-    augroup END
-endif
-
-" Make g[ select last pasted text, copying gv, which selects last seleted text
-nnoremap g[ `[v`]
-vnoremap g[ <Esc>`[v`]
 
 
 " Make '"%P' in normal mode paste the entire path to the file (similar to '"%p',
@@ -1099,6 +1086,18 @@ abbrev bq b
 " | SECTION | Motions and text editing
 " -----------
 "
+" Make Vim remember last cursor position in a file
+if has("autocmd")
+    augroup RememberCursorPosition
+        au!
+        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    augroup END
+endif
+
+" Make g[ select last pasted text, copying gv, which selects last seleted text
+nnoremap g[ `[v`]
+vnoremap g[ <Esc>`[v`]
+
 " Enable jumping to matching angle bracket with %
 " source: https://www.reddit.com/r/vim/comments/kr9rnu/how_to_jump_to_matching_anglebracket_using/
 set matchpairs+=<:>
@@ -1124,17 +1123,6 @@ nnoremap <C-s> zL
 " lose my focus. In the future I can map it to just vimwiki so that I am able
 " to execute the current cell in python with <C-b> from insert mode
 inoremap <C-b> <Nop>
-
-" Make j and k move display lines instead of actual lines, unless you have a
-" count. This way:
-" - You can move through long lines wrapped into paragraphs more easily by
-"   typing j and k instead of gj and gk
-" - You can still use line numbers to move a few lines up or down
-" Stolen from https://www.hillelwayne.com/post/intermediate-vim/
-nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
-vnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-vnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
 " If the cursor is quiet for 10s or more, add that position to the jumplist so
 " that we can easily return to it
@@ -1205,24 +1193,14 @@ nnoremap <S-y> y$
 nnoremap <space> :
 vnoremap <space> :
 
-" Make 0 a 'smart' go to start of line: if we press it once, we go to the
-" first non-blank character, and if we press it twice, we go to the actual
-" start of the line
-" From https://www.reddit.com/r/vim/comments/kn0cpp/key_mappings_everyone_uses/
-" TODO Make 0 mapping not depend on itself, i.e. make it go to the first
-" column by using cursor() https://stackoverflow.com/questions/9953082/how-to-jump-directly-to-a-column-number-in-vim
-" instead of 0. That way, we can make 0 an inclusive backward motion with omap
-" instead of onoremap
-nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
-vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 
 " Make backward motions such as b or 0 inclusive (for changing with c)
 onoremap b vb
 onoremap B vB
 omap F v<Plug>Sneak_F
 omap T v<Plug>Sneak_T
-onoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'v0' : 'v^'
-onoremap g0 vg0
+onoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'vg0' : 'vg^'
+
 
 " When using <Enter> or <Tab> in Insert-mode, do <CTRL-G>u
 " first to start a new change so that I can undo these operations with
@@ -1278,26 +1256,75 @@ endfunction
 nnoremap <silent> gj :<c-u>call RepeatCmd('call NextClosedFold("j")')<cr>
 nnoremap <silent> gk :<c-u>call RepeatCmd('call NextClosedFold("k")')<cr>
 
-" Add last-modified info to the message by g<C-g>
-function! Improved_g_CTRL_g()
-    redir => message
-        silent exe "norm! g\<C-g>"
-    redir END
-    let modified_time = strftime("%c", getftime(bufname("%")))
-    let message = message . "\n\n" . modified_time . " (last modified)\n"
-    echo message
-endfunction
-nnoremap g<C-g>  :call Improved_g_CTRL_g()<CR>
-
 " Do not keep { } motions in jumplist
 " By romainl on https://superuser.com/questions/836784/in-vim-dont-store-motions-in-jumplist
 nnoremap } :<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>
 nnoremap { :<C-u>execute "keepjumps norm! " . v:count1 . "{"<CR>
 
 
-" -----------
-" | SECTION | Things I'm yet deciding to keep or not
-" -----------
+" -------------------------
+" SECTION:  Lines: actual lines vs display lines, adding lines, moving through lines, etc
+" ------------------------
+"
+" Display line equivalent of o and O. gO adds an additional line of space
+" below because we usually want the stuff below to go away and not bother us
+nnoremap go  i<CR><Esc><Up>:s/\s\+$//e<CR><Down>^i
+nnoremap gO  i<CR><Esc><Up>A
+
+" Display line equivalent of I and A
+nnoremap gA g$a
+nnoremap gI g^i
+
+" Make j and k move display lines instead of actual lines, unless you have a
+" count. This way:
+" - You can move through long lines wrapped into paragraphs more easily by
+"   typing j and k instead of gj and gk
+" - You can still use line numbers to move a few lines up or down
+" Stolen from https://www.hillelwayne.com/post/intermediate-vim/
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+vnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+vnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+
+" Make $ work on screen/display lines
+nnoremap $ g$
+vnoremap $ g$
+onoremap $ g$
+
+" Make 0 a 'smart' go to start of screen/display line:
+" - if we press it once, we go to the
+" - first non-blank character, and if we press it twice, we go to the actual
+"   start of the line
+" From https://www.reddit.com/r/vim/comments/kn0cpp/key_mappings_everyone_uses/
+" TODO Make 0 mapping not depend on itself, i.e. make it go to the first
+" column by using cursor() https://stackoverflow.com/questions/9953082/how-to-jump-directly-to-a-column-number-in-vim
+" instead of 0. That way, we can make 0 an inclusive backward motion with omap
+" instead of onoremap
+nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
+vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
+
+" Map g$ and g0 to beginning and end of current paragraph
+function! MoveToFirstLineOfParagraph()
+    call cursor(line("'{") + (line("'{") == line("0") ? 0 : 1),1)
+endfunction
+vnoremap <silent> g0 :<C-U>call MoveToFirstLineOfParagraph()<CR>`<1v``
+nnoremap <silent> g0 :<C-U>call MoveToFirstLineOfParagraph()<CR>
+onoremap <silent> g0 :call MoveToFirstLineOfParagraph()<CR>
+
+function! MoveToLastLineOfParagraph()
+" The next line take care of the edge case in which the current paragraph is
+" the end of the file, so { doesn't take us to the line after the paragraph,
+" but rather to the last line of the paragraph
+    call cursor(line("'}") - (line("'}") == line("$") ? 0 : 1),99999999)
+endfunction
+nnoremap <silent> g$ :<C-U>call MoveToLastLineOfParagraph()<CR>
+vnoremap <silent> g$ :<C-U>call MoveToLastLineOfParagraph()<CR>`<1v``
+onoremap <silent> g$ :call MoveToLastLineOfParagraph()<CR>
+
+
+" -------------------------
+" SECTION:  Things I'm yet deciding to keep or not
+" ------------------------
 "
 " Define motions g( and g) similar to motion ge
 nnoremap g) )geh

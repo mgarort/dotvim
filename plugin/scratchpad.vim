@@ -4,5 +4,6 @@ function! LaunchScratchpad()
     let tmpfile = system('mktemp')
     exe 'edit ' . tmpfile
     colorscheme blackwhite
+    set filetype=vimwiki
     startinsert
 endfunction
