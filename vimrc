@@ -1283,12 +1283,7 @@ nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 vnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 vnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
-" Make $ work on screen/display lines
-nnoremap $ g$
-vnoremap $ g$
-onoremap $ g$
-
-" Make 0 a 'smart' go to start of screen/display line:
+" Make 0 a 'smart' go to start of line:
 " - if we press it once, we go to the
 " - first non-blank character, and if we press it twice, we go to the actual
 "   start of the line
@@ -1297,16 +1292,16 @@ onoremap $ g$
 " column by using cursor() https://stackoverflow.com/questions/9953082/how-to-jump-directly-to-a-column-number-in-vim
 " instead of 0. That way, we can make 0 an inclusive backward motion with omap
 " instead of onoremap
-nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
-vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
+nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 
 " Map g$ and g0 to beginning and end of current paragraph
 function! MoveToFirstLineOfParagraph()
     call cursor(line("'{") + (line("'{") == line("0") ? 0 : 1),1)
 endfunction
-vnoremap <silent> g0 :<C-U>call MoveToFirstLineOfParagraph()<CR>`<1v``
-nnoremap <silent> g0 :<C-U>call MoveToFirstLineOfParagraph()<CR>
-onoremap <silent> g0 :call MoveToFirstLineOfParagraph()<CR>
+vnoremap <silent> z0 :<C-U>call MoveToFirstLineOfParagraph()<CR>`<1v``
+nnoremap <silent> z0 :<C-U>call MoveToFirstLineOfParagraph()<CR>
+onoremap <silent> z0 :call MoveToFirstLineOfParagraph()<CR>
 
 function! MoveToLastLineOfParagraph()
 " The next line take care of the edge case in which the current paragraph is
@@ -1314,9 +1309,9 @@ function! MoveToLastLineOfParagraph()
 " but rather to the last line of the paragraph
     call cursor(line("'}") - (line("'}") == line("$") ? 0 : 1),99999999)
 endfunction
-nnoremap <silent> g$ :<C-U>call MoveToLastLineOfParagraph()<CR>
-vnoremap <silent> g$ :<C-U>call MoveToLastLineOfParagraph()<CR>`<1v``
-onoremap <silent> g$ :call MoveToLastLineOfParagraph()<CR>
+nnoremap <silent> z$ :<C-U>call MoveToLastLineOfParagraph()<CR>
+vnoremap <silent> z$ :<C-U>call MoveToLastLineOfParagraph()<CR>`<1v``
+onoremap <silent> z$ :call MoveToLastLineOfParagraph()<CR>
 
 
 " -------------------------
