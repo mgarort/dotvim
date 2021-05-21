@@ -49,7 +49,7 @@ cmap <C-u> <Plug>(c_unix-line-discard)
 " History of previous commands with <C-r> (using :History command of fzf.vim)
 " Similar to how <C-r> opens fzf in the command line
 cnoremap <Plug>(c_fzf-history) History:<CR>
-cmap <C-r> <Plug>(c_fzf-history)
+" cmap <C-r> <Plug>(c_fzf-history)
 " TODO This waits for timeoutlen because <C-r> in command line mode conflicts
 " with pasting registers
 
