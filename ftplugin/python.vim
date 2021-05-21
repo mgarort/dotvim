@@ -45,6 +45,9 @@ function! GenerateCtags()
     exe '!ctags -Rf ' . root_dir . '/.tags --python-kinds=-i --exclude=' . root_dir . '/tasks/*/OUTPUT ' . root_dir
 endfunction
 nnoremap <leader>t :call GenerateCtags()<CR>
+" TODO This generates ctags in the directory where Vim was
+" opened,rather than the directory of the current buffer. Change it so that it
+" generates tags in the directory of the current buffer
 
 
 " gp and gP for pdb
