@@ -180,6 +180,26 @@ function! EditArbitraryDate()
     exe 'e ' . path
 endfunction
 
+" This function will insert the diary note template into empty and newly
+" created diary notes
+" NOTE Decided not to use it because it's better to leave empty diary notes
+" blank, since that allows you to quickly see that you have nothing planned
+" for that day yet
+function! PopulateDiaryEntry()
+    " Write diary template if the current file is empty or i
+    let filesize = getfsize(expand("%"))
+    let extension = expand("%:e")
+    " If file is empty and is not a directory, populate with diary template
+    " (necessary to check with extension becausee getfsize returns 0 both if
+    " directory or if empty file)
+    if extension == 'wiki' && filesize == 0
+        call feedkeys("idiary\<Tab>\<Esc>gg4j")
+    " If file doesn't exist (is being newly created), populate
+    elseif filesize == -1
+        call feedkeys("idiary\<Tab>\<Esc>gg4j")
+    endif
+endfunction
+
 
 
 " -------------------------
