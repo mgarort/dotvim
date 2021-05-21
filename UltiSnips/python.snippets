@@ -54,7 +54,7 @@ endsnippet
 
 
 # -------------------------
-# SECTION:  Headers
+# SECTION:  Headers and section delimiters
 # ------------------------
 #
 
@@ -71,6 +71,10 @@ snippet section "python section"
 # SECTION:  ${0:description}
 # ------------------------
 #
+endsnippet
+
+snippet #### "# * 60"
+##################################################
 endsnippet
 
 
@@ -137,7 +141,7 @@ drop_duplicates(subset=['${1:subset}'],keep='${2:first, last or False}')
 endsnippet
 
 snippet to_csv "DataFrame.to_csv" i
-to_csv('${1:path}',sep='${2:sep}',header=${3:bool},index=${4:bool})
+to_csv(${1:path},sep='${2:\t}',header=${3:bool},index=${4:bool})
 endsnippet
 
 # -------------------------
