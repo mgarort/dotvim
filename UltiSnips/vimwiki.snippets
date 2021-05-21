@@ -155,11 +155,19 @@ endsnippet
 # SECTION:  Vimwiki links and references
 # ------------------------
 #
+snippet gl "Vimwiki link"
+[[${2:note}|${1:description}]]
+endsnippet
+
 snippet link "Vimwiki link"
 [[./${2:LINK_PATH}|${1:description}]]
 endsnippet
 
 snippet image "Vimwiki image"
+{{file:./images/processed_${2:IMAGE_PATH}|${1:description}|style="width:550px;height:220px;"}}
+endsnippet
+
+snippet pic "Vimwiki image"
 {{file:./images/processed_${2:IMAGE_PATH}|${1:description}|style="width:550px;height:220px;"}}
 endsnippet
 
@@ -589,6 +597,9 @@ snippet grad "\grad"
 \grad
 endsnippet
 
+snippet partial "\partial"
+\partial
+endsnippet
 
 # -------------------------
 # SECTION:  Operators for optimization
