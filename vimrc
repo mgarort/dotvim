@@ -1148,6 +1148,9 @@ augroup END
 " and it's a hindrance rather than any help
 vnoremap <S-k> <Nop>
 
+" Repeat last substitution with & in visual mode too
+xnoremap <silent> & :'<,'>s<CR>
+
 " Recognize `.tags` file as well as `tags` file (for ctags), and look for tags in
 " upper directories recursively
 set tags=./tags;,tags;./.tags;,.tags;
