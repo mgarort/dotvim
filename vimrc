@@ -322,6 +322,12 @@ nnoremap ,r :register<CR>
 " - Going to an important file or location: like vimrc, bashrc, i3 config...
 " - Dangerous actions that shouldn't be easily reachable so that they are not
 "   performed by mistake: delete swp file, save session, load session...
+"
+" In contrast, comma , is generally used for:
+" - Buffer actions: whereas specific to the current buffer, or related to
+"   buffer motion.
+" - List actions: show open buffers, unlisted buffers, past buffers... or show
+"   list of registers.
 
 "   TODO Maybe add another bulletpoint that simply says "actions that are
 "   ergonomic to <leader>? Like fuzzy search
@@ -413,15 +419,6 @@ nmap <leader><leader><leader><leader><leader>rfkhk  <Plug>BufKillBd
 nmap <leader><leader><leader><leader><leader>slfkj  <Plug>BufKillBun
 nmap <leader><leader><leader><leader><leader>nbgfh  <Plug>BufKillForward
 nmap <leader><leader><leader><leader><leader>burib  <Plug>BufKillBack
-
-
-" y for viewing in table format (just bc "y" is next to "t")
-function! ViewTable()
-    set nowrap
-    set nowrite
-    RainbowAlign
-endfunction
-nnoremap <leader>y :call ViewTable()<CR>
 
 " Add mappings to make (save) current session and load it. Three <leader> to avoid doing
 " it by mistake

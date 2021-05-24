@@ -5,3 +5,12 @@ setlocal nomodifiable
 setlocal nofoldenable
 
 set wrap
+
+
+" t for viewing in table format
+function! ViewTable()
+    set nowrap
+    set nowrite
+    RainbowAlign
+endfunction
+nnoremap ,t :call ViewTable()<CR>
