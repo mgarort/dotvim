@@ -677,112 +677,6 @@ inoremap <silent> <Tab> <C-R>=(ExpandSnippetIfPossibleAndGetResult() > 0) ? '' :
 
 
 
-" Useful text objects by romainl (there are more at https://gist.github.com/romainl/c0a8b57a36aec71a986f1120e1931f20)
-" 24 simple text objects
-" ----------------------
-" i_ i. i: i, i; i| i/ i\ i* i+ i- i# i=
-" a_ a. a: a, a; a| a/ a\ a* a+ a- a# a=
-for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '-', '#' , '=','$']
-        execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
-        execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
-        execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
-        execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
-endfor
-" line text objects
-" -----------------
-" il al
-xnoremap il g_o^
-onoremap il :<C-u>normal vil<CR>
-xnoremap al $o0
-onoremap al :<C-u>normal val<CR>
-" link text objects
-" -----------------
-function! VisualLink(mode)
-    " Modes for text object could be 'in' or 'around'
-    if a:mode == 'in'
-        let shrink_selection = 1
-    elseif a:mode == 'around'
-        let shrink_selection = 0
-    endif
-    " Save cursor position
-    let l:cursor_pos = getpos('.')
-    " Use search() to search in current line only.
-    " Check if there is a link is in the forward direction
-    let link_found_forward = search(']]','ceW',line('.'))
-    if link_found_forward != 0
-        normal v
-        " Try to match closing brackets. If not found, turn off visual
-        " mode and restore cursor position
-        let found_closing_brackets = search('[[','bcW',line('.'))
-        if found_closing_brackets == 0
-            normal v
-            call setpos('.', l:cursor_pos)
-            return
-        else
-            if shrink_selection
-                call feedkeys('llohh')
-            endif
-        endif
-    " If there is no link in the forward direction, check in the backward
-    " direction
-    else
-        let link_found_backward = search('[[','bcW',line('.'))
-        if link_found_backward != 0
-            normal v
-            " Try to match closing brackets. If not found, turn off visual
-            " mode and restore cursor position
-            let found_closing_brackets = search(']]','ceW',line('.'))
-            if found_closing_brackets == 0
-                normal v
-                call setpos('.', l:cursor_pos)
-                return
-            else
-                if shrink_selection
-                    call feedkeys('hholl')
-                endif
-            endif
-        else
-            return
-        endif
-    endif
-endfunction
-xnoremap agl :<C-u>call VisualLink('around')<CR>
-onoremap agl :<C-u>normal vagl<CR>
-xnoremap igl :<C-u>call VisualLink('in')<CR>
-onoremap igl :<C-u>normal vigl<CR>
-" TODO Create text object igl
-" number text object (integer and float)
-" --------------------------------------
-" in
-function! VisualNumber()
-        call search('\d\([^0-9\.]\|$\)', 'cW')
-        normal v
-        call search('\(^\|[^0-9\.]\d\)', 'becW')
-endfunction
-xnoremap in :<C-u>call VisualNumber()<CR>
-onoremap in :<C-u>normal vin<CR>
-
-" <S-j> and <S-k> add blank lines below and above respectively
-" Note that this stills leaves H, M and L for moving the cursor
-" within the window
-" The combo exe "norm keys" allows to use especial characters
-" See :h :normal and https://stackoverflow.com/questions/4010890/vim-exit-insert-mode-with-normal-command
-function! AddBlackLineAbove()
-    setlocal formatoptions-=cro
-    let l:cursor_pos = getpos('.')
-    exe "normal O\<Esc>0D"
-    call setpos('.', [l:cursor_pos[0], l:cursor_pos[1]+1, l:cursor_pos[2], l:cursor_pos[3]])
-    setlocal formatoptions+=cro
-endfunction
-function! AddBlackLineBelow()
-    setlocal formatoptions-=cro
-    let l:cursor_pos = getpos('.')
-    exe "normal m`o\<Esc>0D"
-    call setpos('.', l:cursor_pos)
-    setlocal formatoptions+=cro
-endfunction
-nnoremap <silent><S-k> :call AddBlackLineAbove()<CR>
-nnoremap <silent><S-j> :call AddBlackLineBelow()<CR>
 
 " -----------
 " | SECTION | Windows
@@ -1261,6 +1155,95 @@ nnoremap <silent> gk :<c-u>call RepeatCmd('call NextClosedFold("k")')<cr>
 nnoremap } :<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>
 nnoremap { :<C-u>execute "keepjumps norm! " . v:count1 . "{"<CR>
 
+" Useful text objects by romainl (there are more at https://gist.github.com/romainl/c0a8b57a36aec71a986f1120e1931f20)
+" 24 simple text objects
+" ----------------------
+" i_ i. i: i, i; i| i/ i\ i* i+ i- i# i=
+" a_ a. a: a, a; a| a/ a\ a* a+ a- a# a=
+for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '-', '#' , '=','$']
+        execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
+        execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
+        execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
+        execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
+endfor
+" line text objects
+" -----------------
+" il al
+xnoremap il g_o^
+onoremap il :<C-u>normal vil<CR>
+xnoremap al $o0
+onoremap al :<C-u>normal val<CR>
+" link text objects
+" -----------------
+function! VisualLink(mode)
+    " Modes for text object could be 'in' or 'around'
+    if a:mode == 'in'
+        let shrink_selection = 1
+    elseif a:mode == 'around'
+        let shrink_selection = 0
+    endif
+    " Save cursor position
+    let l:cursor_pos = getpos('.')
+    " Use search() to search in current line only.
+    " Check if there is a link is in the forward direction
+    let link_found_forward = search(']]','ceW',line('.'))
+    if link_found_forward != 0
+        normal v
+        " Try to match closing brackets. If not found, turn off visual
+        " mode and restore cursor position
+        let found_closing_brackets = search('[[','bcW',line('.'))
+        if found_closing_brackets == 0
+            normal v
+            call setpos('.', l:cursor_pos)
+            return
+        else
+            if shrink_selection
+                call feedkeys('llohh')
+            endif
+        endif
+    " If there is no link in the forward direction, check in the backward
+    " direction
+    else
+        let link_found_backward = search('[[','bcW',line('.'))
+        if link_found_backward != 0
+            normal v
+            " Try to match closing brackets. If not found, turn off visual
+            " mode and restore cursor position
+            let found_closing_brackets = search(']]','ceW',line('.'))
+            if found_closing_brackets == 0
+                normal v
+                call setpos('.', l:cursor_pos)
+                return
+            else
+                if shrink_selection
+                    call feedkeys('hholl')
+                endif
+            endif
+        else
+            return
+        endif
+    endif
+endfunction
+xnoremap agl :<C-u>call VisualLink('around')<CR>
+onoremap agl :<C-u>normal vagl<CR>
+xnoremap igl :<C-u>call VisualLink('in')<CR>
+onoremap igl :<C-u>normal vigl<CR>
+" TODO Create text object igl
+" number text object (integer and float)
+" --------------------------------------
+" in
+function! VisualNumber()
+        call search('\d\([^0-9\.]\|$\)', 'cW')
+        normal v
+        call search('\(^\|[^0-9\.]\d\)', 'becW')
+endfunction
+xnoremap in :<C-u>call VisualNumber()<CR>
+onoremap in :<C-u>normal vin<CR>
+
+" Similarly to how J or <S-j> collapses many lines into a single line,
+" K or <S-k> will unroll every word into its own line
+vnoremap <S-k> :<C-u>'<,'>s/\s\+/\r/<CR>
+
 
 " -------------------------
 " SECTION:  Lines: actual lines vs display lines, adding lines, moving through lines, etc
@@ -1315,6 +1298,29 @@ endfunction
 nnoremap <silent> z$ :<C-U>call MoveToLastLineOfParagraph()<CR>
 vnoremap <silent> z$ :<C-U>call MoveToLastLineOfParagraph()<CR>`<1v``
 onoremap <silent> z$ :call MoveToLastLineOfParagraph()<CR>
+
+" <S-j> and <S-k> add blank lines below and above respectively
+" Note that this stills leaves H, M and L for moving the cursor
+" within the window
+" The combo exe "norm keys" allows to use especial characters
+" See :h :normal and https://stackoverflow.com/questions/4010890/vim-exit-insert-mode-with-normal-command
+function! AddBlackLineAbove()
+    setlocal formatoptions-=cro
+    let l:cursor_pos = getpos('.')
+    exe "normal O\<Esc>0D"
+    call setpos('.', [l:cursor_pos[0], l:cursor_pos[1]+1, l:cursor_pos[2], l:cursor_pos[3]])
+    setlocal formatoptions+=cro
+endfunction
+function! AddBlackLineBelow()
+    setlocal formatoptions-=cro
+    let l:cursor_pos = getpos('.')
+    exe "normal m`o\<Esc>0D"
+    call setpos('.', l:cursor_pos)
+    setlocal formatoptions+=cro
+endfunction
+nnoremap <silent><S-k> :call AddBlackLineAbove()<CR>
+nnoremap <silent><S-j> :call AddBlackLineBelow()<CR>
+
 
 
 " -------------------------
