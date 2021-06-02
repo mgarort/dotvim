@@ -1301,22 +1301,22 @@ onoremap <silent> z$ :call MoveToLastLineOfParagraph()<CR>
 " within the window
 " The combo exe "norm keys" allows to use especial characters
 " See :h :normal and https://stackoverflow.com/questions/4010890/vim-exit-insert-mode-with-normal-command
-function! AddBlackLineAbove()
+function! AddBlankLineAbove()
     setlocal formatoptions-=cro
     let l:cursor_pos = getpos('.')
     exe "normal O\<Esc>0D"
     call setpos('.', [l:cursor_pos[0], l:cursor_pos[1]+1, l:cursor_pos[2], l:cursor_pos[3]])
     setlocal formatoptions+=cro
 endfunction
-function! AddBlackLineBelow()
+function! AddBlankLineBelow()
     setlocal formatoptions-=cro
     let l:cursor_pos = getpos('.')
     exe "normal m`o\<Esc>0D"
     call setpos('.', l:cursor_pos)
     setlocal formatoptions+=cro
 endfunction
-nnoremap <silent><S-k> :call AddBlackLineAbove()<CR>
-nnoremap <silent><S-j> :call AddBlackLineBelow()<CR>
+nnoremap <silent><S-k> :call AddBlankLineAbove()<CR>
+nnoremap <silent><S-j> :call AddBlankLineBelow()<CR>
 
 
 
