@@ -1230,12 +1230,32 @@ onoremap igl :<C-u>normal vigl<CR>
 " --------------------------------------
 " in
 function! VisualNumber()
-        call search('\d\([^0-9\.]\|$\)', 'cW')
+        " First, match the last digit in the number. Explanation:
+        " - \d     match a digit
+        " - \([^0-9\.]\|$\)     the digit can be followed by the end of line
+        "                       $, and cannot be followed by any digit (so
+        "                       that we match the very last digit) or by a dot
+        "                       (so that we match the very last digit even in
+        "                       the presence of a decimal point).
+        let match_last_digit = search('\d\([^0-9\.]\|$\)', 'cW', line('.'))
+        if match_last_digit == 0
+            " Corner case: sometimes the very last digit is followed by a dot,
+            "              because the dot is not a decimal point, but a file
+            "              extension. For example, file1234.txt . So if the
+            "              previous match fails, try to match a digit followed
+            "              by a dot
+            let match_last_digit_with_dot = search('\d\([^0-9]\|$\)', 'cW', line('.'))
+            if match_last_digit_with_dot == 0
+                " If nothing works, then abort selection
+                return
+            endif
+        endif
         normal v
-        call search('\(^\|[^0-9\.]\d\)', 'becW')
+        " Finally, match the first digit
+        call search('\(^\|[^0-9\.]\d\)', 'becW', line('.'))
 endfunction
-xnoremap in :<C-u>call VisualNumber()<CR>
-onoremap in :<C-u>normal vin<CR>
+xnoremap <silent> in :<C-u>call VisualNumber()<CR>
+onoremap <silent> in :<C-u>normal vin<CR>
 
 " Similarly to how J or <S-j> collapses many lines into a single line,
 " K or <S-k> will unroll every word into its own line
