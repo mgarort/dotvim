@@ -32,6 +32,8 @@ imap <F10> <Plug>(i_forward-word)
 inoremap <Plug>(i_unix-line-discard) <C-g>u<C-u>
 imap <C-u> <Plug>(i_unix-line-discard)
 
+inoremap <Plug>(i_kill-line) <Esc>lC
+imap <C-k> <Plug>(i_kill-line)
 
 " -------------------------
 " SECTION:  Command line mode
