@@ -144,6 +144,7 @@ snippet to_csv "DataFrame.to_csv" i
 to_csv(${1:path},sep='${2:\t}',header=${3:bool},index=${4:bool})
 endsnippet
 
+
 # -------------------------
 # SECTION:  Errors and exceptions
 # ------------------------
@@ -154,4 +155,13 @@ endsnippet
 
 snippet raise "ValueError"
 raise ValueError('${0:message}')
+endsnippet
+
+
+# -------------------------
+# SECTION:  Popular molecules
+# ------------------------
+#
+snippet ibuprofen "Ibuprofen SMILES"
+CC(Cc1ccc(cc1)C(C(=O)O)C)C
 endsnippet
