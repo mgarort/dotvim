@@ -176,8 +176,14 @@ endfunction
 function! EditArbitraryDate()
     let current_date = strftime("%Y-%m-%d")
     let date = input('Enter date in YYYY-MM-DD format:  ', current_date)
-    let path = g:vimwiki_list[0]['path'] . '/diary/' . date . '.wiki'
-    exe 'e ' . path
+    if len(date) == 0
+        echo 'Error. Cannot leave date empty!'
+        sleep 2
+        echo ''
+    else
+        let path = g:vimwiki_list[0]['path'] . '/diary/' . date . '.wiki'
+        exe 'e ' . path
+    endif
 endfunction
 
 " This function will insert the diary note template into empty and newly
