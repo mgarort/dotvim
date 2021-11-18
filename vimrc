@@ -62,6 +62,7 @@ Plugin 'jeetsukumaran/vim-pythonsense'
 Plugin 'airblade/vim-matchquote'
 Plugin 'nvie/vim-flake8'
 Plugin 'chrisbra/recover.vim'
+Plugin 'mattn/calendar-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required (note that this automatically guesses indents for
@@ -499,6 +500,8 @@ function! AutomaticColorscheme()
     "   achieved through the augroup and autocommands
     let this_filetype = &l:filetype
     if this_filetype == 'vimwiki'
+        colorscheme blackwhite
+    elseif this_filetype == 'calendar'
         colorscheme blackwhite
     else
         colorscheme codedark

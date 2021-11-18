@@ -109,6 +109,14 @@ nmap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
 " Create new diary note (or edit existing one)
 nnoremap <silent><buffer> <leader>d :call EditArbitraryDate()<CR>
 
+" Open calendar. Very similar to the <leader>d mapping for EditArbitraryDate(),
+" but with a calendar view provided by the plugin mattn/calendar.vim
+" <leader>e chosen because it is very similar to <leader>d
+nnoremap <silent><buffer> <leader>e :call OpenCalendar()<CR>
+"TODO Instead of Calendar, consider using CalendarT, which is full screen. But
+"then you have to configure it so that pressing on a particular date closes
+"the calendar (in addition to opening the day)
+
 
 " ----------------------
 " SECTION:  Appearance

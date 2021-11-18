@@ -201,6 +201,18 @@ function! PopulateDiaryEntry()
 endfunction
 
 
+function OpenCalendar()
+    Calendar
+    setlocal filetype=calendar
+    color blackwhite
+    call calendar#action("PrevYear")
+    call calendar#action("NextYear")
+endfunction
+
+" Make calendar from the plugin mattn/calendar.vim start on Monday
+" (not directly in the Vimwiki plugin but closely integrated with Vimwiki)
+let g:calendar_monday = 1
+
 
 " -------------------------
 " SECTION:  Functionality for writing in Vim
