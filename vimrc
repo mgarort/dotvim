@@ -402,7 +402,7 @@ function! SearchWithGrep()
     " terminal. Otherwise grep clutters the screen for the output of later
     " commands
     if is_upper == -1
-        silent exe 'grep! -i "' . search . '" *.wiki'
+        silent exe 'grep! -i "' . search . '" *.wiki diary/*.wiki'
     else
         silent exe 'grep! "' . search . '" *.wiki'
     endif
