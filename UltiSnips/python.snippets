@@ -11,7 +11,7 @@ endsnippet
 #
 
 snippet task "guatask task"
-class ${1:TaskName}(${2:TaskParent}):
+class ${1:TaskName}(${2:Task}):
     debug = True
     requires = [${3:required tasks}]
     params = {${4:parameters}}
@@ -24,6 +24,34 @@ class ${1:TaskName}(${2:TaskParent}):
 
     def load_output(self):
 	    ${9:Write here how the output of the task should be loaded (once completed).}
+endsnippet
+
+snippet (Task): "class attributes needed for guatask task" i
+(Task):
+    requires = [${3:required tasks}]
+    params = {${4:parameters}}
+    directory = '${5:directory name}'
+    subdirectory = '${6:subdirectory name}'
+    output_filename = '${7:output filename}'
+    debug = True
+    def run(self):
+        ${8:Write here what the task is supposed to do.}
+    def load_output(self):
+        ${9:Write here how the output of the task should be loaded (once completed).}
+endsnippet
+
+snippet (Task) "class attributes needed for guatask task" i
+(Task):
+    requires = [${3:required tasks}]
+    params = {${4:parameters}}
+    directory = '${5:directory name}'
+    subdirectory = '${6:subdirectory name}'
+    output_filename = '${7:output filename}'
+    debug = True
+    def run(self):
+        ${8:Write here what the task is supposed to do.}
+    def load_output(self):
+        ${9:Write here how the output of the task should be loaded (once completed).}
 endsnippet
 
 snippet requires "class attributes needed for guatask task"
@@ -133,7 +161,11 @@ endsnippet
 
 
 snippet read_csv "pd.read_csv" i
-read_csv(${1:path},sep='${2:sep}', header=${3:header})
+read_csv(${1:path},sep='${2:\t}', header=${3:int_or_None})
+endsnippet
+
+snippet read_csv( "pd.read_csv" i
+read_csv(${1:path},sep='${2:\t}', header=${3:int_or_None})
 endsnippet
 
 snippet drop "DataFrame.drop_duplicates" i
@@ -142,6 +174,18 @@ endsnippet
 
 snippet to_csv "DataFrame.to_csv" i
 to_csv(${1:path},sep='${2:\t}',header=${3:bool},index=${4:bool})
+endsnippet
+
+snippet to_csv( "DataFrame.to_csv" i
+to_csv(${1:path},sep='${2:\t}',header=${3:bool},index=${4:bool})
+endsnippet
+
+snippet open "open()"
+open(${1:filepath},mode='${2:mode}')
+endsnippet
+
+snippet set_index "set_index()" i
+set_index('${1:index}')
 endsnippet
 
 # -------------------------
@@ -154,4 +198,25 @@ endsnippet
 
 snippet raise "ValueError"
 raise ValueError('${0:message}')
+endsnippet
+
+# -------------------------
+# SECTION:  Docstring
+# ------------------------
+#
+snippet fdoc "Docstring for functions (Google style)"
+    """
+    This is a one or two-line description.
+
+    Args:
+        param1(type): param1 description
+        param2(type, optional): param2 description
+
+    Returns:
+        Description of what is returned
+	(alternatively, change for "Yields:" if it is a generator)
+
+    Raises:
+        Exception: Exception message
+    """
 endsnippet
