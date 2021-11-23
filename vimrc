@@ -96,6 +96,26 @@ syntax on
 " doesn't leave a trail of open buffers behind. But it will also work for
 " non-Vimwiki files. The function CloseThisBuffer() ensures that if there is
 " no open buffer, <BS> will close Vim
+function! IsFugitiveDiffScratchWindow()
+    let buffer_name = bufname("%")
+    let string_index = stridx(buffer_name,"fugitive")
+    if string_index == 0
+        return 1
+    else
+        return 0
+    endif
+endfunction
+
+function! IsFugitiveStatusWindow()
+    let buffer_name = bufname("%")
+    let string_index = stridx(buffer_name,"\.git/index")
+    if string_index == -1
+        return 0
+    else
+        return 1
+    endif
+endfunction
+
 function! CloseThisBuffer()
     if bufname("%") == ""
         q
@@ -891,24 +911,6 @@ inoremap <C-q> <C-k>
 
 "Mappings for Vim fugitive
 nnoremap <leader>g :G<CR>
-function! IsFugitiveDiffScratchWindow()
-    let buffer_name = bufname("%")
-    let string_index = stridx(buffer_name,"fugitive")
-    if string_index == 0
-        return 1
-    else
-        return 0
-    endif
-endfunction
-function! IsFugitiveStatusWindow()
-    let buffer_name = bufname("%")
-    let string_index = stridx(buffer_name,"\.git/index")
-    if string_index == -1
-        return 0
-    else
-        return 1
-    endif
-endfunction
 
 "Mappings for quickfix window (copied from tpope's unimpaired)
 nnoremap [q :cprev<CR>
