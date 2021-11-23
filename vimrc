@@ -116,12 +116,23 @@ function! IsFugitiveStatusWindow()
     endif
 endfunction
 
+function! IsCalendarWindow()
+    let buffer_name = bufname("%")
+    if buffer_name == '__Calendar'
+        return 1
+    else
+        return 0
+    endif
+endfunction
+
 function! CloseThisBuffer()
     if bufname("%") == ""
         q
     elseif IsFugitiveDiffScratchWindow() == 1
         bd
     elseif IsFugitiveStatusWindow() == 1
+        q
+    elseif IsCalendarWindow() == 1
         q
     else
         BD
