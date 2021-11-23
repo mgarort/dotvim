@@ -213,6 +213,7 @@ function OpenCalendar()
     color blackwhite
     call calendar#action("PrevYear")
     call calendar#action("NextYear")
+    vertical resize 27
 endfunction
 
 " Make calendar from the plugin mattn/calendar.vim start on Monday
