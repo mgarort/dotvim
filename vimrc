@@ -62,6 +62,7 @@ Plugin 'jeetsukumaran/vim-pythonsense'
 Plugin 'airblade/vim-matchquote'
 Plugin 'nvie/vim-flake8'
 Plugin 'chrisbra/recover.vim'
+Plugin 'mattn/calendar-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required (note that this automatically guesses indents for
@@ -95,12 +96,43 @@ syntax on
 " doesn't leave a trail of open buffers behind. But it will also work for
 " non-Vimwiki files. The function CloseThisBuffer() ensures that if there is
 " no open buffer, <BS> will close Vim
+function! IsFugitiveDiffScratchWindow()
+    let buffer_name = bufname("%")
+    let string_index = stridx(buffer_name,"fugitive")
+    if string_index == 0
+        return 1
+    else
+        return 0
+    endif
+endfunction
+
+function! IsFugitiveStatusWindow()
+    let buffer_name = bufname("%")
+    let string_index = stridx(buffer_name,"\.git/index")
+    if string_index == -1
+        return 0
+    else
+        return 1
+    endif
+endfunction
+
+function! IsCalendarWindow()
+    let buffer_name = bufname("%")
+    if buffer_name == '__Calendar'
+        return 1
+    else
+        return 0
+    endif
+endfunction
+
 function! CloseThisBuffer()
     if bufname("%") == ""
         q
     elseif IsFugitiveDiffScratchWindow() == 1
         bd
     elseif IsFugitiveStatusWindow() == 1
+        q
+    elseif IsCalendarWindow() == 1
         q
     else
         BD
@@ -402,7 +434,7 @@ function! SearchWithGrep()
     " terminal. Otherwise grep clutters the screen for the output of later
     " commands
     if is_upper == -1
-        silent exe 'grep! -i "' . search . '" *.wiki'
+        silent exe 'grep! -i "' . search . '" *.wiki diary/*.wiki'
     else
         silent exe 'grep! "' . search . '" *.wiki'
     endif
@@ -499,6 +531,8 @@ function! AutomaticColorscheme()
     "   achieved through the augroup and autocommands
     let this_filetype = &l:filetype
     if this_filetype == 'vimwiki'
+        colorscheme blackwhite
+    elseif this_filetype == 'calendar'
         colorscheme blackwhite
     else
         colorscheme codedark
@@ -888,24 +922,6 @@ inoremap <C-q> <C-k>
 
 "Mappings for Vim fugitive
 nnoremap <leader>g :G<CR>
-function! IsFugitiveDiffScratchWindow()
-    let buffer_name = bufname("%")
-    let string_index = stridx(buffer_name,"fugitive")
-    if string_index == 0
-        return 1
-    else
-        return 0
-    endif
-endfunction
-function! IsFugitiveStatusWindow()
-    let buffer_name = bufname("%")
-    let string_index = stridx(buffer_name,"\.git/index")
-    if string_index == -1
-        return 0
-    else
-        return 1
-    endif
-endfunction
 
 "Mappings for quickfix window (copied from tpope's unimpaired)
 nnoremap [q :cprev<CR>

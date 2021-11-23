@@ -32,10 +32,12 @@ map <leader><leader><leader><leader><leader>hEhgh <Plug>VimwikiIncrementListItem
 map <leader><leader><leader><leader><leader>jDjhj <Plug>VimwikiIncrementListItem
 map <leader><leader><leader><leader><leader>kCkjk <Plug>VimwikiToggleRejectedListItem
 map <leader><leader><leader><leader><leader>lBlkl <Plug>VimwikiToggleRejectedListItem
+" map <leader><leader><leader><leader><leader>libgk <Plug>VimwikiChangeSymbolInListTo
 silent! unmap <buffer> glA
 silent! unmap <buffer> gla
 silent! unmap <buffer> glI
 silent! unmap <buffer> gli
+silent! unmap <buffer> gLi
 silent! unmap <buffer> gl1
 silent! unmap <buffer> gl#
 silent! unmap <buffer> gl*

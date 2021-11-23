@@ -71,14 +71,18 @@ nmap <silent> gl  <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>i\|<Esc><
 " - gLl for link (of which gl is just a shorthand because it's the most common)
 " - gLp paper
 " - gLd document
+" - gLb book
+" - gLi image
 xmap <silent> gLl <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>i\|<Esc><space><C-u>set nolazyredraw<CR>i
 xmap <silent> gLp <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./papers/\|<Esc><space><C-u>set nolazyredraw<CR>i
 xmap <silent> gLd <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./docs/\|<Esc><space><C-u>set nolazyredraw<CR>i
 xmap <silent> gLb <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./books/\|<Esc><space><C-u>set nolazyredraw<CR>i
+xmap <silent> gLi <space><C-u>set lazyredraw<CR>gvz}gvz}s}}i\|style="width:550px;height:220px;"<Esc>S{{<Right><Right>ifile:./images/processed_\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLl <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>i\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLp <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./papers/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLd <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./docs/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLb <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./books/\|<Esc><space><C-u>set nolazyredraw<CR>i
+nmap <silent> gLi <space><C-u>set lazyredraw<CR>viwz}gvz}s}}i\|style="width:550px;height:220px;"<Esc>S{{<Right><Right>ifile:./images/processed_\|<Esc><space><C-u>set nolazyredraw<CR>i
 " Keybinding for creating link to title
 nnoremap gLt a[[]]<Esc><Left>i
 " Keybinding for removing link
@@ -104,6 +108,14 @@ nmap <leader>w<leader>t <Plug>VimwikiMakeTomorrowDiaryNote
 
 " Create new diary note (or edit existing one)
 nnoremap <silent><buffer> <leader>d :call EditArbitraryDate()<CR>
+
+" Open calendar. Very similar to the <leader>d mapping for EditArbitraryDate(),
+" but with a calendar view provided by the plugin mattn/calendar.vim
+" <leader>e chosen because it is very similar to <leader>d
+nnoremap <silent><buffer> <leader>e :call OpenCalendar()<CR>
+"TODO Instead of Calendar, consider using CalendarT, which is full screen. But
+"then you have to configure it so that pressing on a particular date closes
+"the calendar (in addition to opening the day)
 
 
 " ----------------------

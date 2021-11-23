@@ -32,6 +32,8 @@ imap <F10> <Plug>(i_forward-word)
 inoremap <Plug>(i_unix-line-discard) <C-g>u<C-u>
 imap <C-u> <Plug>(i_unix-line-discard)
 
+inoremap <Plug>(i_kill-line) <Esc>lC
+imap <C-k> <Plug>(i_kill-line)
 
 " -------------------------
 " SECTION:  Command line mode
@@ -71,3 +73,11 @@ cnoremap <Plug>(c_backward-word) <S-Left>
 cmap <F9> <Plug>(c_backward-word)
 cnoremap <Plug>(c_forward-word) <S-Right>
 cmap <F10> <Plug>(c_forward-word)
+
+" Delete from cursor to end of line with <C-k>
+" from https://vi.stackexchange.com/questions/33030/delete-from-cursor-position-until-end-of-line-in-command-line-mode/33042#33042
+func! KillLineToEnd()
+    return strpart(getcmdline(), 0, getcmdpos()-1)
+endfunc
+cnoremap <C-k> <C-\>eKillLineToEnd()<CR>
+

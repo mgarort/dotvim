@@ -176,8 +176,14 @@ endfunction
 function! EditArbitraryDate()
     let current_date = strftime("%Y-%m-%d")
     let date = input('Enter date in YYYY-MM-DD format:  ', current_date)
-    let path = g:vimwiki_list[0]['path'] . '/diary/' . date . '.wiki'
-    exe 'e ' . path
+    if len(date) == 0
+        echo 'Error. Cannot leave date empty!'
+        sleep 2
+        echo ''
+    else
+        let path = g:vimwiki_list[0]['path'] . '/diary/' . date . '.wiki'
+        exe 'e ' . path
+    endif
 endfunction
 
 " This function will insert the diary note template into empty and newly
@@ -200,6 +206,19 @@ function! PopulateDiaryEntry()
     endif
 endfunction
 
+
+function OpenCalendar()
+    Calendar
+    setlocal filetype=calendar
+    color blackwhite
+    call calendar#action("PrevYear")
+    call calendar#action("NextYear")
+    vertical resize 27
+endfunction
+
+" Make calendar from the plugin mattn/calendar.vim start on Monday
+" (not directly in the Vimwiki plugin but closely integrated with Vimwiki)
+let g:calendar_monday = 1
 
 
 " -------------------------
