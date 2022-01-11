@@ -158,7 +158,7 @@ set nofoldenable
 " want to not compile (not viewing changes in HTML, but don't have to wait a
 " couple of seconds after each write)
 let s:n_lines = line('$')
-if s:n_lines < 60
+if s:n_lines < 200
     let b:is_compile_html_mode_active = 1
 else
     let b:is_compile_html_mode_active = 0
