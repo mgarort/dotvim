@@ -988,6 +988,8 @@ cabbrev gpush Gpush
 " Abbreviate :bq to :q so that we can close the buffer list by just pressing q
 abbrev bq b
 
+" Abbreviate w] to w to avoid accidentally writing to ]
+abbrev w] w
 
 
 " -----------
