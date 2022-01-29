@@ -121,8 +121,8 @@ function! Wikify()
     %s/\\begin{verbatim}/{{{>/ge
     %s/\\end{verbatim}/}}}/ge
     %s#\\underline{\(.\{-}\)}#<u>\1</u>#ge
-    %s#\\textbf{\(.\{-}\)}#<b>\1</b>#ge
-    %s#\\textit{\(.\{-}\)}#<i>\1</i>#ge
+    %s#\\textbf{\(.\{-}\)}#*\1*#ge
+    %s#\\textit{\(.\{-}\)}#_\1_#ge
     %s#\\item{\(.*\)}#\1#ge
     %s#\\verb|\(.\{-}\)|#`\1`#ge
     " The following replaces the $$....$$ equations in latex
