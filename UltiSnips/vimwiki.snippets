@@ -43,6 +43,22 @@ snippet -- "Separating line" i
 ------------------------------------------------------
 endsnippet
 
+snippet ref "Vimwiki references"
+--------------------------------
+
+===== References =====
+
+*1* ${0}
+endsnippet
+
+snippet papers "Papers to read"
+--------------------------------
+
+===== Papers to read =====
+
+TODO ${0}
+endsnippet
+
 
 # -------------------------
 # SECTION:  Environments
@@ -206,14 +222,6 @@ snippet textfile "Vimwiki link to textfile"
 [[./textfiles/${1:TEXTFILE_PATH}]]
 endsnippet
 
-snippet ref "Vimwiki references"
---------------------------------
-
-===== References =====
-
-*1* ${0}
-endsnippet
-
 
 # -------------------------
 # SECTION:  HTML formatting
@@ -300,6 +308,15 @@ endsnippet
 # Ad-hoc snippets for specific projects
 snippet xr "XXX Add ref"
 XXX Add ref
+endsnippet
+
+
+# -------------------------
+# SECTION:  Abbreviations for book and paper references
+# ------------------------
+#
+snippet brock "Brock. Biology of microorganisms"
+Brock. [[file:./books/brock_biology_of_microorganisms.pdf|Biology of microorganisms]].
 endsnippet
 
 
