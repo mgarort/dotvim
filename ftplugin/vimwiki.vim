@@ -79,12 +79,14 @@ xmap <silent> gLs <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./sc
 xmap <silent> gLd <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./docs/\|<Esc><space><C-u>set nolazyredraw<CR>i
 xmap <silent> gLb <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./books/\|<Esc><space><C-u>set nolazyredraw<CR>i
 xmap <silent> gLi <space><C-u>set lazyredraw<CR>gvz}gvz}s}}i\|style="width:550px;height:220px;"<Esc>S{{<Right><Right>ifile:./images/processed_\|<Esc><space><C-u>set nolazyredraw<CR>i
+xmap <silent> gLm <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./media/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLl <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>i\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLp <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./papers/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLs <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./scores/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLd <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./docs/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLb <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./books/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLi <space><C-u>set lazyredraw<CR>viwz}gvz}s}}i\|style="width:550px;height:220px;"<Esc>S{{<Right><Right>ifile:./images/processed_\|<Esc><space><C-u>set nolazyredraw<CR>i
+nmap <silent> gLm <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./media/\|<Esc><space><C-u>set nolazyredraw<CR>i
 " Keybinding for creating link to title
 nnoremap gLt a[[]]<Esc><Left>i
 " Keybinding for removing link
