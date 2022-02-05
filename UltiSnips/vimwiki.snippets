@@ -401,6 +401,16 @@ snippet color "\color{}" i
 endsnippet
 
 # -------------------------
+# SECTION:  Latex math environments
+# ------------------------
+#
+snippet mat "smart matrix environment from vim-snippets"
+\\begin{${1:p/b/v/V/B/small}matrix}
+${0:${VISUAL}}
+\\end{$1matrix}
+endsnippet
+
+# -------------------------
 # SECTION:  Set symbols and number types
 # ------------------------
 #
