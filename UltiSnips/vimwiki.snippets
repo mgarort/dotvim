@@ -178,48 +178,52 @@ endsnippet
 # ------------------------
 #
 snippet gl "Vimwiki link"
-[[${2:note}|${1:description}]]
+[[${1:note}|${2:description}]]
 endsnippet
 
 snippet link "Vimwiki link"
-[[./${2:LINK_PATH}|${1:description}]]
+[[./${1:LINK_PATH}|${2:description}]]
 endsnippet
 
 snippet image "Vimwiki image"
-{{file:./images/processed_${2:IMAGE_PATH}|${1:description}|style="width:550px;height:220px;"}}
+{{file:./images/processed_${1:IMAGE_PATH}|${2:description}|style="width:550px;height:220px;"}}
 endsnippet
 
 snippet pic "Vimwiki image"
-{{file:./images/processed_${2:IMAGE_PATH}|${1:description}|style="width:550px;height:220px;"}}
+{{file:./images/processed_${1:IMAGE_PATH}|${2:description}|style="width:550px;height:220px;"}}
+endsnippet
+
+snippet media "Vimwiki media file"
+{{file:./media/${1:FILE_PATH}|${2:description}|style="width:550px;height:220px;"}}
 endsnippet
 
 # figures for reports, rather than images for notes
 snippet fig "Vimwiki figure"
-{{file:./figures/${2:FIGURE_PATH}|${1:description}|style="width:550px;height:220px;"}}
+{{file:./figures/${1:FIGURE_PATH}|${2:description}|style="width:550px;height:220px;"}}
 endsnippet
 
 snippet paper "Vimwiki paper"
-[[file:./papers/${2:PAPER_PATH}|${1:description}]]
+[[file:./papers/${1:PAPER_PATH}|${2:description}]]
 endsnippet
 
 snippet doc "Vimwiki document"
-[[file:./docs/${2:DOC_PATH}|${1:description}]]
+[[file:./docs/${1:DOC_PATH}|${2:description}]]
 endsnippet
 
 snippet writing "One of my writings"
-[[file:./writings/${2:WRITING_PATH}|${1:description}]]
+[[file:./writings/${1:WRITING_PATH}|${2:description}]]
 endsnippet
 
 snippet book "Vimwiki link to book"
-[[file:./books/${2:BOOK_PATH}|${1:description}]]
+[[file:./books/${1:BOOK_PATH}|${2:description}]]
 endsnippet
 
 snippet file "Vimwiki link to file"
-[[file:./${2:file_path}|${1:description}]]
+[[file:./${1:file_path}|${2:description}]]
 endsnippet
 
 snippet textfile "Vimwiki link to textfile"
-[[./textfiles/${1:TEXTFILE_PATH}]]
+[[./textfiles/${2:TEXTFILE_PATH}]]
 endsnippet
 
 
