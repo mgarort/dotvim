@@ -211,9 +211,12 @@ function OpenCalendar()
     Calendar
     setlocal filetype=calendar
     color blackwhite
+    " We need to move years to get Vim to color the calendar
     call calendar#action("PrevYear")
     call calendar#action("NextYear")
     vertical resize 27
+    " Color days with diary notes in blue
+    hi CalMemo ctermfg=blue
 endfunction
 
 " Make calendar from the plugin mattn/calendar.vim start on Monday
