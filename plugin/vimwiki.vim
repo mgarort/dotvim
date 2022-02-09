@@ -222,6 +222,9 @@ endfunction
 " Make calendar from the plugin mattn/calendar.vim start on Monday
 " (not directly in the Vimwiki plugin but closely integrated with Vimwiki)
 let g:calendar_monday = 1
+" Make the plus signs + indicating that a diary note has been created for
+" a day be closer to the day number
+let g:calendar_mark = 'left-fit'
 
 
 " -------------------------
