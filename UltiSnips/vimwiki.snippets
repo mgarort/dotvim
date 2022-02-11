@@ -454,12 +454,8 @@ snippet ( "(" i
 (${0})
 endsnippet
 
-snippet (* "\left(" i
-\left( 
-endsnippet
-
-snippet )* "\right)" i
-\right) 
+snippet (* "\left( \right)" i
+\left( ${0} \right)
 endsnippet
 
 snippet big) "big (" i
@@ -480,6 +476,10 @@ endsnippet
 
 snippet [ "[" i
 [${0}]
+endsnippet
+
+snippet [* "\left[ \right]" i
+\left[ ${0} \right]
 endsnippet
 
 snippet big] "big [" i
@@ -596,6 +596,10 @@ endsnippet
 
 snippet c. "\cdot" i
 \cdot 
+endsnippet
+
+snippet o. "\odot" i
+\odot 
 endsnippet
 
 snippet v... "\vdots" i
