@@ -121,6 +121,8 @@ nnoremap <silent><buffer> <leader>e :call OpenCalendar()<CR>
 "then you have to configure it so that pressing on a particular date closes
 "the calendar (in addition to opening the day)
 
+" Keys for calendar actions
+let g:calendar_keys = { 'goto_next_month': '<Down>', 'goto_prev_month': '<Up>', 'goto_next_year': '<Right>', 'goto_prev_year': '<Left>'}
 
 " ----------------------
 " SECTION:  Appearance
