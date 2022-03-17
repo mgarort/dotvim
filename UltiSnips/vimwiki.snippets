@@ -450,6 +450,10 @@ snippet EE "E for expectation"
 \E
 endsnippet
 
+snippet E "\E"
+\E
+endsnippet
+
 snippet in "\in"
 \in 
 endsnippet
@@ -458,6 +462,14 @@ endsnippet
 # SECTION:  Delimiters
 # ------------------------
 #
+snippet l "\left"
+\left
+endsnippet
+
+snippet r "\right"
+\right
+endsnippet
+
 snippet " "Double quotes"
 "${0}"
 endsnippet
@@ -514,6 +526,10 @@ snippet { "{" i
 \\{ ${0} \\}
 endsnippet
 
+snippet {* "\left\{ \right\}" i
+\left\\{ ${0} \right\\}
+endsnippet
+
 snippet big{ "big {"
 \big\\{ ${0} \big\\}
 endsnippet
@@ -530,8 +546,12 @@ snippet Bigg{ "Bigg {"
 \Bigg\\{ ${0} \Bigg\\}
 endsnippet
 
-snippet langle "< , >"
+snippet <* "< , >"
 \langle ${1:v1} , ${2:v2} \rangle
+endsnippet
+
+snippet |* "\left| \right|"
+\left| ${0} \right|
 endsnippet
 
 # The following should be used instead of || . || in norms
@@ -551,6 +571,10 @@ snippet | "\|"
 \| 
 endsnippet
 
+snippet Trigger "Description"
+Body
+endsnippet
+
 
 # -------------------------
 # SECTION:  Spacing
@@ -562,6 +586,17 @@ endsnippet
 
 snippet ; "\;" i
 \; 
+endsnippet
+
+# NOTE I have redefined  such that \: actually means \enspace
+# \renewcommand{\:}{\enspace}
+# The original spacing (without redefining commands) is
+# \: .2222em
+# \; .2777em
+# \enspace .5em
+# \quad 1em
+snippet : "\:" i
+\: 
 endsnippet
 
 snippet quad "\quad" i
