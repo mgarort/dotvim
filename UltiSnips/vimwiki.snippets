@@ -11,6 +11,10 @@
 # SECTION:  Headers and separating line
 # -------------------------------------
 #
+snippet = "Header 1"
+= ${0:title} =
+endsnippet
+
 snippet 1= "Header 1"
 = ${0:title} =
 endsnippet
@@ -41,6 +45,22 @@ endsnippet
 
 snippet -- "Separating line" i
 ------------------------------------------------------
+endsnippet
+
+snippet ref "Vimwiki references"
+--------------------------------
+
+===== References =====
+
+*1* ${0}
+endsnippet
+
+snippet papers "Papers to read"
+--------------------------------
+
+===== Papers to read =====
+
+TODO ${0}
 endsnippet
 
 
@@ -162,56 +182,56 @@ endsnippet
 # ------------------------
 #
 snippet gl "Vimwiki link"
-[[${2:note}|${1:description}]]
+[[${1:note}|${2:description}]]
 endsnippet
 
 snippet link "Vimwiki link"
-[[./${2:LINK_PATH}|${1:description}]]
+[[./${1:LINK_PATH}|${2:description}]]
 endsnippet
 
 snippet image "Vimwiki image"
-{{file:./images/processed_${2:IMAGE_PATH}|${1:description}|style="width:550px;height:220px;"}}
+{{file:./images/processed_${1:IMAGE_PATH}|${2:description}|style="width:550px;height:220px;"}}
 endsnippet
 
 snippet pic "Vimwiki image"
-{{file:./images/processed_${2:IMAGE_PATH}|${1:description}|style="width:550px;height:220px;"}}
+{{file:./images/processed_${1:IMAGE_PATH}|${2:description}|style="width:550px;height:220px;"}}
+endsnippet
+
+snippet media "Vimwiki media file"
+{{file:./media/${1:FILE_PATH}|${2:description}|style="width:550px;height:220px;"}}
+endsnippet
+
+snippet lecture "Vimwiki lecture file"
+[[file:./lectures/${1:FILE_PATH}|${2:description}]]
 endsnippet
 
 # figures for reports, rather than images for notes
 snippet fig "Vimwiki figure"
-{{file:./figures/${2:FIGURE_PATH}|${1:description}|style="width:550px;height:220px;"}}
+{{file:./figures/${1:FIGURE_PATH}|${2:description}|style="width:550px;height:220px;"}}
 endsnippet
 
 snippet paper "Vimwiki paper"
-[[file:./papers/${2:PAPER_PATH}|${1:description}]]
+[[file:./papers/${1:PAPER_PATH}|${2:description}]]
 endsnippet
 
 snippet doc "Vimwiki document"
-[[file:./docs/${2:DOC_PATH}|${1:description}]]
+[[file:./docs/${1:DOC_PATH}|${2:description}]]
 endsnippet
 
 snippet writing "One of my writings"
-[[file:./writings/${2:WRITING_PATH}|${1:description}]]
+[[file:./writings/${1:WRITING_PATH}|${2:description}]]
 endsnippet
 
 snippet book "Vimwiki link to book"
-[[file:./books/${2:BOOK_PATH}|${1:description}]]
+[[file:./books/${1:BOOK_PATH}|${2:description}]]
 endsnippet
 
 snippet file "Vimwiki link to file"
-[[file:./${2:file_path}|${1:description}]]
+[[file:./${1:file_path}|${2:description}]]
 endsnippet
 
 snippet textfile "Vimwiki link to textfile"
-[[./textfiles/${1:TEXTFILE_PATH}]]
-endsnippet
-
-snippet ref "Vimwiki references"
---------------------------------
-
-===== References =====
-
-*1* ${0}
+[[./textfiles/${2:TEXTFILE_PATH}]]
 endsnippet
 
 
@@ -303,6 +323,27 @@ XXX Add ref
 endsnippet
 
 
+# -------------------------
+# SECTION:  Abbreviations for books and papers references
+# ------------------------
+#
+snippet brock "Brock. Biology of microorganisms"
+Brock. [[file:./books/brock_biology_of_microorganisms.pdf|Biology of microorganisms]].
+endsnippet
+
+snippet bishop "Bishop. Pattern recognition and machine learning."
+Bishop 2006. [[file:./books/bishop_pattern_recognition_and_machine_learning.pdf|Pattern recognition and machine learning.]]
+endsnippet
+
+snippet murphy "Murphy. Machine learning: A probabilistic perspective."
+Murphy 2012. [[file:./books/murphy_machine_learning_a_probabilistic_perspective.pdf|Machine learning: A probabilistic perspective.]]
+endsnippet
+
+snippet alberts "Alberts. Molecular biology of the cell."
+Alberts 2017. [[file:./books/alberts_molecular_biology_of_the_cell.pdf|Molecular biology of the cell]] (6th edition).
+endsnippet
+
+
 
 ################################################################################
 # PART 2: Snippets for Latex (some of them copied from tex.snippets)
@@ -351,6 +392,10 @@ snippet tilde "tilde"
 \tilde{${0}}
 endsnippet
 
+snippet bar "\bar"
+\bar{${0}}
+endsnippet
+
 ### Text symbols
 
 snippet ~ "text tilde"
@@ -380,6 +425,16 @@ snippet color "\color{}" i
 endsnippet
 
 # -------------------------
+# SECTION:  Latex math environments
+# ------------------------
+#
+snippet mat "smart matrix environment from vim-snippets"
+\\begin{${1:p/b/v/V/B/small}matrix}
+${0:${VISUAL}}
+\\end{$1matrix}
+endsnippet
+
+# -------------------------
 # SECTION:  Set symbols and number types
 # ------------------------
 #
@@ -399,6 +454,10 @@ snippet EE "E for expectation"
 \E
 endsnippet
 
+snippet E "\E"
+\E
+endsnippet
+
 snippet in "\in"
 \in 
 endsnippet
@@ -407,6 +466,14 @@ endsnippet
 # SECTION:  Delimiters
 # ------------------------
 #
+snippet l "\left"
+\left
+endsnippet
+
+snippet r "\right"
+\right
+endsnippet
+
 snippet " "Double quotes"
 "${0}"
 endsnippet
@@ -415,12 +482,8 @@ snippet ( "(" i
 (${0})
 endsnippet
 
-snippet (* "\left(" i
-\left( 
-endsnippet
-
-snippet )* "\right)" i
-\right) 
+snippet (* "\left( \right)" i
+\left( ${0} \right)
 endsnippet
 
 snippet big) "big (" i
@@ -443,6 +506,10 @@ snippet [ "[" i
 [${0}]
 endsnippet
 
+snippet [* "\left[ \right]" i
+\left[ ${0} \right]
+endsnippet
+
 snippet big] "big [" i
 \big[\, ${0} \,\big]
 endsnippet
@@ -463,6 +530,10 @@ snippet { "{" i
 \\{ ${0} \\}
 endsnippet
 
+snippet {* "\left\{ \right\}" i
+\left\\{ ${0} \right\\}
+endsnippet
+
 snippet big{ "big {"
 \big\\{ ${0} \big\\}
 endsnippet
@@ -479,8 +550,12 @@ snippet Bigg{ "Bigg {"
 \Bigg\\{ ${0} \Bigg\\}
 endsnippet
 
-snippet langle "< , >"
+snippet <* "< , >"
 \langle ${1:v1} , ${2:v2} \rangle
+endsnippet
+
+snippet |* "\left| \right|"
+\left| ${0} \right|
 endsnippet
 
 # The following should be used instead of || . || in norms
@@ -500,6 +575,10 @@ snippet | "\|"
 \| 
 endsnippet
 
+snippet Trigger "Description"
+Body
+endsnippet
+
 
 # -------------------------
 # SECTION:  Spacing
@@ -511,6 +590,17 @@ endsnippet
 
 snippet ; "\;" i
 \; 
+endsnippet
+
+# NOTE I have redefined  such that \: actually means \enspace
+# \renewcommand{\:}{\enspace}
+# The original spacing (without redefining commands) is
+# \: .2222em
+# \; .2777em
+# \enspace .5em
+# \quad 1em
+snippet : "\:" i
+\: 
 endsnippet
 
 snippet quad "\quad" i
@@ -527,11 +617,27 @@ snippet to "\to"
 \to
 endsnippet
 
+snippet r> "\rightarrow"
+\rightarrow
+endsnippet
+
+snippet l> "\leftarrow"
+\leftarrow
+endsnippet
+
+snippet u> "\uparrow"
+\uparrow
+endsnippet
+
+snippet d> "\downarrow"
+\downarrow
+endsnippet
+
 # -------------------------
 # SECTION:  Dots
 # ------------------------
 #
-snippet ... "\ldots" i
+snippet ... "\ldots"
 \ldots 
 endsnippet
 
@@ -541,6 +647,18 @@ endsnippet
 
 snippet c. "\cdot" i
 \cdot 
+endsnippet
+
+snippet o. "\odot" i
+\odot 
+endsnippet
+
+snippet v... "\vdots" i
+\vdots 
+endsnippet
+
+snippet d... "\ddots" i
+\ddots 
 endsnippet
 
 
@@ -646,16 +764,8 @@ snippet ^^ "^{}" i
 ^{${0}}
 endsnippet
 
-snippet -1S "^{-1}" i
-^{-1}
-endsnippet
-
-snippet 2S "^2" i
-^2
-endsnippet
-
-snippet 3S "^3" i
-^3
+snippet ^-1 "^{-1}" i
+^{-1} 
 endsnippet
 
 
@@ -875,4 +985,8 @@ endsnippet
 
 snippet no "Non-integral charge"
 Non-integral charge
+endsnippet
+
+snippet 1 "\mathbbone"
+\mathbbone
 endsnippet

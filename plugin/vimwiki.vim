@@ -121,8 +121,8 @@ function! Wikify()
     %s/\\begin{verbatim}/{{{>/ge
     %s/\\end{verbatim}/}}}/ge
     %s#\\underline{\(.\{-}\)}#<u>\1</u>#ge
-    %s#\\textbf{\(.\{-}\)}#<b>\1</b>#ge
-    %s#\\textit{\(.\{-}\)}#<i>\1</i>#ge
+    %s#\\textbf{\(.\{-}\)}#*\1*#ge
+    %s#\\textit{\(.\{-}\)}#_\1_#ge
     %s#\\item{\(.*\)}#\1#ge
     %s#\\verb|\(.\{-}\)|#`\1`#ge
     " The following replaces the $$....$$ equations in latex
@@ -211,14 +211,20 @@ function OpenCalendar()
     Calendar
     setlocal filetype=calendar
     color blackwhite
+    " We need to move years to get Vim to color the calendar
     call calendar#action("PrevYear")
     call calendar#action("NextYear")
     vertical resize 27
+    " Color days with diary notes in blue
+    hi CalMemo ctermfg=blue
 endfunction
 
 " Make calendar from the plugin mattn/calendar.vim start on Monday
 " (not directly in the Vimwiki plugin but closely integrated with Vimwiki)
 let g:calendar_monday = 1
+" Make the plus signs + indicating that a diary note has been created for
+" a day be closer to the day number
+let g:calendar_mark = 'left-fit'
 
 
 " -------------------------
