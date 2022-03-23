@@ -64,6 +64,9 @@ function! AddPdbBelow()
 endfunction
 nnoremap gp :call AddPdbBelow()<CR>
 
+" Wrap selected lines in ##{ and ##} to create cell
+xmap z# <Esc><space>set lazyredraw<CR>ma`<O##{<Esc>`>o##}<Esc>`a<space>set nolazyredraw<CR>
+
 set iskeyword-=_
 let b:CtrlXA_iskeyword = &iskeyword
 set iskeyword+=_
