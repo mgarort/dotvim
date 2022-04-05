@@ -1277,7 +1277,7 @@ onoremap <silent> in :<C-u>normal vin<CR>
 
 " Similarly to how J or <S-j> collapses many lines into a single line,
 " K or <S-k> will unroll every word into its own line
-vnoremap <S-k> :<C-u>'<,'>s/\s\+/\r/<CR>
+vnoremap <S-k> :<C-u>'<,'>s/\%V\s\+/\r/<CR>
 
 
 " -------------------------
