@@ -490,19 +490,19 @@ snippet (* "\left( \right)" i
 \left( ${0} \right)
 endsnippet
 
-snippet big) "big (" i
+snippet big( "big (" i
 \big(\, ${0} \,\big)
 endsnippet
 
-snippet Big) "Big (" i
+snippet Big( "Big (" i
 \Big(\, ${0} \,\Big)
 endsnippet
 
-snippet bigg) "bigg (" i
+snippet bigg( "bigg (" i
 \bigg(\, ${0} \,\bigg)
 endsnippet
 
-snippet Bigg) "Bigg (" i
+snippet Bigg( "Bigg (" i
 \Bigg(\, ${0} \,\Bigg)
 endsnippet
 
@@ -514,19 +514,19 @@ snippet [* "\left[ \right]" i
 \left[ ${0} \right]
 endsnippet
 
-snippet big] "big [" i
+snippet big[ "big [" i
 \big[\, ${0} \,\big]
 endsnippet
 
-snippet Big] "Big [" i
+snippet Big[ "Big [" i
 \Big[\, ${0} \,\Big]
 endsnippet
 
-snippet bigg] "bigg [" i
+snippet bigg[ "bigg [" i
 \bigg[\, ${0} \,\bigg]
 endsnippet
 
-snippet Bigg] "Bigg [" i
+snippet Bigg[ "Bigg [" i
 \Bigg[\, ${0} \,\Bigg]
 endsnippet
 
@@ -561,28 +561,6 @@ endsnippet
 snippet |* "\left| \right|"
 \left| ${0} \right|
 endsnippet
-
-# The following should be used instead of || . || in norms
-snippet norm "\norm"
-\norm{${0}} 
-endsnippet
-
-# The following should be written instead of | in
-# conditional probabilities p(a | b)
-snippet mid "\mid" i
-\mid 
-endsnippet
-
-# The following should be written instead of || in
-# the KL divergence KL(p || q)
-snippet | "\|"
-\| 
-endsnippet
-
-snippet Trigger "Description"
-Body
-endsnippet
-
 
 # -------------------------
 # SECTION:  Spacing
@@ -688,6 +666,14 @@ endsnippet
 
 snippet max "\max"
 \max
+endsnippet
+
+snippet argmax "\argmax"
+\argmax
+endsnippet
+
+snippet argmin "\argmin"
+\argmin
 endsnippet
 
 
@@ -986,6 +972,34 @@ endsnippet
 snippet infty "\infty" i
 \infty
 endsnippet
+
+# The following should be used instead of || . || in norms
+snippet norm "\norm"
+\norm{${0}} 
+endsnippet
+
+# The following should be written instead of | in
+# conditional probabilities p(a | b)
+snippet mid "\mid" i
+\mid 
+endsnippet
+
+# The following should be written instead of || in
+# the KL divergence KL(p || q)
+snippet | "\|"
+\| 
+endsnippet
+
+
+snippet forall "\forall"
+\forall 
+endsnippet
+
+########
+
+
+
+
 
 snippet h "Human"
 Human
