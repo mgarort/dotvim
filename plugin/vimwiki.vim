@@ -124,7 +124,7 @@ function! Wikify()
     %s#\\textbf{\(.\{-}\)}#*\1*#ge
     %s#\\textit{\(.\{-}\)}#_\1_#ge
     %s#\\item{\(.*\)}#\1#ge
-    %s#\\verb|\(.\{-}\)|#`\1`#ge
+    %s#\\verb|\(.\{-}\)|#`\1`#e
     " The following replaces the $$....$$ equations in latex
     " for {{$....}}$ in Vimwiki. Explanation:
     " - Left hand side, \$\$  \$\$ are $$   $$ for Latex
