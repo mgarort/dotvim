@@ -533,6 +533,8 @@ function! AutomaticColorscheme()
         colorscheme blackwhite
     elseif this_filetype == 'calendar'
         colorscheme blackwhite
+    elseif this_filetype == 'tex'
+        colorscheme codedark
     else
         colorscheme codedark
         " Autocommands from https://stackoverflow.com/a/4617156/7998725
