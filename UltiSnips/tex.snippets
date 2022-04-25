@@ -14,6 +14,10 @@ snippet ti "text italic"
 \textit{${0:italic}}
 endsnippet
 
+snippet _ "\textit{}"
+\textit{${0:italic}}
+endsnippet
+
 snippet tb "text bold"
 \textbf{${0:bold}}
 endsnippet
@@ -83,3 +87,33 @@ snippet Bigg{ "Bigg {"
 \Bigg\\{ ${0} \Bigg\\}
 endsnippet
 
+snippet $ "Inline Latex"
+$\; ${0:math} \;$
+endsnippet
+
+snippet cite "\cite{}"
+\\cite{${0}}
+endsnippet
+
+# -------------------------
+# SECTION:  Sections and references
+# ------------------------
+#
+
+
+snippet section "Reference to a section"
+${1:Section}~\\ref{sec:${2}}
+endsnippet
+
+snippet subsection "Reference to a subsection"
+${1:Subsection}~\\ref{sub:${2}}
+endsnippet
+
+# -------------------------
+# SECTION:  Temporary project-specific snippets
+# ------------------------
+#
+
+snippet ds "\dockstring{}"
+\dockstring{}
+endsnippet
