@@ -981,10 +981,10 @@ endfunction
 cnoremap <expr> T CT()
 
 " Abbreviate GPull to Gpull and GPush to Gpull since you often type it wrong
-cabbrev GPull Gpull
-cabbrev GPush Gpush
-cabbrev gpull Gpull
-cabbrev gpush Gpush
+cabbrev GPull Git pull
+cabbrev GPush Git push
+cabbrev gpull Git pull
+cabbrev gpush Git push
 
 " Abbreviate :bq to :q so that we can close the buffer list by just pressing q
 abbrev bq b
