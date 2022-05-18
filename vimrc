@@ -3,6 +3,10 @@
 " dotvim/.vim_version_on_corona.txt). Remember that you need to install Vundle, before installing the plugins, which you do with:
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+" -------------------------
+" SECTION:  Core configuration: Vundle, nocompatible, filetype...
+" ------------------------
+"
 " VUNDLE CONFIGURATION
 
 set nocompatible              " be iMproved, required
@@ -88,6 +92,11 @@ filetype plugin on
 syntax on
 
 
+" To make the British keyboard more ergonomic in Vim:
+" - Use # instead of \ as a leader
+" - Use £ instead of # to search for previous occurrence of word under cursor
+let mapleader = "#"
+nnoremap £ #
 
 
 " This command is relevant to the Vimwiki configuration because it
