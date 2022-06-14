@@ -62,17 +62,18 @@ nnoremap ,u :UpdateTitle<CR>
 command! Wikify call Wikify()
 " Create notes from 6= headers
 nnoremap <silent> '<CR> :call CreateNoteFromTitle()<CR>
-" Keybinding gl for linking to note
-" Note that we had to disable a lot of keybindings in after/ftplugin/vimwiki
-" to freed gl
+
+" - gl for linking to general note (we had to disable a lot of keybindings in
+"   after/ftplugin/vimwiki to freed gl)
 xmap <silent> gl  <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>i\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gl  <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>i\|<Esc><space><C-u>set nolazyredraw<CR>i
 " Keybindings starting with gL for linking to:
-" - gl for link
-
 " - gLp for papers
 xmap <silent> gLp <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./papers/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLp <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./papers/\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLf for files (including datasets)
+xmap <silent> gLf <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./files/\|<Esc><space><C-u>set nolazyredraw<CR>i
+nmap <silent> gLf <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./files/\|<Esc><space><C-u>set nolazyredraw<CR>i
 " - gLn for insulin papers (to share directory with Rafa)
 xmap <silent> gLn <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./papers/insulin/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLn <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./papers/insulin/\|<Esc><space><C-u>set nolazyredraw<CR>i
