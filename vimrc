@@ -1440,6 +1440,11 @@ vnoremap <F8> s
 " -----------
 "
 
+" Do not set simple tex files to "plaintex" filetype. Set all of them
+" to "tex"
+let g:tex_flavor='latex'
+let g:tex_indent_brace=0
+
 
 " Delete text in select mode without affecting the registers TODO
 " function! DeleteSelectMode()
