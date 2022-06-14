@@ -69,28 +69,35 @@ xmap <silent> gl  <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>i\|<Esc><s
 nmap <silent> gl  <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>i\|<Esc><space><C-u>set nolazyredraw<CR>i
 " Keybindings starting with gL for linking to:
 " - gl for link
-" - gLp paper
-" - gLd document
-" - gLb book
-" - gLi image
-" - gLm for media
-" - gLl for lecture
+
+" - gLp for papers
 xmap <silent> gLp <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./papers/\|<Esc><space><C-u>set nolazyredraw<CR>i
-xmap <silent> gLs <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./scores/\|<Esc><space><C-u>set nolazyredraw<CR>i
-xmap <silent> gLd <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./docs/\|<Esc><space><C-u>set nolazyredraw<CR>i
-xmap <silent> gLb <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./books/\|<Esc><space><C-u>set nolazyredraw<CR>i
-xmap <silent> gLi <space><C-u>set lazyredraw<CR>gvz}gvz}s}}i\|style="width:550px;height:220px;"<Esc>S{{<Right><Right>ifile:./images/processed_\|<Esc><space><C-u>set nolazyredraw<CR>i
-xmap <silent> gLm <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./media/\|<Esc><space><C-u>set nolazyredraw<CR>i
-xmap <silent> gLl <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./lectures/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLp <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./papers/\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLn for insulin papers (to share directory with Rafa)
+xmap <silent> gLn <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./papers/insulin/\|<Esc><space><C-u>set nolazyredraw<CR>i
+nmap <silent> gLn <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./papers/insulin/\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLt for patents
+xmap <silent> gLt <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./patents/\|<Esc><space><C-u>set nolazyredraw<CR>i
+nmap <silent> gLt <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./patents/\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLs for scores
+xmap <silent> gLs <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./scores/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLs <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./scores/\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLd for documents
+xmap <silent> gLd <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./docs/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLd <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./docs/\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLb book
+xmap <silent> gLb <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./books/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLb <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./books/\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLi image
+xmap <silent> gLi <space><C-u>set lazyredraw<CR>gvz}gvz}s}}i\|style="width:550px;height:220px;"<Esc>S{{<Right><Right>ifile:./images/processed_\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLi <space><C-u>set lazyredraw<CR>viwz}gvz}s}}i\|style="width:550px;height:220px;"<Esc>S{{<Right><Right>ifile:./images/processed_\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLm for media
+xmap <silent> gLm <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./media/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLm <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./media/\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLl for lectures
+xmap <silent> gLl <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:./lectures/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLl <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:./lectures/\|<Esc><space><C-u>set nolazyredraw<CR>i
-" Keybinding for creating link to title
-nnoremap gLt a[[]]<Esc><Left>i
+
 " Keybinding for removing link
 nmap gLr <space><C-u>set lazyredraw<CR>dz[<Right>dz[<space><C-u>set nolazyredraw<CR>
 
