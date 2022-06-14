@@ -18,8 +18,12 @@ snippet _ "\textit{}"
 \textit{${0:italic}}
 endsnippet
 
-snippet tb "text bold"
+snippet * "\textbf{}"
 \textbf{${0:bold}}
+endsnippet
+
+snippet u "\underline{}"
+\underline{${0:underlined}}
 endsnippet
 
 snippet mbf "mathbf"
@@ -96,17 +100,239 @@ snippet cite "\cite{}"
 endsnippet
 
 # -------------------------
+# SECTION:  Environments
+# ------------------------
+#
+snippet $$ "Equation environment"
+\\begin{equation*}
+    ${0}
+\\end{equation*}
+endsnippet
+
+# -------------------------
+# SECTION:  Greek letters
+# ------------------------
+#
+# These snippets try to be consistent with Vim digraphs
+# Some of the cap versions don't exist in Latex because the English letter is
+# exactly the same (for example, \Alpha is not needed because capital alpha
+# is A). However, they are added for consistency and to encourage learning the
+# Greek letters by seeing the errors caused by using \Alpha and similar ones.
+
+# Α α (Alpha)
+snippet A* "\Alpha" i
+\Alpha
+endsnippet
+snippet a* "\alpha" i
+\alpha
+endsnippet
+# Β β (Beta)
+snippet B* "\Beta" i
+\Beta
+endsnippet
+snippet b* "\beta" i
+\beta
+endsnippet
+# Γ γ (Gamma)
+snippet G* "\Gamma" i
+\Gamma
+endsnippet
+snippet g* "\gamma" i
+\gamma
+endsnippet
+# Δ δ (Delta)
+snippet D* "\Delta" i
+\Delta
+endsnippet
+snippet d* "\delta" i
+\delta
+endsnippet
+# Ε ε ϵ (Epsilon)
+snippet E* "\Epsilon" i
+\Epsilon
+endsnippet
+snippet e* "\varepsilon" i
+\varepsilon
+endsnippet
+snippet j3 "\epsilon" i
+\epsilon
+endsnippet
+# Ζ ζ (Zeta)
+snippet Z* "\Zeta" i
+\Zeta
+endsnippet
+snippet z* "\zeta" i
+\zeta
+endsnippet
+# Η η (Eta)
+snippet Y* "\Eta" i
+\Eta
+endsnippet
+snippet y* "\eta" i
+\eta
+endsnippet
+# Θ θ (Theta)
+snippet H* "\Theta" i
+\Theta
+endsnippet
+snippet h* "\theta" i
+\theta
+endsnippet
+# Ι ι (Iota)
+snippet I* "\Iota" i
+\Iota
+endsnippet
+snippet i* "\iota" i
+\iota
+endsnippet
+# Κ κ (Kappa)
+snippet K* "\Kappa" i
+\Kappa
+endsnippet
+snippet k* "\kappa" i
+\kappa
+endsnippet
+# Λ λ (Lambda)
+snippet L* "\Lambda" i
+\Lambda
+endsnippet
+snippet l* "\lambda" i
+\lambda
+endsnippet
+# Μ μ (Mu)
+snippet M* "\Mu" i
+\Mu
+endsnippet
+snippet m* "\mu" i
+\mu
+endsnippet
+# Ν ν (Nu)
+snippet N* "\Nu" i
+\Nu
+endsnippet
+snippet n* "\nu" i
+\nu
+endsnippet
+# Ξ ξ (Xi)
+snippet C* "\Xi" i
+\Xi
+endsnippet
+snippet c* "\xi" i
+\xi
+endsnippet
+# Ο ο (Omicron)
+snippet O* "\Omicron" i
+\Omicron
+endsnippet
+snippet o* "\omicron" i
+\omicron
+endsnippet
+# Π π (Pi)
+snippet P* "\Pi" i
+\Pi
+endsnippet
+snippet p* "\pi" i
+\pi
+endsnippet
+# Ρ ρ (Rho)
+snippet R* "\Rho" i
+\Rho
+endsnippet
+snippet r* "\rho" i
+\rho
+endsnippet
+# Σ σ ς (Sigma)
+snippet S* "\Sigma" i
+\Sigma
+endsnippet
+snippet s* "\sigma" i
+\sigma
+endsnippet
+snippet *s "\varsigma" i
+\varsigma
+endsnippet
+# Τ τ (Tau)
+snippet T* "\Tau" i
+\Tau
+endsnippet
+snippet t* "\tau" i
+\tau
+endsnippet
+# Υ υ (Upsilon)
+snippet U* "\Upsilon" i
+\Upsilon
+endsnippet
+snippet u* "\upsilon" i
+\upsilon
+endsnippet
+# Φ φ (Phi)
+snippet F* "\Phi" i
+\Phi
+endsnippet
+snippet f* "\phi" i
+\phi
+endsnippet
+# Χ χ (Chi)
+snippet X* "\Xi" i
+\Xi
+endsnippet
+snippet x* "\xi" i
+\xi
+endsnippet
+# Ψ ψ (Psi)
+snippet Q* "\Psi" i
+\Psi
+endsnippet
+snippet q* "\psi" i
+\psi
+endsnippet
+# Ω ω (Omega)
+snippet W* "\Omega" i
+\Omega
+endsnippet
+snippet w* "\omega" i
+\omega
+endsnippet
+# NOTE Greek letter references:
+# - For order of Greek letters https://omniglot.com/writing/greek.htm
+# - For Vim digraph codes https://vimhelp.org/digraph.txt.html
+
+
+# -------------------------
+# SECTION:  Commands
+# ------------------------
+#
+snippet input "\input{}"
+\input{${0}}
+endsnippet
+
+# -------------------------
 # SECTION:  Sections and references
 # ------------------------
 #
 
+snippet label "Label"
+\\label{${1:sec/sub/ssub/fig/tab/app}:${2}}
+endsnippet
 
-snippet section "Reference to a section"
+snippet rsec "Reference to a section" i
 ${1:Section}~\\ref{sec:${2}}
 endsnippet
 
-snippet subsection "Reference to a subsection"
-${1:Subsection}~\\ref{sub:${2}}
+snippet rsub "Reference to a subsection" i
+${1:Section}~\\ref{sub:${2}}
+endsnippet
+
+snippet rssub "Reference to a subsubsection" i
+${1:Section}~\\ref{ssub:${2}}
+endsnippet
+
+snippet rfig "Reference to a figure" i
+${1:Figure}~\\ref{fig:${2}}
+endsnippet
+
+snippet rapp "Reference to an appendix" i
+${1:Appendix}~\\ref{app:${2}}
 endsnippet
 
 # -------------------------

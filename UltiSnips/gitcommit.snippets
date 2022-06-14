@@ -5,3 +5,9 @@ endsnippet
 snippet ` "` `" i
 `${0:code}`
 endsnippet
+
+snippet dt "Timestamp for LaTeX git commits"
+`!p
+from datetime import datetime
+snip.rv = datetime.now().strftime("%Y-%m-%d %H:%M")`
+endsnippet
