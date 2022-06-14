@@ -2,14 +2,21 @@ hi link texRefZone texTypeStyle
 hi link texCite texSectionZone
 " Simply because texBeginEnd has nice yellow pale color
 hi link texMathZoneX texBeginEnd
-hi link texMathSymbol texMathZoneX
 hi link texMathZoneY texBeginEnd
+hi link texMathZoneCS texBeginEnd
+hi link texMathSymbol texMathZoneX
 
+setlocal nofoldenable
+
+setlocal noautoindent
+setlocal nocindent
+setlocal nosmartindent
+setlocal indentexpr=
 
 " Adding : to the list of normal characters that can make
 " up words is necessary so that Vim can jump through tags
 " that contain : (such as sec:my_section)
-setlocal iskeyword+=:
+set iskeyword+=:
 
 " t for regenerating ctags
 " Function to regenerate ctags similar to the one used in Python
