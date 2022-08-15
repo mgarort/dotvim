@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-# This script is the same as the original preview.sh, but it sets the 
+# This script is the same as the original preview.sh, but it sets the
 # IFS to % instead of setting it to : . This is necessary because many
-# of my wiki notes have `:` in the title.
+# of my wiki notes have `:` in the title. Otherwise, fzf won't be able
+# to preview notes with a `:` in the title
 #
 # To be placed (with a symbolic link) on dotvim/bundle/fzf.vim/bin/preview.sh
 
