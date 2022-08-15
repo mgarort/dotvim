@@ -18,6 +18,9 @@ if !exists('g:fzf#vim#buffers_all')
   let g:fzf#vim#buffers_all = {}
 endif
 
+" fzf split layout instead of floating window
+let g:fzf_layout = { 'down': '~40%' }
+
 augroup fzf_buffers
   autocmd!
   if exists('*reltimefloat')
