@@ -23,10 +23,10 @@ let g:vimwiki_list_ignore_newline = 0
 " (if g:vimwiki_autowriteall is set in ftplugin, it doesn't work)
 let g:vimwiki_autowriteall = 0
 " This is so that my vimwiki is hosted in the repos folder
-let g:vimwiki_list = [{'path': '~/repos/wiki',
-            \ 'path_html':'~/wiki_html',
+let g:vimwiki_list = [{'path': '~/repos/notes/wiki',
+            \ 'path_html':'~/repos/notes/html_local',
             \ 'syntax':'default',
-            \ 'template_path':'~/repos/wiki/setup',
+            \ 'template_path':'~/repos/notes/setup',
             \ 'ext':'.wiki',
             \ 'template_default': 'default',
             \ 'template_ext': '.tpl'}]

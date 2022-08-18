@@ -400,7 +400,7 @@ nnoremap <leader>rg :Explore $HOME/repos/guatask<CR>
 nnoremap <leader>rv :Explore $HOME/repos/dotvim<CR>
 nnoremap <leader>rf :Explore $HOME/repos/dotfiles<CR>
 " h for HTML (since this is the HTML template and it's written in html)
-nnoremap <leader>h :e ~/repos/wiki/setup/default.tpl<CR>
+nnoremap <leader>h :e ~/repos/notes/setup/default.tpl<CR>
 nnoremap <leader>i :call LaunchVimwiki()<CR>
 nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
 nnoremap <leader>x :e ~/repos/dotfiles/dot.Xdefaults<CR>
