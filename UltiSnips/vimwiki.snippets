@@ -403,7 +403,7 @@ snippet hat "hat ^"
 \hat{${0}}
 endsnippet
 
-snippet tilde "tilde"
+snippet tilde "tilde" i
 \tilde{${0}}
 endsnippet
 
@@ -480,6 +480,11 @@ endsnippet
 snippet in "\in"
 \in 
 endsnippet
+
+snippet cup "\cup"
+\cup 
+endsnippet
+
 
 # -------------------------
 # SECTION:  Delimiters
@@ -591,8 +596,10 @@ snippet ; "\;" i
 \; 
 endsnippet
 
-# NOTE I have redefined  such that \: actually means \enspace
-# \renewcommand{\:}{\enspace}
+# NOTE I have redefined \: such that it actually means \enspace
+# by writing \renewcommand{\:}{\enspace}
+# in `notes/setup/default.tpl`
+#
 # The original spacing (without redefining commands) is
 # \: .2222em
 # \; .2777em
@@ -683,6 +690,14 @@ endsnippet
 
 snippet max "\max"
 \max
+endsnippet
+
+snippet inf "\inf"
+\inf
+endsnippet
+
+snippet sup "\sup"
+\sup
 endsnippet
 
 snippet argmax "\argmax"
