@@ -406,9 +406,11 @@ nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
 nnoremap <leader>x :e ~/repos/dotfiles/dot.Xdefaults<CR>
 " <leader>bb for the main .bashrc, similar to how <leader>vv takes us to the main vimrc
 nnoremap <leader>bb :e ~/repos/dotfiles/dot.bashrc_common<CR>
-" Distinguish specific bashrc for the second letter: o or l
-nnoremap <leader>bo :e ~/repos/dotfiles/dot.bashrc_corona<CR>
-nnoremap <leader>bl :e ~/repos/dotfiles/dot.bashrc_cluster<CR>
+" Distinguish specific bashrc for the second letter
+nnoremap <leader>ba :e ~/repos/dotfiles/dot.bash_aliases<CR>
+nnoremap <leader>bg :e ~/repos/dotfiles/dot.bash_git<CR>
+nnoremap <leader>bl :e ~/repos/dotfiles/dot.bashrc_local<CR>
+nnoremap <leader>br :e ~/repos/dotfiles/dot.bashrc_remote<CR>
 nnoremap <leader>uu :UltiSnipsEdit<CR>
 function! OpenVimSnippets()
     let ft = &l:filetype
