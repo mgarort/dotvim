@@ -24,7 +24,7 @@ let g:vimwiki_list_ignore_newline = 0
 let g:vimwiki_autowriteall = 0
 " This is so that my vimwiki is hosted in the repos folder
 let g:vimwiki_list = [{'path': '~/repos/notes/wiki',
-            \ 'path_html':'~/repos/notes/html_local',
+            \ 'path_html':'~/repos/notes/local_html',
             \ 'syntax':'default',
             \ 'template_path':'~/repos/notes/setup',
             \ 'ext':'.wiki',
