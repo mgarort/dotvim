@@ -329,7 +329,7 @@ endfunction
 " for compress)
 function! ProcessImages()
     let path_to_wiki = expand(g:vimwiki_list[0]['path'])
-    let path_to_setup_folder = path_to_wiki . '/setup/'
+    let path_to_setup_folder = fnamemodify(path_to_wiki, ":h") . '/setup'
     execute '!cd' path_to_setup_folder '; python3 process_images.py'
 endfunction
 
