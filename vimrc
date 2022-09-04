@@ -1334,13 +1334,17 @@ vnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 vnoremap <expr> <silent> 0 col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 
-" Map g$ and g0 to beginning and end of current paragraph
+" Map Z0 and Z$ to beginning and end of current paragraph
+" Similar to how g0 and g$ go to beginning and end of line (by default Vim
+" configuration)
+" We use Z instead of z because z is used for surround, so if we used z we
+" couldn't ever surround by 0 and $
 function! MoveToFirstLineOfParagraph()
     call cursor(line("'{") + (line("'{") == line("0") ? 0 : 1),1)
 endfunction
-vnoremap <silent> z0 :<C-U>call MoveToFirstLineOfParagraph()<CR>`<1v``
-nnoremap <silent> z0 :<C-U>call MoveToFirstLineOfParagraph()<CR>
-onoremap <silent> z0 :call MoveToFirstLineOfParagraph()<CR>
+vnoremap <silent> Z0 :<C-U>call MoveToFirstLineOfParagraph()<CR>`<1v``
+nnoremap <silent> Z0 :<C-U>call MoveToFirstLineOfParagraph()<CR>
+onoremap <silent> Z0 :call MoveToFirstLineOfParagraph()<CR>
 
 function! MoveToLastLineOfParagraph()
 " The next line take care of the edge case in which the current paragraph is
@@ -1348,9 +1352,10 @@ function! MoveToLastLineOfParagraph()
 " but rather to the last line of the paragraph
     call cursor(line("'}") - (line("'}") == line("$") ? 0 : 1),99999999)
 endfunction
-nnoremap <silent> z$ :<C-U>call MoveToLastLineOfParagraph()<CR>
-vnoremap <silent> z$ :<C-U>call MoveToLastLineOfParagraph()<CR>`<1v``
-onoremap <silent> z$ :call MoveToLastLineOfParagraph()<CR>
+nnoremap <silent> Z$ :<C-U>call MoveToLastLineOfParagraph()<CR>
+vnoremap <silent> Z$ :<C-U>call MoveToLastLineOfParagraph()<CR>`<1v``
+onoremap <silent> Z$ :call MoveToLastLineOfParagraph()<CR>
+
 
 " <S-j> and <S-k> add blank lines below and above respectively
 " Note that this stills leaves H, M and L for moving the cursor
