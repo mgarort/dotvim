@@ -29,6 +29,13 @@ let g:vimwiki_list = [{'path': '~/repos/notes/wiki',
             \ 'template_path':'~/repos/notes/setup',
             \ 'ext':'.wiki',
             \ 'template_default': 'default',
+            \ 'template_ext': '.tpl'},
+            \ {'path': '~/repos/mgarort.github.io/notes/wiki',
+            \ 'path_html':'~/repos/mgarort.github.io/notes',
+            \ 'syntax':'default',
+            \ 'template_path':'~/repos/mgarort.github.io/notes/setup',
+            \ 'ext':'.wiki',
+            \ 'template_default': 'default',
             \ 'template_ext': '.tpl'}]
 
 
@@ -312,6 +319,17 @@ augroup END
 "     autocmd!
 "     autocmd BufWritePost *.wiki if b:is_compile_html_mode_active ==# 1 | silent Vimwiki2HTML | endif
 " augroup END
+
+
+" TODO Find which entry of g:vimwiki_list we are currently in, in orderf to
+" open the correct HTML file, by:
+" - Getting the length of g:vimwiki_list
+" - Iterating over all the elements of g:vimwiki_list
+" - Checking if they match with the current wiki path:
+"   - You can get the current wiki path with   let current_wiki_path = expand('%:p:h')
+"   - You can check for matching with match('string1', 'string2'). If string1
+"     and string2 are the same, this will return 0 (because they match in the
+"     first character)
 function! OpenThisHTML()
     let path_to_html_folder = expand(g:vimwiki_list[0]['path_html']) . '/'
     let full_path_to_wiki_file = expand('%:p')
