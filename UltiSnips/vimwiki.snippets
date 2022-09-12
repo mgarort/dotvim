@@ -457,21 +457,18 @@ endsnippet
 # SECTION:  Set symbols and number types
 # ------------------------
 #
-snippet RR "R for reals"
+snippet R "R for reals"
 \R
 endsnippet
 
-snippet QQ "Q for rationals"
+snippet Q "Q for rationals"
 \Q
 endsnippet
 
-snippet ZZ "Z for integers"
+snippet Z "Z for integers"
 \Z
 endsnippet
 
-snippet EE "E for expectation"
-\E
-endsnippet
 
 snippet E "\E"
 \E
@@ -485,17 +482,49 @@ snippet cup "\cup"
 \cup 
 endsnippet
 
+snippet subset "\subset"
+\subset 
+endsnippet
+
+snippet supset "\supset"
+\supset 
+endsnippet
+
+snippet subseteq "\subseteq"
+\subseteq 
+endsnippet
+
+snippet supseteq "\supseteq"
+\supseteq 
+endsnippet
+
 
 # -------------------------
 # SECTION:  Delimiters
 # ------------------------
 #
-snippet l "\left"
+snippet left "\left"
 \left
 endsnippet
 
-snippet r "\right"
+snippet right "\right"
 \right
+endsnippet
+
+snippet	big "\big"
+\big
+endsnippet
+
+snippet	Big "\Big"
+\Big
+endsnippet
+
+snippet	bigg "\bigg"
+\bigg
+endsnippet
+
+snippet	Bigg "\Bigg"
+\Bigg
 endsnippet
 
 snippet " "Double quotes"
@@ -583,6 +612,11 @@ endsnippet
 snippet |left "\left| \right|"
 \left| ${0} \right|
 endsnippet
+
+snippet langle "\langle \rangle"
+\langle ${0} \rangle
+endsnippet
+
 
 # -------------------------
 # SECTION:  Spacing
@@ -680,6 +714,10 @@ snippet log "\log" i
 \log
 endsnippet
 
+snippet ln "\ln" i
+\ln
+endsnippet
+
 snippet exp "\exp"
 \exp
 endsnippet
@@ -706,6 +744,14 @@ endsnippet
 
 snippet argmin "\argmin"
 \argmin
+endsnippet
+
+snippet sin "\sin"
+\sin 
+endsnippet
+
+snippet cos "\cos"
+\cos 
 endsnippet
 
 
@@ -778,9 +824,16 @@ snippet sum "\sum" i
 \sum_{${1:i=1}}^{${2:n}} 
 endsnippet
 
+snippet + "\sum" i
+\sum
+endsnippet
+
 snippet prod "\prod" i
 \prod_{${1:i=1}}^{${2:n}} 
 endsnippet
+
+# * cannot be used for a \prod snippet because
+# it is already taken for *bold*.
 
 snippet x "\times"
 \times 
@@ -799,8 +852,12 @@ snippet grad "\grad"
 \grad
 endsnippet
 
-snippet partial "\partial"
-\partial
+snippet partial "Partial derivative" i
+\frac{\partial ${1}}{\partial ${2}}
+endsnippet
+
+snippet total "d derivative" i
+\frac{\d ${1}}{\d ${2}}
 endsnippet
 
 
