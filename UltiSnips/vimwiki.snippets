@@ -129,6 +129,26 @@ weekday = datetime.datetime(int(year), int(month), int(day)).strftime('%A')
 
 snip.rv = f'{year}.{month}.{day} {weekday}'` =
 
+`!p
+import datetime
+
+year, month, day = snip.basename.split('-')
+weekday = datetime.datetime(int(year), int(month), int(day)).strftime('%A')
+
+if weekday == 'Monday':
+    snip.rv ='''
+------------------------------------------------------
+
+==== GOALS FOR THIS WEEK ====
+
+
+
+------------------------------------------------------
+
+    '''
+else:
+    snip.rv = ''
+`
 ==== To do today ====
 
 
@@ -170,19 +190,6 @@ snip.rv = f'{year}.{month}.{day} {weekday}'` =
 
 
 ==== Scratch ====
-
-
-endsnippet
-
-snippet goal "Goals for this week"
-
-------------------------------------------------------
-
-==== GOALS FOR THIS WEEK ====
-
-${0}
-
-------------------------------------------------------
 
 
 endsnippet
