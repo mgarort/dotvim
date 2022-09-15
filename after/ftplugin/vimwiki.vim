@@ -4,6 +4,11 @@
 " Autocommand from section "8. Lists" in the Vimwiki docs
 inoremap <expr><buffer> <CR> pumvisible() ? '<Esc>a' : '<C-]><Esc>:VimwikiReturn 3 5<CR>'
 
+" Unmap \ww from vimwiki's default usage (go to index note) and map it to go
+" to the note of the Monday of the current week
+silent! nunmap <leader>ww
+nnoremap <leader>ww :call OpenMonday()<CR>
+
 " Map the <Plug> commands that interfere with <C-l>. Needs to be done here
 " because in ftplugin/vimwiki.vim there is an error when unmapping that there is no such
 " mappings. This is presumably because at the time ftplugin is sourced those

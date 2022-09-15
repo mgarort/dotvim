@@ -234,6 +234,22 @@ let g:calendar_monday = 1
 let g:calendar_mark = 'left-fit'
 
 
+" Function for opening note of Monday of current week
+function OpenMonday()
+python3 << EOF
+import vim
+from datetime import datetime, timedelta
+
+now = datetime.now()
+monday = now - timedelta(days=now.weekday())
+monday_str =  monday.strftime('%Y-%m-%d')
+note_name = './diary/' + monday_str + '.wiki'
+vim.command(f"let note_name = '{note_name}'")
+EOF
+    exe 'e ' . note_name
+endfunction
+
+
 " -------------------------
 " SECTION:  Functionality for writing in Vim
 " ------------------------
