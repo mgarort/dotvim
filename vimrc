@@ -1297,6 +1297,21 @@ function! ExpandIntoLines()
 endfunction
 vnoremap <S-k> :<C-u>call ExpandIntoLines()<CR>
 
+" Make <C-e> go to end of line in select mode. This is the intuitive behaviour
+snoremap <C-e> <Esc>A
+
+" Prevent inserting multiple times. I used to do this by mistake, because I
+" pressed a number before `i` without intending to
+nnoremap 1i i
+nnoremap 2i i
+nnoremap 3i i
+nnoremap 4i i
+nnoremap 5i i
+nnoremap 6i i
+nnoremap 7i i
+nnoremap 8i i
+nnoremap 9i i
+
 
 " -------------------------
 " SECTION:  Lines: actual lines vs display lines, adding lines, moving through lines, etc
