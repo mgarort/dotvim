@@ -347,7 +347,7 @@ augroup END
 "     and string2 are the same, this will return 0 (because they match in the
 "     first character)
 function! OpenThisHTML()
-    let path_to_html_folder = expand(g:vimwiki_list[0]['path_html']) . '/'
+    let path_to_html_folder = expand(g:vimwiki_list[g:current_wiki]['path_html']) . '/'
     let full_path_to_wiki_file = expand('%:p')
     let note_name_with_wiki_extension = split(full_path_to_wiki_file, '/wiki/')[-1]
     let note_name = split(note_name_with_wiki_extension, '\.wiki')[0]

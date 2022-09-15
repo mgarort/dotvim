@@ -192,6 +192,27 @@ nnoremap <C-c> :call ProcessImages()<CR>
 
 
 
-
-
-
+" -------------------------
+" SECTION:  Handling several wikis
+" ------------------------
+"
+" If you have more than one wiki, sometimes you'll need to create paths that
+" are specific to the wiki you are working on. These paths will use
+" information from the dictionary `g:vimwiki_list` (defined in
+" plugin/vimwiki.vim) and we need the index of the current wiki to access that
+" information. The following is a hacky solution to obtain that index, but it
+" is dependent on the working directory being exactly the wiki directory
+" (.e.g. we cannot open a .wiki file from a parent directory, we need to open
+" it directly from the wiki directory)
+"
+let current_dir = expand('%:p:h')
+" Check if current wiki is 0
+let match_position =  match(current_dir, '/home/mgarort/repos/notes/wiki')
+if match_position == 0
+    let g:current_wiki = 0
+endif
+" Check if current wiki is 1
+let match_position =  match(current_dir, '/home/mgarort/repos/mgarort.github.io/notes/wiki')
+if match_position == 0
+    let g:current_wiki = 1
+endif
