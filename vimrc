@@ -1311,6 +1311,24 @@ nnoremap 6i i
 nnoremap 7i i
 nnoremap 8i i
 nnoremap 9i i
+nnoremap 1a a
+nnoremap 2a a
+nnoremap 3a a
+nnoremap 4a a
+nnoremap 5a a
+nnoremap 6a a
+nnoremap 7a a
+nnoremap 8a a
+nnoremap 9a a
+nnoremap 1A A
+nnoremap 2A A
+nnoremap 3A A
+nnoremap 4A A
+nnoremap 5A A
+nnoremap 6A A
+nnoremap 7A A
+nnoremap 8A A
+nnoremap 9A A
 
 
 " -------------------------
