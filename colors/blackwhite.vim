@@ -29,6 +29,7 @@ let  s:palette.black = [233, '#000000']
 let s:palette.purple = [98, '#875fd7']
 let s:palette.brown = [130, '#af5f00']
 let s:palette.blue = [67, '#5f87af'] "CursorLine, which is an option to highlight the line where the cursor is, and is set with :set cursorline. CursorLine also determines the color of the current line in NERDTree and in CtrlP. Also Visual, which is visual selection
+let s:palette.calmemoblue = [12, '#729ECE'] "The color used by calendar-vim to mark days where you've already writen diary notes
 let s:palette.darkblue = [27, '#005fff']
 let s:palette.green = [65, '#5f875f']
 let s:palette.red = [88, '#870000']
@@ -180,6 +181,7 @@ call s:hi('VimwikiDelText', s:palette.gray10, [], 'underline')
 call s:hi('VimwikiCode', s:palette.gray10, [], 'italic')
 call s:hi('VimwikiUnderline', s:palette.gray10, [], 'underline')
 call s:hi('VimwikiPre', s:palette.gray10, [], 'italic')
+call s:hi('CalMemo', s:palette.calmemoblue, s:palette.white, '')
 
 " My general highlights
 "hi hl-Question cterm=NONE ctermfg=red ctermbg=NONE
