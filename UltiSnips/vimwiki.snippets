@@ -137,59 +137,61 @@ weekday = datetime.datetime(int(year), int(month), int(day)).strftime('%A')
 
 if weekday == 'Monday':
     snip.rv ='''
-------------------------------------------------------
-
-==== GOALS FOR THIS WEEK ====
-
+----------------------------------------------------------------------------
+== GOALS FOR THIS WEEK ==
 
 
-------------------------------------------------------
+
 
     '''
 else:
     snip.rv = ''
 `
-==== To do today ====
+----------------------------------------------------------------------------
+== To do today ==
 
 
 
 
-==== Stack of things doing now ====
+----------------------------------------------------------------------------
+== Stack of things doing now ==
 
 
 
 
-==== Done ====
+----------------------------------------------------------------------------
+== Done ==
 
-====== Research and work ======
-
-
-====== Diabetes and insulin pump ======
+==== Research and work ====
 
 
-====== Admin and chores ======
+==== Diabetes and doctors ====
 
 
-====== Career and applications ======
+==== Admin and chores ====
 
 
-====== Vim and config ======
+==== Career and applications ====
 
 
-====== Writing notes ======
+==== Vim and config ====
 
 
-====== Personal ======
+==== Writing notes ====
 
 
-
-
-==== Today I'm grateful for ====
+==== Personal ====
 
 
 
+----------------------------------------------------------------------------
+== Today I'm grateful for ==
 
-==== Scratch ====
+
+
+
+----------------------------------------------------------------------------
+== Scratch ==
 
 
 endsnippet
@@ -350,19 +352,27 @@ endsnippet
 # ------------------------
 #
 snippet brock "Brock. Biology of microorganisms"
-Brock. [[file:./books/brock_biology_of_microorganisms.pdf|Biology of microorganisms]].
+Brock. [[file:../files/books/brock_biology_of_microorganisms.pdf|Biology of microorganisms]].
 endsnippet
 
-snippet bishop "Bishop. Pattern recognition and machine learning."
-Bishop 2006. [[file:./books/bishop_pattern_recognition_and_machine_learning.pdf|Pattern recognition and machine learning.]]
+snippet bishop "Bishop 2006. Pattern recognition and machine learning."
+Bishop 2006. [[file:../files/books/bishop_pattern_recognition_and_machine_learning.pdf|Pattern recognition and machine learning]].
 endsnippet
 
-snippet murphy "Murphy. Machine learning: A probabilistic perspective."
-Murphy 2012. [[file:./books/murphy_machine_learning_a_probabilistic_perspective.pdf|Machine learning: A probabilistic perspective.]]
+snippet murphy "Murphy 2012. Machine learning: A probabilistic perspective."
+Murphy 2012. [[file:../files/books/murphy_machine_learning_a_probabilistic_perspective.pdf|Machine learning: A probabilistic perspective]].
 endsnippet
 
-snippet alberts "Alberts. Molecular biology of the cell."
-Alberts 2017. [[file:./books/alberts_molecular_biology_of_the_cell.pdf|Molecular biology of the cell]] (6th edition).
+snippet murphy2 "Murphy 2022. Probabilistic machine learning: An introduction."
+Murphy 2022. [[file:../files/books/murphy_probabilistic_machine_learning_an_introduction.pdf|Probabilistic machine learning: An introduction]].
+endsnippet
+
+snippet esl2 "Hastie et al 2009. Elements of Statistical Learning (Second Edition)."
+Hastie et al 2009. [[file:../files/books/ESLII.pdf|Elements of Statistical Learning (Second Edition)]].
+endsnippet
+
+snippet alberts "Alberts 2017. Molecular biology of the cell."
+Alberts 2017. [[file:../files/books/alberts_molecular_biology_of_the_cell.pdf|Molecular biology of the cell]] (6th edition).
 endsnippet
 
 
@@ -406,7 +416,7 @@ endsnippet
 
 ### Text decorators
 
-snippet hat "hat ^"
+snippet hat "hat ^" i
 \hat{${0}}
 endsnippet
 
@@ -487,6 +497,10 @@ endsnippet
 
 snippet cup "\cup"
 \cup 
+endsnippet
+
+snippet cap "\cap"
+\cap 
 endsnippet
 
 snippet subset "\subset"
@@ -761,6 +775,10 @@ snippet cos "\cos"
 \cos 
 endsnippet
 
+snippet sqrt "\sqrt" i
+\sqrt{$0}
+endsnippet
+
 
 # -------------------------
 # SECTION:  Relation operators
@@ -800,6 +818,10 @@ endsnippet
 
 snippet approx "\approx"
 \approx 
+endsnippet
+
+snippet equiv "\equiv"
+\equiv 
 endsnippet
 
 
@@ -851,7 +873,7 @@ endsnippet
 # SECTION:  Operators for differentiation and integration
 # ------------------------
 #
-snippet nabla "\nabla"
+snippet nabla "\nabla" i
 \nabla
 endsnippet
 
@@ -1090,7 +1112,7 @@ snippet infty "\infty" i
 endsnippet
 
 # The following should be used instead of || . || in norms
-snippet norm "\norm"
+snippet norm "\norm" i
 \norm{${0}} 
 endsnippet
 
