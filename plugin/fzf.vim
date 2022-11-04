@@ -18,8 +18,12 @@ if !exists('g:fzf#vim#buffers_all')
   let g:fzf#vim#buffers_all = {}
 endif
 
-" fzf split layout instead of floating window
-let g:fzf_layout = { 'down': '~40%' }
+" fzf floating window
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+" fzf split layout at the bottom instead of floating window
+" let g:fzf_layout = { 'down': '~40%' }
+" Disable right window that previews the notes
+let g:fzf_preview_window = []
 
 augroup fzf_buffers
   autocmd!
