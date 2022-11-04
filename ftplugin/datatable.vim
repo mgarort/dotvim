@@ -4,6 +4,8 @@
 " ViewTable() command from the rainbow_csv plugin
 setlocal readonly
 
+" Set nowrap automatically
+setlocal nowrap
 
 " t for viewing in table format
 function! ViewTable()
