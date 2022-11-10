@@ -8,7 +8,7 @@
 "   note "ftplugin: Only for simple local definitions")
 " - Keybindings will only be active in vimwiki notes. This way I won't trigger
 "   them by accident in other files (for example, by pressing '<CR> in a
-"   python file by mistake and triggering CreateNoteFromTitle)
+"   python file by mistake and triggering CreateNoteOrLinkFromTitle)
 
 
 " -------------------------
@@ -84,7 +84,7 @@ endfunction
 "    has less priority than the two \s* left and right of the capturing group.
 "    So if there are surrounding whitespaces, those will be matched by \s* and
 "    not by \{-}
-function! CreateNoteFromTitle()
+function! CreateNoteOrLinkFromTitle()
     " Check that current line contains title. If not, return from function
     let is_title_in_current_line = match(getline('.'), '====== .\+ ======')
     if is_title_in_current_line == -1
@@ -97,13 +97,21 @@ function! CreateNoteFromTitle()
     " Save the modification without triggering autocommands (the autocommand
     " for compiling to HTML is too slow)
     noa write
-    " Copy title, follow link to note and paste title. Use h register to leave
-    " the 0th unchanged, and restore unnamed register
-    execute "normal ^t]\"hyi]\<CR>ggi= \<Esc>\"hpa =\<CR>\<CR>\<CR>"
-    let @" = getreg("0")
-    " Start insert mode
-    " (norm i doesn't work https://www.reddit.com/r/vim/comments/583uaf/how_to_enter_insert_mode_from_function/)
-    startinsert
+    " Copy title to register h
+    execute "normal ^t]\"hyi]"
+    " Check if file exists. If it exists, then you are done (you created a
+    " link). If it doesn't exist, follow the link, write title and stay in
+    " insert mode
+    let filename = getreg('h') . '.wiki'
+    if filereadable(filename)
+        " Do nothing
+    elseif
+        execute "normal \<CR>ggi= \<Esc>\"hpa =\<CR>\<CR>\<CR>"
+        let @" = getreg("0")
+        " Start insert mode
+        " (norm i doesn't work https://www.reddit.com/r/vim/comments/583uaf/how_to_enter_insert_mode_from_function/)
+        startinsert
+    endif
 endfunction
 
 function! UpdateTitle()

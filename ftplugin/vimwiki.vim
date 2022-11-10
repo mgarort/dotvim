@@ -52,7 +52,7 @@ nnoremap <silent> ,s :call ViewSummary()<CR>
 "   note "ftplugin: Only for simple local definitions")
 " - Keybindings will only be active in vimwiki notes. This way I won't trigger
 "   them by accident in other files (for example, by pressing '<CR> in a
-"   python file by mistake and triggering CreateNoteFromTitle)
+"   python file by mistake and triggering CreateNoteOrLinkFromTitle)
 
 " t for changing Title, u for Updating title
 nnoremap ,t :VimwikiRenameFile<CR>y<CR><C-r>=expand('%:t:r')<CR>
@@ -61,7 +61,7 @@ nnoremap ,u :UpdateTitle<CR>
 " Create wiki notes from Anki notes
 command! Wikify call Wikify()
 " Create notes from 6= headers
-nnoremap <silent> '<CR> :call CreateNoteFromTitle()<CR>
+nnoremap <silent> '<CR> :call CreateNoteOrLinkFromTitle()<CR>
 
 " - gl for linking to general note (we had to disable a lot of keybindings in
 "   after/ftplugin/vimwiki to freed gl)
