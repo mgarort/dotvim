@@ -105,7 +105,7 @@ function! CreateNoteOrLinkFromTitle()
     let filename = getreg('h') . '.wiki'
     if filereadable(filename)
         " Do nothing
-    elseif
+    else
         execute "normal \<CR>ggi= \<Esc>\"hpa =\<CR>\<CR>\<CR>"
         let @" = getreg("0")
         " Start insert mode
