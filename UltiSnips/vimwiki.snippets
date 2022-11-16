@@ -456,6 +456,18 @@ snippet color "\color{}" i
 {\color{${1:color}} ${2:stuff}}
 endsnippet
 
+snippet green "\color{green}" i
+{\color{green} ${2:stuff}}
+endsnippet
+
+snippet red "\color{red}" i
+{\color{red} ${2:stuff}}
+endsnippet
+
+snippet blue "\color{blue}" i
+{\color{blue} ${2:stuff}}
+endsnippet
+
 # -------------------------
 # SECTION:  Latex math environments
 # ------------------------
@@ -610,31 +622,31 @@ snippet {left "\left\{ \right\}" i
 \left\\{ ${0} \right\\}
 endsnippet
 
-snippet {big "big {"
+snippet {big "big {" i
 \big\\{ ${0} \big\\}
 endsnippet
 
-snippet {Big "Big {"
+snippet {Big "Big {" i
 \Big\\{ ${0} \Big\\}
 endsnippet
 
-snippet {bigg "bigg {"
+snippet {bigg "bigg {" i
 \bigg\\{ ${0} \bigg\\}
 endsnippet
 
-snippet {Bigg "Bigg {"
+snippet {Bigg "Bigg {" i
 \Bigg\\{ ${0} \Bigg\\}
 endsnippet
 
-snippet <left "< , >"
+snippet <left "< , >" i
 \langle ${1:v1} , ${2:v2} \rangle
 endsnippet
 
-snippet |left "\left| \right|"
+snippet |left "\left| \right|" i
 \left| ${0} \right|
 endsnippet
 
-snippet langle "\langle \rangle"
+snippet langle "\langle \rangle" i
 \langle ${0} \rangle
 endsnippet
 
@@ -671,7 +683,7 @@ endsnippet
 # Math symbols
 
 # -------------------------
-# SECTION:  Arrows
+# SECTION:  Arrows and cancelling
 # ------------------------
 #
 snippet to "\to"
@@ -692,6 +704,14 @@ endsnippet
 
 snippet d> "\downarrow"
 \downarrow
+endsnippet
+
+snippet cancel "\cancel{}"
+\cancel{$0}
+endsnippet
+
+snippet cancelto "\cancelto{}"
+\cancelto{$1}{$2}
 endsnippet
 
 # -------------------------
@@ -808,7 +828,7 @@ snippet neq "\neq"
 \neq 
 endsnippet
 
-snippet +- "\pm (Latex for ±)"
+snippet +- "\pm ()"
 \pm 
 endsnippet
 
