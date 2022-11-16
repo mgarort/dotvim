@@ -254,7 +254,10 @@ monday_str =  monday.strftime('%Y-%m-%d')
 note_name = './diary/' + monday_str + '.wiki'
 vim.command(f"let note_name = '{note_name}'")
 EOF
+    " Open Monday note
     exe 'e ' . note_name
+    " Go to line 5, which is where the header for the week's goals is
+    exe 5
 endfunction
 
 
