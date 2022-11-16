@@ -1016,6 +1016,11 @@ if has("autocmd")
     augroup END
 endif
 
+" Disable gg and change for <S-h> to go to top of file, because you often
+" press it by mistake when pressing hh to move couple of characters left
+nnoremap gg <Esc>
+nnoremap <S-h> gg
+
 " Make g[ select last pasted text, copying gv, which selects last seleted text
 nnoremap g[ `[v`]
 vnoremap g[ <Esc>`[v`]
