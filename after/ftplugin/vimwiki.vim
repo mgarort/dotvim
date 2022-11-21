@@ -4,12 +4,28 @@
 " Autocommand from section "8. Lists" in the Vimwiki docs
 inoremap <expr><buffer> <CR> pumvisible() ? '<Esc>a' : '<C-]><Esc>:VimwikiReturn 3 5<CR>'
 
-" Unmap \ww and \w\m from vimwiki's default usage (go to index note and go to tomorrow note
-" respectively) and map it to go to the note of the Monday of the current week
+" Unmap some vimwiki/vimkiwi diary keybindings and define them to go to this
+" week's days
+" Monday (m)
+silent! nunmap <leader>wm
+nnoremap <leader>wm :call OpenDayOfWeek(0)<CR>
+" Tuesday (t)
+silent! nunmap <leader>wt
+nnoremap <leader>wt :call OpenDayOfWeek(1)<CR>
+" Wednesday (w)
 silent! nunmap <leader>ww
-nnoremap <leader>ww :call OpenMonday()<CR>
-silent! nunmap <leader>w<leader>m
-nnoremap <leader>w<leader>m :call OpenMonday()<CR>
+nnoremap <leader>ww :call OpenDayOfWeek(2)<CR>
+" Thursday (r)
+map <leader><leader><leader><leader><leader>bLsdflsbf <Plug>VimwikiRenameFile
+silent! unmap <buffer> <leader>wr
+nnoremap <leader>wr :call OpenDayOfWeek(3)<CR>
+" Friday (f)
+nnoremap <leader>wf :call OpenDayOfWeek(4)<CR>
+" Saturday (s)
+silent! nunmap <leader>ws
+nnoremap <leader>ws :call OpenDayOfWeek(5)<CR>
+" Sunday (u)
+nnoremap <leader>wu :call OpenDayOfWeek(6)<CR>
 
 " Map the <Plug> commands that interfere with <C-l>. Needs to be done here
 " because in ftplugin/vimwiki.vim there is an error when unmapping that there is no such

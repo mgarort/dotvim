@@ -242,22 +242,23 @@ let g:calendar_monday = 1
 let g:calendar_mark = 'left-fit'
 
 
-" Function for opening note of Monday of current week
-function OpenMonday()
+" Function for opening different days of the current week
+" (Monday, Tuesday, Wednesday...)
+function OpenDayOfWeek(day_index)
+    " day_index from 0 to 6 for days of the week Monday to Sunday
 python3 << EOF
 import vim
 from datetime import datetime, timedelta
 
 now = datetime.now()
-monday = now - timedelta(days=now.weekday())
-monday_str =  monday.strftime('%Y-%m-%d')
-note_name = './diary/' + monday_str + '.wiki'
+day_index = int(vim.eval('a:day_index'))
+day_of_week = now - timedelta(days=now.weekday()) + timedelta(days=day_index)
+day_of_week_str =  day_of_week.strftime('%Y-%m-%d')
+note_name = './diary/' + day_of_week_str + '.wiki'
 vim.command(f"let note_name = '{note_name}'")
 EOF
-    " Open Monday note
+    " Open day of week note note
     exe 'e ' . note_name
-    " Go to line 5, which is where the header for the week's goals is
-    exe 5
 endfunction
 
 
