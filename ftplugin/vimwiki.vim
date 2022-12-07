@@ -77,9 +77,12 @@ nmap <silent> gLf <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:../
 " - gLn for insulin papers (to share directory with Rafa)
 xmap <silent> gLn <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:../files/papers/insulin/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLn <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:../files/papers/insulin/\|<Esc><space><C-u>set nolazyredraw<CR>i
-" - gLt for patents
-xmap <silent> gLt <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:../files/patents/\|<Esc><space><C-u>set nolazyredraw<CR>i
-nmap <silent> gLt <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:../files/patents/\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLt for temporary files
+xmap <silent> gLt <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:../files/temp/\|<Esc><space><C-u>set nolazyredraw<CR>i
+nmap <silent> gLt <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:../files/temp/\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLa for patents
+xmap <silent> gLa <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:../files/patents/\|<Esc><space><C-u>set nolazyredraw<CR>i
+nmap <silent> gLa <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:../files/patents/\|<Esc><space><C-u>set nolazyredraw<CR>i
 " - gLs for scores
 xmap <silent> gLs <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:../files/scores/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLs <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:../files/scores/\|<Esc><space><C-u>set nolazyredraw<CR>i
