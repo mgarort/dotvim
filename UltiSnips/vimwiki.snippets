@@ -209,7 +209,7 @@ snippet link "Vimwiki link"
 endsnippet
 
 snippet image "Vimwiki image"
-{{file:../files/images/processed_${1:IMAGE_PATH}|${2:description}|style="width:550px;height:220px;"}}
+{{file:../files/images/processed_${1:IMAGE_PATH}|${2:description}|style="width:${3:550}px;height:${4:220}px;"}}
 endsnippet
 
 snippet media "Vimwiki media file"
@@ -510,6 +510,14 @@ snippet in "\in"
 \in 
 endsnippet
 
+snippet notin "\notin"
+\notin 
+endsnippet
+
+snippet nin "\notin"
+\notin 
+endsnippet
+
 snippet cup "\cup"
 \cup 
 endsnippet
@@ -649,10 +657,17 @@ snippet |left "\left| \right|" i
 \left| ${0} \right|
 endsnippet
 
-snippet langle "\langle \rangle" i
+snippet angle "\langle \rangle" i
 \langle ${0} \rangle
 endsnippet
 
+snippet ceil "\lceil \rceil"
+\left\lceil ${0} \right\rceil
+endsnippet
+
+snippet floor "\lfloor \rfloor"
+\left\lfloor ${0} \right\rfloor
+endsnippet
 
 # -------------------------
 # SECTION:  Spacing
@@ -839,7 +854,7 @@ snippet sim "\sim"
 \sim 
 endsnippet
 
-snippet approx "\approx"
+snippet approx "\approx" i
 \approx 
 endsnippet
 
