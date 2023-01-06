@@ -1118,7 +1118,7 @@ nnoremap <S-y> y$
 
 " Remap : to <space> for easier typing
 nnoremap <space> :
-vnoremap <space> :
+xnoremap <space> :
 
 
 " Make backward motions such as b or 0 inclusive (for changing with c)
@@ -1152,7 +1152,7 @@ nmap gt <Plug>DeleteTrailingWhitespaces
 " commands force us to use nmap instead of nnoremap
 
 " The same for every line selected in visual mode. We define noremapgt in
-vnoremap gt :s/\s\+$//<CR>
+xnoremap gt :s/\s\+$//<CR>
 
 " Vim-like undo and redo
 nnoremap <S-u> <C-r>
