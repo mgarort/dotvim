@@ -1020,6 +1020,7 @@ endif
 " press it by mistake when pressing hh to move couple of characters left
 nnoremap gg <Esc>
 nnoremap <S-h> gg
+xnoremap <S-h> gg
 
 " Make g[ select last pasted text, copying gv, which selects last seleted text
 nnoremap g[ `[v`]
