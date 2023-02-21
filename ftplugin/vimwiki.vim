@@ -8,7 +8,7 @@
 "
 " Map <leader>m to go to the meetings note
 nnoremap <leader>m :e ~/repos/notes/wiki/Topic : Meetings.wiki<CR>
-nnoremap <leader>G :e ~/repos/notes/wiki/Goals for week and month.wiki<CR>
+nnoremap <leader>G :call OpenGoals()<CR>
 
 
 

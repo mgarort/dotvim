@@ -261,6 +261,14 @@ EOF
     exe 'e ' . note_name
 endfunction
 
+function OpenGoals()
+    " Old implementation simply opened the "Goals" note
+    " ~/repos/notes/wiki/Goals for week and month.wiki<CR>
+    exe OpenDayOfWeek(0)
+    norm gg
+    exe search('Weekly')
+endfunction
+
 
 " -------------------------
 " SECTION:  Functionality for writing in Vim
