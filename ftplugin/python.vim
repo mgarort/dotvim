@@ -1,6 +1,6 @@
 function! CopyCellToIPython()
     " Copy cell (delimited by ##{ and ##}) to register t
-    exe '?##{?+1;/##}/-1y t'
+    exe '?#%%?+1;/#%%/-1y t'
     " Move to bottom window (where the terminal is)
     call feedkeys("\<C-w>j")
     " Paste register t to IPython command line and move back
