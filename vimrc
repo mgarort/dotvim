@@ -788,6 +788,10 @@ tnoremap <C-j> <C-w>j
 nnoremap <leader><leader><leader><leader><leader><leader>l <Plug>NetrwRefresh
 
 
+" Open explorer window to the left
+nnoremap <leader>e 20Lexplore
+
+
 " -------------------------
 " SECTION:  Help and info
 " ------------------------
