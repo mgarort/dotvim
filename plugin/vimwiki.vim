@@ -22,21 +22,39 @@ let g:vimwiki_list_ignore_newline = 0
 " Avoid automatically writing upon exit
 " (if g:vimwiki_autowriteall is set in ftplugin, it doesn't work)
 let g:vimwiki_autowriteall = 0
-" This is so that my vimwiki is hosted in the repos folder
+" Usually, the variable g:vimwiki_list should hold all the wikis in a
+" single list. However, I don't know how to make :Vimwiki2HTML compile
+" the HTML to the second wiki in the list. So if I want to compile an
+" HTML to the second wiki (the website one, my workflow is the following):
+"
+" 1. Copy the desired wiki file to the second wiki directory:
+"       '~/repos/mgarort.github.io/notes/wiki'
+" 2. Open the vimwiki config file '~/repos/dotvim/plugin/vimwiki.vim' (this
+"    file) and comment the first wiki / uncomment the second wiki.
+" 3. Close Vim.
+" 4. Open the wiki file in Vim and make desired modifications before
+"    publication.
+" 5. Run :Vimwiki2HTML
+" 6. Open the vimwiki config file (this file) and uncomment first wiki /
+"    comment second wiki.
+"
+" First wiki (local)
 let g:vimwiki_list = [{'path': '~/repos/notes/wiki',
             \ 'path_html':'~/repos/notes/local_html',
             \ 'syntax':'default',
             \ 'template_path':'~/repos/notes/setup',
             \ 'ext':'.wiki',
             \ 'template_default': 'default',
-            \ 'template_ext': '.tpl'},
-            \ {'path': '~/repos/mgarort.github.io/notes/wiki',
-            \ 'path_html':'~/repos/mgarort.github.io/notes',
-            \ 'syntax':'default',
-            \ 'template_path':'~/repos/mgarort.github.io/notes/setup',
-            \ 'ext':'.wiki',
-            \ 'template_default': 'default',
             \ 'template_ext': '.tpl'}]
+"
+" Second wiki (website mgarort.me)
+" let g:vimwiki_list = [{'path': '~/repos/mgarort.github.io/notes/wiki',
+"             \ 'path_html':'~/repos/mgarort.github.io/notes',
+"             \ 'syntax':'default',
+"             \ 'template_path':'~/repos/mgarort.github.io/notes/setup',
+"             \ 'ext':'.wiki',
+"             \ 'template_default': 'default',
+"             \ 'template_ext': '.tpl'}]
 
 
 
