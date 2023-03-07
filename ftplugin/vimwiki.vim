@@ -109,6 +109,9 @@ nmap <silent> gLm <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:../
 " - gLl for lectures
 xmap <silent> gLl <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:../files/lectures/\|<Esc><space><C-u>set nolazyredraw<CR>i
 nmap <silent> gLl <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:../files/lectures/\|<Esc><space><C-u>set nolazyredraw<CR>i
+" - gLw for writings
+xmap <silent> gLw <space><C-u>set lazyredraw<CR>gvz]gvz]<Right><Right>ifile:../files/writings/\|<Esc><space><C-u>set nolazyredraw<CR>i
+nmap <silent> gLw <space><C-u>set lazyredraw<CR>viwz]gvz]<Right><Right>ifile:../files/writings/\|<Esc><space><C-u>set nolazyredraw<CR>i
 
 " Keybinding for removing link
 nmap gLr <space><C-u>set lazyredraw<CR>dz[<Right>dz[<space><C-u>set nolazyredraw<CR>
