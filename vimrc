@@ -547,6 +547,12 @@ function! AutomaticColorscheme()
         colorscheme blackwhite
     elseif this_filetype == 'tex'
         colorscheme codedark
+    elseif this_filetype == 'datatable'
+        :
+    elseif this_filetype == 'tsv'
+        :
+    elseif this_filetype == 'csv'
+        :
     else
         colorscheme codedark
         " Autocommands from https://stackoverflow.com/a/4617156/7998725
@@ -567,6 +573,7 @@ endfunction
 augroup ColorschemeForBuffers
     autocmd!
     autocmd BufEnter * :call AutomaticColorscheme()
+    autocmd WinEnter * :call AutomaticColorscheme()
 augroup END
 
 
