@@ -141,6 +141,7 @@ if weekday == 'Monday':
 == Weekly goals ==
 
 
+----------------------------------------------------------------------------
 == To do today ==
 
 - XXX Write weekly goals
@@ -149,13 +150,14 @@ if weekday == 'Monday':
 
     '''
 else:
-    snip.rv = ''
-`
+    snip.rv = '''
 ----------------------------------------------------------------------------
 == To do today ==
 
 
 
+    '''
+`
 ----------------------------------------------------------------------------
 == Stack of things doing now ==
 
@@ -442,6 +444,10 @@ endsnippet
 
 
 # Math text formatting
+snippet rm "math roman" i
+\mathrm{${0}}
+endsnippet
+
 snippet bf "mathbf" i
 \mathbf{${0:mathbold}}
 endsnippet
@@ -489,25 +495,47 @@ snippet substack "\substack"
 endsnippet
 
 # -------------------------
+# SECTION:  Probability and statistics
+# ------------------------
+#
+snippet E "\E"
+\E{${1}}{${2}}
+endsnippet
+
+snippet var "\Var"
+\Var{${0}}
+endsnippet
+
+snippet cov "\Cov"
+\Cov{${1}}{${2}}
+endsnippet
+
+
+# -------------------------
+# SECTION:  Combinatorics
+# ------------------------
+#
+snippet choose "\choose"
+{ $1 \choose $2 }
+endsnippet
+
+
+# -------------------------
 # SECTION:  Set symbols and number types
 # ------------------------
 #
-snippet R "R for reals"
+snippet RR "R for reals"
 \R
 endsnippet
 
-snippet Q "Q for rationals"
+snippet QQ "Q for rationals"
 \Q
 endsnippet
 
-snippet Z "Z for integers"
+snippet ZZ "Z for integers"
 \Z
 endsnippet
 
-
-snippet E "\E"
-\E
-endsnippet
 
 snippet in "\in"
 \in 
@@ -670,6 +698,10 @@ endsnippet
 
 snippet floor "\lfloor \rfloor"
 \left\lfloor ${0} \right\rfloor
+endsnippet
+
+snippet underbrace "\underbrace"
+\underbrace{\subtower ${1} }_{\suptower ${2}}
 endsnippet
 
 # -------------------------
@@ -887,7 +919,7 @@ snippet iff "\iff"
 endsnippet
 
 # -------------------------
-# SECTION:  Operators for terms
+# SECTION:  Sumations and products
 # ------------------------
 #
 snippet sum "\sum" i
@@ -896,6 +928,10 @@ endsnippet
 
 snippet + "\sum" i
 \sum
+endsnippet
+
+snippet int "\int" i
+\int ${2} \; \d{${1}}
 endsnippet
 
 snippet prod "\prod" i
@@ -911,7 +947,7 @@ endsnippet
 
 
 # -------------------------
-# SECTION:  Operators for differentiation and integration
+# SECTION:  Differentiation and integration
 # ------------------------
 #
 snippet nabla "\nabla" i
