@@ -405,12 +405,13 @@ nnoremap <leader>i :call LaunchVimwiki()<CR>
 nnoremap <leader>c :e ~/repos/dotfiles/config<CR>
 nnoremap <leader>x :e ~/repos/dotfiles/dot.Xdefaults<CR>
 " <leader>bb for the main .bashrc, similar to how <leader>vv takes us to the main vimrc
-nnoremap <leader>bb :e ~/repos/dotfiles/dot.bashrc_common<CR>
+nnoremap <leader>bb :e ~/repos/dotfiles/bashrc/dot.bashrc_common<CR>
 " Distinguish specific bashrc for the second letter
-nnoremap <leader>ba :e ~/repos/dotfiles/dot.bash_aliases<CR>
-nnoremap <leader>bg :e ~/repos/dotfiles/dot.bash_git<CR>
-nnoremap <leader>bl :e ~/repos/dotfiles/dot.bashrc_local<CR>
-nnoremap <leader>br :e ~/repos/dotfiles/dot.bashrc_remote<CR>
+nnoremap <leader>ba :e ~/repos/dotfiles/bashrc/dot.bashrc_aliases<CR>
+nnoremap <leader>bf :e ~/repos/dotfiles/bashrc/dot.bashrc_functions<CR>
+nnoremap <leader>bg :e ~/repos/dotfiles/bashrc/dot.bashrc_git<CR>
+nnoremap <leader>bl :e ~/repos/dotfiles/bashrc/dot.bashrc_local<CR>
+nnoremap <leader>br :e ~/repos/dotfiles/bashrc/dot.bashrc_remote<CR>
 nnoremap <leader>uu :UltiSnipsEdit<CR>
 function! OpenVimSnippets()
     let ft = &l:filetype
