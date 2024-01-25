@@ -72,6 +72,11 @@ silent! unmap <buffer> gln
 silent! unmap <buffer> glx
 
 
+" Unmap vil so that I can use it for selecting current line
+map <leader><leader><leader><leader><leader>FDVKd <Plug>VimwikiTextObjListSingleV
+silent! xunmap <buffer> il
+
+
 " Same as above, but with <C-d> so that we can use it for deleting, just as in the shell
 silent! iunmap <buffer> <C-d>
 
